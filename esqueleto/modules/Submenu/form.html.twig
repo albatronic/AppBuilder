@@ -1,0 +1,8 @@
+{# TEMPLATE Submenu/form.html.twig #}
+{# Muestra los campos editables de la entidad        #}
+
+{{ macro.input('Orden','Etiqueta','text','Submenu[Orden]','Submenu_Orden',datos.Orden,'4','CampoUnidades') }}
+{{ macro.input('Titulo','Etiqueta','text','Submenu[Titulo]','Submenu_Titulo',datos.Titulo,'50','CampoTextoLargo') }}
+{{ macro.input('Controller','Etiqueta','text','Submenu[Script]','Submenu_Script',datos.Script,'50','CampoTextoLargo') }}
+{{ macro.select('Administrador','Etiqueta','Submenu[Administrador]','Submenu_Administrador',none,datos.Administrador,datos.Administrador.fetchAll,'Select') }}
+{{ macro.select('Emergente','Etiqueta','Submenu[Emergente]','Submenu_Emergente',none,datos.Emergente,datos.Emergente.fetchAll,'Select') }}

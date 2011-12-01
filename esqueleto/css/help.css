@@ -1,0 +1,551 @@
+/* General page styles ---------------------------------------------------- */
+body, html {
+	margin: 0px;
+	padding: 0px;
+	color: black;
+	background-color: white;
+}
+
+body, input, textarea, select, option {
+	font-family: verdana, arial, helvetica, sans-serif;
+}
+code, pre, tt {
+	font-family: Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console",  Monaco, "Courier New", Courier, monospace;
+}
+tt.parameter {
+	font-style: italic;
+}
+pre {
+	background-color: #ddd;
+}
+
+#content, #headmenu, #footnav, #copyright, #thismirror,
+#headsearch span, #headsearch input, #headsearch select {
+	font-size: 85%;
+}
+
+a, a:visited, a:hover {
+	color: #000099;
+	background-color: transparent;
+}
+
+a:active {
+	color: #0000ff;
+	background-color: transparent;
+}
+
+h1, h2, h3, h4 {
+	font-weight: bold;
+	color: #000066;
+	background-color: transparent;
+}
+h1 { font-size: 130%; }
+h2 { font-size: 125%; }
+h3 { font-size: 110%; }
+h4 { font-size: 100%; }
+
+/* browsers handle this differently
+input.max, textarea.max, select.max {
+	width: 100%;
+}
+*/
+
+img {
+	border: 0px;
+}
+img.middle {
+	vertical-align: middle;
+}
+
+#leftbar div.tip, #leftbar div.information {
+	margin: 0;
+	padding: 5px;
+	text-align: left;
+}
+#leftbar div.tip p, #leftbar div.information p {
+	text-align: left;
+}
+
+/* FIXME: Remove when the new XSL build has finished */
+div.warning table, div.warning table tr, div.warning table td,
+div.caution table, div.caution table tr, div.caution table td {
+	border: 0;
+}
+/* }}} */
+
+hr {
+	border: 0px;
+	color: black;
+	background-color: black;
+	height: 1px;
+	/* clear: both; has problems in IE and Opera */
+}
+
+.center {
+	text-align: center;
+}
+.center table {
+	margin-left: auto;
+	margin-right: auto;
+	text-align: left;
+}
+.center th {
+	text-align: center;
+}
+
+.newsdate {
+	font-size: smaller;
+	font-style: italic;
+	color: #6666cc;
+	background-color: transparent;
+}
+div.newsItem .newsdate {
+	float:left;
+	margin-right: 10px;
+}
+
+div.indent {
+	margin-left: 50px;
+}
+
+li {
+	padding-top: 3px;
+	padding-bottom: 3px;
+}
+/* Don't overwrite ordered lists */
+ul li {
+	list-style-type: square;
+        font-weight: bold;
+}
+
+em {
+	font-weight: bold;
+	font-style: italic;
+}
+
+ul.simple {
+	padding-left: 8px;
+	margin: 0 0 1em 0;
+}
+ul.simple li {
+	padding: 0px;
+	list-style-type: none;
+}
+
+/* Content are styles ----------------------------------------------------- */
+#content {
+	padding: 10px;
+}
+#content h1 {
+	margin-top: 0px;
+}
+
+/* 3px IE bug hack hidden from IE5-mac \*/
+* html #content { height: 1%; }
+/* End hide from IE5-mac */
+
+/* Layout styling and helpers --------------------------------------------- */
+#cuerpo, #layout_3 {
+	/* Background image will be set in a mirror specific CSS rule */
+	background-position: top left;
+	background-repeat: repeat-y;
+}
+#layout_3_helper {
+	/* Background image will be set in a mirror specific CSS rule */
+	background-position: top right;
+	background-repeat: repeat-y;
+}
+
+.cleaner {
+	clear: both;
+	height: 1px;
+	font-size: 1px;
+}
+
+#leftbar {
+	float: left;
+	width: 186px;
+	padding: 5px;
+	font-size: smaller;
+}
+#conferencesSidebar {
+	float: left;
+	width: 300px;
+	border-right: 1px dotted #000;
+	padding: 0 0 0 5px;
+	background-color: #efefef;
+	font-size: smaller;
+}
+
+/* {{{ Latest conference announcements on the frontpage */
+#confTeaser {
+	border: 1px dotted #999;
+	padding: 10px 0;
+	margin: 0;
+	background-color: #eee;
+	font-size: small;
+}
+
+#confTeaser p {
+	display: inline;
+}
+
+#confTeaser ul {
+	margin: 0;
+	padding: 0;
+	display: inline;
+}
+
+#confTeaser ul li {
+	background-color: #eee;
+	padding: 0 2px;
+	margin: 0;
+	display: inline;
+}
+/* }}} */
+
+#leftbar p, #leftbar h3, #rightbar p, #rightbar h3 {
+	margin-top: 0;
+	margin-bottom: 1em;
+}
+#rightbar {
+	float: right;
+	width: 186px;
+	padding: 5px;
+	font-size: smaller;
+}
+
+#rightbar h3 {
+	font-size: small;
+}
+
+#layout_1 #content.conferences {
+	margin-left: 310px;
+}
+#cuerpo #content, #layout_3 #content {
+	margin-left: 196px;
+}
+#layout_3 #content {
+	margin-right: 196px;
+}
+
+/* Header navigation area ------------------------------------------------- */
+#headnav {
+	color: inherit;
+	background-color: #9999cc;
+	height: 76px;
+	position: relative;
+}
+#headnav img {
+	border: 0px;
+	margin: 0px 3px;
+}
+#headmenu {
+	position: absolute;
+	bottom: 0px;
+	right: 5px;
+	text-align: right;
+	padding-left: 126px;
+}
+#headsearch {
+	background-color: #666699;
+	border-width: 1px 0px;
+	border-color: #333366;
+	border-style: solid;
+	text-align: right;
+	padding-right: 6px;
+	font-size: 75%;
+	color: white;
+}
+#headsearch input.submit {
+	vertical-align: baseline;
+}
+#headsearch form, #headsearch p {
+	margin: 0px;
+}
+#headsearch span.shortkey {
+	text-decoration: underline;
+	font-size: 100%;
+}
+
+/* Footer navigation area ------------------------------------------------- */
+#footnav {
+	color: inherit;
+	background-color: #9999cc;
+	border-width: 1px 0px;
+	border-color: #333366;
+	border-style: solid;
+	text-align: right;
+	padding-right: 6px;
+}
+#pagefooter {
+	position: relative;
+	font-size: 75%;
+	color: inherit;
+	background-color: #cccccc;
+	width: 100%;
+}
+#thismirror {
+	text-align: right;
+	margin-left: 50%;
+	padding: 6px;
+}
+#copyright {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	padding: 6px;
+	margin-right: 30%;
+}
+#footnav a, #headmenu a {
+	font-size: 75%;
+	text-decoration: none;
+}
+
+/* Credits page styles ---------------------------------------------------- */
+.e {
+	background-color: #ccccff;
+	color: inherit;
+	font-weight: bold;
+}
+.h {
+	background-color: #9999cc;
+	color: inherit;
+	font-weight: bold;
+}
+.v, .vr {
+	background-color: #cccccc;
+	color: inherit;
+}
+.vr {
+	text-align: right;
+}
+
+/* PHP source code highlighting ------------------------------------------- */
+.phpcode, div.classsynopsis {
+	padding: 0.5em;
+	text-align: left;
+}
+div.phpcode span.html {
+	color: black;
+	background-color: transparent;
+}
+div.phpcode span.comment, div.classsynopsisinfo_comment {
+	color: #FF8000;
+	background-color: transparent;
+}
+div.classsynopsisinfo_comment {
+	font-weight: bold;
+}
+div.phpcode span.default {
+	color: #0000BB;
+	background-color: transparent;
+}
+div.phpcode span.keyword {
+	color: #007700;
+	background-color: transparent;
+}
+div.phpcode span.string {
+	color: #DD0000;
+	background-color: transparent;
+}
+
+
+/* Standard tables -------------------------------------------------------- */
+table.standard td {
+	background-color: #eeeeee;
+	color: inherit;
+}
+table.standard th {
+	background-color: #cccccc;
+	color: inherit;
+}
+table.standard td.highlight {
+	background-color: #ffffcc;
+	color: inherit;
+}
+table.standard td.sub, table.standard th.sub,
+table.standard th.subr, table.standard th.subl {
+	background-color: #dddddd;
+	color: inherit;
+}
+table.standard th.subr {
+	text-align: right;
+	vertical-align: top;
+}
+table.standard th.subl {
+	text-align: left;
+	vertical-align: top;
+}
+
+/* Mirror listing tables -------------------------------------------------- */
+table.mirrors td {
+	background-color: #eeeeee;
+	color: inherit;
+	font-size: smaller;
+}
+table.mirrors th {
+	background-color: #cccccc;
+	color: inherit;
+}
+table.mirrors th.ch {
+	text-align: left;
+}
+table.mirrors th img {
+	border: 1px solid #000000;
+}
+table.mirrors th.flag {
+	width: 45px;
+}
+table.mirrors tr.this td {
+	background-color: #ffffcc;
+	color: inherit;
+}
+table.mirrors td.caret {
+	text-align: right;
+	background-color: white !important;
+	color: inherit;
+}
+
+
+/* Logos table ------------------------------------------------------------ */
+table#logos {
+	background-color: #f0f0f0;
+	color: inherit;
+}
+table#logos td {
+	vertical-align: middle;
+}
+table#logos td.logo, table#logos td.logob {
+	text-align: center;
+	width: 33%;
+	background-color: #ffffff;
+	color: inherit;
+}
+table#logos td.logob {
+	background-color: #000000;
+	color: inherit;
+}
+table#logos td.star {
+	width: 20px;
+}
+span.star {
+	font-size: 1.5em;
+	font-weight: bold;
+	color: #6868cd;
+}
+table#logos td ul {
+	padding-left: 15px;
+	list-style-type: square;
+}
+
+/* Left sidebar TOC on manual pages --------------------------------------- */
+ul.toc {
+	margin: 0px 5px 5px 5px;
+	padding: 0px;
+}
+ul.toc li {
+	font-size: 85%;
+	margin: 1px 0 1px 1px;
+	padding: 1px 0 1px 11px;
+	list-style-type: none;
+	background-repeat: no-repeat;
+	background-position: center left;
+}
+ul.toc li.header {
+	font-size: 115%;
+	padding: 5px 0px 5px 11px;
+	border-bottom: 1px solid #cccccc;
+	margin-bottom: 5px;
+}
+ul.toc li.active {
+	font-weight: bold;
+}
+ul.toc li a {
+	text-decoration: none;
+}
+ul.toc li a:hover {
+	text-decoration: underline;
+}
+
+/* Top and bottom navigation controls on manual pages --------------------- */
+div.manualnavbar {
+	background-color: #e0e0e0;
+	color: inherit;
+	padding: 4px;
+	margin-bottom: 10px;
+}
+div.manualnavbar a {
+	text-decoration: none;
+}
+div.manualnavbar a:hover {
+	text-decoration: underline;
+}
+div.manualnavbar .prev, div.manualnavbar .langchooser {
+	padding-right: 4px;
+}
+div.manualnavbar .next, div.manualnavbar .lastupdated {
+	float: right;
+	padding-left: 4px;
+}
+div.manualnavbar hr {
+	color: #cccccc;
+	background-color: #cccccc;
+}
+div.manualnavbar form {
+	margin: 0px;
+	font-size: 75%;
+}
+div.manualnavbar .lastupdated {
+	font-size: 75%;
+}
+div.manualnavbar div.langchooser #changeLangImage {
+	border: 0px solid #000;
+	width: 11px;
+	height: 11px;
+}
+div.manualnavbar fieldset {
+	margin: 0px;
+	padding: 0px;
+	border: 0px solid #000;
+}
+div.manualnavbar div.langchooser p {
+	margin: 0px 10px 0 5px;
+	padding: 0px;
+	float: left;
+}
+
+
+
+ /* TOC elements on manual pages ------------------------------------------- */
+ul.toc li {
+	background-image: url(http://static.php.net/www.php.net/images/box-0.gif);
+}
+ul.toc li.up {
+	background-image: url(http://static.php.net/www.php.net/images/caret-u.gif);
+}
+ul.toc li.home {
+	background-image: url(http://static.php.net/www.php.net/images/caret-t.gif);
+}
+ul.toc li.active {
+	background-image: url(http://static.php.net/www.php.net/images/box-1.gif);
+}
+
+/* Sidebar backgrounds ---------------------------------------------------- */
+#cuerpo, #layout_3 {
+	background-image: url(http://static.php.net/www.php.net/images/leftbar.png);
+}
+#layout_3_helper {
+	background-image: url(http://static.php.net/www.php.net/images/rightbar.png);
+}
+/*clase para los ul li de indice.html.twig*/
+.listado{padding-left: 15px;}
+
+/* ul para preguntas frecuentes*/
+li.faq{
+    padding: 20px;
+    font-weight: bold;
+}
+p.faq{
+    font-size: 10px;
+}

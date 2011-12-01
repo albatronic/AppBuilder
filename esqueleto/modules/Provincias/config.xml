@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Document : Provincias\config.xml
+  @author: Sergio Pérez <sergio.perez@albatronic.com>
+* @copyright: INFORMATICA ALBATRONIC SL
+* @date 12.06.2011 19:02:56
+-->
+
+<Provincias>
+  <login_required>YES</login_required>
+  <permission_control>YES</permission_control>
+  <help_file>provincias.html.twig</help_file>
+  <title>Provincias</title>
+  <conection>empresas</conection>
+  <entity>Provincias</entity>
+  <table>provincias</table>
+  <primarykey>IDProvincia</primarykey>
+  <records_per_page>15</records_per_page>
+  <order_by>Provincia</order_by>
+  <search_default>Provincia</search_default>
+  <columns>
+    <column>
+      <title>IDProvincia</title>
+      <field>IDProvincia</field>
+      <filter>NO</filter>
+      <list>YES</list>
+      <form>YES</form>
+      <link><route/><param/><title/><target/></link>
+      <default></default>
+
+      <validator>
+      </validator>
+
+     
+    </column>
+
+    <column>
+      <title>Codigo</title>
+      <field>Codigo</field>
+      <filter>YES</filter>
+      <list>NO</list>
+      <form>YES</form>
+      <link><route/><param/><title/><target/></link>
+      <default></default>
+
+      <validator>
+        <null>NO</null>
+        <type>string</type>
+        <length>5</length>
+        <min></min>
+        <max></max>
+        <message>Valor Requerido</message>
+      </validator>
+
+     
+    </column>
+
+    <column>
+      <title>Provincia</title>
+      <field>Provincia</field>
+      <filter>YES</filter>
+      <list>NO</list>
+      <form>YES</form>
+      <link><route/><param/><title/><target/></link>
+      <default></default>
+
+      <validator>
+        <null>NO</null>
+        <type>string</type>
+        <length>30</length>
+        <min></min>
+        <max></max>
+        <message>Valor Requerido</message>
+      </validator>
+
+     
+    </column>
+
+    <column>
+      <title>IDZona</title>
+      <field>IDZona</field>
+      <filter>NO</filter>
+      <list>NO</list>
+      <form>YES</form>
+      <link><route/><param/><title/><target/></link>
+      <default></default>
+
+      <validator>
+        <null>NO</null>
+        <type>integer</type>
+        <length>4</length>
+        <min>0</min>
+        <max>999</max>
+        <message>Valor Requerido</message>
+      </validator>
+
+    
+    </column>
+
+  </columns>
+</Provincias>

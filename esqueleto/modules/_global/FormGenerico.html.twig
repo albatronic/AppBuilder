@@ -1,0 +1,11 @@
+{{form_errors(form)}}
+{% for field in form %}
+    {% if not field.ishidden %}
+    <div>   
+        {{ form_label(field)}}
+        {{ form_errors(field) }}
+        {{ form_field(field, { 'class':'field' }) }}
+    </div>
+    {% endif %}
+{% endfor %}
+{{ form_hidden(form) }}

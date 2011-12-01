@@ -1,0 +1,26 @@
+{#-- MENU DESPLEGABLE: Necesita menunegro.css ----------------------------------#}
+{# Recibe un array (menu) con dos dimensiones para contruir el menu desplegable #}
+{#------------------------------------------------------------------------------#}
+
+<!--MENU-->
+<div id='wrapper'>
+    <div id="main-nav">
+	<ul id="menu-main-menu" class="sf-menu">
+	{% for titulo,subopciones in menu %}
+            <li id="menu-item-2515">
+                <a href='#'>{{ titulo }}</a>
+
+        	<ul class='sub-menu'>
+                {% for subopcion in subopciones %}
+                    <li id="menu-item-815">
+                        <a href='{{app.path}}/{{ subopcion.route }}'>{{ subopcion.titulo }}</a>
+                    </li>
+                {% endfor %}
+                </ul>
+
+            </li>
+	{% endfor %}
+	</ul>
+    </div>
+</div>
+<!-- FIN MENU-->

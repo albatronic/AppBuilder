@@ -1,0 +1,17 @@
+{# TEMPLATE Agentes/form.html.twig #}
+{# Muestra los campos editables de la entidad        #}
+
+{{ macro.input('Login','Etiqueta','text','Agentes[Login]','Agentes_Login',datos.Login,'15','CampoTextoCorto') }}
+{{ macro.input('Nombre','Etiqueta','text','Agentes[Nombre]','Agentes_Nombre',datos.Nombre,'50','CampoTextoLargo') }}
+{{ macro.input('Password','Etiqueta','Password','Agentes[Password]','Agentes_Password',none,'50','CampoTextoLargo') }}
+{{ macro.input('Repita Password','Etiqueta','Password','Agentes[RepitePassword]','Agentes_RepitePassword',none,'50','CampoTextoLargo') }}
+{# macro.input('Quien','Etiqueta','text','Agentes[Quien]','Agentes_Quien',datos.Quien,'50','CampoTextoLargo') #}
+{{ macro.input('E-Mail','Etiqueta','text','Agentes[EMail]','Agentes_EMail',datos.EMail,'50','CampoTextoLargo') }}
+{{ macro.select('Activo','Etiqueta','Agentes[Activo]','Agentes_Activo',none,datos.Activo.IDTipo,datos.Activo.fetchAll,'Select') }}
+{{ macro.select('Rol','Etiqueta','Agentes[Rol]','Agentes_Rol',none,datos.Rol.IDTipo,datos.Rol.fetchAll,'Select') }}
+{{ macro.select('Perfil','Etiqueta','Agentes[IDPerfil]','Agentes_IDPerfil',none,datos.IDPerfil.IDPerfil,datos.IDPerfil.fetchAll('Perfil'),'Select') }}
+{{ macro.select('Empresa','Etiqueta','Agentes[IDEmpresa]','Agentes_IDEmpresa',none,datos.IDEmpresa.IDEmpresa,datos.IDEmpresa.fetchAll('RazonSocial'),'Select',none,'DesplegableAjax("div_Agentes_IDSucursal","Agentes_IDSucursal","Agentes[IDSucursal]","sucursales",this.value);DesplegableAjax("div_Agentes_IDAlmacen","Agentes_IDAlmacen","Agentes[IDAlmacen]","almacenes",this.value)') }}
+{{ macro.select('Sucursal','Etiqueta','Agentes[IDSucursal]','Agentes_IDSucursal',none,datos.IDSucursal.IDSucursal,datos.IDSucursal.fetchAll(datos.IDEmpresa.IDEmpresa,'Nombre'),'Select') }}
+{{ macro.select('Almacén','Etiqueta','Agentes[IDAlmacen]','Agentes_IDAlmacen',none,datos.IDAlmacen.IDAlmacen,datos.IDAlmacen.fetchAll(datos.IDEmpresa.IDEmpresa,'Nombre'),'Select') }}
+{{ macro.input('N. Logins','Etiqueta','text','Agentes[NLogin]','Agentes_NLogin',datos.NLogin,'4','CampoUnidades','readonly') }}
+{{ macro.fecha('Ultimo Login','Etiqueta','Agentes[UltimoLogin]','Agentes_UltimoLogin',datos.UltimoLogin,'19','LiteralFechaHora','readonly') }}

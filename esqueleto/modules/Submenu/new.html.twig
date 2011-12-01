@@ -1,0 +1,26 @@
+{# Template new.html.twig for Submenu #}
+{# -------------------------------------------------------#}
+{# CREAR UN REGISTRO NUEVO                                #}
+{# -------------------------------------------------------#}
+{% extends 'Submenu/index.html.twig' %}
+
+{% block navegador %}
+{% include "_global/comandosList.html.twig" with {'controller': values.controller, 'linkValue': values.linkBy.value} %}
+{% endblock %}
+
+{% block mantenimiento %}
+<div class="FormManto">
+    <form name="manto" action="" method="POST">
+        <input name="controller" value="Submenu" type="hidden" />
+        <input name="action" value="new" type="hidden" />
+        <input name="Submenu[IDOpcion]" value="{{ values.linkBy.value }}" type="hidden" />
+        <input name="Submenu[Id]" value="{{ values.datos.Id }}" type="hidden" />
+        {% include '_global/comandosCreate.html.twig' %}
+
+        <div class="Cuerpo">
+	{% include '_global/FormErrores.html.twig' with {'errores': values.errores} %}
+	{% include "Submenu/form.html.twig" with {'datos': values.datos} %}
+        </div>
+    </form>
+</div>
+{% endblock %}

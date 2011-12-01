@@ -1,0 +1,13 @@
+{# MUESTRAR LOS MENSAJES DE ALERTA DEL FORMULARIO           #}
+{# CONCATENA TODOS LOS ELEMENTOS DEL ARRAY alertas Y SE LOS #}
+{# PASA A LA FUNCION JS SEPARADOS POR EL CARACTER '#'       #}
+
+{% if alertas %}
+    {% set mensaje = none %}
+
+    {% for alerta in alertas %}
+        {% set mensaje = mensaje ~ alerta ~ '#' %}
+    {% endfor %}
+
+    <script> setTimeout ("notificacion('{{mensaje}}','alerta')", 0000);</script>
+{% endif %}

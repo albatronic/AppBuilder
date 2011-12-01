@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Document : Perfiles\config.xml
+  @author: Sergio Pérez <sergio.perez@albatronic.com>
+* @copyright: INFORMATICA ALBATRONIC SL
+* @date 12.06.2011 19:03:07
+-->
+
+<Perfiles>
+  <login_required>YES</login_required>
+  <permission_control>YES</permission_control>
+  <help_file>perfiles.html.twig</help_file>
+  <title>Perfiles de Usuario</title>
+  <conection>empresas</conection>
+  <entity>Perfiles</entity>
+  <table>perfiles</table>
+  <primarykey>IDPerfil</primarykey>
+  <records_per_page>10</records_per_page>
+  <order_by>Perfil</order_by>
+  <search_default>Perfil</search_default>
+  <columns>
+    <column>
+      <title>IDPerfil</title>
+      <field>IDPerfil</field>
+      <filter>NO</filter>
+      <list>YES</list>
+      <form>YES</form>
+      <link><route/><param/><title/><target/></link>
+      <default></default>
+
+      <validator>
+      </validator>
+
+      
+    </column>
+
+    <column>
+      <title>Perfil</title>
+      <field>Perfil</field>
+      <filter>YES</filter>
+      <list>NO</list>
+      <form>YES</form>
+      <link><route/><param/><title/><target/></link>
+      <default></default>
+
+      <validator>
+        <null>NO</null>
+        <type>string</type>
+        <length>50</length>
+        <min></min>
+        <max></max>
+        <message>Valor Requerido</message>
+      </validator>
+
+
+    </column>
+
+    <column>
+      <title>Descripcion</title>
+      <field>Descripcion</field>
+      <filter>YES</filter>
+      <list>NO</list>
+      <form>YES</form>
+      <link><route/><param/><title/><target/></link>
+      <default></default>
+
+      <validator>
+        <null>YES</null>
+        <type>string</type>
+        <length>255</length>
+        <min></min>
+        <max></max>
+        <message>Valor Requerido</message>
+      </validator>
+
+   
+    </column>
+
+    <column>
+      <title>Administrador</title>
+      <field>Administrador</field>
+      <filter>NO</filter>
+      <list>NO</list>
+      <form>YES</form>
+      <link><route/><param/><title/><target/></link>
+      <default>0</default>
+
+      <validator>
+        <null>NO</null>
+        <type></type>
+        <length></length>
+        <min></min>
+        <max></max>
+        <message>Valor Requerido</message>
+      </validator>
+
+    
+    </column>
+
+  </columns>
+</Perfiles>

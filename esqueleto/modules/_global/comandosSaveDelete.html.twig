@@ -1,0 +1,16 @@
+{# Template para los comandos Guardar y Borrar registro #}
+
+    <input name="accion" id="accion" value="" type="hidden" />
+    <div class='Comandos'>
+        <div class="Titulo">
+        <div style="float: left;">
+            {% if values.permisos['A'] %}
+            <input type="image" src="{{app.path}}/images/save_cmd.png" border="0" onclick="getElementById('accion').value='Guardar';" alt="Guardar" title="Guardar" />
+            {% endif %}
+            {% if values.permisos['B'] %}
+            <input type="image" src="{{app.path}}/images/trash_cmd.png" border="0" onclick="if (!confirm('¿Desea borrar el registro?')) {return false;} else {getElementById('accion').value='Borrar';}" alt="Borrar" title="Borrar" />
+            {% endif %}
+        </div>
+        {% include '_global/comandosAuditoria.html.twig' with {'controller': values.controller} %}
+        </div>
+    </div>

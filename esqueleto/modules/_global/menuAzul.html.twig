@@ -1,0 +1,25 @@
+{#-- MENU DESPLEGABLE: Necesita menu.css   -------------------------------------#}
+{# Recibe un array (menu) con dos dimensiones para contruir el menu desplegable #}
+{#------------------------------------------------------------------------------#}
+
+<!--MENU-->
+    <div id='menu'><span class='preload2'></span>
+	<ul class='menu2'>
+            <img src='images/menu_izq.gif' align='left' />
+            <img src='images/menu_der.gif' align='right'/>
+
+	{% for titulo,subopciones in menu %}
+            <li class='top'>
+                <a href='#' id='telmex' class='top_link'><span class='down'>{{ titulo }}</span></a>
+
+        	<ul class='sub'>
+                {% for subopcion in subopciones %}
+                    <li><a href='{{app.path}}/{{ subopcion.route }}'>{{ subopcion.titulo }}</a></li>
+                {% endfor %}
+                </ul>
+
+            </li>
+	{% endfor %}
+	</ul>
+    </div>
+<!-- FIN MENU-->

@@ -1,0 +1,9 @@
+{# TEMPLATE Permisos/form.html.twig #}
+{# Muestra los campos editables de la entidad        #}
+
+{% import '_global/macros.html.twig' as macro %}
+
+
+{{ macro.select('Opcion','Etiqueta','Permisos[IDOpcion]','Permisos_IDOpcion',none,datos.IDOpcion,datos.IDOpcion.fetchAll,'Select') }}
+{{ macro.select('Subopcion','Etiqueta','Permisos[IDSubopcion]','Permisos_IDSubopcion',none,datos.IDSubopcion,datos.IDSubopcion.fetchAll('Titulo',datos.IDOpcion),'Select') }}
+{{ macro.input('Permisos','Etiqueta','text','Permisos[Permisos]','Permisos_Permisos',datos.Permisos,'6','CampoTextoCorto') }}

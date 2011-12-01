@@ -1,0 +1,40 @@
+{% import "_global/macros.html.twig" as macro %}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es-ES" lang="es-ES">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link type="text/css" rel="stylesheet" href="{{app.path}}/css/menuazul.css" />
+        <link type="text/css" rel="stylesheet" href="{{app.path}}/css/menunegro.css" />
+        <link type="text/css" rel="stylesheet" href="{{app.path}}/css/contenedor.css" />
+        <link type="text/css" rel="stylesheet" href="{{app.path}}/css/formularios.css" />
+        <link type="text/css" rel="stylesheet" href="{{app.path}}/css/notificaciones.css" />
+        <link type="text/css" rel="stylesheet" href="{{app.path}}/css/jquery-autocompletar.css" />
+        <link type="text/css" rel="stylesheet" href="{{app.path}}/css/thickbox.css" />
+
+        <script type="text/javascript" src="{{app.path}}/js/jquery.js"></script>
+        <script type="text/javascript" src="{{app.path}}/js/script.js"></script>
+        <script type="text/javascript" src="{{app.path}}/js/thickbox.js"></script>
+        <script type="text/javascript" src="{{app.path}}/js/popcalendar.js"></script>
+
+        <title>.:: {{app.name}} {% block title %} {{ titulo }} {% endblock %}</title>
+    </head>
+    <body style="background:#eeeeee;">
+        <div id="contenedor_popup">
+            <div id="contenido">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+
+        <div id="notificacion"></div>
+
+        <div class="pieizq">
+            <div class="debug">
+            {% if values._debugMode %}
+                <pre>{{values._debugValues}}</pre>
+            {% endif %}
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Document : Agentes\config.xml
+  @author: Sergio Pérez <sergio.perez@albatronic.com>
+* @copyright: INFORMATICA ALBATRONIC SL
+* @date 12.06.2011 19:03:07
+-->
+
+<Agentes>
+  <login_required>YES</login_required>
+  <permission_control>YES</permission_control>
+  <help_file>agentes.html.twig</help_file>
+  <title>Usuarios</title>
+  <conection>empresas</conection>
+  <entity>Agentes</entity>
+  <table>agentes</table>
+  <primarykey>IDAgente</primarykey>
+  <records_per_page>20</records_per_page>
+  <order_by>Nombre</order_by>
+  <search_default>Nombre</search_default>
+  <columns>
+    <column>
+      <title>Código</title>
+      <field>IDAgente</field>
+      <filter>NO</filter>
+      <list>YES</list>
+      <form>YES</form>
+      <link><route/><param/><title/><target/></link>
+      <default></default>
+
+      <validator>
+      </validator>
+    </column>
+
+    <column>
+      <title>Login</title>
+      <field>Login</field>
+      <filter>NO</filter>
+      <list>YES</list>
+      <form>YES</form>
+      <link><route/><param/><title/><target/></link>
+      <default></default>
+
+      <validator>
+        <null>NO</null>
+        <type>string</type>
+        <length>15</length>
+        <min></min>
+        <max></max>
+        <message>Valor Requerido</message>
+      </validator>
+    </column>
+
+    <column>
+      <title>Nombre</title>
+      <field>Nombre</field>
+      <filter>YES</filter>
+      <list>YES</list>
+      <form>YES</form>
+      <link><route/><param/><title/><target/></link>
+      <default></default>
+
+      <validator>
+        <null>NO</null>
+        <type>string</type>
+        <length>50</length>
+        <min></min>
+        <max></max>
+        <message>Valor Requerido</message>
+      </validator>
+    </column>
+
+    <column>
+      <title>Password</title>
+      <field>Password</field>
+      <filter>NO</filter>
+      <list>NO</list>
+      <form>YES</form>
+      <link><route/><param/><title/><target/></link>
+      <default></default>
+
+      <validator>
+        <null>NO</null>
+        <type>string</type>
+        <length>50</length>
+        <min></min>
+        <max></max>
+        <message>Valor Requerido</message>
+      </validator>
+    </column>
+
+    <column>
+      <title>Quien</title>
+      <field>Quien</field>
+      <filter>NO</filter>
+      <list>NO</list>
+      <form>YES</form>
+      <link><route/><param/><title/><target/></link>
+      <default></default>
+
+      <validator>
+      </validator>
+    </column>
+
+    <column>
+      <title>N. Logins</title>
+      <field>NLogin</field>
+      <filter>NO</filter>
+      <list>YES</list>
+      <form>YES</form>
+      <link><route/><param/><title/><target/></link>
+      <default>0</default>
+
+      <validator>
+        <null>YES</null>
+        <type>integer</type>
+        <length>4</length>
+        <min></min>
+        <max></max>
+        <message>Valor Requerido</message>
+      </validator>
+    </column>
+
+    <column>
+      <title>Ultimo Login</title>
+      <field>UltimoLogin</field>
+      <filter>NO</filter>
+      <list>NO</list>
+      <form>YES</form>
+      <link><route/><param/><title/><target/></link>
+      <default></default>
+
+      <validator>
+        <null>YES</null>
+        <type>datetime</type>
+        <length></length>
+        <min></min>
+        <max></max>
+        <message>Valor Requerido</message>
+      </validator>
+    </column>
+
+    <column>
+      <title>EMail</title>
+      <field>EMail</field>
+      <filter>YES</filter>
+      <list>NO</list>
+      <form>YES</form>
+      <link><route/><param/><title/><target/></link>
+      <default></default>
+
+      <validator>
+        <null>NO</null>
+        <type>email</type>
+        <length>50</length>
+        <min></min>
+        <max></max>
+        <message>Valor Requerido</message>
+      </validator>
+    </column>
+
+    <column>
+      <title>Activo</title>
+      <field>Activo</field>
+      <filter>NO</filter>
+      <list>NO</list>
+      <form>YES</form>
+      <link><route/><param/><title/><target/></link>
+      <default>0</default>
+
+      <validator>
+        <null>NO</null>
+        <type>integer</type>
+        <length>1</length>
+        <min>0</min>
+        <max>1</max>
+        <message>Valor Requerido</message>
+      </validator>
+    </column>
+
+    <column>
+      <title>Perfil</title>
+      <field>IDPerfil</field>
+      <filter>NO</filter>
+      <list>YES</list>
+      <form>YES</form>
+      <link><route/><param/><title/><target/></link>
+      <default>0</default>
+
+      <validator>
+        <null>NO</null>
+        <type>integer</type>
+        <length>3</length>
+        <min>1</min>
+        <max>999</max>
+        <message>Valor Requerido (1-999)</message>
+      </validator>
+    </column>
+
+    <column>
+      <title>Empresa</title>
+      <field>IDEmpresa</field>
+      <filter>NO</filter>
+      <list>YES</list>
+      <form>YES</form>
+      <link><route/><param/><title/><target/></link>
+      <default></default>
+
+      <validator>
+        <null>YES</null>
+        <type>integer</type>
+        <length>3</length>
+        <min>0</min>
+        <max>999</max>
+        <message>Valor Requerido (0-999)</message>
+      </validator>
+    </column>
+
+    <column>
+      <title>Sucursal</title>
+      <field>IDSucursal</field>
+      <filter>NO</filter>
+      <list>YES</list>
+      <form>YES</form>
+      <link><route/><param/><title/><target/></link>
+      <default></default>
+
+      <validator>
+        <null>YES</null>
+        <type>integer</type>
+        <length>3</length>
+        <min>1</min>
+        <max>999</max>
+        <message>Valor Requerido (1-999)</message>
+      </validator>
+    </column>
+
+    <column>
+      <title>Rol</title>
+      <field>Rol</field>
+      <filter>NO</filter>
+      <list>YES</list>
+      <form>YES</form>
+      <link><route/><param/><title/><target/></link>
+      <default>0</default>
+
+      <validator>
+        <null>NO</null>
+        <type>integer</type>
+        <length>1</length>
+        <min>0</min>
+        <max>99</max>
+        <message>Valor Requerido</message>
+      </validator>
+    </column>
+
+    <column>
+      <title>Almacén</title>
+      <field>IDAlmacen</field>
+      <filter>NO</filter>
+      <list>YES</list>
+      <form>YES</form>
+      <link><route/><param/><title/><target/></link>
+      <default></default>
+
+      <validator>
+        <null>YES</null>
+        <type>integer</type>
+        <length>3</length>
+        <min>1</min>
+        <max>999</max>
+        <message>Valor Requerido (1-999)</message>
+      </validator>
+    </column>
+
+  </columns>
+</Agentes>

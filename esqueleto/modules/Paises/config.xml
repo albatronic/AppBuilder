@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Document : Paises\config.xml
+  @author: Sergio Pérez <sergio.perez@albatronic.com>
+* @copyright: INFORMATICA ALBATRONIC SL
+* @date 12.06.2011 19:02:55
+-->
+
+<Paises>
+  <login_required>YES</login_required>
+  <permission_control>YES</permission_control>
+  <help_file>paises.html.twig</help_file>
+  <title>Paises</title>
+  <conection>empresas</conection>
+  <entity>Paises</entity>
+  <table>paises</table>
+  <primarykey>IDPais</primarykey>
+  <records_per_page>15</records_per_page>
+  <order_by>Pais</order_by>
+  <search_default>Pais</search_default>
+  <columns>
+    <column>
+      <title>IDPais</title>
+      <field>IDPais</field>
+      <filter>NO</filter>
+      <list>NO</list>
+      <form>YES</form>
+      <link><route/><param/><title/><target/></link>
+      <default></default>
+
+      <validator>
+      </validator>
+
+      
+    </column>
+
+    <column>
+      <title>IsoNum</title>
+      <field>IsoNum</field>
+      <filter>YES</filter>
+      <list>YES</list>
+      <form>YES</form>
+      <link><route/><param/><title/><target/></link>
+      <default></default>
+
+      <validator>
+        <null>YES</null>
+        <type>integer</type>
+        <length>6</length>
+        <min></min>
+        <max></max>
+        <message>Valor Requerido</message>
+      </validator>
+
+      
+    </column>
+
+    <column>
+      <title>Iso2</title>
+      <field>Iso2</field>
+      <filter>YES</filter>
+      <list>YES</list>
+      <form>YES</form>
+      <link><route/><param/><title/><target/></link>
+      <default></default>
+
+      <validator>
+        <null>YES</null>
+        <type></type>
+        <length>2</length>
+        <min></min>
+        <max></max>
+        <message>Valor Requerido</message>
+      </validator>
+
+     
+    </column>
+
+    <column>
+      <title>Iso3</title>
+      <field>Iso3</field>
+      <filter>YES</filter>
+      <list>YES</list>
+      <form>YES</form>
+      <link><route></route><param/><title/><target/></link>
+      <default></default>
+
+      <validator>
+        <null>YES</null>
+        <type></type>
+        <length>3</length>
+        <min></min>
+        <max></max>
+        <message>Valor Requerido</message>
+      </validator>
+
+     
+    </column>
+
+    <column>
+      <title>Pais</title>
+      <field>Pais</field>
+      <filter>YES</filter>
+      <list>YES</list>
+      <form>YES</form>
+      <link><route>Paises/edit</route><param/><title>Editar...</title><target/></link>
+      <default></default>
+
+      <validator>
+        <null>NO</null>
+        <type>string</type>
+        <length>80</length>
+        <min></min>
+        <max></max>
+        <message>Valor Requerido</message>
+      </validator>
+
+    
+    </column>
+
+  </columns>
+</Paises>

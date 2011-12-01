@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Document : Provincias\listados.xml
+  @author: Sergio Pérez <sergio.perez@albatronic.com>
+* @copyright: INFORMATICA ALBATRONIC SL
+* @date 05.08.2011 20:38:16
+-->
+
+<Provincias>
+<listado>
+  <title>Provincias</title>
+  <order_by>IDProvincia ASC</order_by>
+  <break_field></break_field>
+  <idPerfil></idPerfil>
+  <orientation>P</orientation>
+  <unit>mm</unit>
+  <format>A4</format>
+  <margins>10,10,15,10</margins>
+  <body_font>Courier, ,8</body_font>
+
+  <columns>
+
+    <column>
+      <title>Codigo</title>
+      <field>Codigo</field>
+      <length>6</length>
+      <align>R</align>
+      <type></type>
+      <total>NO</total>
+      <formula></formula>
+      <format></format>
+    </column>
+
+    <column>
+      <title>Provincia</title>
+      <field>Provincia</field>
+      <length>30</length>
+      <align>L</align>
+      <type>string</type>
+      <total>NO</total>
+      <formula></formula>
+      <format></format>
+    </column>
+
+    <column>
+      <title>Zona</title>
+      <field>IDZona</field>
+      <length>30</length>
+      <align>L</align>
+      <type>integer</type>
+      <total>NO</total>
+      <formula></formula>
+      <format></format>
+    </column>
+
+  </columns>
+</listado>
+</Provincias>

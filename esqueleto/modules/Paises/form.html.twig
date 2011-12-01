@@ -1,0 +1,9 @@
+{# TEMPLATE Paises/form.html.twig #}
+{# Muestra los campos editables de la entidad        #}
+
+{% import '_global/macros.html.twig' as macro %}
+
+{{ macro.input('IsoNum','Etiqueta','text','Paises[IsoNum]','Paises_IsoNum',datos.IsoNum,'6','CampoUnidades') }}
+{{ macro.input('Iso2','Etiqueta','text','Paises[Iso2]','Paises_Iso2',datos.Iso2,'2','CampoTextoCorto') }}
+{{ macro.input('Iso3','Etiqueta','text','Paises[Iso3]','Paises_Iso3',datos.Iso3,'3','CampoTextoCorto') }}
+{{ macro.input('Pais','Etiqueta','text','Paises[Pais]','Paises_Pais',datos.Pais,'80','CampoTextoLargo') }}

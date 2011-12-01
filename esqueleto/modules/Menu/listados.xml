@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Document : Menu\listados.xml
+  @author: Sergio Pérez <sergio.perez@albatronic.com>
+* @copyright: INFORMATICA ALBATRONIC SL
+* @date 05.08.2011 20:38:16
+-->
+
+<Menu>
+<listado>
+  <title>Menu</title>
+  <order_by>IDOpcion ASC</order_by>
+  <break_field></break_field>
+  <idPerfil></idPerfil>
+  <orientation>P</orientation>
+  <unit>mm</unit>
+  <format>A4</format>
+  <margins>10,10,15,10</margins>
+  <body_font>Courier, ,8</body_font>
+
+  <columns>
+    <column>
+      <title>IDOpcion</title>
+      <field>IDOpcion</field>
+      <length>4</length>
+      <align>R</align>
+      <type>integer</type>
+      <total>NO</total>
+      <formula></formula>
+      <format></format>
+    </column>
+
+    <column>
+      <title>Script</title>
+      <field>Script</field>
+      <length>50</length>
+      <align>L</align>
+      <type>string</type>
+      <total>NO</total>
+      <formula></formula>
+      <format></format>
+    </column>
+
+    <column>
+      <title>Titulo</title>
+      <field>Titulo</field>
+      <length>50</length>
+      <align>L</align>
+      <type>string</type>
+      <total>NO</total>
+      <formula></formula>
+      <format></format>
+    </column>
+
+    <column>
+      <title>Orden</title>
+      <field>Orden</field>
+      <length>4</length>
+      <align>R</align>
+      <type>integer</type>
+      <total>NO</total>
+      <formula></formula>
+      <format></format>
+    </column>
+
+    <column>
+      <title>Administrador</title>
+      <field>Administrador</field>
+      <length>1</length>
+      <align>R</align>
+      <type>integer</type>
+      <total>NO</total>
+      <formula></formula>
+      <format></format>
+    </column>
+
+    <column>
+      <title>Icono</title>
+      <field>Icono</field>
+      <length>50</length>
+      <align>L</align>
+      <type>string</type>
+      <total>NO</total>
+      <formula></formula>
+      <format></format>
+    </column>
+
+  </columns>
+</listado>
+</Menu>

@@ -1,0 +1,19 @@
+{# TEMPLATE Menu/form.html.twig #}
+{# Muestra los campos editables de la entidad        #}
+
+
+<input name="Menu[Script]" value="" type="hidden" />
+<input name="Menu[Icono]" value="" type="hidden" />
+{{ macro.input('Orden','Etiqueta','text','Menu[Orden]','Menu_Orden',datos.Orden,'4','CampoUnidades') }}
+{{ macro.input('Titulo','Etiqueta','text','Menu[Titulo]','Menu_Titulo',datos.Titulo,'50','CampoTextoLargo') }}
+{{ macro.select('Administrador','Etiqueta','Menu[Administrador]','Menu_Administrador',none,datos.Administrador,datos.Administrador.fetchAll,'Select') }}
+
+{% if datos.IDOpcion %}
+
+    <div style='margin-top:15px;width:100%;'>
+        <iframe width="100%" height="327" scrolling="yes" style="border: 1px dotted grey;"
+                src="{{app.path}}/Submenu/list/{{datos.IDOpcion}}">
+        </iframe>
+    </div>
+
+{% endif %}

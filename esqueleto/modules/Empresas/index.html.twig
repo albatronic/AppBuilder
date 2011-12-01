@@ -1,0 +1,21 @@
+{# Template index.html.twig for Empresas #}
+{# -------------------------------------------------------#}
+{% extends '_global/layout.html.twig' %}
+
+{% block title parent() ~ " - " ~ values.titulo %}
+
+{% block content %}
+        {% include '_global/TituloGenerico.html.twig' with {'controller':  values.controller, 'linkValue': values.linkBy.value} %}
+
+	{% block filtro %}
+            {% if values.permisos['C'] %}
+                {% include 'Empresas/filtro.html.twig' with {'filter':values.listado.filter} %}
+            {% endif %}
+	{% endblock %}
+
+	{% block listado %}
+	{% endblock %}
+
+	{% block mantenimiento %}
+	{% endblock %}
+{% endblock %}

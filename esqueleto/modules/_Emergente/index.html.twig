@@ -1,0 +1,13 @@
+{# Template index.html.twig for _Emergente #}
+{# -------------------------------------------------------#}
+{% extends '_global/popup.html.twig' %}
+
+{% block content %}
+    {% include "_global/errores.html.twig" with {'errores': values.errores} %}
+    {% include "_global/alertas.html.twig" with {'alertas': values.alertas} %}
+
+    {% block listado %}
+    {% endblock %}
+
+    <div id="notificacion"></div>
+{% endblock %}

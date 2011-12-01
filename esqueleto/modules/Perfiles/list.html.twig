@@ -1,0 +1,33 @@
+{# Template list.html.twig for Perfiles #}
+{# -------------------------------------------------------#}
+{% extends 'Perfiles/index.html.twig' %}
+
+{% block listado %}
+<div class='Listado'>
+
+	{% include '_global/paginacion.html.twig' with {'filter':values.listado.filter,'controller':'Perfiles','position':'izq'}%}
+
+        <table width="100%">
+            <tr class='Titulos'>
+                <td class='Item'>Perfil</td>
+                <td class='Item'>Descripción</td>
+                <td class='Item'>Administrador</td>
+            </tr>
+
+            <tbody class='Cuerpo'>
+            {% for key,objeto in values.listado.data %}
+            <tr>
+                <td class='Item'><a href="{{app.path}}/Perfiles/edit/{{objeto.IDPerfil}}" title="Editar...">{{objeto.Perfil}}</a></td>
+                <td class='Item'>{{objeto.Descripcion}}</td>
+                <td class='Item' align='center'>{{objeto.Administrador.Descripcion}}</td>
+            </tr>
+            {% else %}
+            <tr><td colspan='2'>No hay informaci&oacute;n que cumpla esos criterios</td></tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+	{% include '_global/paginacion.html.twig' with {'filter':values.listado.filter,'controller':'Perfiles','position':'der'}%}
+
+</div>
+{% endblock %}

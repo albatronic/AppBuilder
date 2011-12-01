@@ -1,0 +1,19 @@
+{# Template index.html.twig for Sucursales #}
+{# -------------------------------------------------------#}
+{% extends '_global/popup.html.twig' %}
+
+{% block title parent() ~ " - " ~ values.titulo %}
+
+{% block content %}
+        <div class='Subtitulo'>
+    	{% block navegador %}
+            {% include '_global/comandosNew.html.twig' with {'controller': values.controller, 'linkValue': values.linkBy.value} %}
+	{% endblock %}
+        </div>
+
+	{% block listado %}
+	{% endblock %}
+
+	{% block mantenimiento %}
+	{% endblock %}
+{% endblock %}

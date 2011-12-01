@@ -1,0 +1,13 @@
+{# MUESTRAR LOS MENSAJES DE ERROR DEL FORMULARIO            #}
+{# CONCATENA TODOS LOS ELEMENTOS DEL ARRAY errores Y SE LOS #}
+{# PASA A LA FUNCION JS SEPARADOS POR EL CARACTER '#'       #}
+
+{% if errores %}
+    {% set mensaje = none %}
+
+    {% for error in errores %}
+        {% set mensaje = mensaje ~ error ~ '#' %}
+    {% endfor %}
+
+    <script> setTimeout ("notificacion('{{mensaje}}','error')", 0000);</script>
+{% endif %}

@@ -1,0 +1,29 @@
+{# Template para el comando Auditoria #}
+
+        <input name="{{controller}}[createdAt]"  value="{{ values.datos.createdAt }}" type="hidden" />
+        <input name="{{controller}}[createdBy]"  value="{{ values.datos.createdBy.IDAgente }}" type="hidden" />
+        <input name="{{controller}}[modifiedAt]" value="{{ values.datos.modifiedAt }}" type="hidden" />
+        <input name="{{controller}}[modifiedBy]" value="{{ values.datos.modifiedBy.IDAgente }}" type="hidden" />
+
+        <div style="float: right;">
+            <img src='{{app.path}}/images/auditoria.png'
+                 onmouseover="getElementById('Auditoria').style.display='';"
+                 onmouseout="getElementById('Auditoria').style.display='none';"
+                 alt="Auditoria" title="Auditoria"
+            />
+            <div class="Auditoria" style="display:none;" id="Auditoria">
+                <div class="Titulo">Auditoría</div>
+
+                <div class="Subtitulo">Creado por:</div>
+                <div>{{values.datos.CreatedBy}}</div>
+                <div>{{values.datos.CreatedAt}}</div>
+
+                <div class="Separacion"></div>
+
+                <div class="Subtitulo">Modificado por:</div>
+                <div>{{values.datos.ModifiedBy}}</div>
+                <div>{{values.datos.ModifiedAt}}</div>
+
+            </div>
+        </div>
+        <div style="clear: both;"></div>

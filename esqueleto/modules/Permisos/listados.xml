@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Document : Permisos\listados.xml
+  @author: Sergio Pérez <sergio.perez@albatronic.com>
+* @copyright: INFORMATICA ALBATRONIC SL
+* @date 05.08.2011 20:38:16
+-->
+
+<Permisos>
+<listado>
+  <title>Permisos</title>
+  <order_by>Id ASC</order_by>
+  <break_field></break_field>
+  <idPerfil></idPerfil>
+  <orientation>P</orientation>
+  <unit>mm</unit>
+  <format>A4</format>
+  <margins>10,10,15,10</margins>
+  <body_font>Courier, ,8</body_font>
+
+  <columns>
+    <column>
+      <title>Id</title>
+      <field>Id</field>
+      <length>11</length>
+      <align>R</align>
+      <type>integer</type>
+      <total>NO</total>
+      <formula></formula>
+      <format></format>
+    </column>
+
+    <column>
+      <title>IDPerfil</title>
+      <field>IDPerfil</field>
+      <length>4</length>
+      <align>R</align>
+      <type>integer</type>
+      <total>NO</total>
+      <formula></formula>
+      <format></format>
+    </column>
+
+    <column>
+      <title>IDOpcion</title>
+      <field>IDOpcion</field>
+      <length>4</length>
+      <align>R</align>
+      <type>integer</type>
+      <total>NO</total>
+      <formula></formula>
+      <format></format>
+    </column>
+
+    <column>
+      <title>IDSubopcion</title>
+      <field>IDSubopcion</field>
+      <length>4</length>
+      <align>R</align>
+      <type>integer</type>
+      <total>NO</total>
+      <formula></formula>
+      <format></format>
+    </column>
+
+    <column>
+      <title>Permisos</title>
+      <field>Permisos</field>
+      <length>6</length>
+      <align>L</align>
+      <type>string</type>
+      <total>NO</total>
+      <formula></formula>
+      <format></format>
+    </column>
+
+  </columns>
+</listado>
+</Permisos>

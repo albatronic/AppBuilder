@@ -1,0 +1,8 @@
+{# TEMPLATE Provincias/form.html.twig #}
+{# Muestra los campos editables de la entidad        #}
+
+{% import '_global/macros.html.twig' as macro %}
+
+{{ macro.input('Código','Etiqueta','text','Provincias[Codigo]','Provincias_Codigo',datos.Codigo,'5','CampoTextoCorto') }}
+{{ macro.input('Provincia','Etiqueta','text','Provincias[Provincia]','Provincias_Provincia',datos.Provincia,'30','CampoTextoLargo') }}
+{{ macro.select('Zona Transporte','Etiqueta','Provincias[IDZona]','Provincias_IDZona',none,datos.IDZona.IDZona,datos.IDZona.fetchAll('Zona'),'Select') }}

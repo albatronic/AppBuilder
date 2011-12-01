@@ -1,0 +1,26 @@
+{# Template new.html.twig for Sucursales #}
+{# -------------------------------------------------------#}
+{# CREAR UN REGISTRO NUEVO                                #}
+{# -------------------------------------------------------#}
+{% extends 'Sucursales/index.html.twig' %}
+
+{% block navegador %}
+{% include "_global/comandosList.html.twig" with {'controller': values.controller, 'linkValue': values.linkBy.value} %}
+{% endblock %}
+
+{% block mantenimiento %}
+<div class="FormManto">
+    <form name="manto" action="" method="POST">
+        <input name="controller" value="Sucursales" type="hidden" />
+        <input name="action" value="new" type="hidden" />
+        <input name="Sucursales[IDSucursal]" value="{{values.datos.IDSucursal}}" type="hidden" />
+        <input name="Sucursales[IDEmpresa]" value="{{ values.linkBy.value }}" type="hidden" />
+        {% include '_global/comandosCreate.html.twig' %}
+
+        <div class="Cuerpo">
+	{% include '_global/FormErrores.html.twig' with {'errores': values.errores} %}
+	{% include "Sucursales/form.html.twig" with {'datos': values.datos} %}
+        </div>
+    </form>
+</div>
+{% endblock %}

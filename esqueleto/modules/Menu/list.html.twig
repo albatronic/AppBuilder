@@ -1,0 +1,31 @@
+{# Template list.html.twig for Menu #}
+{# -------------------------------------------------------#}
+{% extends 'Menu/index.html.twig' %}
+
+{% block listado %}
+<div class='Listado'>
+
+	{% include '_global/paginacion.html.twig' with {'filter':values.listado.filter,'controller':'Menu','position':'izq'}%}
+
+        <table width='50%'>
+            <tr class='Titulos'>
+                <td class='Item'>Orden</td>
+                <td class='Item'>Titulo</td>
+                <td class='Item'>Administrador</td>
+            </tr>
+
+            <tbody class="Cuerpo">
+            {% for key,objeto in values.listado.data %}
+            <tr class="ItemListado">
+                <td><a href="{{app.path}}/Menu/edit/{{objeto.IDOpcion}}" title="Editar...">{{objeto.Orden}}</a></td>
+                <td>{{objeto.Titulo}}</td>
+                <td align="center">{{objeto.Administrador.Descripcion}}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+	{% include '_global/paginacion.html.twig' with {'filter':values.listado.filter,'controller':'Menu','position':'der'}%}
+
+</div>
+{% endblock %}

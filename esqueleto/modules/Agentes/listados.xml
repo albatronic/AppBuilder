@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Document : Agentes\listados.xml
+  @author: Sergio Pérez <sergio.perez@albatronic.com>
+* @copyright: INFORMATICA ALBATRONIC SL
+* @date 05.08.2011 20:38:16
+-->
+
+<Agentes>
+<listado>
+  <title>Usuarios del Sistema</title>
+  <order_by>Nombre ASC</order_by>
+  <break_field></break_field>
+  <idPerfil></idPerfil>
+  <orientation>L</orientation>
+  <unit>mm</unit>
+  <format>A4</format>
+  <margins>10,10,15,10</margins>
+  <body_font>Courier, ,8</body_font>
+
+  <columns>
+
+    <column>
+      <title>Login</title>
+      <field>Login</field>
+      <length>10</length>
+      <align>L</align>
+      <type>string</type>
+      <total>NO</total>
+      <formula></formula>
+      <format></format>
+    </column>
+
+    <column>
+      <title>Nombre</title>
+      <field>Nombre</field>
+      <length>30</length>
+      <align>L</align>
+      <type>string</type>
+      <total>NO</total>
+      <formula></formula>
+      <format></format>
+    </column>
+
+    <column>
+      <title>NLogin</title>
+      <field>NLogin</field>
+      <length>4</length>
+      <align>R</align>
+      <type>integer</type>
+      <total>NO</total>
+      <formula></formula>
+      <format></format>
+    </column>
+
+    <column>
+      <title>Ult. Login</title>
+      <field>UltimoLogin</field>
+      <length>10</length>
+      <align>R</align>
+      <type>date</type>
+      <total>NO</total>
+      <formula></formula>
+      <format></format>
+    </column>
+
+    <column>
+      <title>EMail</title>
+      <field>EMail</field>
+      <length>30</length>
+      <align>L</align>
+      <type>string</type>
+      <total>NO</total>
+      <formula></formula>
+      <format></format>
+    </column>
+
+    <column>
+      <title>Activo</title>
+      <field>Activo</field>
+      <length>6</length>
+      <align>C</align>
+      <type>integer</type>
+      <total>NO</total>
+      <formula></formula>
+      <format></format>
+    </column>
+    
+    <column>
+      <title>Rol</title>
+      <field>Rol</field>
+      <length>10</length>
+      <align>L</align>
+      <type>integer</type>
+      <total>NO</total>
+      <formula></formula>
+      <format></format>
+    </column>
+
+    <column>
+      <title>Perfil</title>
+      <field>IDPerfil</field>
+      <length>10</length>
+      <align>L</align>
+      <type>integer</type>
+      <total>NO</total>
+      <formula></formula>
+      <format></format>
+    </column>
+
+    <column>
+      <title>Empresa</title>
+      <field>IDEmpresa</field>
+      <length>20</length>
+      <align>L</align>
+      <type>integer</type>
+      <total>NO</total>
+      <formula></formula>
+      <format></format>
+    </column>
+
+    <column>
+      <title>Sucursal</title>
+      <field>IDSucursal</field>
+      <length>15</length>
+      <align>L</align>
+      <type>integer</type>
+      <total>NO</total>
+      <formula></formula>
+      <format></format>
+    </column>
+
+    <column>
+      <title>Almacen</title>
+      <field>IDAlmacen</field>
+      <length>10</length>
+      <align>L</align>
+      <type>integer</type>
+      <total>NO</total>
+      <formula></formula>
+      <format></format>
+    </column>
+
+  </columns>
+</listado>
+</Agentes>

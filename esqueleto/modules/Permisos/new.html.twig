@@ -1,0 +1,25 @@
+{# Template new.html.twig for Permisos #}
+{# -------------------------------------------------------#}
+{# CREAR UN REGISTRO NUEVO                                #}
+{# -------------------------------------------------------#}
+{% extends 'Permisos/index.html.twig' %}
+
+{% block navegador %}
+(<a href='{{app.path}}/Permisos/list/{{values.linkBy.value}}'>Listado</a>)
+{% endblock %}
+
+{% block mantenimiento %}
+<div class="FormManto">
+    <form name="manto" action="" method="POST">
+        <input name="controller" value="Permisos" type="hidden" />
+        <input name="action" value="new" type="hidden" />
+        <input name="Permisos[IDPerfil]" value="{{ values.linkBy.value }}" type="hidden" />
+        {% include '_global/comandosCreate.html.twig' %}
+
+        <div class="Cuerpo">
+	{% include '_global/FormErrores.html.twig' with {'errores': values.errores} %}
+	{% include "Permisos/form.html.twig" with {'datos': values.datos} %}
+        </div>
+    </form>
+</div>
+{% endblock %}

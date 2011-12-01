@@ -1,0 +1,34 @@
+{# Template edit.html.twig for Permisos #}
+{# -------------------------------------------------------#}
+{# EDITAR UN REGISTRO. ACCIONES: GUARDAR Y BORRAR         #}
+{# -------------------------------------------------------#}
+{% extends 'Permisos/index.html.twig' %}
+
+{% block navegador %}
+(<a href='{{app.path}}/Permisos/list/{{values.linkBy.value}}'>Listado</a>)
+{% endblock %}
+
+{% block mantenimiento %}
+<div class="FormManto">
+	<form name="manto" action="" method="POST">
+		<div class='Comandos'>
+			{% if values.permisos['A'] %}
+                            <input type="submit" name="accion" value="Guardar" class="Comando"/>
+                        {% endif %}
+			{% if values.permisos['B'] %}
+			<input type="submit" name="accion" value="Borrar" class="Comando" onclick="return confirm('¿Desea borrar el registro?');"/>
+                        {% endif %}
+                        <hr>
+		</div>
+
+		<div class='Cuerpo'>
+			<input name="controller" value="Permisos" type="hidden" />
+			<input name="action" value="edit" type="hidden" />
+			<input name="Permisos[Id]" value="{{ values.datos.Id }}" type="hidden" />
+                        <input name="Permisos[IDPerfil]" value="{{ values.linkBy.value }}" type="hidden" />
+			{% include "_global/FormErrores.html.twig" with {'errores': values.errores} %}
+			{% include "Permisos/form.html.twig" with {'datos': values.datos} %}
+		</div>
+	</form>
+</div>
+{% endblock %}

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Document : Empresas\listados.xml
+  @author: Sergio Pérez <sergio.perez@albatronic.com>
+* @copyright: INFORMATICA ALBATRONIC SL
+* @date 05.08.2011 20:38:16
+-->
+
+<Empresas>
+<listado>
+  <title>Empresas</title>
+  <order_by>IDEmpresa ASC</order_by>
+  <break_field></break_field>
+  <idPerfil></idPerfil>
+  <orientation>L</orientation>
+  <unit>mm</unit>
+  <format>A4</format>
+  <margins>10,10,15,10</margins>
+  <body_font>Courier, ,8</body_font>
+
+  <columns>
+
+    <column>
+      <title>Razon Social</title>
+      <field>RazonSocial</field>
+      <length>50</length>
+      <align>L</align>
+      <type>string</type>
+      <total>NO</total>
+      <formula></formula>
+      <format></format>
+    </column>
+
+    <column>
+      <title>Cif</title>
+      <field>Cif</field>
+      <length>15</length>
+      <align>L</align>
+      <type>string</type>
+      <total>NO</total>
+      <formula></formula>
+      <format></format>
+    </column>
+
+    <column>
+      <title>Direccion</title>
+      <field>Direccion</field>
+      <length>50</length>
+      <align>L</align>
+      <type>string</type>
+      <total>NO</total>
+      <formula></formula>
+      <format></format>
+    </column>
+
+    <column>
+      <title>Poblacion</title>
+      <field>Poblacion</field>
+      <length>25</length>
+      <align>L</align>
+      <type>string</type>
+      <total>NO</total>
+      <formula></formula>
+      <format></format>
+    </column>
+
+    <column>
+      <title>Provincia</title>
+      <field>IDProvincia</field>
+      <length>13</length>
+      <align>L</align>
+      <type>integer</type>
+      <total>NO</total>
+      <formula></formula>
+      <format></format>
+    </column>
+
+    <column>
+      <title>Cod.Postal</title>
+      <field>CodigoPostal</field>
+      <length>10</length>
+      <align>L</align>
+      <type>string</type>
+      <total>NO</total>
+      <formula></formula>
+      <format></format>
+    </column>
+
+  </columns>
+</listado>
+</Empresas>

@@ -1,0 +1,7 @@
+{# empty Twig template #}
+	<div class='Titulo'>{{ values.titulo }}
+	{% block navegador %}
+            {% include '_global/comandosNew.html.twig' with {'controller': controller, 'linkValue': linkValue} %}
+	{% endblock %}
+        {% include '_global/comandosHelp.html.twig' with {'controller': controller} %}
+        </div>

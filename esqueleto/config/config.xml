@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : conection.xml
+    Created on : 18 de marzo de 2011, 17:46
+    Author     : Sergio
+    Description:
+        Parametros de conexion.
+
+    CONDIGURAR LOS SIGUIENTES VALORES:
+
+    APP_TITLE   : Es el título de la aplicación
+    WEB_SERVER  : Es la url del servidor de páginas
+    APP_PATH    : Es el carpeta donde se aloja la aplicación dentro de la zona pública del servidor
+    DATA_SERVER : Es la url del servidor de datos (puede ser diferente del servidor de páginas)
+    USER        : Usuario de conexión a la base de datos
+    PASSWORD    : Contraseña de conexión a la base de datos
+    DATABASE    : Nombre de la base de datos
+
+    CONFIGURAR TAMBIEN LOS PARAMETROS PARA EL MAILER
+-->
+
+<config>
+    <debug_mode>false</debug_mode>
+
+    <app>
+        <name>APP_TITLE</name>
+        <url>http://WEB_SERVER</url>
+        <path>/APP_PATH</path>
+    </app>
+    
+    <conections>
+        <empresas>
+            <dbEngine>mysql</dbEngine>
+            <host>DATA_SERVER</host>
+            <user>USER</user>
+            <password>PASSWORD</password>
+            <database>DATABASE</database>
+        </empresas>
+
+        <datos001>
+            <dbEngine>mysql</dbEngine>
+            <host>DATA_SERVER</host>
+            <user>USER</user>
+            <password>PASSWORD</password>
+            <database>DATABASE001</database>
+        </datos001>
+    </conections>
+
+    <twig>
+        <motor>../lib/twig/lib/Twig/Autoloader.php</motor>
+        <templates_folder>modules</templates_folder>
+        <debug_mode>true</debug_mode>
+        <cache_folder>tmp</cache_folder>
+        <charset></charset>
+    </twig>
+
+    <mailer>
+        <plugin_dir>../lib/PHPMailer_v2.0.0/</plugin_dir>
+        <socket>smtp</socket>
+        <host>mail.dominio.com</host>
+        <smtp_auth>true</smtp_auth>
+        <user_name>info@dominio.com</user_name>
+        <password>xxxx</password>
+        <from>info@dominio.com</from>
+        <from_name>DOMINIO</from_name>
+        <timeout>30</timeout>
+    </mailer>
+
+</config>

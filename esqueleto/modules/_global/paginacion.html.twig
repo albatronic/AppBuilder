@@ -1,0 +1,61 @@
+<form name="paginacion{{position}}" id="paginacion{{position}}" class="Paginacion-{{position}}" action="" method="POST">
+
+Página {{filter.page}} de {{filter.pages}} ({{filter.records}} registros) &nbsp;
+
+{% if filter.pages != 0 %}
+    {% if filter.page != 1 %}
+         <input type="image" name="primera"  onClick="document.getElementById('filter[page{{position}}]').value=1;"  src="{{app.path}}/images/primero1.gif" alt="Primero"/>
+         <input type="image" name="atras" onClick="document.getElementById('filter[page{{position}}]').value={{filter.page-1}};" src="{{app.path}}/images/anterior1.gif" alt="Anterior"/>
+    {%else%}
+        <img src="{{app.path}}/images/primero0.gif"/>
+        <img src="{{app.path}}/images/anterior0.gif"/>
+    {%endif%}
+
+    <select id="pagina" onChange="document.getElementById('filter[page{{position}}]').value=pagina.value;submit();" >
+        {% for i in range(1, filter.pages, 1) %}
+        <option value ="{{ i }}" {% if( i == filter.page)%} selected {%endif%} >{{i}}</option>
+        {% endfor %}
+    </select>
+
+    {% if filter.page != filter.pages %}
+        <input type="image" name="siguiente" onClick="document.getElementById('filter[page{{position}}]').value={{filter.page+1}};" src="{{app.path}}/images/siguiente1.gif" alt="Siguiente"/>
+        <input type="image" name="ultima" onClick="document.getElementById('filter[page{{position}}]').value={{ filter.pages}};" src="{{app.path}}/images/ultimo1.gif" alt="Ultimo"/>
+
+    {%else%}
+            <img src="{{app.path}}/images/siguiente0.gif"/>
+            <img src="{{app.path}}/images/ultimo0.gif"/>
+    {%endif%}
+
+    {% if position == 'izq'%}
+        {% if values.permisos['E'] %}
+            <img style="float:right;margin-left:6px;" src="{{app.path}}/images/ico_excel.gif" border="0" title="Exportar..." alt="Exportar..." 
+                 onClick="document.getElementById('action{{position}}').value='exportar';document.getElementById('paginacion{{position}}').submit();"
+            />
+        {%endif%}
+        {% if values.permisos['L'] %}
+            <img style="float:right;" src="{{app.path}}/images/icon_printgreen.gif" border="0" title="Imprimir..." alt="Imprimir..." 
+                 onClick="document.getElementById('action{{position}}').value='listado';document.getElementById('paginacion{{position}}').submit();"
+            />
+        {%endif%}
+    {%endif%}
+
+{%endif%}
+
+{% if values.listado.formatos %}
+    <select name="formatoListado" id="formatolistado{{position}}" size="1" class="select">
+        {% for key,title in values.listado.formatos %}
+            <option value="{{ key }}">{{ title }}</option>
+        {% endfor %}
+    </select>
+{%endif%}
+
+{% for key,value in filter.columnsSelected %}
+    <input type="hidden" name="filter[columnsSelected][{{key}}]" value="{{ filter.columnsSelected[key] }}"/>
+    <input type="hidden" name="filter[valuesSelected][{{key}}]" value="{{ filter.valuesSelected[key] }}"/>
+{% endfor %}
+<input type="hidden" name="filter[columnOrder]" value="{{ filter.columnOrder }}"/>
+<input type="hidden" name="filter[page]" id="filter[page{{position}}]" value="{{filter.page}}"/>
+<input type="hidden" name="filter[recordsPerPage]" value="{{ filter.recordsPerPage }}"/>
+<input type="hidden" name="controller" value="{{controller}}" />
+<input type="hidden" name="action" id="action{{position}}" value="list" />
+</form>

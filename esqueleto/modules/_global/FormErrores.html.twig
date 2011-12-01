@@ -1,0 +1,12 @@
+{# MUESTRAR LOS MENSAJES DE ERROR DEL FORMULARIO #}
+
+{% if errores %}
+<div class="MensajeError">
+    <p class="TituloError">Corriga los siguientes errores:</p>
+    <ul>
+    {% for error in errores %}
+        <li>{{ error }}</li>
+    {% endfor %}
+    </ul>
+</div>
+{% endif %}

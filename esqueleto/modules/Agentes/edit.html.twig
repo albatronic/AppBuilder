@@ -1,0 +1,21 @@
+{# Template edit.html.twig for Agentes #}
+{# -------------------------------------------------------#}
+{# EDITAR UN REGISTRO. ACCIONES: GUARDAR Y BORRAR         #}
+{# -------------------------------------------------------#}
+{% extends 'Agentes/index.html.twig' %}
+
+{% block mantenimiento %}
+<div class="FormManto">
+    <form name="manto" action="" method="POST">
+        <input name="controller" value="Agentes" type="hidden" />
+        <input name="action" value="edit" type="hidden" />
+        <input name="Agentes[IDAgente]" value="{{ values.datos.IDAgente }}" type="hidden" />
+        {% include "_global/comandosSaveDelete.html.twig" %}
+
+        <div class='Cuerpo'>
+	{% include "_global/FormErrores.html.twig" with {'errores': values.errores} %}
+	{% include "Agentes/form.html.twig" with {'datos': values.datos} %}
+        </div>
+    </form>
+</div>
+{% endblock %}
