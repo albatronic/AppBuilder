@@ -1,0 +1,32 @@
+## YAML Template.
+
+cabecera:
+  numero: 23
+  fecha: 2011-01-01
+  cliente: sergio perez
+  direccion: av. blas otero, 10 local 1
+  poblacion: maracena
+  provincia: granada
+  codigoPostal: 18200
+  
+detalle:
+  -
+    idArticulo: 23
+    descripcion: impresora muy bonita
+    unidades: 12
+    precio: 134.45
+    descuento: 10
+    importe: 234323.12
+  -
+    idArticulo: 25
+    descripcion: la segunda impresora bonita
+    unidades: 12
+    precio: 134.45
+    descuento: 10
+    importe: 234323.12
+
+pie:
+  baseImponible: 1000
+  iva: 18
+  cuotaIva: 180
+  total: 1180
