@@ -1,3 +1,10 @@
 App Builder
 
 Tools to generate de skeleton and ORM classes for a aplication
+
+A partir de la definicion de la base de datos se generan de forma automatica:
+
+1. El esqueleto de la aplicacion
+2. Las clases ORM: por cada tabla se crean 2 clases
+3. Los templates para editar la informacion
+
