@@ -1,5 +1,4 @@
 <?php
-
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -42,21 +41,4 @@ function cambia($file, $target, $carpeta) {
     }
 }
 
-/**
-  $xml = new XmlTools();
-  $arrayXml = $xml->Xml2Array($file);
-
-  $yml = Spyc::YAMLDump($arrayXml);
-  file_put_contents($target, $yml);
-
-  echo "FORMATO YAML</br>";
-  echo '<pre>';
-  echo $yml;
-  echo '</pre>';
-
-  echo "FORMATO ARRAY</br>";
-  echo '<pre>';
-  print_r($arrayXml);
-  echo '</pre>';
- */
 ?>
