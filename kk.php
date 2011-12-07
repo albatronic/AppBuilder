@@ -4,14 +4,18 @@
  * and open the template in the editor.
  */
 
-include "../erp/bin/spyc-0.5/Spyc.class.php";
+include "../erp/bin/yaml/lib/sfYaml.php";
 include "../erp/bin/nimbus/XmlRead.class.php";
 include "../erp/bin/xml/XmlTools.class.php";
 
-$file = "../erp/modules/Articulos/config.xml";
-$target = "../erp/modules/Articulos/config.yaml";
-
-$dir = opendir('../erp/modules');
+$carpeta = "TiposPales";
+$file = "../erp/modules/TiposPales/config.xml";
+$target = "../erp/modules/TiposPales/config.yml";
+cambia($file,$target,$carpeta);
+$file = "../erp/modules/TiposPales/listados.xml";
+$target = "../erp/modules/TiposPales/listados.yml";
+cambia($file,$target,$carpeta);
+exit;
 while ($carpeta = readdir($dir)) {
     if (($carpeta != '..') and ($carpeta != '.')) {
         $file = "../erp/modules/" . $carpeta . "/config.xml";
@@ -35,7 +39,7 @@ function cambia($file, $target, $carpeta) {
         $xml = new XmlTools();
         $arrayXml = $xml->Xml2Array($file);
 
-        $yml = Spyc::YAMLDump($arrayXml);
+        $yml = sfYaml::dump($arrayXml,2);
         $yml = "# Module: ".$carpeta."\n#\n# @author: Sergio Perez <sergio.perez@albatronic.com>\n# @copyright: Informatica ALBATRONIC\n# @date: ".date('d-m-Y')."\n#\n".$yml;
         file_put_contents($target, $yml);
     }

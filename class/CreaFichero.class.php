@@ -31,6 +31,7 @@ class Esqueleto {
         'config',
         'css',
         'docs',
+        'docs/formats',
         'docs/docs001',
         'docs/docs001/catalog',
         'docs/docs001/export',

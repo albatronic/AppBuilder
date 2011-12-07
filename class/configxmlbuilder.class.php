@@ -38,11 +38,125 @@ class ConfigXmlBuilder {
         $this->td = new TableDescriptor(DB_BASE, $table);
         $this->filename = str_replace("_", " ", $this->td->getTable());
         $this->filename = str_replace(" ", "", ucwords($this->filename));
-        $this->Load();
+        $this->creaYAML();
     }
 
-    private function Load() {
+    private function creaYAML() {
         $nfiltros = 0;
+
+        $conexion = str_replace("#", "<?php echo \$_SESSION['emp'];?>", CONECTION);
+
+        $buf .= "# Module: " . $this->filename . "\n";
+        $buf .= "# Document : modules\\" . $this->filename . "\config.yml\n#\n";
+        $buf .= "# @author: Sergio Pérez <sergio.perez@albatronic.com>\n# @copyright: INFORMATICA ALBATRONIC SL\n# @date " . date('d.m.Y H:i:s') . "\n";
+        $buf .= "#\n---\n";
+        $buf .= $this->filename . ":\n";
+        $buf .= "  login_required: YES\n";
+        $buf .= "  permission_control: " . PERMISSIONCONTROL . "\n";
+        $buf .= "  help_file: help.html.twig\n";
+        $buf .= "  title: " . ucwords($this->filename) . "\n";
+        $buf .= "  id_video: " . strtolower($this->filename) . "\n";
+        $buf .= "  url_video: null\n";
+        $buf .= "  conection: '" . $conexion . "'\n";
+        $buf .= "  entity: " . $this->filename . "\n";
+        $buf .= "  table: " . $this->td->getTable() . "\n";
+        $buf .= "  primarykey: " . $this->td->getPrimaryKey() . "\n";
+        $buf .= "  records_per_page: 15\n";
+        $buf .= "  order_by: " . $this->td->getPrimaryKey() . "\n";
+        $buf .= "  search_default: " . $this->td->getPrimaryKey() . "\n";
+        $buf .= "  referenced_entities:\n";
+        foreach ($this->td->getParentEntities() as $entity) {
+            $buf .= "    -\n";
+            $buf .= "      entity: " . $entity . "\n";
+        }
+
+        $buf .= "  columns:\n";
+         foreach ($this->td->getColumns() as $column) {
+            if ($this->variable_types[$column['Type']] == 'date')
+                $column['Length'] = 10;
+
+            $buf .= "    -\n";
+            $buf .= "      title: " . $column['Field'] . "\n";
+            $buf .= "      field: " . $column['Field'] . "\n";
+            if ($column['Field'] == $this->td->getPrimaryKey()) {
+                $buf .= "      filter: NO\n";
+                $buf .= "      list: NO\n";
+            } else {
+                if (($column['ReferencedColumn'] == '') and ($column['Type'] != 'date') and ($column['Type'] != 'tinyint'))
+                    $buf .= "      filter: YES\n";
+                else
+                    $buf .= "      filter: NO\n";
+                $buf .= "      list: YES\n";
+            }
+            $buf .= "      form: YES\n";
+            $buf .= "      link:\n";
+            $buf .= "        route: null\n";
+            $buf .= "        param: null\n";
+            $buf .= "        title: null\n";
+            $buf .= "        target: null\n";
+            $buf .= "        link: null\n";
+            $buf .= "      default: " . $column['Default'] . "\n";
+
+            //FILTRO ADICIONAL. SE PONE SI:
+            // LA COLUMNA REFERENCIA A OTRA ENTIDAD, O
+            // ES DE TIPO DATE, O
+            // ES DE TIPO TINYINT (ValoresSN)
+            if ($column['ReferencedColumn'] != '') {
+                $nfiltros++;
+                $buf .= "      aditional_filter:\n";
+                $buf .= "        order: " . $nfiltros . "\n";
+                $buf .= "        caption: " . $column['Field'] . "\n";
+                $buf .= "        entity: {$column['ReferencedEntity']}\n";
+                $buf .= "        method: fetchAll\n";
+                $buf .= "        params: null\n";
+                $buf .= "        type: input\n";
+                $buf .= "        operator: =\n";
+                $buf .= "        event: null\n";
+                $buf .= "      default: null\n";
+
+            } else {
+                if ($column['Type'] == 'date') {
+                    $nfiltros++;
+                    $buf .= "      aditional_filter:\n";
+                    $buf .= "        order: " . $nfiltros . "\n";
+                    $buf .= "        caption: " . $column['Field'] . "\n";
+                    $buf .= "        type: range\n";
+                    $buf .= "        operator: >=\n";
+                    $nfiltros++;
+                } elseif ($column['Type'] == 'tinyint') {
+                    $nfiltros++;
+                    $buf .= "      aditional_filter:\n";
+                    $buf .= "        order: " . $nfiltros . "\n";
+                    $buf .= "        caption: " . $column['Field'] . "\n";
+                    $buf .= "        entity: ValoresSN\n";
+                    $buf .= "        method: fetchAll\n";
+                    $buf .= "        params: null\n";
+                    $buf .= "        type: select\n";
+                    $buf .= "        operator: =\n";
+                    $buf .= "        event: null\n";
+                    $buf .= "      default: null\n";
+                }
+            }
+
+            //VALIDADDOR. NO SE PONE PARA LA PRIMARYKEY
+            if ($column['Field'] != $this->td->getPrimaryKey()) {
+                $buf .= "      validator:\n";
+                $buf .= "        null: " . $column['Null'] . "\n";
+                $buf .= "        type: " . $this->variable_types[$column['Type']] . "\n";
+                $buf .= "        length: " . $column['Length'] . "\n";
+                $buf .= "        min: null\n";
+                $buf .= "        max: null\n";
+                $buf .= "        message: Valor Requerido\n";
+            }
+        }
+        $buf .= "\n";
+        $this->buffer = $buf;
+    }
+
+    private function creaXML() {
+        $nfiltros = 0;
+
+        $conexion = str_replace("#", "<?php echo \$_SESSION['emp'];?>", CONECTION);
 
         $buf = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n\n";
         $buf .= "<!--\n";
@@ -57,7 +171,7 @@ class ConfigXmlBuilder {
         $buf .= "  <title>" . ucwords($this->filename) . "</title>\n";
         $buf .= "  <id_video>" . strtolower($this->filename) . "</id_video>\n";
         $buf .= "  <url_video></url_video>\n";
-        $buf .= "  <conection>" . CONECTION . "</conection>\n";
+        $buf .= "  <conection>" . $conexion . "</conection>\n";
         $buf .= "  <entity>" . $this->filename . "</entity>\n";
         $buf .= "  <table>" . $this->td->getTable() . "</table>\n";
         $buf .= "  <primarykey>" . $this->td->getPrimaryKey() . "</primarykey>\n";
@@ -86,7 +200,7 @@ class ConfigXmlBuilder {
                 $buf .= "      <filter>NO</filter>\n";
                 $buf .= "      <list>NO</list>\n";
             } else {
-                if ( ($column['ReferencedColumn'] == '') and ($column['Type'] != 'date') and ($column['Type'] != 'tinyint'))
+                if (($column['ReferencedColumn'] == '') and ($column['Type'] != 'date') and ($column['Type'] != 'tinyint'))
                     $buf .= "      <filter>YES</filter>\n";
                 else
                     $buf .= "      <filter>NO</filter>\n";

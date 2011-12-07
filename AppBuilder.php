@@ -88,16 +88,16 @@ if ($_POST['accion'] == "Generar") {
                 new CreaFichero($pathmodules . "/" . $filename . "Controller.class.php", $controller->Get());
             }
 
-            //Crear el archivo config.xml
+            //Crear el archivo config.yml
             if ($_POST['config'] == 'on') {
                 $config = new ConfigXmlBuilder($tablename);
-                new CreaFichero($pathmodules . "/config.xml", $config->Get());
+                new CreaFichero($pathmodules . "/config.yml", $config->Get());
             }
 
-            //Crear el archivo listados.xml
+            //Crear el archivo listados.yml
             if ($_POST['listados'] == 'on') {
                 $listados = new ListadosXmlBuilder($tablename);
-                new CreaFichero($pathmodules . "/listados.xml", $listados->Get());
+                new CreaFichero($pathmodules . "/listados.yml", $listados->Get());
             }
         } else
             echo "NO EXISTE LA CARPETA ", $pathmodules, "</br>";
@@ -168,8 +168,8 @@ if ($_POST['accion'] == "Generar") {
                 <tr><td>App Name</td><td><input name="appname" type="text" value="elr"></td></tr>
                 <tr><td>Gesti&oacute;n de Permisos</td><td><input name="permisos" type="checkbox" checked></td></tr>
                 <tr><td>Generar Controlador</td><td><input name="controller" type="checkbox"></td></tr>
-                <tr><td>Generar config.xml</td><td><input name="config" type="checkbox"></td></tr>
-                <tr><td>Generar listados.xml</td><td><input name="listados" type="checkbox"></td></tr>
+                <tr><td>Generar config.yml</td><td><input name="config" type="checkbox"></td></tr>
+                <tr><td>Generar listados.yml</td><td><input name="listados" type="checkbox"></td></tr>
                 <tr><td>Generar Templates</td><td><input name="templates" type="checkbox"></td></tr>
                 <tr><td>Generar Modelo de datos</td><td><input name="model" type="checkbox"></td></tr>
                 <tr><td>Generar Metodos</td><td><input name="method" type="checkbox"></td></tr>
