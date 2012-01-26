@@ -1,8 +1,20 @@
 <?php
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+
+$dblink = mysql_connect('www.interpral.com', 'interpra', 'i1234a');
+if ($dblink) {
+    mysql_select_db('interpra_ppuemp', $dblink);
+    $query = "select * from empresas";
+    $result = mysql_query($query, $dblink);
+    while ($row == mysql_fetch_array($result))
+        print_r($row);
+    mysql_close();
+} die("Sin conexion");
+exit;
 
 include "../erp/bin/yaml/lib/sfYaml.php";
 include "../erp/bin/nimbus/XmlRead.class.php";
@@ -11,10 +23,10 @@ include "../erp/bin/xml/XmlTools.class.php";
 $carpeta = "TiposPales";
 $file = "../erp/modules/TiposPales/config.xml";
 $target = "../erp/modules/TiposPales/config.yml";
-cambia($file,$target,$carpeta);
+cambia($file, $target, $carpeta);
 $file = "../erp/modules/TiposPales/listados.xml";
 $target = "../erp/modules/TiposPales/listados.yml";
-cambia($file,$target,$carpeta);
+cambia($file, $target, $carpeta);
 exit;
 while ($carpeta = readdir($dir)) {
     if (($carpeta != '..') and ($carpeta != '.')) {
@@ -34,13 +46,13 @@ function cambia($file, $target, $carpeta) {
 
     if (file_exists($file)) {
 
-        echo $file,"</br>";
-        
+        echo $file, "</br>";
+
         $xml = new XmlTools();
         $arrayXml = $xml->Xml2Array($file);
 
-        $yml = sfYaml::dump($arrayXml,2);
-        $yml = "# Module: ".$carpeta."\n#\n# @author: Sergio Perez <sergio.perez@albatronic.com>\n# @copyright: Informatica ALBATRONIC\n# @date: ".date('d-m-Y')."\n#\n".$yml;
+        $yml = sfYaml::dump($arrayXml, 2);
+        $yml = "# Module: " . $carpeta . "\n#\n# @author: Sergio Perez <sergio.perez@albatronic.com>\n# @copyright: Informatica ALBATRONIC\n# @date: " . date('d-m-Y') . "\n#\n" . $yml;
         file_put_contents($target, $yml);
     }
 }

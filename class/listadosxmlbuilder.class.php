@@ -33,6 +33,7 @@ class ListadosXmlBuilder {
         "datetime" => "datetime",
         "timestamp" => "datetime",
     );
+    private $auditoriaColumns = array('CreatedBy','CreatedAt','ModifiedBy','ModifiedAt');
 
     public function __construct($table='') {
         $this->td = new TableDescriptor(DB_BASE, $table);
@@ -55,13 +56,13 @@ class ListadosXmlBuilder {
         $buf .= "    orientation: P\n";
         $buf .= "    unit: mm\n";
         $buf .= "    format: A4\n";
-        $buf .= "    margins: 10, 10, 15, 10'\n";
+        $buf .= "    margins: 10, 10, 15, 10\n";
         $buf .= "    body_font: Courier, ,8\n";
         $buf .= "    columns:\n";
 
         foreach ($this->td->getColumns() as $column) {
-            // NO SE MUESTRA LA PRIMARYKEY
-            if ($column['Field'] != $this->td->getPrimaryKey()) {
+            // NO SE MUESTRA LA PRIMARYKEY NI LAS COLUMNAS DE AUDITORIA
+            if ( ($column['Field'] != $this->td->getPrimaryKey()) and (!in_array($column['Field'], $this->auditoriaColumns)) ) {
                 switch ($this->variable_types[$column['Type']]) {
                     case 'integer' :
                     case 'decimal' :
@@ -94,7 +95,6 @@ class ListadosXmlBuilder {
                 $buf .= "        format: null\n";
             }
         }
-        $buf .= "\n";
         $this->buffer = $buf;
     }
 

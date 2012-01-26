@@ -33,6 +33,7 @@ class ConfigXmlBuilder {
         "datetime" => "datetime",
         "timestamp" => "datetime",
     );
+    private $auditoriaColumns = array('CreatedBy', 'CreatedAt', 'ModifiedBy', 'ModifiedAt');
 
     public function __construct($table='') {
         $this->td = new TableDescriptor(DB_BASE, $table);
@@ -53,6 +54,7 @@ class ConfigXmlBuilder {
         $buf .= $this->filename . ":\n";
         $buf .= "  login_required: YES\n";
         $buf .= "  permission_control: " . PERMISSIONCONTROL . "\n";
+        $buf .= "  favourite_control: NO\n";
         $buf .= "  help_file: help.html.twig\n";
         $buf .= "  title: " . ucwords($this->filename) . "\n";
         $buf .= "  id_video: " . strtolower($this->filename) . "\n";
@@ -71,85 +73,84 @@ class ConfigXmlBuilder {
         }
 
         $buf .= "  columns:\n";
-         foreach ($this->td->getColumns() as $column) {
-            if ($this->variable_types[$column['Type']] == 'date')
-                $column['Length'] = 10;
+        // NO SE MUESTRAN LAS COLUMNAS DE AUDITORIA
+        foreach ($this->td->getColumns() as $column) {
+            if (!in_array($column['Field'], $this->auditoriaColumns)) {
+                if ($this->variable_types[$column['Type']] == 'date')
+                    $column['Length'] = 10;
 
-            $buf .= "    -\n";
-            $buf .= "      title: " . $column['Field'] . "\n";
-            $buf .= "      field: " . $column['Field'] . "\n";
-            if ($column['Field'] == $this->td->getPrimaryKey()) {
-                $buf .= "      filter: NO\n";
-                $buf .= "      list: NO\n";
-            } else {
-                if (($column['ReferencedColumn'] == '') and ($column['Type'] != 'date') and ($column['Type'] != 'tinyint'))
-                    $buf .= "      filter: YES\n";
-                else
+                $buf .= "    -\n";
+                $buf .= "      title: " . $column['Field'] . "\n";
+                $buf .= "      field: " . $column['Field'] . "\n";
+                if ($column['Field'] == $this->td->getPrimaryKey()) {
                     $buf .= "      filter: NO\n";
-                $buf .= "      list: YES\n";
-            }
-            $buf .= "      form: YES\n";
-            $buf .= "      link:\n";
-            $buf .= "        route: null\n";
-            $buf .= "        param: null\n";
-            $buf .= "        title: null\n";
-            $buf .= "        target: null\n";
-            $buf .= "        link: null\n";
-            $buf .= "      default: " . $column['Default'] . "\n";
+                    $buf .= "      list: NO\n";
+                } else {
+                    if (($column['ReferencedColumn'] == '') and ($column['Type'] != 'date') and ($column['Type'] != 'tinyint'))
+                        $buf .= "      filter: YES\n";
+                    else
+                        $buf .= "      filter: NO\n";
+                    $buf .= "      list: YES\n";
+                }
+                $buf .= "      form: YES\n";
+                $buf .= "      link:\n";
+                $buf .= "        route: null\n";
+                $buf .= "        param: null\n";
+                $buf .= "        title: null\n";
+                $buf .= "        target: null\n";
+                $buf .= "        link: null\n";
+                $buf .= "      default: " . $column['Default'] . "\n";
 
-            //FILTRO ADICIONAL. SE PONE SI:
-            // LA COLUMNA REFERENCIA A OTRA ENTIDAD, O
-            // ES DE TIPO DATE, O
-            // ES DE TIPO TINYINT (ValoresSN)
-            if ($column['ReferencedColumn'] != '') {
-                $nfiltros++;
-                $buf .= "      aditional_filter:\n";
-                $buf .= "        order: " . $nfiltros . "\n";
-                $buf .= "        caption: " . $column['Field'] . "\n";
-                $buf .= "        entity: {$column['ReferencedEntity']}\n";
-                $buf .= "        method: fetchAll\n";
-                $buf .= "        params: null\n";
-                $buf .= "        type: input\n";
-                $buf .= "        operator: =\n";
-                $buf .= "        event: null\n";
-                $buf .= "      default: null\n";
-
-            } else {
-                if ($column['Type'] == 'date') {
+                //FILTRO ADICIONAL. SE PONE SI:
+                // LA COLUMNA REFERENCIA A OTRA ENTIDAD, O
+                // ES DE TIPO DATE, O
+                // ES DE TIPO TINYINT (ValoresSN)
+                if ($column['ReferencedColumn'] != '') {
                     $nfiltros++;
                     $buf .= "      aditional_filter:\n";
                     $buf .= "        order: " . $nfiltros . "\n";
                     $buf .= "        caption: " . $column['Field'] . "\n";
-                    $buf .= "        type: range\n";
-                    $buf .= "        operator: >=\n";
-                    $nfiltros++;
-                } elseif ($column['Type'] == 'tinyint') {
-                    $nfiltros++;
-                    $buf .= "      aditional_filter:\n";
-                    $buf .= "        order: " . $nfiltros . "\n";
-                    $buf .= "        caption: " . $column['Field'] . "\n";
-                    $buf .= "        entity: ValoresSN\n";
+                    $buf .= "        entity: {$column['ReferencedEntity']}\n";
                     $buf .= "        method: fetchAll\n";
                     $buf .= "        params: null\n";
-                    $buf .= "        type: select\n";
+                    $buf .= "        type: input\n";
                     $buf .= "        operator: =\n";
                     $buf .= "        event: null\n";
-                    $buf .= "      default: null\n";
+                } else {
+                    if ($column['Type'] == 'date') {
+                        $nfiltros++;
+                        $buf .= "      aditional_filter:\n";
+                        $buf .= "        order: " . $nfiltros . "\n";
+                        $buf .= "        caption: " . $column['Field'] . "\n";
+                        $buf .= "        type: range\n";
+                        $buf .= "        operator: >=\n";
+                        $nfiltros++;
+                    } elseif ($column['Type'] == 'tinyint') {
+                        $nfiltros++;
+                        $buf .= "      aditional_filter:\n";
+                        $buf .= "        order: " . $nfiltros . "\n";
+                        $buf .= "        caption: " . $column['Field'] . "\n";
+                        $buf .= "        entity: ValoresSN\n";
+                        $buf .= "        method: fetchAll\n";
+                        $buf .= "        params: null\n";
+                        $buf .= "        type: select\n";
+                        $buf .= "        operator: =\n";
+                        $buf .= "        event: null\n";
+                    }
+                }
+
+                //VALIDADDOR. NO SE PONE PARA LA PRIMARYKEY
+                if ($column['Field'] != $this->td->getPrimaryKey()) {
+                    $buf .= "      validator:\n";
+                    $buf .= "        nullable: " . $column['Null'] . "\n";
+                    $buf .= "        type: " . $this->variable_types[$column['Type']] . "\n";
+                    $buf .= "        length: " . $column['Length'] . "\n";
+                    $buf .= "        min: null\n";
+                    $buf .= "        max: null\n";
+                    $buf .= "        message: Valor Requerido\n";
                 }
             }
-
-            //VALIDADDOR. NO SE PONE PARA LA PRIMARYKEY
-            if ($column['Field'] != $this->td->getPrimaryKey()) {
-                $buf .= "      validator:\n";
-                $buf .= "        null: " . $column['Null'] . "\n";
-                $buf .= "        type: " . $this->variable_types[$column['Type']] . "\n";
-                $buf .= "        length: " . $column['Length'] . "\n";
-                $buf .= "        min: null\n";
-                $buf .= "        max: null\n";
-                $buf .= "        message: Valor Requerido\n";
-            }
         }
-        $buf .= "\n";
         $this->buffer = $buf;
     }
 

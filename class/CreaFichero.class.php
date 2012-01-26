@@ -28,6 +28,7 @@ class Esqueleto {
     private $raiz;
     private $status = true;
     private $esqueleto = array(
+        'bin',
         'config',
         'css',
         'docs',
@@ -40,6 +41,7 @@ class Esqueleto {
         'docs/docs001/images',
         'docs/docs001/pdfs',
         'entities',
+        'entities/abstract',
         'entities/models',
         'entities/methods',
         'images',
@@ -53,8 +55,6 @@ class Esqueleto {
         'modules/_Emergente',
         'modules/_global',
         'modules/_help',
-        'modules/_help/_global',
-        'modules/_help/contens',
         'modules/_help/images',
         'tmp',
     );

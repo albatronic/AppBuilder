@@ -157,7 +157,8 @@ class TableDescriptor {
                         //Pongo el nombre la la tabla refenciada en notacion entidad
                         $aux = str_replace("_", " ", $columna['ReferencedEntity']);
                         $columna['ReferencedEntity'] = str_replace(" ", "", ucwords($aux));
-                        $this->ParentEntities[] = $columna['ReferencedEntity'];
+                        if (!in_array($columna['ReferencedEntity'], $this->ParentEntities))
+                            $this->ParentEntities[] = $columna['ReferencedEntity'];
                     }
                     break;
 
@@ -174,7 +175,8 @@ class TableDescriptor {
                         //Pongo el nombre la la tabla refenciada en notacion entidad
                         $aux = str_replace("_", " ", $columna['ReferencedEntity']);
                         $columna['ReferencedEntity'] = str_replace(" ", "", ucwords($aux));
-                        $this->ParentEntities[] = $columna['ReferencedEntity'];
+                        if (!in_array($columna['ReferencedEntity'], $this->ParentEntities))
+                            $this->ParentEntities[] = $columna['ReferencedEntity'];
                     }
                     break;
             }

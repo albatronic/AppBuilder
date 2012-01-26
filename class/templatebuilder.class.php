@@ -19,6 +19,8 @@ class TemplateBuilder {
     private $td;
     private $filename;
 
+    private $auditoriaColumns = array('CreatedBy', 'CreatedAt', 'ModifiedBy', 'ModifiedAt');
+
     public function __construct($table='') {
         $this->td = new TableDescriptor(DB_BASE, $table);
 
@@ -190,7 +192,8 @@ class TemplateBuilder {
         //$tmp .= "{% import '_global/macros.html.twig' as macro %}\n\n";
 
         foreach ($this->td->getColumns() as $column) {
-            if ($column['Field'] != $this->td->getPrimaryKey()) {
+            // NO SE MUESTRA NI LA PRIMARI KEY NI LAS COLUMNAS DE AUDITORIA
+            if ( ($column['Field'] != $this->td->getPrimaryKey()) and (!in_array($column['Field'], $this->auditoriaColumns)) ) {
                 $column_name = str_replace('-', '_', $column['Field']);
 
                 $label = ucwords($column_name);

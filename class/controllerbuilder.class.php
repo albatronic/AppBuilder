@@ -44,7 +44,7 @@ class ControllerBuilder {
         $buf .= "\ninclude \"modules/controller.php\";\n\n";
          */
 
-        $buf .= "class " . $this->filename . "Controller extends controller {\n\n";
+        $buf .= "class " . $this->filename . "Controller extends Controller {\n\n";
         $buf .= "\tprotected \$entity = \"" . $this->filename . "\";\n";
         $buf .= "\tprotected \$parentEntity = \"\";\n";
 
