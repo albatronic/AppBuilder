@@ -24,38 +24,27 @@ config:
       dbEngine: mysql
       host: localhost
       user: root
-      password: albatronic
-      database: interpra_ppuemp
+      password: 
+      database: 
     datos001:
       dbEngine: mysql
       host: localhost
       user: root
-      password: albatronic
-      database: interpra_ppuerp001
-    datos002:
-      dbEngine: mysql
-      host: localhost
-      user: root
-      password: albatronic
-      database: interpra_ppuerp002
-    datos003:
-      dbEngine: mysql
-      host: localhost
-      user: root
-      password: albatronic
-      database: interpra_ppuerp003
+      password: 
+      database: 
+
   # MOTOR DE ENVIO DE CORREOS
   mailer:
     plugin_dir: ../../app/bin/PHPMailer_v2.0.0/
     plugin_file: PhpMailer.class.php
     motor: PhpMailer
     socket: smtp
-    host: mail.interpral.com
+    host: mail.dominio.com
     smtp_auth: true
-    user_name: info@interpral.com
-    password: i1234o
-    from: info@interpral.com
-    from_name: INTERPRAL
+    user_name: info@dominio.com
+    password: 
+    from: info@dominio.com
+    from_name: NOMBRE
     timeout: 30
   # MOTOR PARA DOCUMENTOS EXCEL
   excel: ../../app/bin/PHPExcel/PHPExcel.php
