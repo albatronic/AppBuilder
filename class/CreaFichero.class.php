@@ -8,6 +8,7 @@
  * @date 08-jun-2011
  *
  */
+
 class CreaFichero {
 
     public function __construct($filename, $content) {
@@ -25,57 +26,51 @@ class CreaFichero {
 
 class Esqueleto {
 
-    private $raiz;
-    private $status = true;
-    private $esqueleto = array(
-        'bin',
-        'config',
-        'css',
-        'docs',
-        'docs/formats',
-        'docs/docs001',
-        'docs/docs001/catalog',
-        'docs/docs001/export',
-        'docs/docs001/export/xmls',
-        'docs/docs001/formats',
-        'docs/docs001/images',
-        'docs/docs001/pdfs',
-        'entities',
-        'entities/abstract',
-        'entities/models',
-        'entities/methods',
-        'images',
-        'images/calendario',
-        'images/notificaciones',
-        'js',
-        'lang',
-        'lib',
-        'log',
-        'modules',
-        'modules/_Emergente',
-        'modules/_global',
-        'modules/_help',
-        'modules/_help/images',
-        'tmp',
-    );
-
-    public function __construct($raiz) {
-        $this->raiz = $raiz;
+    /**
+     * Crea la carpeta $pathDestino y copia en ella la estructura y contenido
+     * de la carpeta $pathDestino
+     * 
+     * @param string $pathOrigen La carpeta origen
+     * @param string $pathDestino La carpeta destino
+     * @return boolean
+     */
+    public function copia($pathOrigen,$pathDestino) {
+        
+        if ($pathDestino)
+            return $this->copy_r($pathOrigen, $pathDestino);
+        else
+            return false;
     }
 
-    public function crea() {
-
-        // SI NO EXISTE, CREA EL DIRECTORIO RAIZ
-        if (!file_exists($this->raiz))
-            $this->status = @mkdir($this->raiz, 0, true);
-
-        // CREO LOS SUBDIRECTORIOS
-        if ($this->status) {
-            foreach ($this->esqueleto as $folder) {
-                @mkdir($this->raiz . "/" . $folder, 0, true);
+    /**
+     * Copia recursiva de origen a destino
+     * 
+     * @param string $path La carpeta origen
+     * @param string $dest La carpeta destino
+     * @return boolean
+     */
+    private function copy_r($path, $dest) {
+        if (is_dir($path)) {
+            @mkdir($dest);
+            $objects = scandir($path);
+            if (sizeof($objects) > 0) {
+                foreach ($objects as $file) {
+                    if ($file == "." || $file == "..")
+                        continue;
+                    // go on
+                    if (is_dir($path . DS . $file)) {
+                        $this->copy_r($path . DS . $file, $dest . DS . $file);
+                    } else {
+                        copy($path . DS . $file, $dest . DS . $file);
+                    }
+                }
             }
+            return true;
+        } elseif (is_file($path)) {
+            return copy($path, $dest);
+        } else {
+            return false;
         }
-        return $this->status;
     }
 
 }

@@ -1,0 +1,47 @@
+{# _Emergente/promosVigentesClientes.html.twig #}
+
+<script language='JavaScript' type='text/javascript'>
+    $(function() {
+	$( "#dialogPromo" ).dialog({
+            autoOpen: false,
+            width: 800,
+            height: 200,
+            position: ['center','center'],
+            closeOnEscape: true,
+            });
+    });
+</script>
+
+<div id="dialogPromo" title="Promociones Vigentes para {{cliente.RazonSocial}}">
+<div class="Listado" style="margin: 5px;">
+    <table width="100%">
+
+        <tr class="Titulos">
+            <td class="Item">Promocion</td>
+            <td class="Item">Familia</td>
+            <td class="Item">Artículo</td>
+            <td class="Item">Fin Promo</td>
+            <td class="Item">Ctd. Mínima</td>
+            <td class="Item">Tipo</td>
+            <td class="Item">Valor</td>
+            <td class="Item">Forma de Pago</td>
+        </tr>
+
+        <tbody class='Cuerpo'>
+            {% for promo in cliente.getPromosVigentes(fecha) %}
+            <tr>
+                <td style="text-align: left;">{{promo.Titulo}}</td>
+                <td style="text-align: left;">{{promo.IDFamilia}}</td>
+                <td style="text-align: left;">{{promo.IDArticulo.Descripcion}}</td>
+                <td style="width: 70px; text-align: right;">{{promo.FinPromocion}}</td>
+                <td style="width: 60px; text-align: right;">{{promo.CantidadMinima}}</td>
+                <td style="width: 70px; text-align: left;">{{promo.TipoPromocion}}</td>
+                <td style="width: 70px; text-align: right;">{{promo.Valor}}</td>
+                <td style="text-align: left;">{{promo.IDFP.Descripcion}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+</div>
+</div>

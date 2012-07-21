@@ -1,0 +1,60 @@
+{% import "_global/macros.html.twig" as macro %}
+{% spaceless %}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es-ES" lang="es-ES">
+    <head>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>.: {{ app.name }} {% block title %} {{ titulo }} {% endblock %}</title>
+        <link rel="shortcut icon" href="favicon.ico" />
+
+        <!-- Para que esté disponible el path de la app en todos los java scripts -->
+        <script type="text/javascript">var appPath = "{{app.path}}";</script>
+
+        <link type="text/css" rel="stylesheet" href="{{app.path}}/css/tablet/menuazulgris.css" />
+        <link type="text/css" rel="stylesheet" href="{{app.path}}/css/tablet/contenedor.css" />
+        <link type="text/css" rel="stylesheet" href="{{app.path}}/css/tablet/formularios.css" />
+        <link type="text/css" rel="stylesheet" href="{{app.path}}/css/tablet/notificaciones.css" />
+        <link type="text/css" rel="stylesheet" href="{{app.path}}/css/tablet/jquery.ui.all.css" />
+        <link type="text/css" rel="stylesheet" href="{{app.path}}/css/tablet/jquery.autocompletar.css" />
+        <link type="text/css" rel="stylesheet" href="{{app.path}}/css/tablet/thickbox.css" media="screen" />
+
+        <script type="text/javascript" src="{{app.path}}/js/jquery/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="{{app.path}}/js/jquery/jquery.bgiframe-2.1.2.js"></script>
+        <script type="text/javascript" src="{{app.path}}/js/jquery/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="{{app.path}}/js/jquery/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="{{app.path}}/js/jquery/jquery.ui.datepicker.js"></script>
+	<script type="text/javascript" src="{{app.path}}/js/jquery/i18n/jquery.ui.datepicker-es.js"></script>
+        <script type="text/javascript" src="{{app.path}}/js/jquery/jquery.ui.tabs.js"></script>
+        <script type="text/javascript" src="{{app.path}}/js/jquery/jquery.ui.mouse.js"></script>
+        <script type="text/javascript" src="{{app.path}}/js/jquery/jquery.ui.draggable.js"></script>
+        <script type="text/javascript" src="{{app.path}}/js/jquery/jquery.ui.position.js"></script>
+        <script type="text/javascript" src="{{app.path}}/js/jquery/jquery.ui.resizable.js"></script>
+        <script type="text/javascript" src="{{app.path}}/js/jquery/jquery.ui.dialog.js"></script>
+        <script type="text/javascript" src="{{app.path}}/js/jquery/jquery.ui.autocomplete.js"></script>
+        <script type="text/javascript" src="{{app.path}}/js/jquery/jquery.ui.accordion.js"></script>
+        <script type="text/javascript" src="{{app.path}}/js/script.js"></script>
+        <script type="text/javascript" src="{{app.path}}/js/thickbox.js"></script>
+
+    </head>
+    <body style="background:#eeeeee;">
+        <div id="contenedor_popup">
+            <div id="contenido">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+
+        <div id="notificacion"></div>
+
+        <div class="pieizq">
+            <div class="debug">
+            {% if values._debugMode %}
+                <pre>{{values._debugValues}}</pre>
+            {% endif %}
+            </div>
+        </div>
+    </body>
+</html>
+{% endspaceless %}

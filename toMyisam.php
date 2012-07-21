@@ -8,7 +8,7 @@
  * @date: 10-06-2011
  *
  */
-$link_identifier=mysql_connect('localhost','root','albatronic');
+$link_identifier=mysql_connect('localhost','root','');
 mysql_select_db('interpral_ppuerp001', $link_identifier);
 $query="show tables;";
 $result=mysql_query($query);

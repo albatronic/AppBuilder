@@ -1,12 +1,13 @@
 {# exportar.html.twig                                                 #}
 {# TEMPLATE PARA DESCARGAR UN ARCHIVO PREVIAMENTE GENERADO/EXPORTADO  #}
 {# -------------------------------------------------------------------#}
-{% extends "_global/layout.html.twig" %}
+{% extends values.controller ~ "/index.html.twig" %}
 
-{% block content %}
-    <h2>Exportar información</h2>
+{% block listado %}
+    <h2 style='margin-top:20px;'>Exportar información</h2>
     <p style='margin-top:20px;'>
         Se ha generado el siguiente archivo descargable:
         <a href="{{values.export.file}}" target="blank_" title='Botón derecho, guardar contenido como...'>{{values.export.title}}</a>
     </p>
+    <iframe width="99%" height="600" src="{{app.path}}/{{values.export.file}}"></iframe>
 {% endblock %}

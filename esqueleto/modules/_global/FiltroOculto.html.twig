@@ -1,0 +1,17 @@
+{# Valores del filtro #}
+
+{% for key,column in filter.columnsSelected %}
+    <input name="filter[columnsSelected][{{key}}]" value="{{column}}" type="hidden" />
+{% endfor %}
+
+{% for key,value in filter.valuesSelected %}
+    <input name="filter[valuesSelected][{{key}}]" value="{{value}}" type="hidden" />
+{% endfor %}
+
+{% for key,value in filter.flags %}
+    <input name="filter[flags][{{key}}]" value="{{value}}" type="hidden" />
+{% endfor %}
+
+<input name="filter[orderBy]" value="{{filter.orderBy}}" type="hidden" />
+<input name="filter[page]" value="{{filter.page}}" type="hidden" />
+<input name="filter[recordsPerPage]" value="{{filter.recordsPerPage}}" type="hidden" />

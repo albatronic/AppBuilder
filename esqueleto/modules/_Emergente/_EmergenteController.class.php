@@ -5,20 +5,19 @@
  *
  * LA INFORMACION QUE SE MOSTRARA DEPENDE DEL METODO LLAMADO
  *
- * @author: Sergio Perez <sergio.perez@albatronic.com>
- * @copyright: INFORMATICA ALBATRONIC SL 
- * @date 27.07.2011 11:10:13
+ * @author Sergio Perez <sergio.perez@albatronic.com>
+ * @copyright INFORMATICA ALBATRONIC SL 
+ * @since 27.07.2011 11:10:13
 
- * Extiende a la clase controller
  */
-class _EmergenteController extends controller {
+class _EmergenteController {
 
-    protected $entity = "";
+    protected $request;
+    protected $values;
 
     public function __construct($request) {
-
+        // Cargar lo que viene en el request
         $this->request = $request;
-
         $this->values['request'] = $this->request;
     }
 
@@ -29,11 +28,11 @@ class _EmergenteController extends controller {
     public function reservasAction() {
         switch ($this->request["METHOD"]) {
             case 'GET':
-                $idArticulo = $this->request['3'];
-                $idAlmacen = $this->request['4'];
+                $idArticulo = $this->request['2'];
+                $idAlmacen = $this->request['3'];
                 $condicion = " JOIN albaranes_cab USING(IDAlbaran) where t1.IDAlmacen='{$idAlmacen}' and t1.IDArticulo='{$idArticulo}' and t1.IDEstado='1' ";
                 $query = "select IDLinea from albaranes_lineas as t1 {$condicion} order by albaranes_cab.Fecha ASC";
-                $em = new entityManager("datos" . $_SESSION['emp']);
+                $em = new EntityManager("datos" . $_SESSION['emp']);
                 $em->query($query);
                 $rows = $em->fetchResult();
                 $em->desConecta();
@@ -60,11 +59,11 @@ class _EmergenteController extends controller {
     public function entradasAction() {
         switch ($this->request["METHOD"]) {
             case 'GET':
-                $idArticulo = $this->request['3'];
-                $idAlmacen = $this->request['4'];
+                $idArticulo = $this->request['2'];
+                $idAlmacen = $this->request['3'];
                 $condicion = " JOIN pedidos_cab USING(IDPedido) where t1.IDAlmacen='{$idAlmacen}' and t1.IDArticulo='{$idArticulo}' and t1.IDEstado='1' ";
                 $query = "select IDLinea from pedidos_lineas as t1 {$condicion} order by pedidos_cab.FechaEntrega ASC";
-                $em = new entityManager("datos" . $_SESSION['emp']);
+                $em = new EntityManager("datos" . $_SESSION['emp']);
                 $em->query($query);
                 $rows = $em->fetchResult();
                 $em->desConecta();
@@ -86,12 +85,12 @@ class _EmergenteController extends controller {
 
     /**
      * Devuelve array con los posibles formatos de documentos para
-     * el tipo de documento indicado como parámetro o en la posicion 3 del request
+     * el tipo de documento indicado como parámetro o en la posicion 2 del request
      *
-     * El controlador que generará el documento viene en la posicion 4 del request
-     * El id del objeto a imprimir viene en la posicion 5 del request
+     * El controlador que generará el documento viene en la posicion 3 del request
+     * El id del objeto a imprimir viene en la posicion 4 del request
      *
-     * Los formatos están definidos en  docs/docsXXX/tipoDocumento.xml
+     * Los formatos están definidos en  docs/docsXXX/tipoDocumento.yml
      * Se mostrarán solo aquellos que el perfil del usuario tenga acceso.
      *
      * En el nodo <idPerfil> se indican los IDs (separados por comas) de los perfiles que tendrán acceso
@@ -105,30 +104,18 @@ class _EmergenteController extends controller {
         switch ($this->request["METHOD"]) {
             case 'GET':
                 if ($tipoDocumento == '')
-                    $tipoDocumento = $this->request['3'];
+                    $tipoDocumento = $this->request['2'];
 
-                $controlador = $this->request['4'];
-                $idDocumento = $this->request['5'];
-                $formatos = array();
+                $controlador = $this->request['3'];
+                $idDocumento = $this->request['4'];
 
-                $file = "docs/docs" . $_SESSION['emp'] . "/formats/" . $tipoDocumento . ".xml";
-                $xml = new xmlRead($file);
-
-                $perfilUsuario = $_SESSION['USER']['user']['IDPerfil'];
-                $i = 0;
-                foreach ($xml->getXml() as $formato) {
-                    $perfiles = (string) $formato->idPerfil;
-                    $arrayPerfiles = explode(',', $perfiles);
-                    if (($perfiles == '') or (in_array($perfilUsuario, $arrayPerfiles)))
-                        $formatos[] = array(
-                            'Id' => $i++,
-                            'Value' => (string) $formato->title
-                        );
-                }
-                unset($xml);
+                $documento = new DocumentoPdf();
+                $formatos = $documento->getFormatos($tipoDocumento);
+                unset($documento);
 
                 $this->values = array(
                     'numeroDeFormatos' => count($formatos),
+                    'tipoDocumento' => $tipoDocumento,
                     'formatos' => $formatos,
                     'controlador' => $controlador,
                     'idDocumento' => $idDocumento,
@@ -139,6 +126,174 @@ class _EmergenteController extends controller {
                 break;
         }
         return array('template' => '_Emergente/formatosDocumentos.html.twig', 'values' => $this->values);
+    }
+
+    /**
+     * Renderiza el template _Emergente/historicoCompras.html.twig
+     * mostrando las compras realizadas a un proveedor de un articulo dado.
+     * La información se obtiene en base a los pedidos confimardos o facturados.
+     * No se tienen en cuenta los pedidos no confirmados.
+     *
+     * Puede entrar por POST o por GET. Los parámetros vienen en
+     * idArticulo y idProveedor si es por POST, o
+     * posicion 2 (idArticulo) y 3 (idProveedor) si es por GET
+     *
+     * @return array El template y los datos
+     */
+    public function HistoricoComprasAction() {
+
+        switch ($this->request["METHOD"]) {
+            case 'GET':
+                $idArticulo = $this->request['2'];
+                $idProveedor = $this->request['3'];
+                break;
+            case 'POST':
+                $idArticulo = $this->request['idArticulo'];
+                $idProveedor = $this->request['idProveedor'];
+                break;
+        }
+
+        $articulo = new Articulos($idArticulo);
+        $proveedor = new Proveedores($idProveedor);
+
+
+        // Calcular el total de unidades compradas y el precio medio de venta
+        // Solo calcula los pedidos que están confirmados o facturados
+        $em = new EntityManager("datos" . $_SESSION['emp']);
+        if ($em->getDbLink()) {
+            $query = "SELECT SUM(t1.Unidades) as Unidades, SUM(t1.Importe) as Importe
+                FROM pedidos_lineas as t1, pedidos_cab as t2
+                WHERE t1.IDPedido=t2.IDPedido
+                AND t2.IDProveedor='{$idProveedor}'
+                AND t1.IDArticulo='{$idArticulo}'
+                AND t2.IDEstado<>'0'";
+            $em->query($query);
+            $rows = $em->fetchResult();
+            $em->desConecta();
+        }
+
+        ($rows[0]['Unidades'] != 0) ? $precioMedio = $rows[0]['Importe'] / $rows[0]['Unidades'] : $precioMedio = 0;
+        ($rows[0]['Unidades'] == '') ? $unidades = 0 : $unidades = $rows['0']['Unidades'];
+
+        $this->values['datos'] = array(
+            'idsucursal' => $_SESSION['suc'],
+            'articulo' => $articulo,
+            'proveedor' => $proveedor,
+            'unidades' => $unidades,
+            'precioMedio' => number_format($precioMedio, 3),
+        );
+
+        // Obtener el litado historico de compras para el articulo y proveedor
+        // Solo muestra los pedidos que están confirmador o facturados
+        $em = new EntityManager("datos" . $_SESSION['emp']);
+        if ($em->getDbLink()) {
+            $query = "SELECT t2.IDLinea,t1.IDPedido,DATE_FORMAT(t1.Fecha,'%d-%m-%Y') as Fecha,t2.Unidades,t2.Precio,t2.Descuento,t2.Importe
+                FROM pedidos_cab as t1, pedidos_lineas as t2, proveedores as t3
+                WHERE t1.IDPedido=t2.IDPedido
+                AND t1.IDProveedor=t3.IDProveedor
+                AND t1.IDProveedor='{$idProveedor}'
+                AND t2.IDArticulo='{$idArticulo}'
+                AND t1.IDEstado<>'0'
+                ORDER BY t1.Fecha DESC";
+            $em->query($query);
+            $rows = $em->fetchResult();
+            $em->desConecta();
+        }
+
+        $this->values['listado'] = $rows;
+
+        unset($em);
+        unset($articulo);
+        unset($cliente);
+
+        return array('template' => '_Emergente/historicoCompras.html.twig', 'values' => $this->values);
+    }
+
+    /**
+     * Renderiza el template _Emergente/historicoVentas.html.twig
+     * mostrando las ventas realizadas a un cliente de un articulo dado.
+     * La información se obtiene en base a los albaranes confimardos o facturados.
+     * No se tienen en cuenta los albaranes no confirmados.
+     *
+     * Puede entrar por POST o por GET. Los parámetros vienen en
+     * idArticulo y idCliente si es por POST, o
+     * posicion 2 (idArticulo) y 3 (idCliente) si es por GET
+     *
+     * @return array El template y los datos
+     */
+    public function HistoricoVentasAction() {
+
+        switch ($this->request["METHOD"]) {
+            case 'GET':
+                $idArticulo = $this->request['2'];
+                $idCliente = $this->request['3'];
+                break;
+            case 'POST':
+                $idArticulo = $this->request['idArticulo'];
+                $idCliente = $this->request['idCliente'];
+                break;
+        }
+
+        $articulo = new Articulos($idArticulo);
+        $cliente = new Clientes($idCliente);
+
+
+        // Calcular el total de unidades vendidas y el precio medio de venta
+        // Solo calcula los albaranes que están confirmados o facturados
+        $em = new EntityManager("datos" . $_SESSION['emp']);
+        if ($em->getDbLink()) {
+            $query = "SELECT SUM(t1.Unidades) as Unidades, SUM(t1.Importe) as Importe
+                FROM albaranes_lineas as t1, albaranes_cab as t2
+                WHERE t1.IDAlbaran=t2.IDAlbaran
+                AND t2.IDCliente='{$idCliente}'
+                AND t1.IDArticulo='{$idArticulo}'
+                AND t2.IDEstado<>'0'";
+            $em->query($query);
+            $rows = $em->fetchResult();
+            $em->desConecta();
+        }
+
+        ($rows[0]['Unidades'] != 0) ? $precioMedio = $rows[0]['Importe'] / $rows[0]['Unidades'] : $precioMedio = 0;
+        ($rows[0]['Unidades'] == '') ? $unidades = 0 : $unidades = $rows['0']['Unidades'];
+
+        $this->values['datos'] = array(
+            'idsucursal' => $_SESSION['suc'],
+            'articulo' => $articulo,
+            'cliente' => $cliente,
+            'unidades' => $unidades,
+            'precioMedio' => number_format($precioMedio, 3),
+        );
+
+        // Obtener el litado historico de ventas para el articulo y cliente
+        // Solo muestra los albaranes que están confirmador o facturados
+        $em = new EntityManager("datos" . $_SESSION['emp']);
+        if ($em->getDbLink()) {
+            $query = "SELECT t2.IDLinea,t1.IDAlbaran,t1.NumeroAlbaran,DATE_FORMAT(t1.Fecha,'%d-%m-%Y') as Fecha,t2.Unidades,t2.Precio,t2.Descuento,t2.Importe,t2.IDPromocion
+                FROM albaranes_cab as t1, albaranes_lineas as t2, clientes as t3
+                WHERE t1.IDAlbaran=t2.IDAlbaran
+                AND t1.IDCliente=t3.IDCliente
+                AND t1.IDCliente='{$idCliente}'
+                AND t2.IDArticulo='{$idArticulo}'
+                AND t1.IDEstado<>'0'
+                ORDER BY t1.Fecha DESC";
+            $em->query($query);
+            $rows = $em->fetchResult();
+            $em->desConecta();
+        }
+        // Recorro el array de resultados y convierto (si procede) la columna IDPromocion
+        // en un objeto promocion para tener todos los datos de la promocion en el template.
+        foreach ($rows as $key => $value) {
+            if ($value['IDPromocion'])
+                $rows[$key]['IDPromocion'] = new Promociones($value['IDPromocion']);
+        }
+
+        $this->values['listado'] = $rows;
+
+        unset($em);
+        unset($articulo);
+        unset($cliente);
+
+        return array('template' => '_Emergente/historicoVentas.html.twig', 'values' => $this->values);
     }
 
 }

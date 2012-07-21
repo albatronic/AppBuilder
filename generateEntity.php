@@ -12,7 +12,7 @@ if(!isset($_GET['t']))
 $database_connection_information = "
 define(DB_HOST,'localhost');
 define(DB_USER,'root');
-define(DB_PASS,'albatronic');
+define(DB_PASS,'');
 define(DB_BASE,'interpral_ppuerp001');
 define(PATH_MODEL,'../erp/entities');
 ";

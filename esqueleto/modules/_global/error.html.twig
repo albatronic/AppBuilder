@@ -1,9 +1,9 @@
 {# error.html.twig #}
-{% extends "_global/layout.html.twig" %}
+{% extends layout %}
 
 {% block content %}
 <div class="MensajeError">
     <h1 class="TituloError">Upps!! Algo falló</h1>
-    {{ error }}
+    {{ values.error }}
 </div>
 {% endblock %}

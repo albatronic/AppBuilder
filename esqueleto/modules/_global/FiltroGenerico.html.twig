@@ -8,20 +8,23 @@
             <option value="{{ index }}" {% if (index == filter.columnsSelected[0])%} SELECTED {%endif%}>{{column}}</option>
         {% endfor %}
         </select>
-        Valor (%): <input name="filter[valuesSelected][0]" value="{{ filter.valuesSelected.0 }}" type="text" size="20"/>
+        Valor (%): <input name="filter[valuesSelected][0]" id="filter[valuesSelected][0]" value="{{ filter.valuesSelected.0 }}" type="text" size="20"/>
     </div>
 
     {% if filter.aditional %}
-    <div style="float:left; margin-left: 10px; padding: 2px; cursor: pointer;">
-        <image src="{{app.path}}/images/more.png" id="filtroAvanzado" onclick="document.getElementById('filtroAvanzado').style.display='none';document.getElementById('FiltrosAdicionales').style.display='block';" alt="Filtro Avanzado" title="Filtro Avanzado" />
-    </div>
+        <div style="float: left; margin-left: 5px;">
+            <img src="{{app.path}}/images/more.png" width="14px" height="14px" style="cursor: pointer;"
+                 onclick="getElementById('FiltrosAdicionales').style.display='';"
+                 alt="Filtro Avanzado" title="Filtro Avanzado ...">
+        {% include "_global/filtroAvanzado.html.twig" with {'titulo': values.titulo} %}
+        </div>
     {% endif %}
 
     <div style="float:right;">
         Orden:
-        <select name="filter[columnOrder]">
-        {% for index,column in filter.columns %}
-            <option value="{{ index }}" {% if (index == filter.columnOrder)%} SELECTED {%endif%}>{{column}}</option>
+        <select name="filter[orderBy]">
+        {% for criterio in filter.columnsOrder %}
+            <option value="{{ criterio.criteria }}" {% if (criterio.criteria == filter.orderBy)%} SELECTED {%endif%}>{{criterio.title}}</option>
         {% endfor %}
         </select>
 
@@ -29,57 +32,10 @@
         <input name="filter[recordsPerPage]" type="text" size="3" value="{{ filter.recordsPerPage }}" style="width:25px;"/>
 
         <input name="filter[page]" value="1" type="hidden"/>
-        <input type="image" src="{{app.path}}/images/lupa.png" alt="Consulta" title="Consultar"/>
+        <input style="margin-left: 5px;" type="image" src="{{app.path}}/images/lupa.png" width="16px" height="16px" alt="Consulta" title="Consultar"
+               onclick="$('#div_listado').html('<div class=ListadoAnimation><img src={{app.path}}/images/loadingAnimation.gif /></div>');"/>
     </div>
     <div style="clear:both;"></div>
 </div>
 
-{% if filter.aditional %}
-{% set i = 0 %}
-<div class="FiltrosAdicionales" id="FiltrosAdicionales">
-{% for key,value in filter.aditional %}
-    {% set i = i+1 %}
-
-    <div class="FiltroAdicional">
-        <div>{{value.caption}}:</div>
-
-        <div>
-        {% if value.type == 'select' %}
-            <input name="filter[columnsSelected][{{i}}]" value="{{value.field}}" type="hidden"/>
-            <select name="filter[valuesSelected][{{i}}]" {{ value.event }}>
-                {% for objeto in value.values  %}
-                <option value="{{ objeto.Id }}" {% if objeto.Id == filter.valuesSelected[i]%} SELECTED {% endif %}>{{ objeto.Value }}</option>
-                {% endfor %}
-            </select>
-        {% endif %}
-
-        {% if value.type == 'input' %}
-            <input name="filter[columnsSelected][{{i}}]" value="{{value.field}}" type="hidden"/>
-            <input name="filter[valuesSelected][{{i}}]" value ="{{ filter.valuesSelected[i] }}" type="text" size="10" {{ value.event }}/>
-        {% endif %}
-
-        {% if value.type == 'range' %}
-            <input name="filter[columnsSelected][{{i}}]" value="{{value.field}}" type="hidden"/>
-            <input name="filter[valuesSelected][{{i}}]" value ="{{ filter.valuesSelected[i] }}" type="text" size="10" {{ value.event }}/>
-        {% endif %}
-
-        {% if value.type == 'check' %}
-            <input name="filter[columnsSelected][{{i}}]" value="{{value.field}}" type="hidden"/>
-            <input name="filter[valuesSelected][{{i}}]"
-             {% if  filter.valuesSelected[i] != '' %}
-                {% if  filter.valuesSelected[i] =='1' %}
-                   checked="checked"
-                {% endif %}
-             {%else%}
-                {% if  value.default == 'on' %}
-                   checked="checked"
-                {% endif %}
-             {% endif %}
-                   type="checkbox" {{ value.event }}/>
-        {% endif %}
-        </div>
-    </div>
-{% endfor %}
-    <div style='clear:both'></div> 
-</div>
-{% endif %}
+{{ macro.foco('filter[valuesSelected][0]') }}

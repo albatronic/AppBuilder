@@ -1,0 +1,50 @@
+{# layout.html.twig de AYUDA #}
+{% import "_help/macros.html.twig" as macro %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es" lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>.:: Manual {{app.name}}</title>
+    <link rel="shortcut icon" href="favicon.ico" />
+    <link type="text/css" rel="stylesheet" href="{{app.path}}/css/std/help.css" />
+</head>
+<body>
+
+    <div id="headnav">
+    {%block cabecera%}
+        {% include "_help/header.html.twig" %}
+    {%endblock%}
+    </div>
+
+    <div id="buscador">
+        {%block buscador%}&nbsp;
+        {%endblock%}
+    </div>
+
+    <div id="cuerpo">
+        <div id="leftbar">
+        {%block indice%}
+            {% include "_help/indice.html.twig" %}
+        {%endblock%}
+        </div>
+        <div id="content" class="manual/es">
+            <div class="manualnavbar manualnavbar_top">
+            {%block titulo%}
+            {%endblock%}
+            </div>
+            {%block contenido%}
+            {%endblock%}
+        </div>
+        <div class="cleaner">&nbsp;</div>
+
+        <div id="pagefooter">
+            <div id="thismirror">
+            {%block pie%}
+                &copy; Powered by ALBATRONIC, SL 2012</a><br />
+            {%endblock%}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

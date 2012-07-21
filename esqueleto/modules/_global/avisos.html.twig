@@ -1,0 +1,11 @@
+
+{% if alertas %}
+<div class="MensajeError">
+    <p class="TituloError">Avisos:</p>
+    <ul>
+    {% for alerta in alertas %}
+        <li>{{ alerta }}</li>
+    {% endfor %}
+    </ul>
+</div>
+{% endif %}

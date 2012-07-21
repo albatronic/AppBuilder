@@ -1,0 +1,662 @@
+.degradadoazul {
+    FILTER: progid:DXImagetransform.microsoft.gradient(gradienttype=0,startcolorstr=steelblue,endcolorstr=#ffffff);
+}
+
+H1.SaltoDePagina {
+     PAGE-BREAK-AFTER: always
+}
+.CampoObligatorio{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 8pt;
+    background-color: #FFFF00;
+}
+.boxtitlewhite {
+	FONT-WEIGHT: bold;
+	FONT-SIZE: 11px;
+	COLOR: #FFFFFF;
+	FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+	background-color: #000099;
+}
+.menu {
+    FONT: 8pt Verdana, Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+.formularios {
+	FONT: 8pt Verdana, Arial, Helvetica, sans-serif
+}
+.renglondch{
+	FONT: 8pt Verdana, Arial, Helvetica, sans-serif;
+	BORDER-RIGHT: #9d9dbd 1px solid;
+}
+.renglonizq{
+	FONT: 8pt Verdana, Arial, Helvetica, sans-serif;
+    BORDER-LEFT: #9d9dbd 1px solid;
+}
+.renglonizqabajo{
+	FONT: 8pt Verdana, Arial, Helvetica, sans-serif;
+    BORDER-LEFT: #9d9dbd 1px solid;
+    BORDER-BOTTOM: #9d9dbd 1px solid;
+}
+.botonzonasportes{
+	FONT: 8pt Verdana, Arial, Helvetica, sans-serif;
+    font-weight: bold;
+
+}
+.letrapeq {
+	FONT: 7pt Verdana, Arial, Helvetica, sans-serif
+}
+.general {
+	FONT-SIZE: 8pt; COLOR: #ffffff; FONT-FAMILY: verdana, san-serif, monospace
+}
+.cabecera {
+	FONT-SIZE: 9px;
+ 	FONT-FAMILY: Tahoma;
+	color: #000000;
+}
+.arriba {
+    background:#3E484F url(../images/nav-bg.gif);border:1px solid #6B787F;
+    margin:5px;
+}
+.ticket {
+    FONT-FAMILY: san-serif;
+    FONT-SIZE: 1pt;
+}
+.tituloslistados {
+    FONT-SIZE: 8pt;
+    FONT-FAMILY: Tahoma;
+    background-color: #000000;
+    color: #FFFFFF;
+}
+.pielistados {
+    FONT-SIZE: 8pt;
+    FONT-FAMILY: Tahoma;
+    background-color: #C0C0C0;
+    color: #FFFFFF;
+}
+.fecha {
+	FONT-SIZE: 7.5pt; COLOR: #ffffff; FONT-FAMILY: verdana, san-serif, monospace; BACKGROUND-COLOR: #08421b
+}
+.botontitu {
+	BORDER-RIGHT: #2fad59 0px groove; BORDER-TOP: #2fad59 1px groove; FONT-SIZE: 8pt; BORDER-LEFT: #2fad59 0px groove; COLOR: #0c4820; BORDER-BOTTOM: #2fad59 1px groove; FONT-FAMILY: verdana, san-serif, monospace
+}
+.destacados {
+	FONT-WEIGHT: bold; FONT-SIZE: 8pt; COLOR: #4d7399; FONT-FAMILY: arial, san-serif, monospace; TEXT-ALIGN: left
+}
+.destactitu {
+	BORDER-RIGHT: #adc1d6 1px solid; BORDER-TOP: #adc1d6 1px solid; FONT-WEIGHT: bold; FONT-SIZE: 8pt; BORDER-LEFT: #adc1d6 1px solid; COLOR: #000000; BORDER-BOTTOM: #adc1d6 1px solid; FONT-FAMILY: verdana, san-serif, monospace; 
+}
+.celdasdest {
+	BACKGROUND-COLOR: #fdeab4
+}
+.separaciones {
+	BORDER-RIGHT: #066e29 1px solid; BORDER-TOP: #066e29 0px solid; BORDER-LEFT: #066e29 0px solid; BORDER-BOTTOM: #066e29 0px solid
+}
+.noticias {
+	BORDER-RIGHT: #4d7399 0px solid; BORDER-TOP: #4d7399 0px solid; FONT-WEIGHT: bold; FONT-SIZE: 8pt; BORDER-LEFT: #4d7399 0px solid; COLOR: #4d7399; BORDER-BOTTOM: #4d7399 1px solid; FONT-FAMILY: arial, san-serif, monospace; TEXT-DECORATION: none
+}
+.unico {
+	BORDER-RIGHT: #4d7399 1px double; BORDER-TOP: #4d7399 1px double; FONT-SIZE: 8pt; BORDER-LEFT: #4d7399 1px double; COLOR: #4d7399; BORDER-BOTTOM: #4d7399 1px double; FONT-FAMILY: arial, san-serif, monospace; BACKGROUND-COLOR: #ffffff
+}
+.noticiaspag {
+	BORDER-RIGHT: #4d7399 0px solid; BORDER-TOP: #4d7399 0px solid; FONT-WEIGHT: bold; FONT-SIZE: 8pt; BORDER-LEFT: #4d7399 0px solid; COLOR: #4d7399; BORDER-BOTTOM: #4d7399 1px solid; FONT-FAMILY: arial, san-serif, monospace
+}
+.ofertas {
+	BORDER-RIGHT: #dc8804 1px double; BORDER-TOP: #dc8804 1px double; FONT-SIZE: 8pt; BORDER-LEFT: #dc8804 1px double; COLOR: #606090; BORDER-BOTTOM: #dc8804 1px double; FONT-FAMILY: arial, san-serif, monospace; BACKGROUND-COLOR: #c5dc99; TEXT-DECORATION: underline
+}
+.ofertastitu {
+	FONT-SIZE: 8pt; COLOR: #4d7399; FONT-FAMILY: arial, san-serif, monospace; TEXT-DECORATION: none
+}
+.secciones {
+	border: #adc1d6 1px solid;
+	FONT-SIZE: 8pt;
+	COLOR: #4d7399;
+	FONT-FAMILY: verdana, san-serif, monospace
+}
+.secciontitu {
+	BORDER-RIGHT: #adc1d6 1px solid; BORDER-TOP: #adc1d6 1px solid; FONT-SIZE: 8pt; BORDER-LEFT: #adc1d6 1px solid; COLOR: #000000; BORDER-BOTTOM: #adc1d6 1px solid; FONT-FAMILY: verdana, san-serif, monospace; 
+}
+.menuizda {
+	BORDER-RIGHT: #eeeeee 1px solid; BORDER-TOP: #eeeeee 0px solid; FONT-WEIGHT: bold; FONT-SIZE: 8pt; BORDER-LEFT: #eeeeee 1px solid; COLOR: #ffffff; BORDER-BOTTOM: #eeeeee 1px solid; FONT-FAMILY: verdana, san-serif, monospace
+}
+.izdatitu {
+	BORDER-RIGHT: #eeeeee 1px solid; BORDER-TOP: #eeeeee 1px solid; FONT-WEIGHT: bold; FONT-SIZE: 8pt; BORDER-LEFT: #eeeeee 1px solid; COLOR: #ffffff; BORDER-BOTTOM: #eeeeee 1px solid; FONT-FAMILY: verdana, san-serif, monospace;
+}
+.izdanormal {
+	BORDER-RIGHT: #eeeeee 1px solid; BORDER-TOP: #eeeeee 1px solid; FONT-WEIGHT: bold; FONT-SIZE: 8pt; BORDER-LEFT: #eeeeee 1px solid; COLOR: #ffffff; BORDER-BOTTOM: #eeeeee 1px solid; FONT-FAMILY: verdana, san-serif, monospace;
+}
+.caja {
+    border: #9d9dbd 1px solid;
+    FONT-SIZE: 8pt;
+    FONT-FAMILY: verdana, san-serif, monospace;
+}
+.guias {
+	FONT-SIZE: 8pt; COLOR: #606090; FONT-FAMILY: verdana, san-serif, monospace
+}
+.fondocentro {
+	BORDER-RIGHT: #fcd95e 1px solid; BORDER-TOP: #fcd95e 0px solid; BORDER-LEFT: #fcd95e 1px solid; BORDER-BOTTOM: #fcd95e 0px solid
+}
+.fondo {
+	BACKGROUND-COLOR: #fde592
+}
+.seccionesfondo {
+	BORDER-RIGHT: #606090 1px solid; BORDER-TOP: #606090 1px solid; FONT-SIZE: 8pt; BORDER-LEFT: #606090 1px solid; COLOR: #606090; BORDER-BOTTOM: #606090 1px solid; FONT-FAMILY: verdana, san-serif, monospace; BACKGROUND-COLOR: #ffffff
+}
+.fondonaranj {
+	BORDER-RIGHT: #adc1d6 1px solid; BORDER-TOP: #adc1d6 0px solid; BORDER-LEFT: #adc1d6 1px solid; BORDER-BOTTOM: #adc1d6 0px solid
+}
+.otrofondo {
+	BACKGROUND-COLOR: #adc1d6
+}
+
+.secciontituverde {
+	BORDER-RIGHT: #9d9dbd 1px solid; BORDER-TOP: #9d9dbd 1px solid; FONT-SIZE: 8pt; BORDER-LEFT: #9d9dbd 1px solid; COLOR: #ffffff; BORDER-BOTTOM: #9d9dbd 1px solid; FONT-FAMILY: verdana, san-serif, monospace; BACKGROUND-COLOR: #9d9dbd
+}
+.verdes {
+	FONT-SIZE: 8pt; COLOR: #ffffff; FONT-FAMILY: arial, san-serif, monospace; TEXT-DECORATION: none
+}
+.tituverde {
+	BORDER-RIGHT: #9d9dbd 1px solid; BORDER-TOP: #9d9dbd 1px solid; FONT-SIZE: 8pt; BORDER-LEFT: #9d9dbd 1px solid; COLOR: #ffffff; BORDER-BOTTOM: #9d9dbd 1px solid; FONT-FAMILY: verdana, san-serif, monospace
+}
+.marronsecc {
+	FONT-SIZE: 8pt; COLOR: #606090; FONT-FAMILY: arial, san-serif, monospace
+}
+A.menizd:hover {
+	WIDTH: 100%; COLOR: #ffffff; BACKGROUND-COLOR: #4d7399
+}
+A.menizd {
+	FONT-WEIGHT: bold;
+	FONT-SIZE: 7pt;
+	COLOR: #000000;
+	FONT-FAMILY: verdana, san-serif, monospace;
+	TEXT-DECORATION: none;
+	height: 25px;
+	width: 100px;
+	border: thin solid #CCCC00;
+}
+A.mendcha:hover {
+	FONT-WEIGHT: bold; COLOR: #ffffff
+}
+A.mendcha {
+	FONT-SIZE: 8pt; COLOR: #606090; FONT-FAMILY: verdana, san-serif, monospace; TEXT-DECORATION: none
+}
+.titucuad {
+	FONT-WEIGHT: bold; FONT-SIZE: 8pt; COLOR: #606090; FONT-FAMILY: arial, san-serif, monospace; TEXT-DECORATION: none
+}
+A.notic {
+	FONT-WEIGHT: bold; FONT-SIZE: 8pt; COLOR: #606090; FONT-FAMILY: arial, san-serif, monospace; TEXT-DECORATION: none
+}
+.marrones {
+	FONT-SIZE: 8pt; COLOR: #606090; FONT-FAMILY: arial, san-serif, monospace; TEXT-DECORATION: underline
+}
+A.marron {
+	FONT-SIZE: 8pt; COLOR: #606090; FONT-FAMILY: arial, san-serif, monospace; TEXT-DECORATION: underline
+}
+A.unic {
+	FONT-SIZE: 8pt; COLOR: #606090; FONT-FAMILY: arial, san-serif, monospace; TEXT-DECORATION: none
+}
+A.separac {
+	FONT-SIZE: 7.5pt; COLOR: #ffffff; FONT-FAMILY: verdana, san-serif, monospace
+}
+A.ofert {
+	FONT-SIZE: 8pt; COLOR: #606090; FONT-FAMILY: arial, san-serif, monospace; TEXT-DECORATION: underline
+}
+A.destac {
+	FONT-WEIGHT: bold; FONT-SIZE: 8pt; COLOR: #606090; FONT-FAMILY: arial, san-serif, monospace; TEXT-ALIGN: justify; TEXT-DECORATION: none
+}
+A.destacnorm {
+	FONT-SIZE: 8pt; COLOR: #606090; FONT-FAMILY: arial, san-serif, monospace; TEXT-ALIGN: justify; TEXT-DECORATION: none
+}
+A.titu {
+	FONT-WEIGHT: bold; FONT-SIZE: 8pt; COLOR: #606090; FONT-FAMILY: arial, san-serif, monospace; TEXT-DECORATION: none
+}
+A.copy {
+	FONT-SIZE: 8pt; COLOR: #ffffff; FONT-FAMILY: arial, san-serif, monospace; TEXT-DECORATION: none
+}
+A.ofertitu {
+	FONT-WEIGHT: bold; FONT-SIZE: 8pt; COLOR: #ffffff; FONT-FAMILY: arial, san-serif, monospace; TEXT-DECORATION: none
+}
+A.busca {
+	FONT-WEIGHT: bold; FONT-SIZE: 8pt; COLOR: #cccccc; FONT-FAMILY: verdana, san-serif, monospace; TEXT-ALIGN: center; TEXT-DECORATION: none
+}
+.cajasombraoliva {
+	BORDER-RIGHT: #42701a 3px solid;
+    BORDER-TOP: #42701a 1px solid;
+    BORDER-LEFT: #42701a 1px solid;
+    BORDER-BOTTOM: #42701a 3px solid;
+    FONT-SIZE: 8pt;
+    COLOR: #42701a;
+    FONT-FAMILY: verdana, san-serif, monospace;
+    TEXT-ALIGN: center;
+    TEXT-DECORATION: none
+}
+.cajasombraocre {
+	BORDER-RIGHT: #FF9966 3px solid;
+    BORDER-TOP: #FF9966 1px solid;
+    BORDER-LEFT: #FF9966 1px solid;
+    BORDER-BOTTOM: #FF9966 3px solid;
+    FONT-SIZE: 8pt;
+    COLOR: #FF9966;
+    FONT-FAMILY: verdana, san-serif, monospace;
+    TEXT-ALIGN: center;
+    TEXT-DECORATION: none
+}
+.tabla {
+	BORDER-RIGHT: #fcd95e 1px solid;
+	BORDER-TOP: #fcd95e 1px solid;
+	BORDER-LEFT: #fcd95e 1px solid;
+	BORDER-BOTTOM: #fcd95e 1px solid
+}
+.tablatitu {
+	BORDER-RIGHT: #fcf09b 1px solid; BORDER-TOP: #fcf09b 1px solid; FONT-WEIGHT: bold; FONT-SIZE: 8pt; BORDER-LEFT: #fcf09b 1px solid; COLOR: #606090; BORDER-BOTTOM: #fcf09b 1px solid; FONT-FAMILY: arial, san-serif, monospace; BACKGROUND-COLOR: #fcd95e; TEXT-ALIGN: center
+}
+.comuntitu {
+	FONT-WEIGHT: bold; FONT-SIZE: 8pt; COLOR: #000000; FONT-FAMILY: arial, san-serif, monospace; TEXT-DECORATION: none
+}
+.comun {
+	COLOR: #606090;
+	FONT: 8pt Verdana, Arial, Helvetica, sans-serif
+}
+.letrapeq {
+	FONT: 7pt Verdana, Arial, Helvetica, sans-serif
+}
+.general {
+	FONT-SIZE: 8pt;
+	COLOR: #ffffff;
+	FONT-FAMILY: verdana, san-serif, monospace
+}
+.cabecera {
+	FONT-SIZE: 8pt;
+	COLOR: #ffffff;
+	FONT-FAMILY: verdana, san-serif, monospace; 
+}
+.fecha {
+	FONT-SIZE: 7.5pt; COLOR: #ffffff; FONT-FAMILY: verdana, san-serif, monospace; BACKGROUND-COLOR: #08421b
+}
+.botontitu {
+	BORDER-RIGHT: #2fad59 0px groove; BORDER-TOP: #2fad59 1px groove; FONT-SIZE: 8pt; BORDER-LEFT: #2fad59 0px groove; COLOR: #0c4820; BORDER-BOTTOM: #2fad59 1px groove; FONT-FAMILY: verdana, san-serif, monospace
+}
+.destacados {
+	FONT-WEIGHT: bold; FONT-SIZE: 8pt; COLOR: #4d7399; FONT-FAMILY: arial, san-serif, monospace; TEXT-ALIGN: left
+}
+.destactitu {
+	BORDER-RIGHT: #adc1d6 1px solid; BORDER-TOP: #adc1d6 1px solid; FONT-WEIGHT: bold; FONT-SIZE: 8pt; BORDER-LEFT: #adc1d6 1px solid; COLOR: #000000; BORDER-BOTTOM: #adc1d6 1px solid; FONT-FAMILY: verdana, san-serif, monospace;
+}
+.celdasdest {
+	BACKGROUND-COLOR: #fdeab4
+}
+.separaciones {
+	BORDER-RIGHT: #066e29 1px solid; BORDER-TOP: #066e29 0px solid; BORDER-LEFT: #066e29 0px solid; BORDER-BOTTOM: #066e29 0px solid
+}
+.normal {
+	FONT-WEIGHT: normal; FONT-SIZE: 10pt; COLOR: #000000; LINE-HEIGHT: normal; FONT-STYLE: normal; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; TEXT-ALIGN: justify
+}
+.ta11px {
+	font-family: Tahoma;
+	font-size: 11px;
+	font-style: normal;
+	text-transform: none;
+}
+.ta11pxnegblanc {
+	font-family: Tahoma;
+	font-size: 11px;
+	font-style: normal;
+	text-transform: none;
+	font-weight: bold;
+	color: #FFFFFF;
+
+}
+
+.titulitos {
+	font-family: Tahoma;
+	font-size: 11px;
+	font-weight: bold;
+}
+
+.menuizq {
+	BORDER-RIGHT: #9d9dbd 1px solid;
+    BORDER-TOP: #9d9dbd 1px solid;
+    BORDER-LEFT: #9d9dbd 1px solid;
+    BORDER-BOTTOM: #9d9dbd 1px solid;
+	FONT-FAMILY: verdana, san-serif, monospace;
+	font-size: 12px;
+	font-style: normal;
+	font-weight: bolder;
+	font-variant: small-caps;
+	color: #4d7399;
+	text-align: left;
+	width: 130px;
+}
+
+.resultados {
+	font-family: "Comic Sans MS";
+	font-size: 10px;
+	font-weight: bold;
+	font-variant: small-caps;
+	color: #00954A;
+}
+.DondeEsta {
+	font-family: "Comic Sans MS";
+	font-size: 14px;
+	font-style: italic;
+	font-weight: bold;
+	font-variant: small-caps;
+	text-transform: capitalize;
+	color: #FF0000;
+}
+.presupuesto {
+	font-family: Tahoma;
+	font-size: 12px;
+	text-transform: capitalize;
+	color: #0099FF;
+}
+.ta12px {
+	font-family: Tahoma;
+	font-size: 12px;
+	font-style: normal;
+	text-transform: none;
+}
+.CampoUnidades {
+	font-family: Tahoma;
+	font-size: 8pt;
+	text-align: right;
+	width: 40px;
+	color: #000000;
+	height: auto;
+}
+.CampoImporte {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 8pt;
+	text-align: right;
+	width: 55px;
+	color: #000000;
+	height: auto;
+}
+.portes {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 8pt;
+	text-align: right;
+	width: 29px;
+	color: #000000;
+	height: auto;
+}
+.ta18pxazul {
+	font-family: Tahoma;
+	font-size: 18px;
+	font-style: normal;
+	text-transform: none;
+	font-weight: bold;
+	color: #000066;
+}
+.titulos {
+	font-family: Tahoma;
+	font-size: 14px;
+	font-style: normal;
+	text-transform: none;
+	font-weight: bold;
+	font-variant: small-caps;
+	color: #000066;
+}
+.subtitulos {
+	font-family: Tahoma;
+	font-size: 12px;
+	font-style: normal;
+	text-transform: none;
+	font-weight: bold;
+	font-variant: small-caps;
+	color: #000066;
+}
+.paginacion {
+	FONT: 8pt Verdana, Arial, Helvetica, sans-serif;
+	color: #000066;
+}
+
+.ComboFamilias {
+	font-family: Tahoma;
+	font-size: 11px;
+	color: #4d7399;
+	border: thick outset;
+}
+.ta9px {
+	font-family: Tahoma;
+	font-size: 9px;
+	font-style: normal;
+	text-transform: none;
+}
+.Azul {
+    color: #003399
+}
+.bordesazules {
+	border: 1px solid #003399;
+}
+.Verde {
+	color: #009900;
+}
+.Amarillo {
+    color: #FFFF00;
+}
+.Rojo {
+	color: #CC0033;
+}
+.Ocre {
+    color: #FF9966;
+}
+.Oliva {
+    color: #808000;
+}
+.Negro {
+    color: #000000;
+}
+.FucsiaNegro {
+    background-color: #FF7DBE;
+    color: #000000;
+	font-weight: bold;
+}
+.BlancoAzul {
+	color: #FFFFFF;
+	background-color: #000066;
+}
+.dtxrojo11 {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-style: normal;
+	color: #CC3333;
+	font-weight: bold;
+}
+.BlancoFondoRojo {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	color: #FFFFFF;
+	background-color: #CC3333;
+	border-top: thin none #FFFFFF;
+	border-right: thin none #FFFFCC;
+	border-bottom: thin none #FFFFCC;
+	border-left: thin none #FFFFCC;
+}
+.AzulFondoAmarillo {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	color: #000066;
+	background-color: #FFFF00;
+	border-top: thin none #FFFFFF;
+	border-right: thin none #FFFFCC;
+	border-bottom: thin none #FFFFCC;
+	border-left: thin none #FFFFCC;
+}
+.BlancoFondoVerde {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	color: #FFFFFF;
+	background-color: #008000;
+	border-top: thin none #FFFFFF;
+	border-right: thin none #FFFFCC;
+	border-bottom: thin none #FFFFCC;
+	border-left: thin none #FFFFCC;
+}
+
+.Resaltado {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-style: normal;
+	color: #CC3333;
+	font-weight: normal;
+}
+.ticket {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: x-small;
+}
+
+/* CABECERA DE LOS PSTOS, ALBARANES, PEDIDOS Y FACTURAS */
+/*------------------------------------------------------*/
+.documento{
+	margin-top: 3px;
+        margin-bottom: 3px;
+	padding: 0px;
+	float: left;
+	width: 100%;
+	overflow: hidden;
+        color: black;
+}
+
+.documento h2{
+	text-align: left;
+	font-family: Tahoma;
+	font-size: 14px;
+	font-style: normal;
+	text-transform: none;
+	font-weight: bold;
+	font-variant: small-caps;
+	color: #000066;
+	background-color: #adc1d6;
+	padding: 3px 15px 3px;
+}
+
+.documento .cabecera {
+	margin-top: 1px;
+	padding: 0;
+	float: left;
+	width: 100%;
+        color: black;
+}
+
+.documento .cabecera .izquierda {
+	float: left;
+ 	text-align: left;
+	padding: 5px 5px 5px 10px;
+        border: 1px dotted grey;
+}
+
+.documento .cabecera .derecha {
+	float: right;
+	text-align: right;
+	padding: 5px;
+        border: 1px dotted grey;
+}
+ 
+.documento .comandos{
+	clear: both;
+	float: left;
+	width: 98%;
+	padding: 5px 10px 5px 10px;
+}
+
+.documento .comandos .derecha {
+ 	float: right;
+}
+ 
+.documento .comandos .izquierda {
+	float: left;
+}
+
+
+
+/* ************** FOOTER **************** */
+#footer {
+	position: relative;
+	background-color:#FFFFFF;
+	clear:both;
+	margin-top:20px;
+	margin-bottom:15px;
+}
+table.footer {
+   width:770px;
+   text-align:center;
+	border-width:0px;
+	border-style:none;
+	border-color:transparent;
+	border-spacing:0px;
+	border-collapse:collapse;
+	border-color:#336699;
+}
+td.footerT {
+	background-image: url('../images/footertop.gif');
+	height:5px;
+	vertical-align:top;
+}	
+td.footerB {
+	background-image: url('../images/footerbottom.gif');
+	height:10px;
+	vertical-align:top;
+}	
+td.footerM1 {
+	font-size: 7pt;
+	color:#FFFFFF;
+	padding-left:10px;
+	text-align:left;
+	height:10px;
+	vertical-align:middle;
+	background-color:#003366;
+}
+*.footerM2 {
+	font-size: 7pt;
+	color: #FFFFFF;
+	text-decoration: none;
+}
+td.footerM2 {
+	font-size: 7pt;
+	padding-right:10px;
+	text-align:right;
+	height:10px;
+	vertical-align:middle;
+	background-color:#003366;
+}
+a.footerM2:visited, a.footerM2:hover, a.footerM2:link, a.footerM2:active { font:inherit; color:#FFFFFF; text-decoration:none; }
+a.footerM2:hover { text-decoration:underline; }
+td.footerfooter {
+	font-size: 8pt;
+	line-height:9pt;
+}
+
+/* TALLAS Y COLORES */
+
+#cuerpotallascolores{
+   width: 630px;
+}
+
+#cajaseleccion{
+   width: 630px;
+   border: 1px dotted grey;
+   margin-bottom: 5px;
+}
+
+#cajatallas{
+    width: 300px;
+    float: left;
+    border: 1px dotted grey;
+}
+
+#cajacolores{
+    width: 300px;
+    float: right;
+    border: 1px dotted grey;
+}
+
+#reglontalla{
+    clear:left;
+}
+
+#rengloncolor{
+    float: left;
+}

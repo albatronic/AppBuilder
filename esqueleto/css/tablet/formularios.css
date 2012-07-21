@@ -1,0 +1,964 @@
+.FiltrosAdicionales {
+    position: absolute;
+    z-index: 99;
+    top: 2px;
+    right: 2px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+    background-color: white;
+    font-size: 11px;
+    border: 1px solid grey;
+    width: 220px;
+    -moz-border-radius: 7px;
+    -webkit-border-radius: 7px;
+}
+.FiltrosAdicionalesComando {
+    width: 200px;
+    margin: 5px 5px 5px 8px;
+    text-align: center;
+    font-weight: bold;
+    padding: 3px;
+}
+.FiltroAdicional {
+    margin-right: 5px;
+    margin-top: 2px;
+    padding: 3px;
+    float: left;
+}
+
+.CajaRutaDia {
+    width: 18%;
+    float: left;
+    padding: 5px;
+    height:390px;
+    margin-bottom: 3px;
+    margin-left: 4px;
+    background-color: white;
+    -moz-border-radius: 7px;
+    -webkit-border-radius: 7px;
+}
+
+.FrameRutaDia {
+    width: 100%;
+    border: 0px;
+    height:375px;
+    background-color: white;
+}
+
+.RutaDia {
+    background-color: white;
+}
+
+.MensajeError{
+    font-size: 12px;
+    font-family: Arial, Helvetica, serif;
+    color: black;
+    padding: 10px 10px 10px 55px;
+    margin: 5px;
+    background-color: #ff9900;
+    background-image: url('../images/error.png');
+    background-position: 10px 50%;
+    background-repeat: no-repeat;
+}
+
+.TituloError{
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.Nota{
+    clear: both;
+    font-size: 12px;
+    font-family: Arial, Helvetica, serif;
+    padding: 3px;
+    border: 1px solid;
+    margin: 5px;
+    color: #9F6000;
+    background-color: #FEEFB3;
+}
+
+.InterLinea{
+    clear: both;
+    padding: 3px;
+    border: 1px solid;
+    margin-top: 5px;
+    color: #00529B;
+}
+
+.EMail{
+    float: left;
+    width: 350px;
+}
+
+.Izquierda{
+    float: left;
+}
+
+.Derecha{
+    float: right;
+    font-size: 10px;
+}
+
+.Desplegable{
+    color:#000000;
+    width: 250px;
+    font-size: 11px;
+    font-family: Arial, Helvetica, serif;
+    margin-top: 1px;
+}
+
+.Titulo{
+    font-size: 14px;
+    text-align: left;
+    vertical-align: middle;
+    color: #585858;
+    background-color: #eeeeee;
+    font-weight: bold;
+    padding: 2px 2px 2px 2px;
+    height: 24px;
+}
+
+.Subtitulo{
+    font-size: 12px;
+    text-align: left;
+    vertical-align: middle;
+    color: #585858;
+    background-color: #eeeeee;
+    font-weight: bold;
+    padding: 5px;
+}
+
+.FormManto{
+    display: block;
+    overflow: hidden;
+    background-color: #eeeeee;
+    -moz-border-radius: 7px;
+    -webkit-border-radius: 7px;
+    margin-top: 2px;
+    padding: 5px;
+}
+
+.FormManto .Comandos{
+    background-color: #D9D9D9;
+    margin-top: 1px;
+    margin-bottom: 5px;
+    padding: 1px 1px 1px 1px;
+}
+
+.FormManto .Comando{
+    padding: 3px;
+}
+
+.FormManto .Comandos hr { border: 0.5px solid white;}
+
+.FormManto .Titulo .CampoBuscar{
+    width: 80px;
+    margin-top: 1px;
+    background-image: url('../images/vineta_menu.gif');
+    background-position: left;
+    background-repeat: no-repeat;
+    padding-left: 5px;
+}
+
+.FormManto .Cuerpo{
+    font-size: 11px;
+    font-family: Verdana, Geneva, sans-serif;
+}
+
+.FormManto .Cuerpo .Item { clear: both;  }
+
+.FormManto .Cuerpo .Item .Etiqueta{
+    float:left;
+    overflow: hidden;
+    color: black;
+    border-bottom: 1px dotted #525252;
+    text-align:left;
+    width: 120px;
+    margin-right: 5px;
+    margin-top: 2px;
+}
+
+.FormManto .Cuerpo .Item .Literal{
+    color: black;
+    text-align:left;
+    margin-right: 3px;
+    margin-top: 2px;
+    font-size: 11px;
+}
+
+.FormManto .Cuerpo .Item .LiteralFechaHora{
+    overflow: hidden;
+    text-align:left;
+    width: 117px;
+    margin-top: 1px;
+    margin-right: 3px;
+}
+
+.FormManto .Cuerpo .Item .CampoTextoCorto{
+    color:#000000;
+    font-size: 11px;
+    font-family: Verdana, Geneva, sans-serif;
+    text-align:left;
+    width: 80px;
+    margin-top: 1px;
+}
+
+.FormManto .Cuerpo .Item .CampoTextoMedio{
+    color:#000000;
+    font-size: 11px;
+    font-family: Verdana, Geneva, sans-serif;
+    text-align:left;
+    width: 220px;
+    margin-top: 1px;
+}
+
+.FormManto .Cuerpo .Item .CampoTextoLargo{
+    color:#000000;
+    font-size: 11px;
+    font-family: Verdana, Geneva, sans-serif;
+    text-align:left;
+    width: 330px;
+    margin-top: 1px;
+}
+
+.FormManto .Cuerpo .Item .CampoImporte{
+    color:#000000;
+    font-size: 11px;
+    font-family: Verdana, Geneva, sans-serif;
+    text-align:right;
+    width: 80px;
+    margin-top: 1px;
+    margin-right: 3px;
+}
+
+.FormManto .Cuerpo .Item .CampoUnidades{
+    color:#000000;
+    font-size: 11px;
+    font-family: Verdana, Geneva, sans-serif;
+    text-align:right;
+    width: 50px;
+    margin-top: 1px;
+    margin-right: 3px;
+}
+
+.FormManto .Cuerpo .Item .CampoFecha{
+    color:#000000;
+    font-size: 11px;
+    font-family: Verdana, Geneva, sans-serif;
+    text-align:right;
+    width: 68px;
+    margin-top: 1px;
+    margin-right: 3px;
+    background-image:url('../images/calendario/calendario.png');
+    background-repeat:no-repeat;
+    background-position:right;
+    padding-right: 17px;
+}
+
+.FormManto .Cuerpo .Item .CampoBanco{
+    color:#000000;
+    font-size: 11px;
+    font-family: Verdana, Geneva, sans-serif;
+    text-align:right;
+    width: 33px;
+    margin-top: 1px;
+    margin-right: 3px;
+}
+
+.FormManto .Cuerpo .Item .CampoOficina{
+    color:#000000;
+    font-size: 11px;
+    font-family: Verdana, Geneva, sans-serif;
+    text-align:right;
+    width: 33px;
+    margin-top: 1px;
+    margin-right: 3px;
+}
+
+.FormManto .Cuerpo .Item .CampoDigitoControl{
+    color:#000000;
+    font-size: 11px;
+    font-family: Verdana, Geneva, sans-serif;
+    text-align:right;
+    width: 23px;
+    margin-top: 1px;
+    margin-right: 3px;
+}
+
+.FormManto .Cuerpo .Item .CampoCuentaCorriente{
+    color:#000000;
+    font-size: 11px;
+    font-family: Verdana, Geneva, sans-serif;
+    text-align:right;
+    width: 75px;
+    margin-top: 1px;
+    margin-right: 3px;
+}
+
+.FormManto .Cuerpo .Item .LiteralFechaHora{
+    color:#000000;
+    font-size: 11px;
+    font-family: Verdana, Geneva, sans-serif;
+    text-align:right;
+    width: 130px;
+    margin-top: 1px;
+    margin-right: 3px;
+}
+
+.FormManto .Cuerpo .Item .Select{
+    color:#000000;
+    font-size: 11px;
+    font-family: Verdana, Geneva, sans-serif;
+    text-align: left;
+    margin-top: 1px;
+    padding-right: 2px;
+    margin-right: 3px;
+}
+
+.FormManto .Cuerpo .Item .TextArea{
+    color:#000000;
+    font-size: 11px;
+    font-family: Verdana, Geneva, sans-serif;
+    text-align:left;
+    width: 350px;
+    margin-top: 1px;
+    margin-right: 3px;
+    height: 50px;
+}
+
+.FormManto .Cuerpo .Item .CampoCif{
+    color:#000000;
+    font-size: 11px;
+    font-family: Verdana, Geneva, sans-serif;
+    text-align:left;
+    width: 110px;
+    margin-top: 1px;
+}
+
+.FormManto .Cuerpo .Item .CampoCPostal{
+    color:#000000;
+    font-size: 11px;
+    font-family: Verdana, Geneva, sans-serif;
+    text-align:left;
+    width: 74px;
+    margin-top: 1px;
+}
+
+.FormManto .Pie{
+    font-size: 20px;
+    font-family: Verdana, Geneva, sans-serif;
+    margin-top: 2px;
+}
+
+.FormManto-partido{
+    display: block;
+    overflow: hidden;
+    background-color: #eeeeee;
+    margin-top: 2px;
+    padding: 5px;
+    width: 456px;
+    float: right;
+
+}
+
+.FormManto-partido .Comandos{
+    font-size: 16px;
+    text-align: left;
+    vertical-align: middle;
+    color: #585858;
+    margin-top: 1px;
+    margin-bottom: 5px;
+    padding-left: 3px;
+    padding-bottom: 2px;
+}
+
+.FormManto-partido .Comando{
+    padding: 3px;
+}
+
+.FormManto-partido .Comandos hr { border: 0.5px solid white;}
+
+.FormManto-partido .Titulo .CampoBuscar{
+    width: 80px;
+    margin-top: 1px;
+    background-image: url('../images/vineta_menu.gif');
+    background-position: left;
+    background-repeat: no-repeat;
+    padding-left: 5px;
+}
+
+.FormManto-partido .Cuerpo{
+    font-size: 11px;
+    font-family: Verdana, Geneva, sans-serif;
+}
+
+.FormManto-partido .Cuerpo .Item { clear: both;  }
+
+.FormManto-partido .Cuerpo .Item .Etiqueta{
+    float:left;
+    overflow: hidden;
+    color: black;
+    border-bottom: 1px dotted #525252;
+    text-align:left;
+    width: 120px;
+    margin-right: 5px;
+    margin-top: 2px;
+}
+
+.FormManto-partido .Cuerpo .Item .Literal{
+    color: black;
+    text-align:left;
+    margin-right: 3px;
+    margin-top: 2px;
+    font-size: 12px;
+}
+
+.FormManto-partido .Cuerpo .Item .LiteralFechaHora{
+    overflow: hidden;
+    text-align:left;
+    width: 117px;
+    margin-top: 1px;
+    margin-right: 3px;
+}
+
+.FormManto-partido .Cuerpo .Item .CampoTextoCorto{
+    color:#000000;
+    font-size: 11px;
+    font-family: Verdana, Geneva, sans-serif;
+    text-align:left;
+    width: 80px;
+    margin-top: 1px;
+}
+
+.FormManto-partido .Cuerpo .Item .CampoTextoMedio{
+    color:#000000;
+    font-size: 11px;
+    font-family: Verdana, Geneva, sans-serif;
+    text-align:left;
+    width: 220px;
+    margin-top: 1px;
+}
+
+.FormManto-partido .Cuerpo .Item .CampoTextoLargo{
+    color:#000000;
+    font-size: 11px;
+    font-family: Verdana, Geneva, sans-serif;
+    text-align:left;
+    width: 330px;
+    margin-top: 1px;
+}
+
+.FormManto-partido .Cuerpo .Item .CampoImporte{
+    color:#000000;
+    font-size: 11px;
+    font-family: Verdana, Geneva, sans-serif;
+    text-align:right;
+    width: 80px;
+    margin-top: 1px;
+    margin-right: 3px;
+}
+
+.FormManto-partido .Cuerpo .Item .CampoUnidades{
+    color:#000000;
+    font-size: 11px;
+    font-family: Verdana, Geneva, sans-serif;
+    text-align:right;
+    width: 50px;
+    margin-top: 1px;
+    margin-right: 3px;
+}
+
+.FormManto-partido .Cuerpo .Item .CampoFecha{
+    color:#000000;
+    font-size: 11px;
+    font-family: Verdana, Geneva, sans-serif;
+    text-align:right;
+    width: 72px;
+    margin-top: 1px;
+    margin-right: 3px;
+    background-image:url('../images/calendario/calendario.png');
+    background-repeat:no-repeat;
+    background-position:right;
+    padding-right: 24px;
+}
+
+.FormManto-partido .Cuerpo .Item .LiteralFechaHora{
+    color:#000000;
+    font-size: 11px;
+    font-family: Verdana, Geneva, sans-serif;
+    text-align:right;
+    width: 130px;
+    margin-top: 1px;
+    margin-right: 3px;
+}
+
+.FormManto-partido .Cuerpo .Item .Select{
+    color:#000000;
+    font-size: 11px;
+    font-family: Verdana, Geneva, sans-serif;
+    text-align: left;
+    margin-top: 1px;
+    margin-right: 3px;
+}
+
+.FormManto-partido .Cuerpo .Item .TextArea{
+    color:#000000;
+    font-size: 11px;
+    font-family: Verdana, Geneva, sans-serif;
+    text-align:left;
+    width: 350px;
+    margin-top: 1px;
+    margin-right: 3px;
+    height: 50px;
+}
+
+.FormManto-partido .Pie{
+    font-size: 20px;
+    font-family: Verdana, Geneva, sans-serif;
+    margin-top: 2px;
+}
+.general-partido{width:100%;background:#eeeeee;  }
+
+/* ALBARANES */
+.CajaIzquierda {
+    width: 57%;
+    float: left;
+    padding: 5px;
+    margin-bottom: 3px;
+    background-color: whitesmoke;
+    -moz-border-radius: 7px;
+    -webkit-border-radius: 7px;
+}
+
+.CajaTotales {
+    width: 40%;
+    float: right;
+    padding: 5px;
+    margin-bottom: 3px;
+    background-color: whitesmoke;
+    font-size: 10px;
+    -moz-border-radius: 7px;
+    -webkit-border-radius: 7px;
+}
+
+.CampoImporte {
+    color:#000000;
+    font-size: 11px;
+    font-family: Verdana, Geneva, sans-serif;
+    text-align:right;
+    width: 60px;
+    margin-top: 1px;
+    margin-right: 3px;
+}
+
+.CampoImpuesto {
+    color:#000000;
+    font-size: 11px;
+    font-family: Verdana, Geneva, sans-serif;
+    text-align:right;
+    width: 40px;
+    margin-top: 1px;
+    margin-right: 3px;
+}
+
+.TitulosTotales {
+    font-family: Tahoma;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: bold;
+    color: #000066;
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.TotalAlbaran {
+    font-size: 14px;
+    text-align: center;
+    font-weight: bold;
+    color: #BDE5F8;
+    background-color: #00529B;
+    margin-bottom: 2px;
+    padding: 2px;
+}
+.Subtotales {
+    border-top: 1px solid black;
+    margin-bottom: 15px;
+}
+
+/* FIN ALBARANES */
+
+.SubtituloFacturacion {
+    font-size: 11px;
+    text-align: center;
+    font-weight: bold;
+    color: white;
+    background-color: #00529B;
+    margin-bottom: 2px;
+    padding: 2px;
+}
+
+.Comando{
+    font-size: 11px;
+    font-family: Verdana, Geneva, sans-serif;
+    padding: 2px;
+    border: solid 1px grey;
+    margin: 1px;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+/* Listado-partido */
+.Listado-partido{
+    display: block;
+    overflow: hidden;
+    background-color: #eeeeee;
+    margin-top: 2px;
+    padding: 5px;
+    width: 50%;
+    float: left;
+}
+
+.Listado-partido .Cuerpo{
+    width: 100%;
+    border: 1px solid white;
+    font-size: 11px;
+    font-family: Verdana, Geneva, sans-serif;
+    background-repeat: repeat-x;
+}
+
+.Listado-partido .Cuerpo .Item { clear: both;  }
+
+.Listado-partido .Cuerpo .Item .Select{
+    color:#000000;
+    font-size: 11px;
+    font-family: Verdana, Geneva, sans-serif;
+    text-align: left;
+    margin-top: 1px;
+    margin-right: 3px;
+}
+
+.Listado-partido .Cuerpo .LinkButtom{
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+.Listado-partido .Cuerpo .Item{
+    padding-right: 3px;
+}
+
+.Listado-partido .Cuerpo .ItemListado-partido{
+    color: black;
+}
+
+.Listado-partido .Titulos{
+    color: black;
+    background-color: #E75E00;
+    font-variant: small-caps;
+    font-weight: bold;
+}
+
+.Listado-partido .Titulos .Item{
+    text-align: center;
+    padding: 2px;
+    font-size: 11px;
+}
+
+.Listado-partido .Paginacion{
+    font-size: 11px;
+    color: black;
+}
+
+.Listado-partido .Paginacion-izq {
+    padding: 5px;
+    border-bottom: 1px solid;
+    text-align: left;
+}
+
+.Listado-partido .Paginacion-der {
+    padding: 5px;
+    border-top: 1px solid;
+    text-align: right;
+}
+
+.Listado-partido .Cabecera{
+    font-size: 14px;
+    text-align: left;
+    vertical-align: middle;
+    color: #585858;
+    font-weight: bold;
+    margin-top: 1px;
+    margin-bottom: 5px;
+    padding-left: 3px;
+    padding-bottom: 2px;
+}
+
+.Listado-partido .Pie{
+    background: grey;
+    color: white;
+    font-size: 11px;
+    font-family: Verdana, Geneva, sans-serif;
+}
+
+/*ESTILOS PARA LOS ACTION LIST*/
+.Listado-partido a{ color:black;}
+.Listado-partido th{border-style: none; }
+.Listado-partido td{border-style: none; }
+.Listado-partido .Select{border-style: none; }
+.Listado-partido tbody tr:hover td,tbody tr:hover th, tbody tr:hover a{ background-color: #F0F8FF;}
+.Listado-partido .sin_registros{ font-size: 12px; text-align: center;}
+/*FIN ACTION LIST*/
+
+/* LISTADO */
+.Listado{
+    display: block;
+    background-color: #eeeeee;
+    -moz-border-radius: 7px;
+    -webkit-border-radius: 7px;
+}
+
+.Listado .Cuerpo{
+    width: 100%;
+    border: 1px solid white;
+    font-size: 11px;
+    font-family: Verdana, Geneva, sans-serif;
+    background-repeat: repeat-x;
+}
+
+.Listado .Cuerpo .Item { clear: both;  }
+
+.Listado .Cuerpo .Item .Select{
+    color:#000000;
+    font-size: 11px;
+    font-family: Verdana, Geneva, sans-serif;
+    text-align: left;
+    margin-top: 1px;
+    margin-right: 3px;
+}
+
+.Listado .Cuerpo .LinkButtom{
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+.Listado .Cuerpo .Item{
+    padding-right: 3px;
+}
+
+.Listado .Cuerpo .ItemListado{
+    color: black;
+}
+
+.Listado .Titulos{
+    color: white;
+    background-color: #4D4D4D;
+    font-variant: small-caps;
+    font-weight: bold;
+}
+
+.Listado .Titulos .Item{
+    text-align: center;
+    padding: 2px;
+    font-size: 11px;
+}
+
+.Listado .Paginacion{
+    font-size: 11px;
+    color: black;
+}
+
+.Listado .Paginacion-izq {
+    padding: 5px;
+    border-bottom: 1px solid;
+    text-align: left;
+}
+
+.Listado .Paginacion-der {
+    padding: 5px;
+    border-top: 1px solid;
+    text-align: right;
+}
+
+.Listado .Cabecera{
+    font-size: 14px;
+    text-align: left;
+    vertical-align: middle;
+    color: #585858;
+    font-weight: bold;
+    margin-top: 1px;
+    margin-bottom: 5px;
+    padding-left: 3px;
+    padding-bottom: 2px;
+}
+
+.Listado .Pie{
+    background: grey;
+    color: white;
+    font-size: 11px;
+    font-family: Verdana, Geneva, sans-serif;
+}
+
+
+/*ESTILOS PARA LOS ACTION LIST*/
+.Listado a{ color:black;}
+.Listado th{border-style: none; }
+.Listado td{border-style: none; }
+.Listado .Select{border-style: none; }
+.Listado tbody tr:hover td,tbody tr:hover th, tbody tr:hover a{ color: black; background-color: #D9D9D9;}
+.Listado .sin_registros{ font-size: 12px; text-align: center;}
+/*FIN ACTION LIST*/
+
+.Filtro{
+    display: block;
+    margin-top: 2px;
+    overflow: hidden;
+    background-color: #eeeeee;
+    padding: 5px;
+    -moz-border-radius: 7px;
+    -webkit-border-radius: 7px;
+}
+
+.calendario{
+    color:#000000;
+    font-size: 11px;
+    font-family: Verdana, Geneva, sans-serif;
+    text-align:right;
+    width: 72px;
+    margin-top: 1px;
+    margin-right: 3px;
+    background-image:url('../images/calendario/calendario.png');
+    background-repeat:no-repeat;
+    background-position:right;
+    padding-right: 24px;
+}
+
+.Auditoria {
+    /*Alinear ARRIBA derecha, ancho notificacion 30%*/
+    position: absolute;
+    z-index: 99;
+    top: 0px;
+    width: 150px;
+    right: 32px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:12px;
+    font-weight: normal;
+    border: 1px solid;
+    margin: 10px 0px;
+    padding:5px 10px 5px 10px;
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    color: #00529B;
+    background-color: #BDE5F8;
+    -moz-border-radius: 7px;
+    -webkit-border-radius: 7px;
+}
+.Auditoria .Titulo {
+    text-align: center;
+    font-weight: bold;
+    color: #BDE5F8;
+    background-color: #00529B;
+    margin-bottom: 10px;
+}
+.Auditoria .Subtitulo {
+    text-align: left;
+    font-weight: bold;
+    color: #00529B;
+    background-color: #BDE5F8;
+}
+.Auditoria .Separacion {
+    height: 10px;
+}
+
+/* Dialogo emergente para mostrar el detalle de una promocion
+ * en las líneas de albaranes y presupuestos
+*/
+.Dialogo-Promo {
+    position: absolute;
+    z-index: 1020;
+    width: 250px;
+    left: 20px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    border: 1px solid;
+    margin: 10px 0px;
+    padding:5px 10px 5px 10px;
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    color: #00529B;
+    background-color: #BDE5F8;
+    -moz-border-radius: 7px;
+    -webkit-border-radius: 7px;
+}
+.Dialogo-Promo .Titulo {
+    text-align: center;
+    font-weight: bold;
+    color: #BDE5F8;
+    background-color: #00529B;
+    margin-bottom: 10px;
+}
+
+select {
+    font-size: 11px;
+    font-family: Verdana, Geneva, sans-serif;
+    text-align: left;
+    border-style: none;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+}
+
+.Select350 {
+    font-size: 11px;
+    font-family: Verdana, Geneva, sans-serif;
+    text-align: left;
+    width: 350px;
+    border-style: none;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+}
+
+.Select80 {
+    font-size: 11px;
+    font-family: Verdana, Geneva, sans-serif;
+    text-align: left;
+    width: 80px;
+    border-style: none;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+}
+
+.Select60 {
+    font-size: 11px;
+    font-family: Verdana, Geneva, sans-serif;
+    text-align: left;
+    width: 60px;
+    border-style: none;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+}
+
+input {
+    font-size: 11px;
+    font-family: Verdana, Geneva, sans-serif;
+}
+
+.structure-actions-dropdown {
+    position: absolute;
+    padding: 3px;
+    z-index: 2000;
+    background:#fff;
+    line-height:24px;
+    border:1px solid #aaa;
+    -moz-box-shadow:0px 3px 3px #ddd;
+}
+.structure-actions-dropdown span {display:block;}
+.structure-actions-dropdown span:hover {background: #ddd;}
+td.more-opts {
+    white-space: nowrap;
+}
+
+.existencias {
+    width: 33%;
+    text-align: right;
+    border-style: solid dotted;
+}

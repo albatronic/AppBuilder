@@ -1,4 +1,5 @@
 
+
 {# label: MUESTRA UN <DIV> CONTENIENDO EL TEXTO value Y APLICANDO LA CLASE class #}
 {# ----------------------------------------------------------------------------- #}
 {% macro label(value,class) %}
@@ -82,12 +83,12 @@
 
 {# select: MUESTRA UN <SELECT> #}
 {# --------------------------- #}
-{% macro select(label, classLabel, name, id, size, defecto, opciones, class, popup, onchange) %}
+{% macro select(label, classLabel, name, id, size, defecto, opciones, class, popup, onchange, onblur) %}
 <div class="Item" id="div_{{id}}">
     {% if label %}
         {{ _self.label(label,classLabel) }}
     {% endif %}
-    <select name="{{ name }}" id="{{ id|default(name)}}" size="{{ size|default(1) }}" class="{{ class }}" onchange="{{onchange}}" >   
+    <select name="{{ name }}" id="{{ id|default(name)}}" size="{{ size|default(1) }}" class="{{ class }}" onchange="{{onchange}}" onblur="{{onblur}}" >
         {% for value in opciones %}
             <option value="{{ value.Id }}" {% if (value.Id==defecto) %} SELECTED {%endif%}>
                 {{value.Value}}
@@ -100,25 +101,9 @@
 </div>
 {% endmacro %}
 
-{# selectSN: MUESTRA UN <SELECT> CON LOS VALORES POSIBLES: Si,No #}
-{# ------------------------------------------------------------- #}
-{% macro selectSN(label, classLabel, name, id, size, defecto, class) %}
-{% set values_SN = {'0': 'No', '1': 'Si'} %}
-<div class="Item" id="div_{{id}}">
-    {% if label %}
-        {{ _self.label(label,classLabel) }}
-    {% endif %}
-    <select name="{{ name }}" id="{{ id|default(name)}}" size="{{ size|default(1) }}" class="{{ class }}">
-        {% for key,value in values_SN %}
-            <option value="{{ key }}" {% if (key==defecto) %} SELECTED {%endif%}>{{value}}</option>
-        {% endfor %}
-    </select>
-</div>
-{% endmacro %}
-
 {# img: MUESTRA UNA IMAGEN #}
 {% macro img(url,width,height,alt) %}
-    <img src="{{ url }}" width="{{ width|default('') }}" border="0" alt="{{alt|default('Image')}}"/>
+    <img src="{{ url }}" width="{{ width|default('') }}" alt="{{alt|default('Image')}}"/>
 {% endmacro%}
 
 {# linkimg: MUESTRA UN LINK CON LUPA COMO IMAGEN #}
@@ -130,8 +115,8 @@
         Elemento 4 : Alto de la ventana
 #}
 {% macro linkimg(opciones) %}
-    {#<a href="javascript:;" onClick="window.open('{{app.path}}/{{controller}}/list','{{controller}}','width=590,height=400,resizable=yes,scrollbars=yes')"><img src="{{app.path}}/images/lupa.png" border="0" alt="Editar..."></a>#}
-    <a class="thickbox" title= "{{ opciones[2]|default("Ventana") }}" href="{{opciones[0]}}/{{opciones[1]}}/list/?TB_iframe=true&height={{ opciones[3]|default("500") }}&width={{ opciones[4]|default("600") }}"><img src="{{opciones[0]}}/images/lupa.png" border="0" alt="Editar..."></a>
+    {#<a href="javascript:;" onClick="window.open('{{app.path}}/{{controller}}/list','{{controller}}','width=590,height=400,resizable=yes,scrollbars=yes')"><img src="{{app.path}}/images/lupa.png" width="16px" height="16px" alt="Editar..."></a>#}
+    <a class="thickbox" title= "{{ opciones[2]|default("Ventana") }}" href="{{opciones[0]}}/{{opciones[1]}}/list/?TB_iframe=true&height={{ opciones[3]|default("500") }}&width={{ opciones[4]|default("600") }}"><img src="{{opciones[0]}}/images/lupa.png" width="16px" height="16px" alt="Editar..."></a>
 {% endmacro%}
 
 {# fecha: MUESTRA UN INPUT DE TIPO FECHA. UTILIZA UN POPUP DE CALENDARIO #}
@@ -140,9 +125,11 @@
 {% if label %}
     {{ _self.label(label,classLabel) }}
 {% endif %}
+    <script>$(function() {$( "#{{id|default(label)}}" ).datepicker({changeMonth: true, changeYear: true, showWeek: true, firstDay: 1});});</script>
     <input name="{{name}}" type="text" id="{{id|default(label)}}" value="{{value}}"
-           onFocus="popUpCalendar(this, {{ id|default(label) }}, 'dd/mm/yyyy');"
-           size="{{ size|default("10")}}" class="{{ class|default("calendario")}}" {{extra}}/>
+           size="{{ size|default("10")}}" class="{{ class|default("calendario")}}"
+           onKeyUp="this.value=formateafecha(this.value);" {{extra}}
+    />
 </div>
 {% endmacro %}
 
@@ -156,13 +143,70 @@ document.getElementById('{{id}}').focus();
 {# botonThickBox: ABRE UNA VENTANA THICKBOX RENDERIZANDO EL RESULTADO DEL CONTROLADOR Y ACTION INDICADO EN RUTA #}
 {% macro botonThickBox(path,ruta,ventanaTitulo,ventanaAlto,ventanaAncho)%}
 <a class="thickbox" title= "{{ventanaTitulo|default("Informe")}}" href="{{path}}/{{ruta}}/?TB_iframe=true&height={{ ventanaAlto|default("500") }}&width={{ ventanaAncho|default("600") }}">
-    <img src="{{path}}/images/botonreport.png" border="0" alt="{{ventanaTitulo}}">
+    <img src="{{path}}/images/botonreport.png" width="16px" height="16px" alt="{{ventanaTitulo|default("Informe")}}">
 </a>
 {% endmacro %}
 
-{# botonDocumento: ABRE UNA VENTANA THICKBOX MOSTRANDO LOS POSIBLES FORMATOS DEL DOCUMENTO #}
+{# linkThickBox: ABRE UNA VENTANA THICKBOX RENDERIZANDO EL RESULTADO DEL CONTROLADOR Y ACTION INDICADO EN RUTA #}
+{% macro linkThickBox(path,textoLink,ruta,ventanaTitulo,ventanaAlto,ventanaAncho)%}
+<a class="thickbox" title= "{{ventanaTitulo|default("Informe")}}" href="{{path}}/{{ruta}}/?TB_iframe=true&height={{ ventanaAlto|default("500") }}&width={{ ventanaAncho|default("600") }}">
+    {{textoLink}}
+</a>
+{% endmacro %}
+    
+{# botonDocumento: ABRE UNA VENTANA EMERGENTE MOSTRANDO LOS POSIBLES FORMATOS DEL DOCUMENTO #}
 {% macro botonDocumento(path,documento,controller,id)%}
 <a href="javascript:;" title= "Imprimir" onclick="window.open('{{path}}/_Emergente/formatosDocumentos/{{documento}}/{{controller}}/{{id}}','Documento','width=690,height=600,status=false,resizable=1');">
-    <img src="{{path}}/images/print_cmd.png" border="0" alt="Imprimir">
+    <img src="{{path}}/images/print_cmd.png" width="24px" height="24px" alt="Imprimir">
 </a>
+{% endmacro %}
+
+{# historicoVentas: ABRE UNA VENTANA EMERGENTE MOSTRANDO EL HISTORICO DE VENTAS DEL ARTICULO Y CLIENTE #}
+{% macro historicoVentas(path,idArticulo,idCliente) %}
+<a href="javascript:;" onClick="window.open('{{path}}/_Emergente/HistoricoVentas/{{idArticulo}}/{{idCliente}}','HistoricoVentas','width=450,height=500,resizable=yes,scrollbars=yes');">
+    <img src="{{path}}/images/botonreport.png" width="16px" height="16px" alt="Historico" title="Historico...">
+</a>
+{% endmacro %}
+
+{# historicoCompras: ABRE UNA VENTANA EMERGENTE MOSTRANDO EL HISTORICO DE COMPRAS DEL ARTICULO Y PROVEEDOR #}
+{% macro historicoCompras(path,idArticulo,idProveedor) %}
+<a href="javascript:;" onClick="window.open('{{path}}/_Emergente/HistoricoCompras/{{idArticulo}}/{{idProveedor}}','HistoricoCompras','width=450,height=500,resizable=yes,scrollbars=yes');">
+    <img src="{{path}}/images/botonreport.png" width="16px" height="16px" alt="Historico" title="Historico...">
+</a>
+{% endmacro %}
+
+{# promosVigentesCliente: Muesta un diálogo jquery con las promociones vigentes para el cliente #}
+{% macro promosVigentesCliente(path,cliente,fecha) %}
+<a href="javascript:;" onclick="$('#dialogPromo').dialog('open');">
+    <img src="{{path}}/images/botonreport.png" width="16px" height="16px" alt="Promociones" title="Promociones...">
+</a>
+{% include "_Emergente/promosVigentesCliente.html.twig" with {'cliente': cliente, 'fecha': fecha} %}
+{% endmacro %}
+
+{# detalleRecepcionLinea: Muesta un diálogo jquery con el detalle de la recepcion de la linea de una entidad  #}
+{% macro detalleRecepcionLinea(path,lineaEntidad) %}
+<a href="javascript:;" onclick="$('#dialog{{lineaEntidad.IDLinea}}').dialog('open');">
+    <img src="{{path}}/images/botonreport.png" width="16px" height="16px" alt="Detalle Recepción" title="Detalle Recepción...">
+</a>
+{% include "RecepcionarLineas/detalleRecepcion.html.twig" with {'lineaEntidad': lineaEntidad} %}
+{% endmacro %}
+
+{# detalleExpedicionLinea: Muesta un diálogo jquery con el detalle de la expedicion de la linea de una entidad #}
+{% macro detalleExpedicionLinea(path,lineaEntidad) %}
+<a href="javascript:;" onclick="$('#dialog{{lineaEntidad.IDLinea}}').dialog('open');">
+    <img src="{{path}}/images/botonreport.png" width="16px" height="16px" alt="Detalle Expedición" title="Detalle Expedición...">
+</a>
+{% include "ExpedirLineas/detalleExpedicion.html.twig" with {'lineaEntidad': lineaEntidad} %}
+{% endmacro %}
+
+{# Muestra los documentos de la entidad#}
+{% macro documentos(entidad,idEntidad) %}
+<div>
+    <input name="document" type="file" id="document" size="20" class="Comando">
+    <input name="accion" type="submit" value="Enviar" class="Comando" onclick="$('#action').val('Documento')">
+    <input name="documentoBorrar" id="documentoBorrar" value="" type="hidden" />
+</div>
+<div id="Documentos" style="margin-top: 10px;"></div>
+<script>documentos('{{entidad}}', '{{idEntidad}}', 'Documentos');</script>
+<div style="clear:both;"></div>
 {% endmacro %}

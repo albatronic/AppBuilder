@@ -6,7 +6,7 @@
 
 {% if values.numeroDeFormatos == 1 %}
 <script language='JavaScript' type='text/javascript'>
-    window.open('{{app.path}}/{{values.controlador}}/Imprimir/{{values.idDocumento}}','Documento');
+    window.open('{{app.path}}/{{values.controlador}}/Imprimir/{{values.idDocumento}}/{{values.tipoDocumento}}/{{values.formatos[0].Id}}','Documento');
 </script>
 {% endif %}
 
@@ -15,12 +15,14 @@
     <form name="manto" action="" method="POST">
         <input name="controller" value="{{values.controlador}}" type="hidden" />
         <input name="action" id="action" value="Imprimir" type="hidden" />
+        <input name="tipoDocumento" id="tipoDocumento" value="{{values.tipoDocumento}}" type="hidden" />
         <input name="idDocumento" id="idDocumento" value="{{values.idDocumento}}" type="hidden" />
-        <div class='Comandos'>
-            <div class="Titulo">
-                Impresión de documento:
-                {{ macro.select('Documento','Etiqueta','Formato','Formato',none,'',values.formatos,'Select') }}
-                <input type="submit" value="Imprimir"/>
+        <div class='Cuerpo'>
+            <div style="float:left;">
+                {{ macro.select('Formato:','Etiqueta','formato','formato',none,'',values.formatos,'Select') }}
+            </div>
+            <div style="float: left;">
+                <input class="Comandos" type="submit" value="Imprimir"/>
             </div>
         </div>
     </form>
@@ -28,6 +30,8 @@
 {% endif %}
 
 {% if values.numeroDeFormatos == 0 %}
-<p>No se han definido formatos para este documento</p>
+<div class="MensajeError">
+    <p class="TituloError">No se han definido formatos para este documento, o bien no tiene permisos.</p>
+</div>
 {% endif %}
 {% endblock %}

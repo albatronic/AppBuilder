@@ -1,0 +1,27 @@
+{# _Emergente/dialogoExportar.html.twig #}
+
+<script language='JavaScript' type='text/javascript'>
+    $(function() {
+        $( "#dialog" ).dialog({
+            autoOpen: false,
+            width: 230,
+            height: 100,
+            position: ['center'],
+            closeOnEscape: true,
+            });
+    });
+</script>
+
+<div id="dialog" title="Formatos de exportación">
+    <select id="selectExportType" class="Select" style="width: 100px; margin-top: 20px;">
+    {% for value in export_types %}
+        <option value="{{value}}">{{value}}</option>
+    {% endfor %}
+    </select>
+    
+    <input type="button" value="Exportar" class="Comando"
+            onClick="$('#action{{position}}').val('exportar');
+                    $('#exportType{{position}}').val($('#selectExportType').val());
+                    document.getElementById('paginacion{{position}}').submit();"
+    />
+</div>

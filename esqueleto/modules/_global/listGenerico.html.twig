@@ -1,6 +1,7 @@
 {# LISTADO GENERICO listGenerico.html.twig                #}
 {# ES INCLUIDO POR LOS list.html.twig DE CADA CONTROLADOR #}
 
+<div id="Listado">
 <table width='100%'>
     <tr class='Titulos'>
         <td width='16px'>&nbsp;</td>
@@ -14,7 +15,7 @@
         <tr>
             <td>
                 <a href='{{app.path}}/{{controller}}/Edit/{{objeto.getPrimaryKeyValue()}}' title='Editar ...'>
-                    <img src="{{app.path}}/images/botoneditar.png" border='0'/>
+                    <img src="{{app.path}}/images/botoneditar.png" width="16px" height="16px" />
                 <a>
             </td>
             {% for field,value in listado.titles %}
@@ -39,3 +40,4 @@
     {% endfor %}
     </tbody>
 </table>
+</div>

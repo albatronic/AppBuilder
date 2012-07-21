@@ -20,6 +20,8 @@ include "class/listadosxmlbuilder.class.php";
 include "class/entitybuilder.class.php";
 include "class/CreaFichero.class.php";
 
+define('DS', DIRECTORY_SEPARATOR);
+
 $database_connection_information = "
 define(DB_HOST,'" . $_POST[dbhost] . "');
 define(DB_USER,'" . $_POST[dbuser] . "');
@@ -44,108 +46,112 @@ eval($database_connection_information);
 if ($_POST['accion'] == "Generar") {
 
     // CREAR EL ESQUELETO DE LA APLICACION
-    if ($_POST['esqueleto'] == 'on') {
-        $esqueleto = new Esqueleto(CARPETA);
-        $esqueleto->crea();
+    if ( ($_POST['esqueleto'] == 'on') and (CARPETA != '') ) {
+        $esqueleto = new Esqueleto();
+        $esqueleto->copia("esqueleto", CARPETA);
+        unset($esqueleto);
     }
 
-    $dblink = mysql_connect(DB_HOST, DB_USER, DB_PASS);
-    mysql_select_db(DB_BASE, $dblink);
+    if ( (DB_BASE != '') and (CARPETA != '') ) {
+        $dblink = mysql_connect(DB_HOST, DB_USER, DB_PASS);
+        mysql_select_db(DB_BASE, $dblink);
 
-    if ($_POST['table'] == '') {
-        $query = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='" . DB_BASE . "'";
-        $result = mysql_query($query, $dblink);
-        while ($row = mysql_fetch_array($result))
-            $tables[] = $row;
-    } else {
-        $tables[] = array('0' => $_POST['table'], 'TABLE_NAME' => $_POST['table']);
-    }
+        if ($_POST['table'] == '') {
+            $query = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='" . DB_BASE . "'";
+            $result = mysql_query($query, $dblink);
+            while ($row = mysql_fetch_array($result))
+                $tables[] = $row;
+        } else {
+            $tables[] = array('0' => $_POST['table'], 'TABLE_NAME' => $_POST['table']);
+        }
 
-    $new_classes = array();
-
-
-    //Recorre todo el schema y para cada tabla genera: form.php, template.php, actions.php y config.xml
-    //Los cuatro archivos los ubica en una carpeta con el nombre de la tabla.
-    $pathmodel = CARPETA . "/entities";
-
-    foreach ($tables as $row) {
-        $tablename = $row['TABLE_NAME'];
-        $new_classes[strtolower($tablename)] = "$tablename";
-
-        $filename = str_replace("_", " ", strtolower($tablename));
-        $filename = str_replace(" ", "", ucwords($filename));
-
-        // CREAR MODULO
-        // ------------
-        $pathmodules = CARPETA . "/modules/" . $filename;
-        if (!file_exists($pathmodules))
-            @mkdir($pathmodules);
-
-        if (file_exists($pathmodules)) {
-            //Crear el Controlador
-            if ($_POST['controller'] == 'on') {
-                $controller = new ControllerBuilder($tablename, false);
-                new CreaFichero($pathmodules . "/" . $filename . "Controller.class.php", $controller->Get());
-            }
-
-            //Crear el archivo config.yml
-            if ($_POST['config'] == 'on') {
-                $config = new ConfigXmlBuilder($tablename);
-                new CreaFichero($pathmodules . "/config.yml", $config->Get());
-            }
-
-            //Crear el archivo listados.yml
-            if ($_POST['listados'] == 'on') {
-                $listados = new ListadosXmlBuilder($tablename);
-                new CreaFichero($pathmodules . "/listados.yml", $listados->Get());
-            }
-        } else
-            echo "NO EXISTE LA CARPETA ", $pathmodules, "</br>";
+        $new_classes = array();
 
 
-        // CREAR TEMPLATES
-        // ---------------
-        $pathtemplates = CARPETA . "/modules/" . $filename;
-        if (!file_exists($pathmodules))
-            @mkdir($pathmodules);
+        //Recorre todo el schema y para cada tabla genera: form.php, template.php, actions.php y config.xml
+        //Los cuatro archivos los ubica en una carpeta con el nombre de la tabla.
+        $pathmodel = CARPETA . DS . "entities";
 
-        if (file_exists($pathtemplates)) {
-            // Templates: index,filtro,edit,form,list,new
-            if ($_POST['templates'] == 'on') {
-                $template = new TemplateBuilder($tablename, false);
-                $templates = $template->Get();
+        foreach ($tables as $row) {
+            $tablename = $row['TABLE_NAME'];
+            $new_classes[strtolower($tablename)] = "$tablename";
 
-                foreach ($templates as $key => $value) {
-                    //Crear el fichero .html.twig de cada template
-                    new CreaFichero($pathtemplates . "/" . $key . ".html.twig", $value);
-                }
-            } elseif ($_POST['help'] == 'on') {
-                $template = new TemplateBuilder($tablename, false);
-                $templates = $template->Get();
-                new CreaFichero($pathtemplates . "/help.html.twig", $templates['help']);
-            }
-        } else
-            echo "NO EXISTE LA CARPETA ", $pathmodules, "</br>";
-
-
-        // CREAR ENTIDAD DE DATOS
-        // ----------------------
-        if ((file_exists($pathmodel)) and (($_POST['model'] == 'on') or ($_POST['method'] == 'on'))) {
             $filename = str_replace("_", " ", strtolower($tablename));
             $filename = str_replace(" ", "", ucwords($filename));
-            $entity = new EntityBuilder($tablename);
 
-            // Crear la clase para el modelo de datos
-            if ($_POST['model'] == 'on')
-                new CreaFichero($pathmodel . "/models/" . $filename . "Entity.class.php", $entity->GetModel());
+            // CREAR MODULO
+            // ------------
+            $pathmodules = CARPETA . DS . "modules" . DS . $filename;
+            if (!file_exists($pathmodules))
+                @mkdir($pathmodules);
 
-            // Crear la clase para los métodos
-            if ($_POST['method'] == 'on')
-                new CreaFichero($pathmodel . "/methods/" . $filename . ".class.php", $entity->GetMethod());
+            if (file_exists($pathmodules)) {
+                //Crear el Controlador
+                if ($_POST['controller'] == 'on') {
+                    $controller = new ControllerBuilder($tablename, false);
+                    new CreaFichero($pathmodules . DS . $filename . "Controller.class.php", $controller->Get());
+                }
+
+                //Crear el archivo config.yml
+                if ($_POST['config'] == 'on') {
+                    $config = new ConfigXmlBuilder($tablename);
+                    new CreaFichero($pathmodules . DS . "config.yml", $config->Get());
+                }
+
+                //Crear el archivo listados.yml
+                if ($_POST['listados'] == 'on') {
+                    $listados = new ListadosXmlBuilder($tablename);
+                    new CreaFichero($pathmodules . DS . "listados.yml", $listados->Get());
+                }
+            } else
+                echo "NO EXISTE LA CARPETA ", $pathmodules, "</br>";
+
+
+            // CREAR TEMPLATES
+            // ---------------
+            $pathtemplates = CARPETA . DS ."modules" . DS . $filename;
+            if (!file_exists($pathmodules))
+                @mkdir($pathmodules);
+
+            if (file_exists($pathtemplates)) {
+                // Templates: index,filtro,edit,form,list,new
+                if ($_POST['templates'] == 'on') {
+                    $template = new TemplateBuilder($tablename, false);
+                    $templates = $template->Get();
+
+                    foreach ($templates as $key => $value) {
+                        //Crear el fichero .html.twig de cada template
+                        new CreaFichero($pathtemplates . DS . $key . ".html.twig", $value);
+                    }
+                } elseif ($_POST['help'] == 'on') {
+                    $template = new TemplateBuilder($tablename, false);
+                    $templates = $template->Get();
+                    new CreaFichero($pathtemplates . DS . "help.html.twig", $templates['help']);
+                }
+            } else
+                echo "NO EXISTE LA CARPETA ", $pathmodules, "</br>";
+
+
+            // CREAR ENTIDAD DE DATOS
+            // ----------------------
+            if ((file_exists($pathmodel)) and (($_POST['model'] == 'on') or ($_POST['method'] == 'on'))) {
+                $filename = str_replace("_", " ", strtolower($tablename));
+                $filename = str_replace(" ", "", ucwords($filename));
+                $entity = new EntityBuilder($tablename);
+
+                // Crear la clase para el modelo de datos
+                if ($_POST['model'] == 'on')
+                    new CreaFichero($pathmodel . DS . "models" . DS . $filename . "Entity.class.php", $entity->GetModel());
+
+                // Crear la clase para los métodos
+                if ($_POST['method'] == 'on')
+                    new CreaFichero($pathmodel . DS . "methods" . DS . $filename . ".class.php", $entity->GetMethod());
+            }
         }
     }
 }
 ?>
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
     <head>
@@ -159,13 +165,13 @@ if ($_POST['accion'] == "Generar") {
                 <tr><td colspan="2" align="center">Generador del esqueleto de una aplicaci&oacute;n</td></tr>
                 <tr><td>Servidor</td><td><input name="dbhost" type="text" value="localhost"></td></tr>
                 <tr><td>Usuario</td><td><input name="dbuser" type="text" value="root"></td></tr>
-                <tr><td>Contrase&ntilde;a</td><td><input name="dbpassword" type="text" value="albatronic"></td></tr>
-                <tr><td>Base de datos</td><td><input name="dbbase" type="text" value="foc_ppuelr001"></td></tr>
+                <tr><td>Contrase&ntilde;a</td><td><input name="dbpassword" type="text" value=""></td></tr>
+                <tr><td>Base de datos</td><td><input name="dbbase" type="text" value=""></td></tr>
                 <tr><td>Conexi&oacute;n</td><td><input name="conection" type="text" value="datos#"></td></tr>
                 <tr><td>Tabla</td><td><input name="table" type="text" value=""></td></tr>
                 <tr><td>Generar esqueleto</td><td><input name="esqueleto" type="checkbox"></td></tr>
-                <tr><td>Carpeta destino (sin / al final)</td><td><input name="carpeta" type="text" size="50" value="../elr"></td></tr>
-                <tr><td>App Name</td><td><input name="appname" type="text" value="elr"></td></tr>
+                <tr><td>Carpeta destino (sin / al final)</td><td><input name="carpeta" type="text" size="50" value=""></td></tr>
+                <tr><td>App Name</td><td><input name="appname" type="text" value=""></td></tr>
                 <tr><td>Gesti&oacute;n de Permisos</td><td><input name="permisos" type="checkbox" checked></td></tr>
                 <tr><td>Generar Controlador</td><td><input name="controller" type="checkbox"></td></tr>
                 <tr><td>Generar config.yml</td><td><input name="config" type="checkbox"></td></tr>

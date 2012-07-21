@@ -47,7 +47,7 @@ class TemplateBuilder {
         $tmp .= "<div class='Listado'>\n";
         $tmp .= "\t{% include '_global/paginacion.html.twig' with {'filter': values.listado.filter, 'controller': values.controller, 'position': 'izq'}%}\n\n";
         $tmp .= "\t{% include '_global/listGenerico.html.twig' with {'listado': values.listado, 'controller': values.controller} %}\n\n";
-        $tmp .= "\t{% include '_global/paginacion.html.twig' with {'filter': values.listado.filter, 'controller': values.controller, 'position': 'der'}%}\n";
+        //$tmp .= "\t{% include '_global/paginacion.html.twig' with {'filter': values.listado.filter, 'controller': values.controller, 'position': 'der'}%}\n";
         $tmp .= "</div>\n";
         $tmp .= "{% endblock %}";
 
@@ -78,7 +78,7 @@ class TemplateBuilder {
     private function indexTemplate() {
         $tmp = "{# Template index.html.twig for " . $this->filename . " #}\n";
         $tmp .= "{# ----------------------------------------------------#}\n";
-        $tmp .= "{% extends '_global/layout.html.twig' %}\n\n";
+        $tmp .= "{% extends layout %}\n\n";
 
         $tmp .= "{% block title parent() ~ ' - '  ~ values.titulo %}\n\n";
 
@@ -91,8 +91,10 @@ class TemplateBuilder {
         $tmp .= "\t{% endif %}\n";
         $tmp .= "\t{% endblock %}\n\n";
 
+        $tmp .= "\t<div id='div_listado'>\n";
         $tmp .= "\t{% block listado %}\n";
-        $tmp .= "\t{% endblock %}\n\n";
+        $tmp .= "\t{% endblock %}\n";
+        $tmp .= "\t</div>\n\n";
 
         $tmp .= "\t{% block mantenimiento %}\n";
         $tmp .= "\t{% endblock %}\n";
@@ -109,9 +111,9 @@ class TemplateBuilder {
         $tmp = "{# Template filtro.html.twig for " . $this->filename . " #}\n";
         $tmp .= "{# -------------------------------------------------------#}\n";
         $tmp .= "<div class='Filtro'>\n";
-        $tmp .= "\t<form name='filtro' action='' method='POST'>\n";
+        $tmp .= "\t<form name='filtro' id='filtro' action='' method='POST'>\n";
         $tmp .= "\t\t<input name='controller' value='{{ values.controller }}' type='hidden' />\n";
-        $tmp .= "\t\t<input name='action' value='list' type='hidden' />\n";
+        $tmp .= "\t\t<input name='action' id='actionFiltro' value='list' type='hidden' />\n";
         $tmp .= "\t\t{% include '_global/FiltroGenerico.html.twig' with {'filter': filter} %}\n";
         $tmp .= "\t</form>\n";
         $tmp .= "</div>";
@@ -131,9 +133,9 @@ class TemplateBuilder {
 
         $tmp .= "{% block mantenimiento %}\n";
         $tmp .= "<div class=\"FormManto\">\n";
-        $tmp .= "\t<form name=\"manto\" action=\"\" method=\"POST\">\n";
+        $tmp .= "\t<form name=\"manto\" id=\"manto_{{ values.controller }}\" action=\"\" enctype=\"multipart/form-data\" method=\"POST\">\n";
         $tmp .= "\t\t<input name=\"controller\" value=\"{{ values.controller }}\" type=\"hidden\" />\n";
-        $tmp .= "\t\t<input name=\"action\" value=\"edit\" type=\"hidden\" />\n";
+        $tmp .= "\t\t<input name=\"action\" id=\"action\" value=\"edit\" type=\"hidden\" />\n";
         $tmp .= "\t\t<input name=\"{{ values.controller }}[" . $this->td->getPrimaryKey() ."]\" value=\"{{ values.datos." . $this->td->getPrimaryKey() . " }}\" type=\"hidden\" />\n";
         $tmp .= "\t\t{% include \"_global/comandosSaveDelete.html.twig\" %}\n\n";
 
@@ -165,7 +167,7 @@ class TemplateBuilder {
         $tmp .= "<div class=\"FormManto\">\n";
         $tmp .= "\t<form name=\"manto\" action=\"\" method=\"POST\">\n";
         $tmp .= "\t\t<input name=\"controller\" value=\"{{ values.controller }}\" type=\"hidden\" />\n";
-        $tmp .= "\t\t<input name=\"action\" value=\"new\" type=\"hidden\" />\n";
+        $tmp .= "\t\t<input name=\"action\" id=\"action\" value=\"new\" type=\"hidden\" />\n";
         $tmp .= "\t\t<input name=\"{{ values.controller }}[" . $this->td->getPrimaryKey() . "]\" value=\"{{ values.datos." . $this->td->getPrimaryKey() . " }}\" type=\"hidden\" />\n";
         $tmp .= "\t\t{% include '_global/comandosCreate.html.twig' %}\n";
 

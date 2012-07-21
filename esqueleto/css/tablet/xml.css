@@ -1,0 +1,48 @@
+body{ background-color: #eeeeee;}
+hr {
+    width: 300px;
+    margin-left: 0px;
+    border: 0.5px solid white;
+}
+.FormManto{   
+    background-color: #eeeeee;
+    margin-top: 2px;
+    padding: 5px;
+}
+
+.FormManto .Cuerpo{
+    font-size: 11px;
+    font-family: Verdana, Geneva, sans-serif;
+}
+
+
+.FormManto .Cuerpo .Item .CampoLargo{
+    color:#000000;
+    font-size: 11px;
+    font-family: Verdana, Geneva, sans-serif;
+    text-align:left;
+    width: 150px;
+    margin-top: 1px;
+}
+
+.FormManto .Cuerpo .Item { clear: both;  }
+
+.FormManto .Cuerpo .Item .Etiqueta{
+    float:left;
+    overflow: hidden;
+    color: black;
+    border-bottom: 1px dotted #525252;
+    text-align:left;
+    width: 120px;
+    margin-right: 5px;
+    margin-top: 2px;
+}
+.Comando{
+    font-size: 11px;
+    font-family: Verdana, Geneva, sans-serif;
+    font-weight: bold;
+    color:  #e49f20;
+    border: 0px;
+    background-color: white;
+    vertical-align: middle;
+}

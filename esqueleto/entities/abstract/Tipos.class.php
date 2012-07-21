@@ -12,7 +12,7 @@
  *
  * @author Sergio Pérez <sergio.perez@albatronic.com>
  * @copyright Informatica ALBATRONIC, SL
- * @date 08.06.2011
+ * @since 08.06.2011
  */
 
 class Tipos {
@@ -36,6 +36,9 @@ class Tipos {
     }
 
     public function fetchAll() {
+
+        $this->tipos[] = array('Id'=>'', 'Value'=>':: Indique valor');
+
         return $this->tipos;
     }
 

@@ -2,8 +2,11 @@
 {# MUESTRA EN UN IFRAME EL ARCHIVO RECIBIDO, NORMALMENTE SERA UN PDF  #}
 {# PERO PUEDE SER DE CUALQUIER TIPO: EXCEL, WORD, IMAGEN, ETC         #}
 {# -------------------------------------------------------------------#}
-{% extends "_global/layout.html.twig" %}
+{% extends values.controller ~ "/index.html.twig" %}
 
-{% block content %}
+{% block listado %}
+    <p style="padding: 10px; font-size: 12px;">
+        <a href="{{app.path}}/{{values.archivo}}">Descargar</a>
+    </p>
     <iframe width="99%" height="600" src="{{app.path}}/{{values.archivo}}"></iframe>
 {% endblock %}

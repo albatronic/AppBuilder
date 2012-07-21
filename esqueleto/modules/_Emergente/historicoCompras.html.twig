@@ -1,0 +1,72 @@
+{# _Emergente/historicoCompras.html.twig #}
+
+{% extends '_Emergente/index.html.twig' %}
+
+{% block listado %}
+<div style="margin: 5px; border: solid 1px grey; padding: 5px;">
+    <form name="consulta" action="" method="POST">
+        <input name="controller" value="_Emergente" type="hidden" />
+        <input name="action" id="action" value="HistoricoCompras" type="hidden" />
+
+        <p style="text-align: center; font-weight: bold; color: #BDE5F8; background-color: #00529B; margin-bottom: 10px; padding: 5px;">Histórico de Compras</p>
+        <div>
+            <div style="float: left; width: 70px; font-size: 12px;">Artículo</div>
+            <div style="float: left;">
+                <input name="idArticulo" value="{{values.datos.articulo.IDArticulo}}" id="idArticulo" type="hidden" />
+                <input value="{{values.datos.articulo.Descripcion}}" id="Descripcion" type="text" maxlength="25" style="width:300px;"
+                       onkeyup="autoCompletar('Descripcion','idArticulo', 'Descripcion', 'articulos', '','');"
+                       />
+            </div>
+        </div>
+
+        <div style="clear: both;"></div>
+
+        <div style="margin-top: 3px;">
+            <div style="float: left; width: 70px; font-size: 12px;">Proveedor</div>
+            <div style="float: left; margin-right: 10px;">
+                <input name="idProveedor" value="{{values.datos.proveedor.IDProveedor}}" id="idCliente" type="hidden" />
+                <input value="{{values.datos.proveedor.RazonSocial}}" id="RazonSocial" type="text" maxlength="255" style="width:300px;"
+                       onkeyup="autoCompletar('RazonSocial', 'idCliente', 'RazonSocial', 'clientes', '','');"
+                       />
+            </div>
+            <input type="image" src="{{app.path}}/images/lupa.png" width="16px" height="16px" alt="Consultar" title="Consultar"/>
+        </div>
+        <div style="clear: both;"></div>
+        <hr>
+        <p>Unidades Compradas: {{values.datos.unidades}}</p>
+        <p>Precio Medio: {{values.datos.precioMedio}} €</p>
+
+    </form>
+</div>
+
+{% if values.listado %}
+<div class="Listado" style="margin: 5px;">
+    <table width="100%">
+        <tr class="Titulos">
+            <td class="Item">Pedido</td>
+            <td class="Item">Fecha</td>
+            <td class="Item">Unidades</td>
+            <td class="Item">Precio</td>
+            <td class="Item">Dcto</td>
+            <td class="Item">Importe</td>
+        </tr>
+
+        <tbody class='Cuerpo'>
+    {% for linea in values.listado %}
+            <tr>
+                <td style="width: 60px; text-align: right;">
+                    <a href="javascript:;" title="Ver Pedido" onClick="window.open('{{app.path}}/PedidosCab/edit/{{linea.IDPedido}}','Pedido','resizable=yes,scrollbars=yes')">{{linea.IDPedido}}</a>
+                </td>
+                <td style="width: 70px; text-align: right;">{{linea.Fecha}}</td>
+                <td style="width: 60px; text-align: right;">{{linea.Unidades}}</td>
+                <td style="width: 70px; text-align: right;">{{linea.Precio}}</td>
+                <td style="width: 60px; text-align: right;">{{linea.Descuento}}%</td>
+                <td style="width: 70px; text-align: right;">{{linea.Importe}}</td>
+            </tr>
+    {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+
+{% endblock %}

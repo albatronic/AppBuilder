@@ -1,0 +1,26 @@
+{# MACROS PARA LOS TEMPLATES DEL SISTEMA DE AYUDA #}
+{# -----------------------------------------------#}
+
+{# MUESTRA UN VIDEO INCRUSTADO #}
+{% macro embedVideo(idVideo,width,height) %}
+{% if idVideo %}
+<embed bgcolor='#505050'
+       width='{{ width|default('450')}}px'
+       height='{{ height|default('350')}}px'
+       type='application/x-shockwave-flash'
+       allowScriptAccess='always'
+       src='http://goview.com/flash/goldwyn/Player.swf'
+       pluginspage='http://www.adobe.com/go/getflashplayer'
+       allowFullScreen='true'
+       name='1.321229851098517E12'
+       flashvars='rtmpServerHosts=stream.goview.com&storageServerHosts=goview.com&recordingUrl=http://goview.com/storageserver/recordings/{{idVideo}}/meeting.svg&rtmpServerContextPath=/fms&storageServerPort=80&recordingId={{idVideo}}'
+       quality='best'
+       id='1.321229851098517E12'>
+</embed>
+{% endif %}
+{% endmacro %}
+
+{# MUESTRA UN LINK AL VIDEO #}
+{% macro linkVideo(idVideo) %}
+<a href="http://goview.com/?id={{idVideo}}">Ver v&iacute;deo</a>
+{% endmacro %}

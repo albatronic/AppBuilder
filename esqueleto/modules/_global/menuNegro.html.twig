@@ -13,7 +13,12 @@
         	<ul class='sub-menu'>
                 {% for subopcion in subopciones %}
                     <li id="menu-item-815">
-                        <a href='{{app.path}}/{{ subopcion.route }}'>{{ subopcion.titulo }}</a>
+                        <div style="float: left; width: 23px;">
+                            <a href='{{app.path}}/{{ subopcion.route }}' target='_blank' title='Ventana Nueva'><img src='{{app.path}}/images/bolamenu.png' width='10px'  /></a>
+                        </div>
+                        <div style="float: left;">
+                            <a href='{{app.path}}/{{ subopcion.route }}'>{{ subopcion.titulo }}</a>
+                        </div>
                     </li>
                 {% endfor %}
                 </ul>

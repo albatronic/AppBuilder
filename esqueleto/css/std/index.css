@@ -1,0 +1,394 @@
+/* 
+    Document   : index
+    Created on : 28-oct-2010, 0:09:01
+    Author     : Sergio Perez Informatica ALBATRONIC, SL
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+body {
+    font-size: 0.7em;
+    font-family: Verdana, "Verdana CE", Arial, "Arial CE", "Lucida Grande CE", lucida, "Helvetic CE", sans-serif;
+    color: white;
+    margin: 0px;
+    text-align: center;
+    background-color: black;
+    background-image: url('../../images/bg-blue-lines.jpg');
+    background-position: top center;
+    background-repeat: repeat-x;
+}
+
+.contenedor {
+    width: 1000px;
+    text-align: left;
+    margin: auto;
+    /* background-color: white;*/
+    color: white;
+    padding: 5px;
+}
+
+.contenedor .cabecera {
+    padding: 10px;
+    text-align: right;
+
+    background-image: url('../../images/loginbottom.jpg');
+    background-repeat: no-repeat;
+    background-position: left center;
+}
+
+.navmenu { width:998px; height:48px; float:left; background:#3E484F url(../../images/nav-bg.gif);border:1px solid #6B787F;}
+.navmenu ul { padding:0; margin:0; list-style:none; height:48px;}
+.navmenu ul li { float:left; padding:15px 0; line-height:14px;}
+.navmenu ul li a { padding:15px 30px 16px 30px; margin:0; line-height:14px; color:#FFFFFF; font:bold 13px Arial; text-decoration:none;}
+/* .navmenu ul li a:hover { background:#1776b8 url(templates/layout3/images/menu_hover.gif) no-repeat right;} */
+/* .navmenu ul li a:hover { background:#E10000; text-decoration:none;}  */
+.navmenu ul li a:hover { background:#515E66 url(../../images/nav-bg-hover.gif) repeat-x;}
+
+.contenedor .cuerpo {
+    float: left;
+    padding: 10px;
+    background-color: white;
+    font-size: 12px;
+
+}
+
+.contenedor .cuerpo .derecha {
+    float: right;
+    background-color: white;
+    color: black;
+    width: 225px;
+    height: 900px;
+    margin-top: 29px;
+    background-image: url(../../images/bgderecha.png);
+    background-repeat: repeat-x;
+    
+}
+
+.contenedor .cuerpo .panel1{
+    float: left;
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-bottom: 10px;
+    padding: 15px;
+    font-size: 12px;
+    text-align: justify;
+    color: black;
+    background-color: white;
+    background-image: url(../../images/bgpanel2.png);
+    background-repeat: repeat-x;
+}
+
+.contenedor .cuerpo .panel1izq{
+    float: left;
+    width: 46%;
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-bottom: 5px;
+    padding: 15px;
+    text-align: justify;
+    color: black;
+    background-color: white;
+    background-image: url(../../images/puzzle.jpg);
+    background-position: right top;
+    background-repeat: no-repeat;
+}
+.contenedor .cuerpo .panel1dch{
+    float: right;
+    width: 46%;
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-bottom: 5px;
+    padding: 15px;
+    text-align: justify;
+    color: black;
+    background-color: white;
+    background-image: url(../../mages/programacion-a-medida.jpg);
+    background-position: right bottom;
+    background-repeat: no-repeat;
+}
+
+.contenedor .cuerpo .panel2izq{
+    float: left;
+    width: 46%;
+    height: 140px;
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-bottom: 3px;
+    padding: 10px;
+    text-align: justify;
+    color: black;
+    background-color: white;
+    background-image: url(../../images/bgpanel2.png);
+    background-repeat: repeat-x;
+}
+.contenedor .cuerpo .panel2dch{
+    float: right;
+    width: 46%;
+    height: 140px;
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-bottom: 3px;
+    padding: 10px;
+    /*font-size: 12px;*/
+    text-align: justify;
+    color: black;
+    background-color: white;
+    /* background-color: #2191c8;*/
+    background-image: url(../../images/bgpanel2.png);
+    background-repeat: repeat-x;
+}
+.contenedor .cuerpo .panel3{
+    float: left;
+    width: 174px;
+    margin-top: 0px;
+    margin-left: 25px;
+    margin-bottom: 5px;
+    padding: 10px;
+    /*font-size: 12px;*/
+    text-align: justify;
+    color: black;
+    background-color: white;
+    background-image: url('../../images/gradient2.png');
+    background-repeat: repeat-x;
+}
+.pie {
+    clear: both;
+    background-color: grey;
+    border: gainsboro dashed 10px;
+    margin-top: 0px;
+    padding-top: 0px;
+    
+}
+.pie .pieizq {
+    float: left;
+    text-align: left;
+    font-size: 10px;
+    padding: 5px;
+    width: 500px;
+
+}
+.pie .piedch {
+    float: right;
+    text-align: right;
+    font-size: 10px;
+    padding: 5px;
+    width: 300px;
+}
+
+#titulo {
+    color: #00377A;
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 15px;
+    margin-bottom: 0px;
+}
+
+#titulo1 {
+    color: #00377A;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+#subtitulo {
+    color: #00377A;
+    font-weight: bold;
+    height: 20px;
+}
+
+#titulofondoazul {
+    background-color: #00377A;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    width: 350px;
+    padding: 10px;
+}
+
+#parrafo350px {
+    width: 350px;
+    border: 1px dotted grey;
+    padding: 10px;
+}
+
+#cajatpvnet {
+    margin-top: 20px;
+    float: right;
+    width: 560px;
+    border-top: 1px dotted grey;
+    border-right: 1px dotted grey;
+    border-bottom: 1px dotted grey;
+    background-image: url(../../images/puzzle.jpg);
+    background-position: right top;
+    background-repeat: no-repeat;
+}
+
+#cajagesnet {
+    margin-top: 0px;
+    float: right;
+    width: 560px;
+    border-left: 1px dotted grey;
+    border-bottom: 1px dotted grey;
+    background-image: url(../../images/programacion-a-medida.jpg);
+    background-position: left;
+    background-repeat: no-repeat;
+}
+
+#cajawebnet {
+    margin-top: 0px;
+    float: right;
+    width: 560px;
+    border-right: 1px dotted grey;
+    border-bottom: 1px dotted grey;
+    background-image: url(../../images/web.jpg);
+    background-position: right;
+    background-repeat: no-repeat;
+}
+
+#cajagesnetficheros {
+    width:100%;
+    float: left;
+    padding: 10px;
+    border-top: 1px solid grey;
+    border-right: 1px solid grey;
+    border-bottom: 1px solid grey;
+    background-image: url(../../images/screenficheros0.png);
+    background-repeat:no-repeat;
+    background-position: center right;
+}
+
+#cajagesnetventas {
+    width:100%;
+    float: left;
+    padding: 10px;
+    border-left: 1px solid grey;
+    border-bottom: 1px solid grey;
+    background-image: url(../../images/screenventas0.png);
+    background-repeat:no-repeat;
+    background-position: center right;
+}
+
+#cajagesnetcompras {
+    width:100%;
+    float: left;
+    padding: 10px;
+    border-right: 1px solid grey;
+    border-bottom: 1px solid grey;
+    background-image: url(../../images/screencompras0.png);
+    background-repeat:no-repeat;
+    background-position: center right;
+}
+
+#cajagesnetalmacen {
+    width:100%;
+    float: left;
+    padding: 10px;
+    border-left: 1px solid grey;
+    border-bottom: 1px solid grey;
+    background-image: url(../../images/screenalmacen0.png);
+    background-repeat:no-repeat;
+    background-position: center right;
+}
+
+#cajagesnetinformes {
+    width:100%;
+    float: left;
+    padding: 10px;
+    border-right: 1px solid grey;
+    border-bottom: 1px solid grey;
+    background-image: url(../../images/screeninformes0.png);
+    background-repeat:no-repeat;
+    background-position: center right;
+}
+
+#cajagesnetmarketing {
+    width:100%;
+    float: left;
+    padding: 10px;
+    border-left: 1px solid grey;
+    border-bottom: 1px solid grey;
+    background-image: url(../../images/screenmarketing0.png);
+    background-repeat:no-repeat;
+    background-position: center right;
+}
+
+#funcionalidades{
+    padding-right: 320px;
+}
+
+#titulo a {color: #00377A;}
+
+.navegador a {color: white;}
+.pie a {color: grey;}
+.panel1izq a {color: #00377A;}
+.panel1dch a {color: #00377A;}
+.panel2izq a {color: #00377A;}
+.panel2dch a {color: #00377A;}
+li {margin-bottom: 5px;}
+
+.contenedor .cabecera .campoinput {
+    margin-left: 3px;
+    margin-right: 3px;
+    width: 80px;
+    height: 22px;
+    border: 0px;
+}
+
+.submit {
+    background-color: grey;
+    color: white;
+    border: 0px;
+    padding: 2px;
+}
+
+#textolegal{
+    text-align: justify;
+    margin-left: 10px;
+    padding: 5px;
+}
+
+#imgdch{
+    background-image: url(../../images/consultoria.jpg);
+    background-position: center right;
+    background-repeat: no-repeat;
+}
+#imgizq{
+    background-image: url(../../images/programacion-a-medida.jpg);
+    background-position: center left;
+    background-repeat: no-repeat;    
+}
+
+.cajatextofuncionalidades{
+    float:right;
+    margin:10px;
+    padding:10px;
+    text-align:left;
+    background-image: url(../../images/bgpanel2.png);
+    background-repeat: repeat-x;
+    width: 40%;
+}
+
+.imagenflotantedch {
+position:relative;
+z-index:1000;
+display:none;
+width:5px;
+height:5px;
+left:200px;
+top:-200px;
+}
+
+.imagenflotanteizq {
+position:relative;
+width:5px;
+height:5px;
+z-index:1;
+left: -750px;
+top: -220px;
+}

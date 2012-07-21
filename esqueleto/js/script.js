@@ -1,121 +1,64 @@
-function CambiaEmpresa(){
-    // document.empresa.s.value='';
-    document.empresa.action.value='Empresa';
-    document.empresa.submit();
+/*
+ * Debe estar definida la variable appPath que indica el path a la app
+ * Se le asigna valor en 'modules/_global/layoutStd.html.twig' y 'modules/_global/popupStd.html.twig'
+ *
+ * @author Sergio Perez <sergio.perez@albatronic.com>
+ * @copyright Informatica Albatronic, sl
+ * @since 22/01/2012
+ */
+
+
+/**
+ * Para las solapas
+ */
+$(function() {
+    $( "#tabs" ).tabs();
+});
+
+/**
+ * Para el efecto acordeon
+ */
+$(function() {
+    $( "#accordion" ).accordion({
+        autoHeight: false,
+        navigation: true,
+        collapsible: true
+    });
+});
+
+function Confirma(mensaje) {
+    var dialogo = $('<div title="Confirmación"><p>' + mensaje + '</p></div>');
+    // a workaround for a flaw in the demo system (http://dev.jqueryui.com/ticket/4375), ignore!
+    $( "#dialog:ui-dialog" ).dialog( "destroy" );
+
+    dialogo.dialog({
+        autoOpen: true,
+        dialogClass: "alert",
+        resizable: false,
+        height: 150,
+        modal: true,
+        show: "fold",
+        hide: "scale",
+        buttons: {
+            Aceptar: function() {
+                $( this ).dialog( "close" );
+                return true;
+            },
+            Cancelar: function() {
+                $( this ).dialog( "close" );
+                return false;
+            }
+        }
+    });
 }
 
-function CambiaSucursal(){
-    document.empresa.action.value='Sucursal';
-    document.empresa.submit();
-}
-
-function CargaTapiz(){
-    top.contenido.location='contenido.php?c=tapiz';
-}
-
-function Menu(url){
-    top.submenu.location=url;
-}
-
-function CambiaIdioma(lang){
-    location='servlet.php?lang=' + lang;
-}
-
-function Confirma(mensaje){
+function Confirma1(mensaje){
     if (confirm(mensaje)) return true;
     else return false;
 }
 
-function goPage(destiny){
-    if (destiny != ("")) {
-        document.location.href = destiny;
-    }
-}
-
-function cambiacolor(idc,colora) {
-    if (document.all) {
-        document.all[idc].style.background = colora;
-    } else if (document.getElementById) {
-        document.getElementById(idc).style.background = colora;
-    }
-}
-
-function MuestraArticulos(){
-    var url;
-    url='selecarti.php?idfab=' + document.forms[0].IDFabricante.value + '&idart=' + document.forms[0].IDArticulo.value;
-    window.open(url,'SELECARTI','width=500,height=610,scrollbars=yes,resizable=yes')
-}
-
-function SacaArticulos(formulario,origen){
-    var url;
-    url='selecarticulos.php?idart=' + document[formulario].IDArticulo.value + '&form=' + formulario + '&origen=' + origen;
-    window.open(url,'SELECARTICULOS','width=650,height=640,scrollbars=yes,resizable=yes')
-}
-
-function MuestraClientes(formulario,campoclave,campotexto){
-    var url;
-    url='seleccliente.php?texto=' + document[formulario][campotexto].value + '&form=' + formulario + '&campoclave=' + campoclave + '&campotexto=' + campotexto;
-    window.open(url,'CLIENTES','width=550,height=610,scrollbars=yes,resizable=yes')
-}
-
-function MuestraProveedores(padre,formulario,campoclave,campotexto){
-    var url;
-    url='selecproveedor.php?padre=' + padre + '&texto=' + document[formulario][campotexto].value + '&form=' + formulario + '&campoclave=' + campoclave + '&campotexto=' + campotexto;
-    window.open(url,'PROVEEDORES','width=500,height=610,scrollbars=yes,resizable=yes')
-}
-	
-function loadNavigation(clave,accion) {
-    var a;
-	
-    document.formulariopsto.IDArticulo.value='';
-
-    document.formulariopsto.Incremento.value='0';
-    document.formulariopsto.Descripcion.value='';
-    document.formulariopsto.Unidades.value='1';
-    document.formulariopsto.Precio.value='0';
-    document.formulariopsto.Descuento.value='0';
-    url=document.location + '&idfab=' + document.formulariopsto.IDFabricante.value;
-    a='document.location.href=url';
-}
-
-function SymError() {
-    return true;
-}
-
-window.onerror = SymError;
-
-function veteA(combo) {
-    donde= combo.options[combo.selectedIndex].value;
-    if (donde!="#") window.location.href=donde;
-}
-
 function CerrarVentana() {
     window.close();
-}
-
-function Centrar() {
-    ancho=document.body.clientWidth;
-    alto=document.body.clientHeight;
-    var X = (screen.width-ancho)/2;
-    var Y = (screen.height-alto)/2;
-    window.moveTo(X,Y)
-}
-
-function MuestraOficinas(formulario,campobanco,campooficina){
-    var url;
-    url='contenido.php?c=bancosoficinas&Banco=' + document[formulario][campobanco].value + '&form=' + formulario + '&campobanco=' + campobanco + '&campooficina=' + campooficina;
-    window.open(url,'OFICINAS','width=500,height=655,scrollbars=yes,resizable=yes')
-}	
-
-function MuestraBancos(formulario,campobanco){
-    var url;
-    url='contenido.php?c=bancos&form=' + formulario + '&campobanco=' + campobanco;
-    window.open(url,'BANCOS','width=500,height=590,scrollbars=yes,resizable=yes')
-}
-
-function LanzaPrograma(prog) {
-    var Shell = new ActiveXObject("WScript.Shell");
-    Shell.run(prog);
 }
 
 function Redondear(cantidad, decimales) {
@@ -146,7 +89,14 @@ function ValidaNif(documento,campo) {
     if(mensaje!='') alert(mensaje);
 }
 
+function esNumero(numero){
+    
+ return (/^([0-9])*.([0-9])*$/.test(numero));
+ 
+}
+ 
 function IsNumeric(valor){
+    
     var log=valor.length;
     var sw="S";
     for (x=0; x<log; x++){
@@ -240,44 +190,10 @@ function formateafecha(fecha){
     return (fecha);
 }
 
-function MuestraHora()
-{
-    var timerN=null;
-    var ahora=new Date();
-    var ahorah=ahora.getHours();
-    var ahoram=ahora.getMinutes();
-    var ahoras=ahora.getSeconds()
-	
-    // Calculo las horas
-    var hora = ((ahorah<10) ? "0" : "") + ahorah + ((ahoram<10) ? ":0" : ":") + ahoram + ((ahoras<10) ? ":0" : ":") + ahoras
-    reloj.value = hora;
-		
-    // Muestro la hora actual cada segundo
-    timerN=setTimeout("MuestraHora()",1000);
+function loading(iddiv) {
+    // Coloco un gif "Cargando..." en la capa
+    $('#'+iddiv).html("<img src='"+appPath+"/images/loading.gif'>");
 }
-
-function Saludar(nombre) {
-    var oneDate = new Date();
-    var elDia = oneDate.getDate();
-    var elMes = oneDate.getMonth();
-    var elAnio = oneDate.getYear();
-    var laHora = oneDate.getHours();
-    var saludo;
-    if ((laHora > 5) && (laHora < 15)) {
-        saludo=" Buenos dias";
-    } else {
-        if ((laHora > 14) && (laHora < 21)) {
-            saludo="Buenas tardes";
-        } else {
-            if ((laHora > 20) || (laHora < 6)) {
-                saludo="Buenas noches";
-            }
-        }
-    }
-    saludo = saludo + " " + nombre;
-    saludojornada.value = saludo;
-}
-
 
 /*
  * ----------------------------------------------------------------
@@ -288,18 +204,50 @@ function Saludar(nombre) {
  * iddiv        -> ID identificador del contenedor que será rellenado con la respuesta (¡¡no vale el atributo name!!)
  * idselect     -> ID identificador del select que se creará  (¡¡no vale el atributo name!!)
  * nameselect   -> NAME name del select que se creará (se utiliza para capturar del datos del formulario)
- * tipo         -> indica el tipo de select. O sea la tabla que se empleará. Ver script 'desplegable_ajax.php'
+ * tipo         -> indica el tipo de select. O sea la tabla que se empleará. Ver script 'desplegableAjax.php'
  * filtro       -> elemento html que contiene el valor por el que filtrar los datos.
  */
 function DesplegableAjax(iddiv,idselect,nameselect,tipo,filtro) {
-    var url        = '/erp/lib/desplegableAjax.php';
-    var parametros = 't='+tipo+'&filtro='+eval(filtro)+'&idselect='+idselect+'&nameselect='+nameselect;
+    var url        = appPath + '/lib/desplegableAjax.php';
+    var parametros = 't='+tipo+'&filtro='+filtro+'&idselect='+idselect+'&nameselect='+nameselect;
 
     // Coloco un gif "Cargando..." en la capa
-    $('#'+iddiv).html("<img src='/erp/images/loading.gif'>");
+    $('#'+iddiv).html("<img src='"+appPath+"/images/loading.gif'>");
 
     jQuery('#'+iddiv).load(url, parametros);
 }
+
+/*
+ * GENERA UN LISTA DE AUTOCOMPLETADO CON JQUERY. REQUIRE DE LA FUNCION 'devuelve'
+ *
+ * campoAutoCompletar   -> es el id del campo donde se genera el autocompletado
+ * campoId              -> es el id del campo donde se devuelve el id obtenido
+ * campoTexto           -> es el id del campo donde se devuelve el texto obtenido
+ * entidad              -> indica en base a qué entidad de datos se genera el autocompletado
+ * idSucursal           -> valor de la sucursal, es opcional
+ * desplegableAjax      -> array con parametros adicionales para disparar desplegables en cascada
+ */
+function autoCompletar(campoAutoCompletar,campoId,campoTexto,entidad,idSucursal,desplegableAjax) {
+    $( "#"+campoAutoCompletar).autocomplete({
+        source: appPath + "/lib/autoCompletar.php?idSucursal=" + idSucursal + "&entidad=" + entidad,
+        minLength: 2,
+        select: function( event, ui ) {
+            devuelve( campoId, ui.item.id, campoTexto, ui.item.value, desplegableAjax );
+        }
+    });
+}
+
+function devuelve( campoId, id, campoTexto, value, desplegableAjax) {
+    $( "#"+campoId ).val(id);
+    $( "#"+campoTexto ).val(value);
+    if (desplegableAjax.length > 0) {
+        var params = desplegableAjax;
+        DesplegableAjax(params[0],params[1],params[2],params[3],id);
+    }
+    $( "#"+campoTexto ).focus();
+}
+
+////////////////////////////////////////////////////////////////////////////////
 
 /*
  * ----------------------------------------------------------------
@@ -339,15 +287,18 @@ function notificacion(mensaje,tipo) {
 /**
  * CREA UN LOTE Y RECARGA EL DIV iddiv CON EL SELECT DE TODOS
  * LOS LOTE DEL PRODUCTO idArticulo
+ * SI NO SE INDICA iddiv, SE CREA EL LOTE PERO NO SE RECARGA EL DIV
+ * EL PARAMETRO puntero SE UTILIZA PARA EL ID DEL TAG <SELECT>
  */
-function CrearLote(iddiv,idArticulo,lote,fFabricacion,fCaducidad) {
-    var url        = '/erp/lib/crearlote.php';
-    var parametros = 'idArticulo='+idArticulo+'&lote='+lote+'&fFabricacion='+fFabricacion+'&fCaducidad='+fCaducidad;
+function CrearLote(puntero,iddiv,idSelect,nameSelect,idArticulo,lote,fFabricacion,fCaducidad,width) {
+    var url        = appPath + '/lib/crearlote.php';
+    var parametros = 'puntero='+puntero+'&idArticulo='+idArticulo+'&lote='+lote+'&fFabricacion='+fFabricacion+'&fCaducidad='+fCaducidad+'&idSelect='+idSelect+'&nameSelect='+nameSelect+'&width='+width;
 
     // Coloco un gif "Cargando..." en la capa
-    $('#'+iddiv).html("<img src='/erp/images/loading.gif'>");
+    $('#'+iddiv).html("<img src='"+appPath+"/images/loading.gif' />");
 
     jQuery('#'+iddiv).load(url, parametros);
+
 }
 
 /**
@@ -366,7 +317,7 @@ function CrearLote(iddiv,idArticulo,lote,fFabricacion,fCaducidad) {
  * POR RAZONES DE OPTIMIZACION, NO SE LANZA LA BUSQUEDA HASTA QUE NO SE HAN
  * INTRODUCIDO AL MENOS TRES CARACTERES.
  *
- * NECESITA LA HOJA DE ESTILOS jquery-autocompletar.css
+ * NECESITA LA HOJA DE ESTILOS jquery.autocompletar.css
  *
  * LLAMA AL SCRIP autoCompletar.php QUE ES EL QUE HACE LA CONSULTA
  * A LA BASE DE DATOS Y DEVUELVE EL RESULTADO
@@ -378,7 +329,7 @@ function lookup(key,idSucursal,idInput,idTexto,entidad,valor,desplegableAjax) {
         $('#suggestions'+key).hide();
     } else {
         $.post(
-            "/erp/lib/autoCompletar.php",
+            appPath + "/lib/autoCompletar.php",
             {
                 key: ""+key+"",
                 idSucursal: ""+idSucursal+"",
@@ -426,4 +377,14 @@ function fill(key,idInput,value,idTexto,texto, desplegableAjax) {
  */
 function hideSuggestions(key) {
     setTimeout("$('#suggestions"+key+"').hide();", 200);
+}
+
+function documentos(entidad, id, idDiv) {
+    var url        = appPath + '/lib/documentos.php';
+    var parametros = 'id='+id+'&entidad='+entidad;
+
+    // Coloco un gif "Cargando..." en la capa
+    $('#'+idDiv).html("<img src='"+appPath+"/images/loading.gif'>");
+
+    jQuery('#'+idDiv).load(url, parametros); 
 }

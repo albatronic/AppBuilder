@@ -1,0 +1,78 @@
+# PARAMETROS DE CONFIGURACION GLOBAL DE LA APLICACION
+---
+config:
+  debug_mode: false
+  # PARA MOSTRAR O NO EL BOTON DE LA AUDITORIA DE LOS FORMULARIOS
+  audit_mode: true
+  # CONTROL DE ACCESO POR IP
+  ip_control: true
+  # FORMATOS DE EXPORTACION DE INFORMACION
+  export_types:
+    - xls
+    - xml
+    - cvs
+    - Yaml
+  # ENTORNO DE LA APLICACION
+  app:
+    name: ERP Albatronic
+    url: http://localhost/apps
+    path: /apps/Erp
+    framework: ../../app/bin/albatronic/
+  # CONEXIONES A LAS BASES DE DATOS
+  conections:
+    empresas:
+      dbEngine: mysql
+      host: localhost
+      user: root
+      password: albatronic
+      database: interpra_ppuemp
+    datos001:
+      dbEngine: mysql
+      host: localhost
+      user: root
+      password: albatronic
+      database: interpra_ppuerp001
+    datos002:
+      dbEngine: mysql
+      host: localhost
+      user: root
+      password: albatronic
+      database: interpra_ppuerp002
+    datos003:
+      dbEngine: mysql
+      host: localhost
+      user: root
+      password: albatronic
+      database: interpra_ppuerp003
+  # MOTOR DE ENVIO DE CORREOS
+  mailer:
+    plugin_dir: ../../app/bin/PHPMailer_v2.0.0/
+    plugin_file: PhpMailer.class.php
+    motor: PhpMailer
+    socket: smtp
+    host: mail.interpral.com
+    smtp_auth: true
+    user_name: info@interpral.com
+    password: i1234o
+    from: info@interpral.com
+    from_name: INTERPRAL
+    timeout: 30
+  # MOTOR PARA DOCUMENTOS EXCEL
+  excel: ../../app/bin/PHPExcel/PHPExcel.php
+  # MOTOR PARA GENERAR DOCUMENTOS PDF
+  pdf: ../../app/bin/pdf/fpdf.class.php
+  # MOTOR PARA GRAFICOS DE BARRAS
+  graph:
+    -
+      ../../app/bin/jpgraph/src/jpgraph.php
+    -
+      ../../app/bin/jpgraph/src/jpgraph_line.php
+    -
+      ../../app/bin/jpgraph/src/jpgraph_bar.php
+  # MOTOR DE TEMPLATES
+  twig:
+    motor: ../../app/bin/Twig-1.7.0/lib/Twig/Autoloader.php
+    templates_folder: modules
+    debug_mode: true
+    cache_folder: tmp
+    charset: null

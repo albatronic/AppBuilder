@@ -1,0 +1,40 @@
+{# Template list.html.twig for _Emergente #}
+{# --------------------------------------------#}
+{% extends '_Emergente/index.html.twig' %}
+
+{% block listado %}
+
+<div class="Subtitulo">
+    <p>Articulo: {{values.data[0].IDArticulo.Descripcion}}</p>
+    <p>Almacen: {{values.data[0].IDAlmacen}}</p>
+</div>
+<div class='Listado'>
+    <table width='100%'>
+        <tr class='Titulos'>
+            <td class='Item'>Num Albaran</td>
+            <td class='Item'>Fecha</td>
+            <td class='Item'>Comercial</td>
+            <td class='Item'>Cliente</td>
+            <td class='Item' colspan="2">Cantidad</td>
+        </tr>
+
+        <tbody class="Cuerpo">
+            {% set total = 0 %}
+            {% set UM = values.data[0].IDArticulo.UMV %}
+            {% for key,objeto in values.data %}
+            <tr class="ItemListado">
+                <td align="right">{{objeto.IDAlbaran.IDAlbaran}}</td>
+                <td>{{objeto.IDAlbaran.Fecha}}</td>
+                <td>{{objeto.IDComercial}}</td>
+                <td>{{objeto.IDAlbaran.IDCliente.RazonSocial}}</td>
+                <td align="right">{{objeto.Unidades}}</td>
+                <td align="left">{{UM}}</td>
+                {% set total = total+objeto.Unidades%}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <hr>
+    <p align="right" class="Subtitulo">Total reservas: {{total}} {{values.data[0].IDArticulo.UMV}} </p>
+</div>
+{% endblock %}

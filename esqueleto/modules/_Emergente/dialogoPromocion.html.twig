@@ -1,0 +1,17 @@
+{# _Emergente/dialogoPromocion.html.twig #}
+{# MUESTRA UN DIALOGO EMERGENTE CON LOS DETALLES DE LA PROMOCION #}
+
+<div style="float: right;">
+    <img src="{{app.path}}/images/favorito.gif"
+         onmouseover="getElementById('promo{{linea.IDLinea}}').style.display='';"
+         onmouseout="getElementById('promo{{linea.IDLinea}}').style.display='none';"/>
+    <div id="promo{{linea.IDLinea}}" class="Dialogo-Promo" style="display: none">
+        <div class="Titulo">{{linea.IDPromocion.Titulo}}</div>
+        <div>Válida hasta: {{linea.IDPromocion.FinPromocion}}</div>
+        <div>Tipo: {{linea.IDPromocion.TipoPromocion}} {{linea.IDPromocion.Valor}}</div>
+        <div>Cantidad Mínima: {{linea.IDPromocion.CantidadMinima}}</div>
+        {% if linea.IDPromocion.IDFP.IDFP %}
+        <div>Forma de Pago: {{linea.IDPromocion.IDFP.Descripcion}}</div>
+        {% endif %}
+    </div>
+</div>
