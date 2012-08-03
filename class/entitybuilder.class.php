@@ -27,7 +27,41 @@ class EntityBuilder {
         "datetime" => "datetime",
         "timestamp" => "datetime",
     );
-    private $auditoriaColumns = array('CreatedBy', 'CreatedAt', 'ModifiedBy', 'ModifiedAt');
+    
+    /**
+     * Array con las columnas comunes a todas la entidades de datos
+     * @var array
+     */
+    private $columnasComunes = array(
+        'Observaciones',
+        'PrimaryKeyMD5',
+        'EsPredeterminado',
+        'Revisado',
+        'Publicar',
+        'VigenteDesde',
+        'VigenteHasta',
+        'CreatedBy',
+        'CreatedAt',
+        'ModifiedBy',
+        'ModifiedAt',
+        'Deleted',
+        'DeletedBy',
+        'DeletedAt',
+        'Privacidad',
+        'Orden',
+        'Imagenes',
+        'FechaPublicacion',
+        'UrlAmigable',
+        'NumeroVisitas',
+        'MetatagTitle',
+        'MetatagKeywords',
+        'MetatagDescription',
+        'MetatagTitleSimple',
+        'MetatagTitlePosicion',
+        'MostrarEnMapaWeb',
+        'ImportanciaMapaWeb',
+        'ChangeFreqMapaWeb',
+        );
 
     public function __construct($table='', $validate=false) {
         $this->td = new TableDescriptor(DB_BASE, $table);
@@ -52,7 +86,7 @@ class EntityBuilder {
         $buf = $this->cabecera . "class {$this->className}Entity extends Entity {\n";
 
         foreach ($this->td->getColumns() as $column) {
-            if (!in_array($column['Field'], $this->auditoriaColumns)) {
+            if (!in_array($column['Field'], $this->columnasComunes)) {
                 $column_name = str_replace('-', '_', $column['Field']);
                 $buf .= "\t/**\n";
                 if ($column['Field'] == $this->td->getPrimaryKey()) {
@@ -112,7 +146,7 @@ class EntityBuilder {
 
 
         foreach ($this->td->getColumns() as $column) {
-            if (!in_array($column['Field'], $this->auditoriaColumns)) {
+            if (!in_array($column['Field'], $this->columnasComunes)) {
                 $column_name = str_replace('-', '_', $column['Field']);
                 $relEntity = "";
                 $valor = "";
@@ -174,7 +208,7 @@ class EntityBuilder {
     private function getParentEntities() {
         $buf = "array(\n";
 
-        foreach ($this->td->getParentEntities() as $key => $entity) {
+        foreach ($this->td->getParentEntities() as $entity) {
             $buf .= "\t\t\t'" . $entity . "',\n";
         }
         $buf .= "\t\t)";

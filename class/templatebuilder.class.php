@@ -19,9 +19,42 @@ class TemplateBuilder {
     private $td;
     private $filename;
 
-    private $auditoriaColumns = array('CreatedBy', 'CreatedAt', 'ModifiedBy', 'ModifiedAt');
+    /**
+     * Array con las columnas comunes a todas la entidades de datos
+     * @var array
+     */
+    private $columnasComunes = array(
+        'Observaciones',
+        'PrimaryKeyMD5',
+        'EsPredeterminado',
+        'Revisado',
+        'Publicar',
+        'VigenteDesde',
+        'VigenteHasta',
+        'CreatedBy',
+        'CreatedAt',
+        'ModifiedBy',
+        'ModifiedAt',
+        'Deleted',
+        'DeletedBy',
+        'DeletedAt',
+        'Privacidad',
+        'Orden',
+        'Imagenes',
+        'FechaPublicacion',
+        'UrlAmigable',
+        'NumeroVisitas',
+        'MetatagTitle',
+        'MetatagKeywords',
+        'MetatagDescription',
+        'MetatagTitleSimple',
+        'MetatagTitlePosicion',
+        'MostrarEnMapaWeb',
+        'ImportanciaMapaWeb',
+        'ChangeFreqMapaWeb',
+    );
 
-    public function __construct($table='') {
+    public function __construct($table = '') {
         $this->td = new TableDescriptor(DB_BASE, $table);
 
         $this->filename = str_replace("_", " ", $this->td->getTable());
@@ -136,7 +169,7 @@ class TemplateBuilder {
         $tmp .= "\t<form name=\"manto\" id=\"manto_{{ values.controller }}\" action=\"\" enctype=\"multipart/form-data\" method=\"POST\">\n";
         $tmp .= "\t\t<input name=\"controller\" value=\"{{ values.controller }}\" type=\"hidden\" />\n";
         $tmp .= "\t\t<input name=\"action\" id=\"action\" value=\"edit\" type=\"hidden\" />\n";
-        $tmp .= "\t\t<input name=\"{{ values.controller }}[" . $this->td->getPrimaryKey() ."]\" value=\"{{ values.datos." . $this->td->getPrimaryKey() . " }}\" type=\"hidden\" />\n";
+        $tmp .= "\t\t<input name=\"{{ values.controller }}[" . $this->td->getPrimaryKey() . "]\" value=\"{{ values.datos." . $this->td->getPrimaryKey() . " }}\" type=\"hidden\" />\n";
         $tmp .= "\t\t{% include \"_global/comandosSaveDelete.html.twig\" %}\n\n";
 
         $tmp .= "\t\t<div class='Cuerpo'>\n";
@@ -194,14 +227,14 @@ class TemplateBuilder {
         //$tmp .= "{% import '_global/macros.html.twig' as macro %}\n\n";
 
         foreach ($this->td->getColumns() as $column) {
-            // NO SE MUESTRA NI LA PRIMARI KEY NI LAS COLUMNAS DE AUDITORIA
-            if ( ($column['Field'] != $this->td->getPrimaryKey()) and (!in_array($column['Field'], $this->auditoriaColumns)) ) {
+            // NO SE GENERA NI LA PRIMARIKEY NI LAS COLUMNAS DE COMUNES
+            if (($column['Field'] != $this->td->getPrimaryKey()) and (!in_array($column['Field'], $this->columnasComunes))) {
                 $column_name = str_replace('-', '_', $column['Field']);
 
                 $label = ucwords($column_name);
                 $labelClass = $labelClass;
-                $name = $this->filename . "[" . $column_name . "]";
-                $id = $this->filename . "_" . $column_name;
+                $name = "values.controller ~ '[" . $column_name . "]'";
+                $id = "values.controller ~ '_" . $column_name . "'";
                 $value = "datos." . $column_name;
 
                 if ($column['ReferencedSchema'] != '') {
@@ -231,7 +264,7 @@ class TemplateBuilder {
                             if ($column['Length'] >= 30)
                                 $tagClass = "CampoTextoLargo";
                             else
-                                $tagClass="CampoTextoCorto";
+                                $tagClass = "CampoTextoCorto";
                             $maxLong = $column['Length'];
                             break;
 
@@ -251,7 +284,7 @@ class TemplateBuilder {
                             if ($column['Length'] >= 8)
                                 $tagClass = "CampoImporte";
                             else
-                                $tagClass="CampoUnidades";
+                                $tagClass = "CampoUnidades";
                             $maxLong = $column['Length'];
                             break;
 
@@ -286,24 +319,27 @@ class TemplateBuilder {
 
                 switch ($macro) {
                     case 'input':
-                        $tmp .= "{{ macro.input('" . $label . "','" . $labelClass . "','" . $type . "','" . $name . "','" . $id . "'," . $value . ",'" . $maxLong . "','" . $tagClass . "') }}\n";
+                        $tmp .= "{{ macro.input('" . $label . "','" . $labelClass . "','" . $type . "'," . $name . "," . $id . "," . $value . ",'" . $maxLong . "','" . $tagClass . "') }}\n";
                         break;
 
                     case 'textarea':
-                        $tmp .= "{{ macro.textarea('" . $label . "','" . $labelClass . "','" . $name . "','" . $id . "'," . $value . ",none,none,'" . $tagClass . "')}}\n";
+                        $tmp .= "{{ macro.textarea('" . $label . "','" . $labelClass . "'," . $name . "," . $id . "," . $value . ",none,none,'" . $tagClass . "')}}\n";
                         break;
 
                     case 'fecha':
-                        $tmp .= "{{ macro.fecha('" . $label . "','" . $labelClass . "','" . $name . "','" . $id . "'," . $value . ",'" . $maxLong . "','" . $tagClass . "') }}\n";
+                        $tmp .= "{{ macro.fecha('" . $label . "','" . $labelClass . "'," . $name . "," . $id . "," . $value . ",'" . $maxLong . "','" . $tagClass . "') }}\n";
                         break;
 
                     case 'select':
-                        $tmp .= "{{ macro.select('" . $label . "','" . $labelClass . "','" . $name . "','" . $id . "',none," . $value . "," . $opciones . ",'" . $tagClass . "')}}\n";
+                        $tmp .= "{{ macro.select('" . $label . "','" . $labelClass . "'," . $name . "," . $id . ",none," . $value . "," . $opciones . ",'" . $tagClass . "')}}\n";
                         break;
                 }
             } // end if
         } // end foreach
 
+        // Añado el include de los campos comunes
+        $tmp .= "{% include '_global/FormComunes.html.twig' %}";
+        
         $this->templates['form'] = $tmp;
     }
 
