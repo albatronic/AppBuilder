@@ -27,7 +27,7 @@ class EntityBuilder {
         "datetime" => "datetime",
         "timestamp" => "datetime",
     );
-    
+
     /**
      * Array con las columnas comunes a todas la entidades de datos
      * @var array
@@ -83,7 +83,7 @@ class EntityBuilder {
         $this->cabecera .= "/**\n";
         $this->cabecera .= " * @orm:Entity(" . $this->td->getTable() . ")\n";
         $this->cabecera .= " */\n";
-        $buf = $this->cabecera . "class {$this->className}Entity extends Entity {\n";
+        $buf = $this->cabecera . "class {$this->className}Entity extends EntityComunes {\n";
 
         foreach ($this->td->getColumns() as $column) {
             if (!in_array($column['Field'], $this->columnasComunes)) {
