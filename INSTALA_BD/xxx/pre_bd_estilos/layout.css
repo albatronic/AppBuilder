@@ -1,0 +1,266 @@
+#barra_menus {
+	width:100%;
+	height:19px;
+	background:url(../pre_bd_imagenes/barra_menus.jpg) 0 0 repeat-x;
+	position:fixed;
+	top:0px;}
+
+#barra_herramientas {
+	width:100%;
+	height:51px;
+	background:url(../pre_bd_imagenes/barra_herramientas.jpg) 0 0 repeat-x;
+	position:fixed;
+	top:19px;}
+
+#barra_ruta {
+	width:100%;
+	height:43px;
+	background:url(../pre_bd_imagenes/fondoRuta.png) 0 0 repeat-x;
+	position:fixed;
+	background-color:#eee;
+	font-size:10px;
+	top:70px;}
+
+#barra_ruta #desplegablesNavegacion {
+	width:35%;
+	padding-left:15px;
+	height:25px;
+	float:left;}
+
+
+#barra_ruta #ruta {
+	width:60%;
+	text-align:right;
+	height:25px;
+	float:right;}
+
+#barra_ruta a{
+	text-decoration:underline;
+	color:#666;}
+
+
+#contenidos {
+	width:92%;
+	/*background-color:#00FF00;*/
+	padding-top:112px;
+	padding-left:50px;}
+
+
+/* INICIO: CUADRO DIÁLOGO 250px ________________________ */
+.cuadrodialogo250 {
+	float:left;
+	position:relative;
+	left:35%;
+	margin-top:100px;
+	width:260px;}
+
+.cuadrodialogo250 .cabeceracuadrodialogo250 {
+	background-color:#ddd;
+	border-top:1px solid #ccc;
+	border-left:1px solid #ccc;
+	border-right:1px solid #ccc;
+	color:#666;
+	font-size:12px;
+	font-style:italic;
+	height:20px;
+	float:left;
+	width:290px; 
+	padding-left:10px;
+}
+	
+.cuadrodialogo250 .cuerpocuadrodialogo250 {
+	background-color:#eee;
+	border-left:1px solid #ccc;
+	border-right:1px solid #ccc;
+	border-bottom:1px solid #ccc;
+	color:#333;
+	padding:20px;
+	width:100%;
+	clear:both;
+	float:left;}
+
+/* FIN: CUADRO DIÁLOGO 250px ________________________ */
+
+
+/* INICIO: CUADRO DIÁLOGO TEXTO 250px ________________________ */
+.cuadrodialogoTexto250 {
+	float:left;
+	position:relative;
+	left:35%;
+	margin-top:100px;
+	width:260px;}
+
+.cuadrodialogoTexto250 .cabeceracuadrodialogoTexto250 {
+	background-color:#ddd;
+	border-top:1px solid #ccc;
+	border-left:1px solid #ccc;
+	border-right:1px solid #ccc;
+	color:#666;
+	font-size:12px;
+	font-style:italic;
+	height:20px;
+	float:left;
+	width:290px; /* 30px MÁS ANCHO QUE EL CONTENEDOR */
+	padding-left:10px;
+}
+	
+.cuadrodialogoTexto250 .cuerpocuadrodialogoTexto250 {
+	background-color:#eee;
+	border-left:1px solid #ccc;
+	border-right:1px solid #ccc;
+	border-bottom:1px solid #ccc;
+	padding:20px;
+	color:#666;
+	width:100%;
+	clear:both;
+	text-align:center;
+	float:left;}
+
+.cuadrodialogoTexto250 .cuerpocuadrodialogoTexto250 .contenedorBotones {
+	float:left;
+	margin-top:20px;
+	width:100%;
+	text-align:center;}
+
+/* FIN: CUADRO DIÁLOGO TEXTO 250px ________________________ */
+
+
+
+
+/* INICIO: CUADRO DIÁLOGO TEXTO ERROR 250px ________________________ */
+.cuadrodialogoTextoError250 {
+	float:left;
+	position:relative;
+	left:35%;
+	margin-top:100px;
+	width:260px;}
+
+.cuadrodialogoTextoError250 .cabeceracuadrodialogoTextoError250 {
+	background-color:#ddd;
+	border-top:1px solid #ccc;
+	border-left:1px solid #ccc;
+	border-right:1px solid #ccc;
+	color:#990000;
+	font-size:12px;
+	font-style:italic;
+	height:20px;
+	float:left;
+	width:290px; /* 30px MÁS ANCHO QUE EL CONTENEDOR */
+	padding-left:10px;
+}
+	
+.cuadrodialogoTextoError250 .cuerpocuadrodialogoTextoError250 {
+	background-color:#eee;
+	border-left:1px solid #ccc;
+	border-right:1px solid #ccc;
+	border-bottom:1px solid #ccc;
+	padding:20px;
+	color:#990000;
+	width:100%;
+	clear:both;
+	text-align:center;
+	float:left;}
+
+.cuadrodialogoTextoError250 .cuerpocuadrodialogoTextoError250 .contenedorBotones {
+	float:left;
+	margin-top:20px;
+	width:100%;
+	text-align:center;}
+
+/* FIN: CUADRO DIÁLOGO TEXTO ERROR 250px ________________________ */
+
+
+
+/* INICIO: LISTADOS ________________________ */
+
+/*.filaTotalesListado {
+	width:100%;
+	text-align:right;
+	margin-bottom:5px;
+	float:left;
+	background-color:#ccc;}*/
+
+.filaBuscadorListado {
+	width:92%;
+	background:url(../pre_bd_imagenes/fondoBuscadorListado.png) 0 0 repeat-x;
+	text-align:left;
+	height:28px;
+	padding-top:7px;
+	position:fixed;
+	top:95px;}
+
+
+.filaAbecedarioListado {
+	width:92%;
+	height:35px;
+	background-color:#eee;
+	position:fixed;
+	top:130px;}
+
+.filaAbecedarioListado .abecedario {
+	width:70%;
+	padding-left:15px;
+	height:25px;
+	padding-top:10px;
+	float:left;}
+
+.filaAbecedarioListado .abecedario a {
+	color:#666;
+	text-decoration:none;}
+
+.filaAbecedarioListado .abecedario a:hover {
+	text-decoration:underline;}
+
+.filaAbecedarioListado .anteriorSiguienteListados {
+	width:20%;
+	text-align:right;
+	height:22px;
+	padding-top:7px;
+	float:right;}
+
+.filaAbecedarioListado .anteriorSiguienteListados img {
+	margin-right:7px;}
+
+.filaTotalesListado {
+	width:92%;
+	text-align:right;
+	height:43px;
+	background:url(../pre_bd_imagenes/fondoTotalRegistrosListados.png) 0 0 repeat-x;
+	position:fixed;
+	background-color:#ccc;
+	top:165px;}
+
+.filaTablaListado {
+	width:100%;
+	clear:both;
+	padding-top:100px;}
+
+
+.cabeceraListado {
+	background-color:#ddd;
+	font-weight:bold;}
+
+.celdaCabeceraListado {
+	padding-left:15px;}
+
+.filasListado {
+	border-bottom:1px #ddd solid;
+	}
+
+.celdasFilasListado {
+padding-bottom:10px;
+padding-top:10px;
+padding-left:15px;
+height:20px;
+}
+
+.celdaIconosListado {
+padding-left:0px;
+}
+
+td.celdaIconosListado img{
+margin-right:5px;
+}
+
+
+/* FIN: LISTADOS ________________________ */

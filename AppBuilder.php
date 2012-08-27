@@ -15,9 +15,10 @@
 include "class/tabledescriptor.class.php";
 include "class/templatebuilder.class.php";
 include "class/controllerbuilder.class.php";
-include "class/configxmlbuilder.class.php";
-include "class/listadosxmlbuilder.class.php";
+include "class/configymlbuilder.class.php";
+include "class/listadosymlbuilder.class.php";
 include "class/entitybuilder.class.php";
+include 'class/columnasComunes.class.php';
 include "class/CreaFichero.class.php";
 
 define('DS', DIRECTORY_SEPARATOR);
@@ -94,13 +95,25 @@ if ($_POST['accion'] == "Generar") {
 
                 //Crear el archivo config.yml
                 if ($_POST['config'] == 'on') {
-                    $config = new ConfigXmlBuilder($tablename);
-                    new CreaFichero($pathmodules . DS . "config.yml", $config->Get());
+                    $config = new ConfigYmlBuilder($tablename);
+                    new CreaFichero($pathmodules . DS . "config.yml", $config->getConfigYml());
+                }
+
+                //Crear el archivo varEntorno.yml
+                if ($_POST['varEntorno'] == 'on') {
+                    $config = new ConfigYmlBuilder($tablename);
+                    new CreaFichero($pathmodules . DS . "varEntorno.yml", $config->getVarEntornoYml());
+                }
+
+                //Crear el archivo varWeb.yml
+                if ($_POST['varWeb'] == 'on') {
+                    $config = new ConfigYmlBuilder($tablename);
+                    new CreaFichero($pathmodules . DS . "varWeb.yml", $config->getVarWebYml());
                 }
 
                 //Crear el archivo listados.yml
                 if ($_POST['listados'] == 'on') {
-                    $listados = new ListadosXmlBuilder($tablename);
+                    $listados = new ListadosYmlBuilder($tablename);
                     new CreaFichero($pathmodules . DS . "listados.yml", $listados->Get());
                 }
             } else
@@ -165,21 +178,24 @@ if ($_POST['accion'] == "Generar") {
                 <tr><td colspan="2" align="center">Generador del esqueleto de una aplicaci&oacute;n</td></tr>
                 <tr><td>Servidor</td><td><input name="dbhost" type="text" value="localhost"></td></tr>
                 <tr><td>Usuario</td><td><input name="dbuser" type="text" value="root"></td></tr>
-                <tr><td>Contrase&ntilde;a</td><td><input name="dbpassword" type="text" value=""></td></tr>
-                <tr><td>Base de datos</td><td><input name="dbbase" type="text" value=""></td></tr>
+                <tr><td>Contrase&ntilde;a</td><td><input name="dbpassword" type="text" value="albatronic"></td></tr>
+                <tr><td>Base de datos</td><td><input name="dbbase" type="text" value="cpanel"></td></tr>
                 <tr><td>Conexi&oacute;n</td><td><input name="conection" type="text" value="datos#"></td></tr>
                 <tr><td>Tabla</td><td><input name="table" type="text" value=""></td></tr>
                 <tr><td>Generar esqueleto</td><td><input name="esqueleto" type="checkbox"></td></tr>
-                <tr><td>Carpeta destino (sin / al final)</td><td><input name="carpeta" type="text" size="50" value=""></td></tr>
-                <tr><td>App Name</td><td><input name="appname" type="text" value=""></td></tr>
+                <tr><td>Carpeta destino (sin / al final)</td><td><input name="carpeta" type="text" size="50" value="/home/sergio/NetBeansProjects/"></td></tr>
+                <tr><td>App Name</td><td><input name="appname" type="text" value="CPanel"></td></tr>
                 <tr><td>Gesti&oacute;n de Permisos</td><td><input name="permisos" type="checkbox" checked></td></tr>
                 <tr><td>Generar Controlador</td><td><input name="controller" type="checkbox"></td></tr>
                 <tr><td>Generar config.yml</td><td><input name="config" type="checkbox"></td></tr>
+                <tr><td>Generar varEntorno.yml</td><td><input name="varEntorno" type="checkbox"></td></tr>
+                <tr><td>Generar varWeb.yml</td><td><input name="varWeb" type="checkbox"></td></tr>
                 <tr><td>Generar listados.yml</td><td><input name="listados" type="checkbox"></td></tr>
                 <tr><td>Generar Templates</td><td><input name="templates" type="checkbox"></td></tr>
+                <tr><td>Generar Ayudas</td><td><input name="help" type="checkbox"></td></tr>
+                <tr style="height: 10px;"><td colspan="2"></td></tr>
                 <tr><td>Generar Modelo de datos</td><td><input name="model" type="checkbox"></td></tr>
                 <tr><td>Generar Metodos</td><td><input name="method" type="checkbox"></td></tr>
-                <tr><td>Generar Ayudas</td><td><input name="help" type="checkbox"></td></tr>
                 <tr>
                     <td colspan="2" align="center">
                         <input name="accion" value="Generar" type="submit">&nbsp;

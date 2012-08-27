@@ -1,0 +1,16 @@
+______________
+gs_l = gs_login 
+______________
+
+ES EL MÓDULO QUE SE EJECUTA CUANDO ENTRAMOS A LA APLICACIÓN. NOS PERMITE LOGUEARNOS.
+
+______________
+gs_h = gs_home 
+______________
+
+ES EL MÓDULO QUE SE EJECUTA CUANDO NOS LOGUEAMOS. SU ÚNICA FUNCIÓN SERÁ MOSTRAR LOS ICONOS PARA ACCEDER A LAS DISTINTAS APLIACIONES.
+
+______________
+gs_ad = gs_ayudadomicilio 
+______________
+

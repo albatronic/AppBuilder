@@ -19,41 +19,6 @@ class TemplateBuilder {
     private $td;
     private $filename;
 
-    /**
-     * Array con las columnas comunes a todas la entidades de datos
-     * @var array
-     */
-    private $columnasComunes = array(
-        'Observaciones',
-        'PrimaryKeyMD5',
-        'EsPredeterminado',
-        'Revisado',
-        'Publicar',
-        'VigenteDesde',
-        'VigenteHasta',
-        'CreatedBy',
-        'CreatedAt',
-        'ModifiedBy',
-        'ModifiedAt',
-        'Deleted',
-        'DeletedBy',
-        'DeletedAt',
-        'Privacidad',
-        'Orden',
-        'Imagenes',
-        'FechaPublicacion',
-        'UrlAmigable',
-        'NumeroVisitas',
-        'MetatagTitle',
-        'MetatagKeywords',
-        'MetatagDescription',
-        'MetatagTitleSimple',
-        'MetatagTitlePosicion',
-        'MostrarEnMapaWeb',
-        'ImportanciaMapaWeb',
-        'ChangeFreqMapaWeb',
-    );
-
     public function __construct($table = '') {
         $this->td = new TableDescriptor(DB_BASE, $table);
 
@@ -61,10 +26,11 @@ class TemplateBuilder {
         $this->filename = str_replace(" ", "", ucwords($this->filename));
 
         $this->indexTemplate();
-        $this->filtroTemplate();
-        $this->editTemplate();
-        $this->newTemplate();
+        //$this->filtroTemplate();
+        //$this->editTemplate();
+        //$this->newTemplate();
         $this->formTemplate();
+        $this->fieldsTemplate();
         $this->listTemplate();
         $this->helpTemplate();
     }
@@ -73,12 +39,18 @@ class TemplateBuilder {
      * Genera el templata "list"
      */
     private function listTemplate() {
-        $tmp = "{# Template list.html.twig for " . $this->filename . " #}\n";
-        $tmp .= "{# -------------------------------------------------------#}\n";
+        $tmp .= "{#\n";
+        $tmp .= "  Module: " . $this->filename . "\n";
+        $tmp .= "  Document : modules\\" . $this->filename . "\\list.html.twig\n\n";
+        $tmp .= "  author: Sergio Pérez <sergio.perez@albatronic.com>\n";
+        $tmp .= "  copyright: INFORMATICA ALBATRONIC SL\n";
+        $tmp .= "  date " . date('d.m.Y H:i:s') . "\n";
+        $tmp .= "#}\n\n";
+
         $tmp .= "{% extends values.controller  ~ '/index.html.twig' %}\n\n";
-        $tmp .= "{% block listado %}\n";
+        $tmp .= "{% block listado %}\n\n";
         $tmp .= "<div class='Listado'>\n";
-        $tmp .= "\t{% include '_global/paginacion.html.twig' with {'filter': values.listado.filter, 'controller': values.controller, 'position': 'izq'}%}\n\n";
+        $tmp .= "\t{% include '_global/paginacion.html.twig' with {'filter': values.listado.filter, 'controller': values.controller, 'position': 'izq'}%}\n";
         $tmp .= "\t{% include '_global/listGenerico.html.twig' with {'listado': values.listado, 'controller': values.controller} %}\n\n";
         //$tmp .= "\t{% include '_global/paginacion.html.twig' with {'filter': values.listado.filter, 'controller': values.controller, 'position': 'der'}%}\n";
         $tmp .= "</div>\n";
@@ -91,8 +63,14 @@ class TemplateBuilder {
      * Generar el template "help"
      */
     private function helpTemplate() {
-        $tmp = "{# Template " . $this->filename . ".html.twig for " . $this->filename . " #}\n";
-        $tmp .= "{# -------------------------------------------------------#}\n";
+        $tmp .= "{#\n";
+        $tmp .= "  Module: " . $this->filename . "\n";
+        $tmp .= "  Document : modules\\" . $this->filename . "\\help.html.twig\n\n";
+        $tmp .= "  author: Sergio Pérez <sergio.perez@albatronic.com>\n";
+        $tmp .= "  copyright: INFORMATICA ALBATRONIC SL\n";
+        $tmp .= "  date " . date('d.m.Y H:i:s') . "\n";
+        $tmp .= "#}\n\n";
+
         $tmp .= "{% extends '_help/layout.html.twig' %}\n\n";
         $tmp .= "{% block titulo %}<h2>{{ values.title }}</h2>{% endblock %}\n\n";
         $tmp .= "{% block contenido %}\n";
@@ -109,18 +87,24 @@ class TemplateBuilder {
      * Generar el template "index"
      */
     private function indexTemplate() {
-        $tmp = "{# Template index.html.twig for " . $this->filename . " #}\n";
-        $tmp .= "{# ----------------------------------------------------#}\n";
+        $tmp .= "{#\n";
+        $tmp .= "  Module: " . $this->filename . "\n";
+        $tmp .= "  Document : modules\\" . $this->filename . "\\index.html.twig\n\n";
+        $tmp .= "  author: Sergio Pérez <sergio.perez@albatronic.com>\n";
+        $tmp .= "  copyright: INFORMATICA ALBATRONIC SL\n";
+        $tmp .= "  date " . date('d.m.Y H:i:s') . "\n";
+        $tmp .= "#}\n\n";
+
         $tmp .= "{% extends layout %}\n\n";
 
         $tmp .= "{% block title parent() ~ ' - '  ~ values.titulo %}\n\n";
 
         $tmp .= "{% block content %}\n";
-        $tmp .= "\t{% include '_global/TituloGenerico.html.twig' with {'controller': values.controller, 'linkValue': values.linkBy.value} %}\n";
+        $tmp .= "\t{% include '_global/tituloGenerico.html.twig' with {'controller': values.controller, 'linkValue': values.linkBy.value} %}\n";
 
         $tmp .= "\t{% block filtro %}\n";
         $tmp .= "\t{% if values.permisos['C'] %}\n";
-        $tmp .= "\t\t{% include values.controller  ~ '/filtro.html.twig' with {'filter': values.listado.filter} %}\n";
+        $tmp .= "\t\t{% include '_global/filtroGenericoWrapper.html.twig' with {'filter': values.listado.filter} %}\n";
         $tmp .= "\t{% endif %}\n";
         $tmp .= "\t{% endblock %}\n\n";
 
@@ -220,15 +204,78 @@ class TemplateBuilder {
      * Generar el template form
      */
     private function formTemplate() {
-        $labelClass = "Etiqueta";
+        $tmp .= "{#\n";
+        $tmp .= "  Module: " . $this->filename . "\n";
+        $tmp .= "  Document : modules\\" . $this->filename . "\\form.html.twig\n\n";
+        $tmp .= "  author: Sergio Pérez <sergio.perez@albatronic.com>\n";
+        $tmp .= "  copyright: INFORMATICA ALBATRONIC SL\n";
+        $tmp .= "  date " . date('d.m.Y H:i:s') . "\n";
+        $tmp .= "#}\n\n";
 
-        $tmp = "{# TEMPLATE " . $this->filename . "/form.html.twig #}\n";
-        $tmp .= "{# Muestra los campos editables de la entidad #}\n\n";
-        //$tmp .= "{% import '_global/macros.html.twig' as macro %}\n\n";
+        $tmp .= "{% extends values.controller ~ '/index.html.twig' %}\n\n";
+
+        $tmp .= "{% if values.datos.getPrimaryKeyValue == '' %} {% set action = 'new' %} {% else %} {% set action = 'edit' %} {% endif %}\n";
+        $tmp .= "{% if action == 'new' %} {% block navegador %}{% endblock %} {% endif %}\n\n";
+
+        $tmp .= "{% block mantenimiento %}\n";
+        $tmp .= "<div class=\"grid_container\">
+    <div class=\"grid_12 full_block\">
+        <div class=\"widget_wrap\">
+
+            <div class=\"widget_top\">
+                <span class=\"h_icon list_image\"></span>
+                <h6>{{values.titulo}}</h6>
+            </div>
+
+            <div class=\"widget_content\">\n";
+        $tmp .= "\t<form name=\"manto_{{ values.controller}}\" id=\"manto_{{ values.controller }}\" action=\"\" method=\"POST\" enctype=\"multipart/form-data\" class=\"form_container left_label\">\n";
+        $tmp .= "\t\t<input name=\"controller\" value=\"{{ values.controller }}\" type=\"hidden\" />\n";
+        $tmp .= "\t\t<input name=\"action\" id=\"action\" value=\"{{action}}\" type=\"hidden\" />\n";
+        $tmp .= "\t\t<input name=\"{{ values.controller }}[{{values.datos.getPrimaryKeyName}}]\" value=\"{{values.datos.getPrimaryKeyValue}}\" type=\"hidden\" />\n";
+        $tmp .= "\t\t{% if action == 'new' %} {% include '_global/comandosCreate.html.twig' %} {% endif %}\n";
+        $tmp .= "\t\t{% if action == 'edit' %} {% include '_global/comandosSaveDelete.html.twig' %} {% endif %}\n";
+
+        $tmp .= "\t\t{% include '_global/formErrores.html.twig' with {'errores': values.errores} %}\n";
+        $tmp .= "\t\t{% include '_global/alertas.html.twig' with {'alertas': values.alertas} %}\n\n";
+        $tmp .= "\t\t<ul>\n";
+        $tmp .= "\t\t\t{% include values.controller ~ \"/fields.html.twig\" with {'datos': values.datos} %}\n";
+        $tmp .= "\t\t</ul>\n";
+        $tmp .= "\t</form>\n\n";
+        $tmp .= "</div>
+        </div>
+    </div>
+</div>\n";
+        $tmp .= "{% endblock %}";
+
+        $this->templates['form'] = $tmp;
+    }
+
+    /**
+     * Generar el template de los campos
+     */
+    private function fieldsTemplate() {
+
+        $labelClass = "field_title";
+
+        $tmp .= "{#\n";
+        $tmp .= "  Module: " . $this->filename . "\n";
+        $tmp .= "  Document : modules\\" . $this->filename . "\\fields.html.twig\n\n";
+        $tmp .= "  author: Sergio Pérez <sergio.perez@albatronic.com>\n";
+        $tmp .= "  copyright: INFORMATICA ALBATRONIC SL\n";
+        $tmp .= "  date " . date('d.m.Y H:i:s') . "\n";
+        $tmp .= "#}\n\n";
+
+        $tabindex = 0;
+        $campoFoco = '';
 
         foreach ($this->td->getColumns() as $column) {
             // NO SE GENERA NI LA PRIMARIKEY NI LAS COLUMNAS DE COMUNES
-            if (($column['Field'] != $this->td->getPrimaryKey()) and (!in_array($column['Field'], $this->columnasComunes))) {
+            if (($column['Field'] != $this->td->getPrimaryKey()) and (!in_array($column['Field'], columnasComunes::$columnasExcepcion))) {
+
+                if ($campoFoco == '') $campoFoco = $column['Field'];
+
+                $tabindex++;
+
                 $column_name = str_replace('-', '_', $column['Field']);
 
                 $label = ucwords($column_name);
@@ -247,13 +294,13 @@ class TemplateBuilder {
                     switch ($column['Type']) {
                         case 'datetime':
                             $macro = "fecha";
-                            $tagClass = "LiteralFechaHora";
+                            $tagClass = "datepicker";
                             $maxLong = 19;
                             break;
 
                         case 'date':
                             $macro = "fecha";
-                            $tagClass = "CampoFecha";
+                            $tagClass = "datepicker";
                             $maxLong = 10;
                             break;
 
@@ -270,7 +317,7 @@ class TemplateBuilder {
 
                         case 'tinyint':
                             $macro = "select";
-                            $tagClass = "Select";
+                            $tagClass = "chzn-select";
                             $value .= "." . $column_name;
                             $opciones = "datos." . $column_name . ".fetchAll()";
                             break;
@@ -291,7 +338,7 @@ class TemplateBuilder {
                         case 'text':
                         case 'longtext':
                             $macro = "textarea";
-                            $tagClass = "TextArea";
+                            $tagClass = "input_grow";
                             break;
 
                         case 'enum': // NO SE RECOMIENDA EL USO DE ENUM
@@ -319,30 +366,32 @@ class TemplateBuilder {
 
                 switch ($macro) {
                     case 'input':
-                        $tmp .= "{{ macro.input('" . $label . "','" . $labelClass . "','" . $type . "'," . $name . "," . $id . "," . $value . ",'" . $maxLong . "','" . $tagClass . "') }}\n";
+                        $tmp .= "{{ macro.input('" . $label . "','" . $labelClass . "','" . $type . "'," . $name . "," . $id . "," . $value . ",'" . $maxLong . "','" . $tagClass . "','" . $tabindex . "') }}\n";
                         break;
 
                     case 'textarea':
-                        $tmp .= "{{ macro.textarea('" . $label . "','" . $labelClass . "'," . $name . "," . $id . "," . $value . ",none,none,'" . $tagClass . "')}}\n";
+                        $tmp .= "{{ macro.textarea('" . $label . "','" . $labelClass . "'," . $name . "," . $id . "," . $value . ",none,none,'" . $tagClass . "','" . $tabindex . "')}}\n";
                         break;
 
                     case 'fecha':
-                        $tmp .= "{{ macro.fecha('" . $label . "','" . $labelClass . "'," . $name . "," . $id . "," . $value . ",'" . $maxLong . "','" . $tagClass . "') }}\n";
+                        $tmp .= "{{ macro.fecha('" . $label . "','" . $labelClass . "'," . $name . "," . $id . "," . $value . ",'" . $maxLong . "','" . $tagClass . "','" . $tabindex . "')}}\n";
                         break;
 
                     case 'select':
-                        $tmp .= "{{ macro.select('" . $label . "','" . $labelClass . "'," . $name . "," . $id . ",none," . $value . "," . $opciones . ",'" . $tagClass . "')}}\n";
+                        $tmp .= "{{ macro.select('" . $label . "','" . $labelClass . "'," . $name . "," . $id . ",none," . $value . "," . $opciones . ",'" . $tagClass . "','" . $tabindex . "')}}\n";
                         break;
                 }
             } // end if
         } // end foreach
 
         // Añado el include de los campos comunes
-        $tmp .= "{% include '_global/FormComunes.html.twig' %}";
-        
-        $this->templates['form'] = $tmp;
-    }
+        $tmp .= "\n{% include '_global/fieldsComunes.html.twig' %}\n\n";
 
+        // Añado la macro para situar el foco
+        $tmp .= "{{ macro.foco(values.controller ~ '_{$campoFoco}') }}\n";
+
+        $this->templates['fields'] = $tmp;
+    }
     /**
      * Devuelve el código html con el formulario de mantenimiento
      * @return text
