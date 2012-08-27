@@ -9,6 +9,8 @@ $Campo1 = array(
 "AU | Audios | Gestiona los Audios",
 "FO | Fotograf&iacute;as | Gestiona las Fotograf&iacute;as",
 "BAR | Bares | Gestiona los Bares",
+"TEL | Teléfonos | Gestiona los Teléfonos",
+
 
 );
 

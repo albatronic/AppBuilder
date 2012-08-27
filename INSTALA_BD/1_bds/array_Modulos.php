@@ -20,6 +20,9 @@ $Campo1 = array(
 "ani | ani | 0 | 0 | Gesti&oacute;n de Animales | Pdfgdfgermite Gestionar los Animales | AC, | 1",
 "ani | aniPepeHola | ani | 1 | Gesti&oacute;n de Razas | Pdfgdfgermite Gestsdfsdfionar los Animales | | 1",
 
+"TEL | TEL | 0 | 0 | Gestor de Teléfonos | Aplicaci&oacute;n de Gestor de Teléfonos | AC, | 1",
+"TEL | TELTerminales | TEL | 1 | Terminales | Permite Gestionar los Terminales | | 1",
+
 );
 
 ?>
