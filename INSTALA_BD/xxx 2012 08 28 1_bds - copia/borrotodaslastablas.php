@@ -41,12 +41,6 @@ include("ejecutoborrotabla.php");
 $tabla=$variableadmin_prefijo_tablas."core_imagenes";
 include("ejecutoborrotabla.php");
 
-$tabla=$variableadmin_prefijo_tablas."enl_enlaces";
-include("ejecutoborrotabla.php");
-
-$tabla=$variableadmin_prefijo_tablas."enl_secciones";
-include("ejecutoborrotabla.php");
-
 
 
 /*

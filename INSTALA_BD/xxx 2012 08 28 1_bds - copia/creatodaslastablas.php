@@ -27,9 +27,6 @@ include("tabla_core_roles.php");
 include("tabla_core_urlamigables.php");
 include("tabla_core_imagenes.php");
 
-include("tabla_core_enl_enlaces.php");
-include("tabla_core_enl_secciones.php");
-
 
 // CREAMOS LA BASE DE DATOS ******************************************************************************
 //include("000_bd_crea_user.php");

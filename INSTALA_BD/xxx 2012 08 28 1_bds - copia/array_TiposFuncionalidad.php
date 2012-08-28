@@ -8,9 +8,10 @@ $Campo1 = array(
 "UP | Update | Actualizar un Registro | 1",
 "DE | Delete | Eliminar un Registro | 1",
 "LI | Listado | Listado de Registros | 1",
-"CO | Consulta | Permite consultar un registro | 1",
-"EX | Exportar | Permite Exportar a distintos formatos | 1",
-"VW | Variables Web | Permite el acceso a las Variables Web | 1",
+"CO | Consulta | Puede consultar un Registro | 1",
+"EX | Exportar | Puede exportar información a distintos formatos | 1",
+"VW | Variables Web | Permite Acceso a las Variables Web | 1",
+
 
 );
 
