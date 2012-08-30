@@ -100,7 +100,7 @@ class TemplateBuilder {
         $tmp .= "{% block title parent() ~ ' - '  ~ values.titulo %}\n\n";
 
         $tmp .= "{% block content %}\n";
-        $tmp .= "\t{% include '_global/tituloGenerico.html.twig' with {'controller': values.controller, 'linkValue': values.linkBy.value} %}\n";
+        //$tmp .= "\t{% include '_global/tituloGenerico.html.twig' with {'controller': values.controller, 'linkValue': values.linkBy.value} %}\n";
 
         $tmp .= "\t{% block filtro %}\n";
         $tmp .= "\t{% if values.permisos['C'] %}\n";
@@ -215,36 +215,30 @@ class TemplateBuilder {
         $tmp .= "{% extends values.controller ~ '/index.html.twig' %}\n\n";
 
         $tmp .= "{% if values.datos.getPrimaryKeyValue == '' %} {% set action = 'new' %} {% else %} {% set action = 'edit' %} {% endif %}\n";
-        $tmp .= "{% if action == 'new' %} {% block navegador %}{% endblock %} {% endif %}\n\n";
+        //$tmp .= "{% if action == 'new' %} {% block navegador %}{% endblock %} {% endif %}\n\n";
 
         $tmp .= "{% block mantenimiento %}\n";
-        $tmp .= "<div class=\"grid_container\">
-    <div class=\"grid_12 full_block\">
-        <div class=\"widget_wrap\">
-
-            <div class=\"widget_top\">
-                <span class=\"h_icon list_image\"></span>
-                <h6>{{values.titulo}}</h6>
-            </div>
-
-            <div class=\"widget_content\">\n";
-        $tmp .= "\t<form name=\"manto_{{ values.controller}}\" id=\"manto_{{ values.controller }}\" action=\"\" method=\"POST\" enctype=\"multipart/form-data\" class=\"form_container left_label\">\n";
-        $tmp .= "\t\t<input name=\"controller\" value=\"{{ values.controller }}\" type=\"hidden\" />\n";
-        $tmp .= "\t\t<input name=\"action\" id=\"action\" value=\"{{action}}\" type=\"hidden\" />\n";
-        $tmp .= "\t\t<input name=\"{{ values.controller }}[{{values.datos.getPrimaryKeyName}}]\" value=\"{{values.datos.getPrimaryKeyValue}}\" type=\"hidden\" />\n";
-        $tmp .= "\t\t{% if action == 'new' %} {% include '_global/comandosCreate.html.twig' %} {% endif %}\n";
-        $tmp .= "\t\t{% if action == 'edit' %} {% include '_global/comandosSaveDelete.html.twig' %} {% endif %}\n";
-
-        $tmp .= "\t\t{% include '_global/formErrores.html.twig' with {'errores': values.errores} %}\n";
-        $tmp .= "\t\t{% include '_global/alertas.html.twig' with {'alertas': values.alertas} %}\n\n";
-        $tmp .= "\t\t<ul>\n";
-        $tmp .= "\t\t\t{% include values.controller ~ \"/fields.html.twig\" with {'datos': values.datos} %}\n";
-        $tmp .= "\t\t</ul>\n";
-        $tmp .= "\t</form>\n\n";
-        $tmp .= "</div>
-        </div>
-    </div>
-</div>\n";
+        $tmp .= "<div class=\"grid_container\">\n";
+        $tmp .= "\t<div class=\"grid_12 full_block\">\n";
+        $tmp .= "\t\t<div class=\"widget_wrap\">\n";
+        $tmp .= "\t\t<div class=\"widget_content\">\n";
+        $tmp .= "\t\t<form name=\"manto_{{ values.controller}}\" id=\"manto_{{ values.controller }}\" action=\"\" method=\"POST\" enctype=\"multipart/form-data\" class=\"form_container left_label\">\n";
+        $tmp .= "\t\t\t<input name=\"controller\" value=\"{{ values.controller }}\" type=\"hidden\" />\n";
+        $tmp .= "\t\t\t<input name=\"action\" id=\"action_{{ values.controller }}\" value=\"{{action}}\" type=\"hidden\" />\n";
+        $tmp .= "\t\t\t<input name=\"accion\" id=\"accion_{{ values.controller }}\" value=\"\" type=\"hidden\" />\n";
+        $tmp .= "\t\t\t<input name=\"{{ values.controller }}[{{values.datos.getPrimaryKeyName}}]\" value=\"{{values.datos.getPrimaryKeyValue}}\" type=\"hidden\" />\n\n";
+        //$tmp .= "\t\t\t{% if action == 'new' %} {% include '_global/comandosCreate.html.twig' %} {% endif %}\n";
+        //$tmp .= "\t\t\t{% if action == 'edit' %} {% include '_global/comandosSaveDelete.html.twig' %} {% endif %}\n\n";
+        $tmp .= "\t\t\t{% include '_global/formErrores.html.twig' with {'errores': values.errores} %}\n";
+        $tmp .= "\t\t\t{% include '_global/alertas.html.twig' with {'alertas': values.alertas} %}\n\n";
+        $tmp .= "\t\t\t<ul>\n";
+        $tmp .= "\t\t\t\t{% include values.controller ~ \"/fields.html.twig\" with {'datos': values.datos} %}\n";
+        $tmp .= "\t\t\t</ul>\n";
+        $tmp .= "\t\t</form>\n";
+        $tmp .= "\t\t</div>\n";
+        $tmp .= "\t\t</div>\n";
+        $tmp .= "\t</div>\n";
+        $tmp .= "</div>\n";
         $tmp .= "{% endblock %}";
 
         $this->templates['form'] = $tmp;

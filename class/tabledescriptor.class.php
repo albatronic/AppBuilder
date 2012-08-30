@@ -20,9 +20,9 @@
  *
  *
  * NOTA: Para obtener el descriptor de las columnas nos basamos en la sentencia sql SHOW COLUMNS
- * 
+ *
  * NOTA: Para obtener las referencias externas a tablas y claves extranjeras usamos:
- * 
+ *
  *          1) Para tablas MyISAM: La columna COLUMN_COMMENT de 'information_schema'.'columns'. En dicha columna
  *              habrá tres valores separados por coma: la base de datos, la tabla y la columna extranjera.
  *          2) Para tablas InnoDB: La tabla 'information_schema'.'key_column_usage'
@@ -154,7 +154,7 @@ class TableDescriptor {
                         $columna['ReferencedSchema'] = $referencias[0];
                         $columna['ReferencedEntity'] = $referencias[1];
                         $columna['ReferencedColumn'] = $referencias[2];
-                        //Pongo el nombre la la tabla refenciada en notacion entidad
+                        //Pongo el nombre de la tabla refenciada en notacion entidad
                         $aux = str_replace("_", " ", $columna['ReferencedEntity']);
                         $columna['ReferencedEntity'] = str_replace(" ", "", ucwords($aux));
                         if (!in_array($columna['ReferencedEntity'], $this->ParentEntities))
@@ -229,7 +229,7 @@ class TableDescriptor {
 
     /**
      * Devuelve un array con los nombres de las entidades
-     * que hacen referencia (hijas) a esta entidad
+     * que hacen referencia (hijas) a esta entidad.
      *
      *  array (
      *      array (

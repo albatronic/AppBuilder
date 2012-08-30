@@ -1,5 +1,5 @@
 <?php
-include("../cnfg.php"); 
+include("../cnfg.php");
 $ruta = '../'.$cnfg_prefijo_carpetas.'1_comunes/variables_comunes_todos_modulos.php'; include("$ruta");
 $ruta = '003_campos_comunes.php'; include("$ruta");
 
@@ -28,7 +28,7 @@ include_once("conecta.php"); $db=conecta(); // CONECTAMOS CON LA BASE DE DATOS
 
 /* Comprobamos la conexion con MYSQL */
 if($db){
-echo "CONEXIÓN CORRECTA CON EL GESTOR DE BASES DE DATOS <b>MYSQL</b> !!!<br><hr>";
+echo "CONEXIï¿½N CORRECTA CON EL GESTOR DE BASES DE DATOS <b>MYSQL</b> !!!<br><hr>";
 }else{
 echo "<font color='#ff0000'>NO SE HA PODIDO CONECTAR CON EL GESTOR DE BASES DE DATOS <b>MYSQL</b> !!!</font><br><hr>";
 }
@@ -37,17 +37,17 @@ echo "<font color='#ff0000'>NO SE HA PODIDO CONECTAR CON EL GESTOR DE BASES DE D
 if(mysql_select_db("$nombre_bd",$db)){
 echo "CONECTADO CON EXITO A LA BASE DE DATOS <b>$nombre_bd</b><br><hr>";
 }else{
-echo "<font color='#ff0000'>NO SE HA PODIDO ESTABLECER CONEXIÓN CON LA BASE DE DATOS <b>$nombre_bd</b></font><br><hr>";
+echo "<font color='#ff0000'>NO SE HA PODIDO ESTABLECER CONEXIï¿½N CON LA BASE DE DATOS <b>$nombre_bd</b></font><br><hr>";
 }
 
 
 
-/* **** ¡OJO ! ******* */  /* Creamos la Tabla */
+/* **** ï¿½OJO ! ******* */  /* Creamos la Tabla */
 $sql="create table $nombre_tabla (
 IDUsuario bigint(11) NOT NULL auto_increment,
-IDPerfil bigint(11) COMMENT 'db,corePerfiles,IDPerfil',
-IDRol bigint(11) COMMENT 'db,coreRoles,IDRol',
-IDTipoUsuario bigint(11) COMMENT 'db,coreTiposusuarios,IDTipoUsuario',
+IDPerfil bigint(11) COMMENT 'db,core_perfiles,IDPerfil',
+IDRol bigint(11) COMMENT 'db,core_roles,IDRol',
+IDTipoUsuario bigint(11) COMMENT 'db,core_tiposusuarios,IDTipoUsuario',
 Login varchar(50),
 Password varchar(100),
 Email varchar(100),
@@ -80,7 +80,7 @@ echo "<font color='#ff0000'>NO SE HA PODIDO CREAR LA TABLA <b>$nombre_tabla</b><
 }
 
 
-/* Calculamos el Número de Campos de la Tabla y obtenemos un listado de los mismos y sus Atributos */
+/* Calculamos el Nï¿½mero de Campos de la Tabla y obtenemos un listado de los mismos y sus Atributos */
 
 $sql="select * from $nombre_tabla";
 $res=mysql_query($sql,$db);
@@ -88,7 +88,7 @@ $num_campos=mysql_num_fields($res);
 echo "LA TABLA <b>$nombre_tabla</b> TIENE <b>$num_campos</b> CAMPOS<br><br>";
 
 echo "<table border='1'>
-<tr bgcolor='#999999'><td>Nombre</td><td>Tipo</td><td>Tamaño</td><td>Opciones</td></tr>";
+<tr bgcolor='#999999'><td>Nombre</td><td>Tipo</td><td>Tamaï¿½o</td><td>Opciones</td></tr>";
 for ($i=0; $i<$num_campos; $i++){
 $nombre=mysql_field_name($res,$i);
 $tipo=mysql_field_type($res,$i);
@@ -133,5 +133,5 @@ foreach ($Campo1 as $indice => $value) {
 
 
 
-mysql_close($db); //Cerramos la CONEXION 
+mysql_close($db); //Cerramos la CONEXION
 ?>

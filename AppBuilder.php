@@ -204,5 +204,13 @@ if ($_POST['accion'] == "Generar") {
                 </tr>
             </table>
         </form>
+        <p>NOTA: Para que se cree la lógica de integridad de datos entre las tablas referenciadas es VITAL
+        que en el campo 'COMMENT' de las columnas que hacen referencia a otras tablas se indiquen los siguientes 3 valores separados por coma:
+        </p>
+        <ul>
+            <li>nombre de la base de datos</li>
+            <li>nombre <b>físico</b> de la tabla referenciada (<b>no el nombre de la entidad</b>)</li>
+            <li>nombre de la columna de la tabla referenciada</li>
+        </ul>
     </body>
 </html>

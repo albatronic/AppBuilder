@@ -1,6 +1,6 @@
 <?php
 include_once "class/tabledescriptor.class.php";
-include_once "../app/bin/pdf/fpdf.class.php";
+include_once "../apps/bin/pdf/fpdf.class.php";
 
 class listadoPDF extends FPDF {
 
