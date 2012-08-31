@@ -5,9 +5,13 @@
 
 
 $Campo1 = array(
-"ENL | ENL | 0 | 0 | Enlaces de Interés | Gestión de los Enlaces de Interés de la Web | AC, | 1",
-"ENL | ENLSecciones | ENL | 1 | Secciones | Permite Gestionar las Secciones en que se clasificarán los Enlaces | | 1",
-"ENL | ENLEnlaces | ENL | 1 | Enlaces de Interés | Permite Gestionar los Enlaces de Interés asociados a cada Sección | | 1",
+"MAS | MAS | 0 | 0 | Master | Contenedor de mÃ³dulos master | AC | 0",
+"MAS | CoreVariables/Web/Pro | MAS | 1 | Variables Web del Proyecto | Permite Gestionar las variables web del proyecto | AC | 1",
+"MAS | CoreVariables/Env/Pro | MAS | 1 | Variables de Entorno del Proyecto | Permite Gestionar las variables de entorno del proyecto | AC | 1",
+
+"ENL | ENL | 0 | 0 | Enlaces de InterÃ©s | GestiÃ³n de los Enlaces de InterÃ©s de la Web | AC,VW | 1",
+"ENL | ENLSecciones | ENL | 1 | Secciones | Permite Gestionar las Secciones en que se clasificarÃ©n los Enlaces | | 1",
+"ENL | ENLEnlaces | ENL | 1 | Enlaces de InterÃ©s | Permite Gestionar los Enlaces de InterÃ©s asociados a cada SecciÃ©n | | 1",
 );
 
 ?>

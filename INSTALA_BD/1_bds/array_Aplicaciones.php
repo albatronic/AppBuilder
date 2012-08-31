@@ -1,8 +1,9 @@
 <?php
-// CodigoApp varchar(15) | NombreApp varchar(100) | Descripcion varchar(100)
+// CodigoApp varchar(15) | NombreApp varchar(100) | Descripcion varchar(100) | Publicar tyint(1)
 
 $Campo1 = array(
-"ENL | Enlaces de Interés | Gestión de los Enlaces de Interés de la Web",
+"MAS | Master | Contenedor de mÃ³dulos master | 1",
+"ENL | Enlaces de InterÃ©s | GestiÃ³n de los Enlaces de InterÃ©s de la Web | 1",
 
 );
 

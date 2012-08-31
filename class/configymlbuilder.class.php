@@ -61,15 +61,15 @@ class ConfigYmlBuilder {
         return $this->buffer;
     }
 
-    public function getVarWebYml() {
+    public function getFieldsVarWeb() {
 
-        $this->creaVarWebYml();
+        $this->creaFieldsVarWeb();
         return $this->buffer;
     }
 
-    public function getVarEntornoYml() {
+    public function getFieldsVarEntorno() {
 
-        $this->creaVarEntornoYml();
+        $this->creaFieldsVarEntorno();
         return $this->buffer;
     }
 
@@ -206,17 +206,18 @@ class ConfigYmlBuilder {
         $this->buffer = $buf . $cols;
     }
 
-    private function creaVarWebYml() {
+    private function creaFieldsVarWeb() {
 
     }
 
-    private function creaVarEntornoYml() {
+    private function creaFieldsVarEntorno() {
 
-        $buf .= "# Module: " . $this->filename . "\n";
-        $buf .= "# Document : modules\\" . $this->filename . "\\varEntorno.yml\n#\n";
-        $buf .= "# @author: Sergio Pérez <sergio.perez@albatronic.com>\n# @copyright: INFORMATICA ALBATRONIC SL\n# @date " . date('d.m.Y H:i:s') . "\n";
-        $buf .= "#\n---\n";
-        $buf .= $this->filename . ":\n";
+        $buf .= "{# Module: " . $this->filename . "\n";
+        $buf .= "   Document : modules\\" . $this->filename . "\\fieldsvarEnv.html.twig\n";
+        $buf .= "   author: Sergio Pérez <sergio.perez@albatronic.com>\n";
+        $buf .= "   copyright: INFORMATICA ALBATRONIC SL\n";
+        $buf .= "   date " . date('d.m.Y H:i:s') . "\n";
+        $buf .= "#}\n\n";
         $buf .= "  numMaxRegistros: 100\n";
         $buf .= "\n";
         $buf .= "  image1:\n";
