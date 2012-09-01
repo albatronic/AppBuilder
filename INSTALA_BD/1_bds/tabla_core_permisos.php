@@ -46,8 +46,8 @@ echo "<font color='#ff0000'>NO SE HA PODIDO ESTABLECER CONEXI�N CON LA BASE DE
 $sql="create table $nombre_tabla (
 IDPermiso bigint(11) NOT NULL auto_increment,
 IDPerfil bigint(11) COMMENT 'db,core_perfiles,IDPerfil',
-NombreModulo varchar(255) COMMENT 'db,core_modulos,NombreModulo',
-Funcionalidades varchar(255),".
+NombreModulo varchar(255) NOT NULL COMMENT 'db,core_modulos,NombreModulo',
+Funcionalidades varchar(255) NOT NULL,".
 
 $sqlComunes.
 $clavesComunes.

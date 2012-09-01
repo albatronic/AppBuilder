@@ -89,6 +89,7 @@ class ConfigYmlBuilder {
         $buf .= "  login_required: YES\n";
         $buf .= "  permission_control: " . PERMISSIONCONTROL . "\n";
         $buf .= "  favourite_control: NO\n";
+        $buf .= "  feature_list: YES\n";
         $buf .= "  help_file: help.html.twig\n";
         $buf .= "  title: " . ucwords($this->filename) . "\n";
         $buf .= "  id_video: " . strtolower($this->filename) . "\n";
@@ -190,7 +191,10 @@ class ConfigYmlBuilder {
                 //VALIDATDOR. NO SE PONE PARA LA PRIMARYKEY
                 if ($column['Field'] != $this->td->getPrimaryKey()) {
                     $cols .= "      validator:\n";
-                    $cols .= "        nullable: " . $column['Null'] . "\n";
+                    if ($column['ReferencedColumn'] != '')
+                        $cols .= "        nullable: NO\n";
+                    else
+                        $cols .= "        nullable: " . $column['Null'] . "\n";
                     $cols .= "        type: " . $this->variable_types[$column['Type']] . "\n";
                     $cols .= "        length: " . $column['Length'] . "\n";
                     $cols .= "        min: null\n";

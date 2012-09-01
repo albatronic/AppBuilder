@@ -45,12 +45,12 @@ echo "<font color='#ff0000'>NO SE HA PODIDO ESTABLECER CONEXI�N CON LA BASE DE
 /* **** �OJO ! ******* */  /* Creamos la Tabla */
 $sql="create table $nombre_tabla (
 IDSeccion bigint(11) NOT NULL auto_increment,
-Seccion varchar(255),
+Seccion varchar(255) NOT NULL,
 Subtitulo varchar(255),
-TipoSeccion tinyint(1) DEFAULT '0' COMMENT 'Abstract,TipoSeccionEnlacesInteres,IDTipo',
-PerteneceA bigint(11) COMMENT 'db,enl_secciones,IDSeccion',
-IDEntidad bigint(11),
-Entidad varchar(255),
+TipoSeccion tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Abstract,TipoSeccionEnlacesInteres,IDTipo',
+PerteneceA bigint(11) NOT NULL COMMENT 'db,enl_secciones,IDSeccion',
+IDEntidad bigint(11) NOT NULL,
+Entidad varchar(255) NOT NULL,
 
 ".
 

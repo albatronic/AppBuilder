@@ -45,9 +45,9 @@ echo "<font color='#ff0000'>NO SE HA PODIDO ESTABLECER CONEXI�N CON LA BASE DE
 /* **** �OJO ! ******* */  /* Creamos la Tabla */
 $sql="create table $nombre_tabla (
 IDModulo bigint(11) NOT NULL auto_increment,
-CodigoApp varchar(15) COMMENT 'db,core_aplicaciones,CodigoApp',
-NombreModulo varchar(255),
-Nivel int(4),
+CodigoApp varchar(15) NOT NULL COMMENT 'db,core_aplicaciones,CodigoApp',
+NombreModulo varchar(255) NOT NULL,
+Nivel int(4) NOT NULL DEFAULT 0,
 PerteneceA varchar(255),
 Titulo varchar(100),
 Descripcion varchar(100),

@@ -33,10 +33,12 @@ class TemplateBuilder {
         $this->fieldsTemplate();
         $this->listTemplate();
         $this->helpTemplate();
+        $this->fieldsVarEnv();
+        $this->fieldsVarWeb();
     }
 
     /**
-     * Genera el templata "list"
+     * Genera el template "list"
      */
     private function listTemplate() {
         $tmp .= "{#\n";
@@ -51,7 +53,7 @@ class TemplateBuilder {
         $tmp .= "{% block listado %}\n\n";
         $tmp .= "<div class='Listado'>\n";
         $tmp .= "\t{% include '_global/paginacion.html.twig' with {'filter': values.listado.filter, 'controller': values.controller, 'position': 'izq'}%}\n";
-        $tmp .= "\t{% include '_global/listGenerico.html.twig' with {'listado': values.listado, 'controller': values.controller} %}\n\n";
+        $tmp .= "\t{% include '_global/listGenerico.html.twig' with {'listado': values.listado, 'controller': values.controller} %}\n";
         //$tmp .= "\t{% include '_global/paginacion.html.twig' with {'filter': values.listado.filter, 'controller': values.controller, 'position': 'der'}%}\n";
         $tmp .= "</div>\n";
         $tmp .= "{% endblock %}";
@@ -59,6 +61,42 @@ class TemplateBuilder {
         $this->templates['list'] = $tmp;
     }
 
+    /**
+     * Genera el template para las variables de ENTORNO del modulo
+     */
+    private function fieldsVarEnv() {
+        $tmp .= "{#\n";
+        $tmp .= "  Module: " . $this->filename . "\n";
+        $tmp .= "  Document : modules\\" . $this->filename . "\\fieldsVarEnv.html.twig\n\n";
+        $tmp .= "  author: Sergio Pérez <sergio.perez@albatronic.com>\n";
+        $tmp .= "  copyright: INFORMATICA ALBATRONIC SL\n";
+        $tmp .= "  date " . date('d.m.Y H:i:s') . "\n";
+        $tmp .= "#}\n\n";
+
+        $tmp .= "{% extends values.controller  ~ '/form.html.twig' %}\n\n";
+        $tmp .= "{% block variables %}\n";
+        $tmp .= "{% endblock %}";
+
+        $this->templates['fieldsVarEnv'] = $tmp;
+    }
+    /**
+     * Genera el template para las variables WEB del módulo
+     */
+    private function fieldsVarWeb() {
+        $tmp .= "{#\n";
+        $tmp .= "  Module: " . $this->filename . "\n";
+        $tmp .= "  Document : modules\\" . $this->filename . "\\fieldsVarWeb.html.twig\n\n";
+        $tmp .= "  author: Sergio Pérez <sergio.perez@albatronic.com>\n";
+        $tmp .= "  copyright: INFORMATICA ALBATRONIC SL\n";
+        $tmp .= "  date " . date('d.m.Y H:i:s') . "\n";
+        $tmp .= "#}\n\n";
+
+        $tmp .= "{% extends values.controller  ~ '/form.html.twig' %}\n\n";
+        $tmp .= "{% block variables %}\n";
+        $tmp .= "{% endblock %}";
+
+        $this->templates['fieldsVarWeb'] = $tmp;
+    }
     /**
      * Generar el template "help"
      */
@@ -103,7 +141,7 @@ class TemplateBuilder {
         //$tmp .= "\t{% include '_global/tituloGenerico.html.twig' with {'controller': values.controller, 'linkValue': values.linkBy.value} %}\n";
 
         $tmp .= "\t{% block filtro %}\n";
-        $tmp .= "\t{% if values.permisos['C'] %}\n";
+        $tmp .= "\t{% if values.permisos['CO'] and values.tieneListado %}\n";
         $tmp .= "\t\t{% include '_global/filtroGenericoWrapper.html.twig' with {'filter': values.listado.filter} %}\n";
         $tmp .= "\t{% endif %}\n";
         $tmp .= "\t{% endblock %}\n\n";
@@ -266,7 +304,8 @@ class TemplateBuilder {
             // NO SE GENERA NI LA PRIMARIKEY NI LAS COLUMNAS DE COMUNES
             if (($column['Field'] != $this->td->getPrimaryKey()) and (!in_array($column['Field'], columnasComunes::$columnasExcepcion))) {
 
-                if ($campoFoco == '') $campoFoco = $column['Field'];
+                if ($campoFoco == '')
+                    $campoFoco = $column['Field'];
 
                 $tabindex++;
 
@@ -282,8 +321,13 @@ class TemplateBuilder {
                     // El campo es un ID de referencia a otra tabla. Se muestra una lista desplegable
                     $macro = "select";
                     $tagClass = "Select";
-                    $value .= "." . $column_name;
-                    $opciones = "datos." . $column_name . ".fetchAll('" . $column['ReferencedColumn'] . "')";
+                    if (strtoupper($column['ReferencedEntity']) == 'ABSTRACT') {
+                        $value = ".IDTipo";
+                        $opciones = "datos." . $column_name . ".fetchAll('0')";
+                    } else {
+                        $value .= "." . $column_name;
+                        $opciones = "datos." . $column_name . ".fetchAll('" . $column['ReferencedColumn'] . "')";
+                    }
                 } else {
                     switch ($column['Type']) {
                         case 'datetime':
@@ -377,7 +421,6 @@ class TemplateBuilder {
                 }
             } // end if
         } // end foreach
-
         // Añado el include de los campos comunes
         $tmp .= "\n{% include '_global/fieldsComunes.html.twig' %}\n\n";
 
@@ -386,6 +429,7 @@ class TemplateBuilder {
 
         $this->templates['fields'] = $tmp;
     }
+
     /**
      * Devuelve el código html con el formulario de mantenimiento
      * @return text

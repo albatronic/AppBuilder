@@ -49,8 +49,8 @@ echo "<font color='#ff0000'>NO SE HA PODIDO ESTABLECER CONEXI�N CON LA BASE DE
  */
 $sql="create table $nombre_tabla (
 IDUrlAmigable bigint(11) NOT NULL auto_increment,
-Controller varchar(255),
-Action varchar(255),
+Controller varchar(255) NOT NULL,
+Action varchar(255) NOT NULL,
 Template varchar(255),
 Parametros varchar(255),
 IDEntidad bigint(11),

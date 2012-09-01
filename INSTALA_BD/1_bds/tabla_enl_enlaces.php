@@ -45,13 +45,13 @@ echo "<font color='#ff0000'>NO SE HA PODIDO ESTABLECER CONEXI�N CON LA BASE DE
 /* **** �OJO ! ******* */  /* Creamos la Tabla */
 $sql="create table $nombre_tabla (
 IDEnlace bigint(11) NOT NULL auto_increment,
-IDSeccion bigint(11) COMMENT 'db,enl_secciones,IDSeccion',
-Titulo varchar(255),
+IDSeccion bigint(11) NOT NULL COMMENT 'db,enl_secciones,IDSeccion',
+Titulo varchar(255) NOT NULL,
 Subtitulo varchar(255),
 Url varchar(255),
-TargetBlank tinyint(1) DEFAULT '0' COMMENT 'Abstract,ValoresSN,IDTipo',
-EsHttps tinyint(1) DEFAULT '0' COMMENT 'Abstract,ValoresSN,IDTipo',
-EsUrlInterna tinyint(1) DEFAULT '0' COMMENT 'Abstract,ValoresSN,IDTipo',
+TargetBlank tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Abstract,ValoresSN,IDTipo',
+EsHttps tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Abstract,ValoresSN,IDTipo',
+EsUrlInterna tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Abstract,ValoresSN,IDTipo',
 ".
 
 $sqlComunes.
