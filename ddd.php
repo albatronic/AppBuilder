@@ -94,10 +94,7 @@ class listadoPDF extends FPDF {
 }
 
 if ($_POST['accion'] == 'BUILD') {
-    if (!isset($_GET['dbase']) and !isset($_POST['table'])) {
-        echo "DEBE INDICAR UNA BASE DE DATOS";
-        exit;
-    }
+    if (!isset($_GET['dbase']) and !isset($_POST['table'])) die ("DEBE INDICAR UNA BASE DE DATOS");
 
     $database_connection_information = "
         define(DB_HOST,'" . $_POST[dbhost] . "');
@@ -229,7 +226,7 @@ if ($_POST['accion'] == 'BUILD') {
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
     <head>
-        <title>DATA DICTIONARY DOCUMENTATOR</title>
+        <title>Data Dictionary Documentor</title>
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
     </head>
 

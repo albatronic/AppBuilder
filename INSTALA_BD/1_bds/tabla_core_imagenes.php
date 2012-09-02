@@ -48,14 +48,14 @@ Id bigint(11) NOT NULL auto_increment,
 Entidad varchar(50) NOT NULL,
 IdEntidad bigint(11) NOT NULL,
 EsGaleria tinyint(1) NOT NULL DEFAULT '0' COMMENT 'abstract,ValoresSN,IDTipo',
-PathName varchar(255),
+PathName varchar(255) NOT NULL,
 TextoPie varchar(255) DEFAULT NULL,
 Title varchar(255) DEFAULT NULL,
 Alt varchar(255) DEFAULT NULL,
-IDTipoMime varchar(10) COMMENT 'Abstract,TiposMime,IDTipo',
-Peso int(11) DEFAULT '0',
-Alto int(11) DEFAULT '0',
-Ancho int(11) DEFAULT '0',".
+IDTipoMime varchar(10) NOT NULL COMMENT 'Abstract,TiposMime,IDTipo',
+Peso int(11) NOT NULL DEFAULT '0',
+Alto int(11) NOT NULL DEFAULT '0',
+Ancho int(11) NOT NULL DEFAULT '0',".
 
 $sqlComunes.
 $clavesComunes.

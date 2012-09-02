@@ -55,7 +55,7 @@ Template varchar(255),
 Parametros varchar(255),
 IDEntidad bigint(11),
 Entidad varchar(255),
-NumeroVisitas bigint(11),".
+NumeroVisitas bigint(11) NOT NULL DEFAULT '0',".
 
 $sqlComunes.
 //$clavesComunes.

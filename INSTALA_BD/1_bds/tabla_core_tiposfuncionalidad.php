@@ -48,7 +48,7 @@ IDTipoFuncionalidad bigint(11) NOT NULL auto_increment,
 CodigoFuncionalidad varchar(15) NOT NULL,
 Titulo varchar(100) NOT NULL,
 Descripcion varchar(100),
-EsEstandar tinyint(1) DEFAULT '1' COMMENT 'Abstract,ValoresSN,IDTipo',".
+EsEstandar tinyint(1) NOT NULL DEFAULT '1' COMMENT 'Abstract,ValoresSN,IDTipo',".
 
 $sqlComunes.
 $clavesComunes.

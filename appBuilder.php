@@ -168,12 +168,12 @@ if ($_POST['accion'] == "Generar") {
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
     <head>
-        <title>Generador de Formularios</title>
+        <title>AppBuilder</title>
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
     </head>
 
     <body>
-        <form action="AppBuilder.php" method="post" enctype="multipart/form-data">
+        <form action="appBuilder.php" method="post" enctype="multipart/form-data">
             <table align="center">
                 <tr><td colspan="2" align="center">Generador del esqueleto de una aplicaci&oacute;n</td></tr>
                 <tr><td>Servidor</td><td><input name="dbhost" type="text" value="localhost"></td></tr>

@@ -49,9 +49,9 @@ CodigoApp varchar(15) NOT NULL COMMENT 'db,core_aplicaciones,CodigoApp',
 NombreModulo varchar(255) NOT NULL,
 Nivel int(4) NOT NULL DEFAULT 0,
 PerteneceA varchar(255),
-Titulo varchar(100),
+Titulo varchar(100) NOT NULL,
 Descripcion varchar(100),
-Funcionalidades varchar(255),".
+Funcionalidades varchar(255) NOT NULL,".
 
 $sqlComunes.
 $clavesComunes.

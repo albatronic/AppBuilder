@@ -54,7 +54,7 @@ Email varchar(100),
 TelefonoMovil varchar(25),
 Nombre varchar(100) NOT NULL,
 Apellidos varchar(100) NOT NULL,
-CambioPassword tinyint(1) DEFAULT '0' COMMENT 'Abstract,ValoresSN,IDTipo',
+CambioPassword tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Abstract,ValoresSN,IDTipo',
 Ips varchar(255),
 NLogin int(4),
 UltimoLogin datetime,".
@@ -118,6 +118,10 @@ $Campo3 = array("1","2");
 $Campo4 = array("1","1");
 // Campo: IDRol
 $Campo5 = array("1","1");
+// Campo: Nombre
+$Campo6 = array("Admin","Adm");
+// Campo: Apellidos
+$Campo7 = array("Apellido Admin","Apellido Adm");
 
 
 $variablesubmodulo_nombre_campo_id="IDUsuario";

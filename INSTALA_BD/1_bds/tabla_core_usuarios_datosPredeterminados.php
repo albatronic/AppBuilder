@@ -39,4 +39,19 @@ $ruta = 'tratamientoDeCadenas.php'; include("$ruta");
 $IDRol="'".$dato."'";
 
 
+$dato=$Campo6[$indice];
+//$dato=strtoupper($dato);
+$ruta = 'eliminoAcentoPrimerCaracter.php'; include("$ruta");
+$ruta = 'tratamientoDeCadenas.php'; include("$ruta");
+
+$Nombre="'".$dato."'";
+
+
+$dato=$Campo7[$indice];
+//$dato=strtoupper($dato);
+$ruta = 'eliminoAcentoPrimerCaracter.php'; include("$ruta");
+$ruta = 'tratamientoDeCadenas.php'; include("$ruta");
+
+$Apellidos="'".$dato."'";
+
 ?>
