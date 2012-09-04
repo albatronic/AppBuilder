@@ -4,26 +4,34 @@
  * Genera una base de datos y usuario en base al esquema
  * indicado en un archivo YAML
  *
+ * Carga carga datos en las tablas creadas
+ *
+ *
  * @author Sergio Pérez <sergio.perez@albatronic.com>
  * @copyright Informática ALBATRONIC, SL
  * @date 02-sep-2012 3:48:47
  */
 class schemaBuilder {
 
-    protected $errores = array();
     protected $host;
     protected $user;
     protected $password;
     protected $dataBase;
-    protected $engine = 'MyISAM';
-    protected $charSet = 'latin1';
+    protected $defaultEngine = 'MyISAM';
+    protected $defaultCharSet = 'latin1';
+    protected $dropTablesIfExists;
     protected $dbLink = FALSE;
+    protected $indices = '';
+    protected $sql;
+    protected $errores = array();
+    protected $log = array();
 
     public function __construct(array $conection) {
         $this->host = $conection['host'];
         $this->user = $conection ['user'];
         $this->password = $conection['password'];
         $this->dataBase = $conection['dataBase'];
+        $this->dropTablesIfExists = $conection['dropTablesIfExists'];
     }
 
     /**
@@ -33,48 +41,35 @@ class schemaBuilder {
      */
     public function createDataBase() {
 
-        $ok = FALSE;
+        return $this->doQuery("CREATE DATABASE `{$this->dataBase}`;");
+    }
 
-        if ($this->connect()) {
-            $ok = $this->doQuery("CREATE DATABASE `{$this->dataBase}`;");
-            $this->close();
-        }
+    /**
+     * Borra una base de datos
+     *
+     * @return boolean TRUE si se ha borrado la base de datos
+     */
+    public function deleteDataBase() {
 
-        return $ok;
+        return $this->doQuery("DROP DATABASE `{$this->dataBase}`;");
     }
 
     /**
      * Crea un usuario en la base de datos
      *
+     * Los datos deben venir en el array $newUser('user' => 'el ususario', 'password' => 'la password')
+     *
+     *
+     * @param array $newUser Array con el usuario y contraseña
      * @return boolean TRUE si se ha creado el usuario
      */
-    public function createUser() {
+    public function createUser(array $newUser) {
 
-        $ok = FALSE;
-
-        if ($this->connect()) {
-
-            $this->close();
-        }
+        $ok = $this->doQuery("CREATE USER '{$newUser['user']}'@'$this->host' IDENTIFIED BY '{$newUser['password']}';");
+        if ($ok)
+            $ok = $this->doQuery("GRANT SELECT, INSERT, UPDATE, DELETE ON `{$this->dataBase}`.* TO '{$newUser['user']}'@'$this->host';");
 
         return $ok;
-    }
-
-    /**
-     * Crea las tablas en base al array $schema
-     *
-     * @param array $schema
-     * @return array Array de errores
-     */
-    public function buildSchema(array $schema) {
-
-        if ($this->connect()) {
-            foreach ($schema as $tableName => $tableSchema) {
-                $this->createTable($tableName, $tableSchema);
-            }
-        }
-
-        return $this->errores;
     }
 
     /**
@@ -84,30 +79,199 @@ class schemaBuilder {
      * @param array $schema El array con el esquema de la tabla
      * @return boolean TRUE si la table se creó correctamente
      */
-    private function createTable($name, array $schema) {
+    public function createTable($name, array $schema) {
 
-        $columnas = "`id` bigint(11) NOT NULL AUTO_INCREMENT,";
-        $indices = "PRIMARY KEY (`id`)";
-        $query = "CREATE TABLE `{$this->dataBase}`.`{$name}` ({$columnas} {$indices}) ENGINE={$this->engine} DEFAULT CHARSET={$this->charSet};";
+        ($schema['engine'] != '') ? $engine = $schema['engine'] : $engine = $this->defaultEngine;
+        ($schema['charSet'] != '') ? $charSet = $schema['charSet'] : $charSet = $this->defaultCharSet;
 
-        if ($ok) {
-            // Crear las columnas
-            if (is_array($schema['columns']))
-                foreach ($schema['columns'] as $column) {
+        $columnas = "  `id` bigint(11) NOT NULL AUTO_INCREMENT,\n";
+        $this->indices = "  PRIMARY KEY (`id`)";
 
+        // Crear sintaxis de las columnas
+        if (is_array($schema['columns']))
+            foreach ($schema['columns'] as $columnName => $attributes) {
+                $columnas .= "  " . $this->buildColumn($columnName, $attributes) . ",\n";
+            }
+
+        // Crear sintaxis de las relaciones extranjeras
+        if (is_array($schema['relations']))
+            foreach ($schema['relations'] as $foreignTable => $attributes) {
+
+            }
+
+        if ($this->dropTablesIfExists) {
+            $query = "DROP TABLE IF EXISTS `{$this->dataBase}`.`{$name}`;";
+            $this->doQuery($query);
+        }
+        $query = "CREATE TABLE `{$this->dataBase}`.`{$name}` (\n{$columnas}{$this->indices}\n) ENGINE={$engine} DEFAULT CHARSET={$charSet} COMMENT '{$schema['comment']}';";
+
+        return $this->doQuery($query);
+    }
+
+    /**
+     * Borra una tabla
+     *
+     * @return boolean TRUE si se ha borrado la tabla
+     */
+    public function deleteTable($name) {
+
+        return $this->doQuery("DROP TABLE `{$this->dataBase}`.`{$name}`;");
+    }
+
+    /**
+     * Vacia una tabla
+     *
+     * @return boolean TRUE si se ha vaciado la tabla
+     */
+    public function truncateTable($name) {
+
+        return $this->doQuery("TRUNCATE TABLE `{$this->dataBase}`.`{$name}`;");
+    }
+
+    /**
+     * Crea las tablas en base al array $schema
+     *
+     * @param array $schema Array con el esquema de la base de datos
+     * @return boolean TRUE si se ha construido el esquema
+     */
+    public function buildSchema(array $schema) {
+
+        if (is_array($schema)) {
+            foreach ($schema as $tableName => $tableSchema)
+                if ($this->createTable($tableName, $tableSchema))
+                    $this->log[] = "Tabla '{$tableName}' creada.";
+        } else
+            $this->errores[] = "NO HAY ESQUEMA";
+
+        return ( count($this->errores) == 0 );
+    }
+
+    /**
+     * Carga datos en las tablas en base al array $fixtures
+     *
+     * Vacia la tabla antes de cargarlas
+     *
+     * Pone en $this->errores[] los posibles errores y además
+     * la estadística de la tablas creadas y filas insertadas
+     *
+     * @param array $fixtures Array con los datos a cargar
+     * @return boolean TRUE si la carga se hizo correctamente
+     */
+    public function loadFixtures(array $fixtures) {
+
+        if (is_array($fixtures)) {
+            foreach ($fixtures as $table => $rows) {
+                // Cada Tabla
+                $nRows = 0;
+                if ($this->truncateTable($table)) {
+                    foreach ($rows as $row)
+                    // Cada Fila
+                        $nRows += $this->insertRow($table, $row);
                 }
+                $this->log[] = "Tabla '{$table}', {$nRows} filas insertadas";
+            }
+        } else
+            $this->errores[] = "NO HAY DATOS QUE CARGAR";
 
-            // Crear las relaciones extranjeras
-            if (is_array($schema['relations']))
-                foreach ($schema['relations'] as $relation) {
+        return ( count($this->errores) == 0 );
+    }
 
-                }
+    /**
+     * Inserta el registro  $row en la tabla $table
+     *
+     * @param string $table El nombre de la tabla
+     * @param array $row Array correspondiente a una fila ('columnName' => 'Value')
+     * @return boolean TRUE si se insertó correctamente
+     */
+    private function insertRow($table, array $row) {
+
+        $columns = '';
+        $values = '';
+
+        foreach ($row as $column => $value) {
+            $columns .= "`{$column}`,";
+            $values .= "'" . mysql_real_escape_string($value) . "',";
+        }
+        // Quito las comas finales
+        $columns = substr($columns, 0, -1);
+        $values = substr($values, 0, -1);
+
+        $query = "INSERT INTO `{$this->dataBase}`.`{$table}` ({$columns}) VALUES ({$values});";
+
+        return $this->doQuery($query);
+    }
+
+    /**
+     * Devuelve la sintaxis SQL de definición de una columna
+     *
+     * Hace conversiones de tipos de datos
+     *
+     * @param string $name Nombre de la columna
+     * @param array $attributes Array con los atributos de la columna
+     * @return string La sintaxis de una columna
+     */
+    private function buildColumn($name, array $attributes) {
+
+
+        // VALIDAR LOS TIPOS DE DATOS. AQUI HAY QUE ACTUAR
+        // DE UNA FORMA U OTRA DEPENDIENDO DEL TIPO DE BASE DE DATOS
+        $arrayTipo = explode("(", $attributes['type']);
+        $tipo = strtoupper($arrayTipo[0]);
+        $precision = str_replace(")", "", $arrayTipo[1]);
+        switch ($tipo) {
+            case 'TEXT':
+                $tipo = 'TEXT';
+                break;
+            case 'INT':
+            case 'INTEGER':
+                if (!$precision)
+                    $precision = '4';
+                $tipo = "INTEGER({$precision})";
+                break;
+            case 'DECIMAL':
+                if (!$precision)
+                    $precision = '10,2';
+                $tipo = "DECIMAL({$precision})";
+                break;
+            case 'STRING':
+                if (!$precision)
+                    $precision = '255';
+                $tipo = "VARCHAR({$precision})";
+                break;
+            case 'TINYINT':
+                if (!$precision)
+                    $precision = '1';
+                $tipo = "TINYINT({$precision})";
+            case 'BOOLEAN':
+                $tipo = "TINYINT(1)";
+                break;
+            case 'TIMESTAMP':
+                $tipo = "TIMESTAMP";
+                break;
+            case 'DATETIME':
+                $tipo = 'DATETIME';
+                break;
+            case 'DATE':
+                $tipo = "DATE";
+                break;
+            case 'TIME':
+                $tipo = "TIME";
+                break;
+            default:
+                $tipo = "** TIPO NO RECONOCIDO EN LA COLUMNA {$name}: " . $tipo . " " . $precision;
         }
 
-        echo $query;
-        $ok = $this->doQuery($query);
+        $column = "`{$name}` {$tipo}";
+        if ($attributes['notnull'])
+            $column .= " NOT NULL";
+        if (isset($attributes['default']))
+            $column .= " DEFAULT '{$attributes['default']}'";
+        if ($attributes['index'])
+            $this->indices .= ",\n  {$attributes['index']} `{$name}` (`{$name}`)";
+        if ($attributes['comment'])
+            $column .= " COMMENT '{$attributes['comment']}'";
 
-        return $ok;
+        return $column;
     }
 
     /**
@@ -115,11 +279,11 @@ class schemaBuilder {
      *
      * @return boolean TRUE si la conexión se ha realizado
      */
-    public function connect() {
+    private function connect() {
 
+        $this->dbLink = @mysql_connect($this->host, $this->user, $this->password);
         if (!$this->dbLink)
-            $this->dbLink = mysql_connect($this->host, $this->user, $this->password);
-
+            $this->errores[] = "ERROR DE CONEXION: " . mysql_errno() . " " . mysql_error();
 
         return $this->dbLink;
     }
@@ -127,18 +291,33 @@ class schemaBuilder {
     /**
      * Cierra la conexión a la BD
      */
-    public function close() {
+    private function close() {
         if ($this->dbLink)
             mysql_close($this->dbLink);
     }
 
     /**
-     * Devuelve el dbLink
+     * Ejecuta la sentencia SQL $query
      *
-     * @return integer
+     * Pone en $this->sql la sentencia ejecutada
+     *
+     * @param string $query Sentencia SQL
+     * @return boolean TRUE si se ejecutró con éxito
      */
-    public function getDbLink() {
-        return $this->dbLink;
+    private function doQuery($query) {
+
+        $this->sql .= $query . "\n\n";
+
+        if ($this->connect()) {
+            $ok = mysql_query($query, $this->dbLink);
+
+            if (!$ok)
+                $this->errores[] = "ERROR QUERY: " . mysql_errno($this->dbLink) . " " . mysql_error($this->dbLink);
+
+            $this->close();
+        }
+
+        return $ok;
     }
 
     /**
@@ -150,14 +329,22 @@ class schemaBuilder {
         return $this->errores;
     }
 
-    private function doQuery($query) {
+    /**
+     * Devuelve el array con los mensajes log
+     * 
+     * @return array Array con los texto logs
+     */
+    public function getLog() {
+        return $this->log;
+    }
 
-        $ok = mysql_query($query, $this->dbLink);
-
-        if (!$ok)
-            $this->errores[] = "ERROR QUERY: " . $query;
-
-        return $ok;
+    /**
+     * Devuelve las sentencias SQL generadas durante todo el proceso
+     *
+     * @return string Sentencia SQL
+     */
+    public function getSql() {
+        return $this->sql;
     }
 
 }

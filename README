@@ -10,7 +10,9 @@ A partir de la definicion de la base de datos se generan de forma automatica:
 
 Usage:
 
-AppBuilder.php --> to generate skeleton, ORM class entities, Controllers and templates
+schemaBuilder.php --> to generate schema data base and load data from yml definition files
+
+appBuilder.php --> to generate skeleton, ORM class entities, Controllers and templates
 
 ddd.php --> to generate the Data Dictionary document pdf
 

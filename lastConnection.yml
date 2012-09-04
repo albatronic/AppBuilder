@@ -1,0 +1,9 @@
+POST:
+  host: localhost
+  user: root
+  password: albatronic
+  dataBase: sergio
+  dropTablesIfExists: false
+FILES:
+  fileNameSchema: { name: schema.yml, type: application/x-yaml, tmp_name: /tmp/phpVZg6w9, error: 0, size: 5951 }
+  fileNameFixtures: { name: fixtures.yml, type: application/x-yaml, tmp_name: /tmp/phpyqcJp3, error: 0, size: 1499 }
