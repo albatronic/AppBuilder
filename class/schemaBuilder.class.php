@@ -23,6 +23,7 @@ class schemaBuilder {
     protected $dbLink = FALSE;
     protected $indices = '';
     protected $sql;
+    protected $lastInsertId;
     protected $errores = array();
     protected $log = array();
 
@@ -84,8 +85,8 @@ class schemaBuilder {
         ($schema['engine'] != '') ? $engine = $schema['engine'] : $engine = $this->defaultEngine;
         ($schema['charSet'] != '') ? $charSet = $schema['charSet'] : $charSet = $this->defaultCharSet;
 
-        $columnas = "  `id` bigint(11) NOT NULL AUTO_INCREMENT,\n";
-        $this->indices = "  PRIMARY KEY (`id`)";
+        $columnas = "  `Id` bigint(11) NOT NULL AUTO_INCREMENT,\n";
+        $this->indices = "  PRIMARY KEY (`Id`)";
 
         // Crear sintaxis de las columnas
         if (is_array($schema['columns']))
@@ -178,6 +179,7 @@ class schemaBuilder {
 
     /**
      * Inserta el registro  $row en la tabla $table
+     * y pone valores por defecto
      *
      * @param string $table El nombre de la tabla
      * @param array $row Array correspondiente a una fila ('columnName' => 'Value')
@@ -192,13 +194,24 @@ class schemaBuilder {
             $columns .= "`{$column}`,";
             $values .= "'" . mysql_real_escape_string($value) . "',";
         }
-        // Quito las comas finales
-        $columns = substr($columns, 0, -1);
-        $values = substr($values, 0, -1);
+        // Añado valores por defecto
+        $columns .= "`CreatedBy`,`CreatedAt`";
+        $values .= "'1','" . date('Y-m-d H:i:s') . "'";
 
         $query = "INSERT INTO `{$this->dataBase}`.`{$table}` ({$columns}) VALUES ({$values});";
 
-        return $this->doQuery($query);
+        $ok = $this->doQuery($query);
+
+        // Despues de insertar actualizo algunas columnas
+        // Se si ha indicado 'Orden' lo respeto
+        if ($ok) {
+            (isset($row['Orden'])) ? $orden = $row['Orden'] :  $orden = $this->lastInsertId;
+            $updates = "`PrimaryKeyMD5` = '" . md5($this->lastInsertId) . "', `Orden` = '" . $orden . "'";
+            $query = "UPDATE `{$this->dataBase}`.`{$table}` SET {$updates} WHERE Id = '{$this->lastInsertId}';";
+            $ok = $this->doQuery($query);
+        }
+
+        return $ok;
     }
 
     /**
@@ -311,7 +324,9 @@ class schemaBuilder {
         if ($this->connect()) {
             $ok = mysql_query($query, $this->dbLink);
 
-            if (!$ok)
+            if ($ok)
+                $this->lastInsertId = mysql_insert_id($this->dbLink);
+            else
                 $this->errores[] = "ERROR QUERY: " . mysql_errno($this->dbLink) . " " . mysql_error($this->dbLink);
 
             $this->close();
@@ -331,7 +346,7 @@ class schemaBuilder {
 
     /**
      * Devuelve el array con los mensajes log
-     * 
+     *
      * @return array Array con los texto logs
      */
     public function getLog() {

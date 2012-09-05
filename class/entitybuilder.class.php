@@ -33,8 +33,9 @@ class EntityBuilder {
         $this->td = new TableDescriptor(DB_BASE, $table);
         $this->validate = $validate;
 
-        $this->className = str_replace("_", " ", strtolower($this->td->getTable()));
-        $this->className = str_replace(" ", "", ucwords($this->className));
+        //$this->className = str_replace("_", " ", strtolower($this->td->getTable()));
+        //$this->className = str_replace(" ", "", ucwords($this->className));
+        $this->className = $this->td->getTable();
         $this->Load();
     }
 

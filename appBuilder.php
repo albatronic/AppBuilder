@@ -75,10 +75,12 @@ if ($_POST['accion'] == "Generar") {
 
         foreach ($tables as $row) {
             $tablename = $row['TABLE_NAME'];
-            $new_classes[strtolower($tablename)] = "$tablename";
+            //$new_classes[strtolower($tablename)] = "$tablename";
+            $new_classes[$tablename] = "$tablename";
 
-            $filename = str_replace("_", " ", strtolower($tablename));
-            $filename = str_replace(" ", "", ucwords($filename));
+            //$filename = str_replace("_", " ", strtolower($tablename));
+            //$filename = str_replace(" ", "", ucwords($filename));
+            $filename = $tablename;
 
             // CREAR MODULO
             // ------------
@@ -148,8 +150,9 @@ if ($_POST['accion'] == "Generar") {
             // CREAR ENTIDAD DE DATOS
             // ----------------------
             if ((file_exists($pathmodel)) and (($_POST['model'] == 'on') or ($_POST['method'] == 'on'))) {
-                $filename = str_replace("_", " ", strtolower($tablename));
-                $filename = str_replace(" ", "", ucwords($filename));
+                //$filename = str_replace("_", " ", strtolower($tablename));
+                //$filename = str_replace(" ", "", ucwords($filename));
+                $filename = $tablename;
                 $entity = new EntityBuilder($tablename);
 
                 // Crear la clase para el modelo de datos

@@ -36,8 +36,9 @@ class ListadosYmlBuilder {
 
     public function __construct($table='') {
         $this->td = new TableDescriptor(DB_BASE, $table);
-        $this->filename = str_replace("_", " ", $this->td->getTable());
-        $this->filename = str_replace(" ", "", ucwords($this->filename));
+        //$this->filename = str_replace("_", " ", $this->td->getTable());
+        //$this->filename = str_replace(" ", "", ucwords($this->filename));
+        $this->filename = $this->td->getTable();
         $this->creaYAML();
     }
 
