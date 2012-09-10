@@ -6,4 +6,4 @@ POST:
   dropTablesIfExists: false
 FILES:
   fileNameSchema: { name: '', type: '', tmp_name: '', error: 4, size: 0 }
-  fileNameFixtures: { name: fixturesModulos.yml, type: application/x-yaml, tmp_name: /tmp/phpwtUL2E, error: 0, size: 3730 }
+  fileNameFixtures: { name: fixturesModules.yml, type: application/x-yaml, tmp_name: /tmp/phpo3nwZN, error: 0, size: 4548 }

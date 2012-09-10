@@ -19,7 +19,9 @@ include "class/configymlbuilder.class.php";
 include "class/listadosymlbuilder.class.php";
 include "class/entitybuilder.class.php";
 include 'class/columnasComunes.class.php';
+include 'class/tiposVariables.class.php';
 include "class/CreaFichero.class.php";
+include "class/yaml/lib/sfYaml.php";
 
 define('DS', DIRECTORY_SEPARATOR);
 
@@ -198,7 +200,7 @@ if ($_POST['accion'] == "Generar") {
                 <tr><td>Generar Ayudas</td><td><input name="help" type="checkbox"></td></tr>
                 <tr style="height: 10px;"><td colspan="2"></td></tr>
                 <tr><td>Generar Modelo de datos</td><td><input name="model" type="checkbox"></td></tr>
-                <tr><td>Generar Metodos</td><td><input name="method" type="checkbox"></td></tr>
+                <tr><td>Generar Metodos !! CUIDADO ¡¡</td><td><input name="method" type="checkbox"></td></tr>
                 <tr>
                     <td colspan="2" align="center">
                         <input name="accion" value="Generar" type="submit">&nbsp;

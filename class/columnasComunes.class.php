@@ -13,13 +13,12 @@ class columnasComunes {
      * @var array
      */
     static $columnasExcepcion = array(
-        'Observaciones',
+        'Observations',
         'PrimaryKeyMD5',
-        'EsPredeterminado',
-        'Revisado',
-        'Publicar',
-        'VigenteDesde',
-        'VigenteHasta',
+        'IsDefault',
+        'Checked',
+        'Publish',
+        'BelongsTo',
         'CreatedBy',
         'CreatedAt',
         'ModifiedBy',
@@ -27,18 +26,34 @@ class columnasComunes {
         'Deleted',
         'DeletedBy',
         'DeletedAt',
-        'Privacidad',
-        'Orden',
-        'FechaPublicacion',
-        'UrlAmigable',
+        'Privacy',
+        'Order',
+        'PublishedAt',
+        'ActiveFrom',
+        'ActiveTo',
+        'UrlPrefix',
+        'LockUrlPrefix',
+        'Slug',
+        'LockSlug',
+        'UrlFriendly',
+        'UrlHeritable',
+        'NumberVisits',
         'MetatagTitle',
         'MetatagKeywords',
         'MetatagDescription',
         'MetatagTitleSimple',
-        'MetatagTitlePosicion',
-        'MostrarEnMapaWeb',
-        'ImportanciaMapaWeb',
-        'ChangeFreqMapaWeb',
+        'MetatagTitlePosition',
+        'ShowOnSitemap',
+        'ImportanceSitemap',
+        'ChangeFreqSitemap',
+    );
+
+    /**
+     * Columnas a ignorar cuando se genera el config.yml de cada módulo
+     * @var array
+     */
+    static $columnasExcepcionConfig = array (
+
     );
 }
 

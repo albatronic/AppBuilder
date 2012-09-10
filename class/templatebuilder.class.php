@@ -271,13 +271,14 @@ class TemplateBuilder {
         $tmp .= "\t\t\t{% include '_global/formErrores.html.twig' with {'errores': values.errores} %}\n";
         $tmp .= "\t\t\t{% include '_global/alertas.html.twig' with {'alertas': values.alertas} %}\n\n";
         $tmp .= "\t\t\t<ul>\n";
-        $tmp .= "\t\t\t\t{% include values.controller ~ \"/fields.html.twig\" with {'datos': values.datos} %}\n";
+        $tmp .= "\t\t\t\t{% include values.controller ~ \"/fields.html.twig\" with {'datos' : values.datos, 'atributos' : values.atributos } %}\n";
         $tmp .= "\t\t\t</ul>\n";
         $tmp .= "\t\t</form>\n";
         $tmp .= "\t\t</div>\n";
         $tmp .= "\t\t</div>\n";
         $tmp .= "\t</div>\n";
         $tmp .= "</div>\n";
+        $tmp .= "<div id='div_formVariablesEnv' class='formVariablesEnv'></div>\n";
         $tmp .= "{% endblock %}";
 
         $this->templates['form'] = $tmp;
@@ -312,7 +313,7 @@ class TemplateBuilder {
 
                 $column_name = str_replace('-', '_', $column['Field']);
 
-                $label = ucwords($column_name);
+                $label = "atributos." . $column_name;
                 $labelClass = $labelClass;
                 $name = "values.controller ~ '[" . $column_name . "]'";
                 $id = "values.controller ~ '_" . $column_name . "'";
@@ -321,7 +322,7 @@ class TemplateBuilder {
                 if ($column['ReferencedSchema'] != '') {
                     // El campo es un ID de referencia a otra tabla. Se muestra una lista desplegable
                     $macro = "select";
-                    $tagClass = "Select";
+                    $tagClass = "chzn-select";
                     if (strtoupper($column['ReferencedEntity']) == 'ABSTRACT') {
                         $value = ".IDTipo";
                         $opciones = "datos." . $column_name . ".fetchAll('0')";
@@ -405,19 +406,19 @@ class TemplateBuilder {
 
                 switch ($macro) {
                     case 'input':
-                        $tmp .= "{{ macro.input('" . $label . "','" . $labelClass . "','" . $type . "'," . $name . "," . $id . "," . $value . ",'" . $maxLong . "','" . $tagClass . "','" . $tabindex . "') }}\n";
+                        $tmp .= "{{ macro.input(" . $label . ",'" . $labelClass . "','" . $type . "'," . $name . "," . $id . "," . $value . ",'" . $maxLong . "','" . $tagClass . "','" . $tabindex . "') }}\n";
                         break;
 
                     case 'textarea':
-                        $tmp .= "{{ macro.textarea('" . $label . "','" . $labelClass . "'," . $name . "," . $id . "," . $value . ",none,none,'" . $tagClass . "','" . $tabindex . "')}}\n";
+                        $tmp .= "{{ macro.textarea(" . $label . ",'" . $labelClass . "'," . $name . "," . $id . "," . $value . ",none,none,'" . $tagClass . "','" . $tabindex . "')}}\n";
                         break;
 
                     case 'fecha':
-                        $tmp .= "{{ macro.fecha('" . $label . "','" . $labelClass . "'," . $name . "," . $id . "," . $value . ",'" . $maxLong . "','" . $tagClass . "','" . $tabindex . "')}}\n";
+                        $tmp .= "{{ macro.fecha(" . $label . ",'" . $labelClass . "'," . $name . "," . $id . "," . $value . ",'" . $maxLong . "','" . $tagClass . "','" . $tabindex . "')}}\n";
                         break;
 
                     case 'select':
-                        $tmp .= "{{ macro.select('" . $label . "','" . $labelClass . "'," . $name . "," . $id . ",none," . $value . "," . $opciones . ",'" . $tagClass . "','" . $tabindex . "')}}\n";
+                        $tmp .= "{{ macro.select(" . $label . ",'" . $labelClass . "'," . $name . "," . $id . ",none," . $value . "," . $opciones . ",'" . $tagClass . "','" . $tabindex . "')}}\n";
                         break;
                 }
             } // end if

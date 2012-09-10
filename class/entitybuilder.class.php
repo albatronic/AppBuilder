@@ -8,28 +8,8 @@ class EntityBuilder {
     private $buffer;
     private $validate;
     private $td;
-    private $variable_types = array(
-        "int" => "integer",
-        "longtext" => "string",
-        "text" => "string",
-        "bool" => "bool",
-        "date" => "date",
-        "blob" => "integer",
-        "float" => "integer",
-        "decimal" => "integer",
-        "double" => "integer",
-        "bigint" => "integer",
-        "tinyint" => "tinyint",
-        "longint" => "integer",
-        "varchar" => "string",
-        "char" => "string",
-        "smallint" => "integer",
-        "datetime" => "datetime",
-        "timestamp" => "datetime",
-    );
 
-
-    public function __construct($table='', $validate=false) {
+    public function __construct($table = '', $validate = false) {
         $this->td = new TableDescriptor(DB_BASE, $table);
         $this->validate = $validate;
 
@@ -58,22 +38,22 @@ class EntityBuilder {
                 $buf .= "\t/**\n";
                 if ($column['Field'] == $this->td->getPrimaryKey()) {
                     if ($column['Extra'] == 'auto_increment') {
-                        $buf .= "\t * @orm:GeneratedValue\n";
+                        $buf .= "\t * @orm GeneratedValue\n";
                     }
-                    $buf .= "\t * @orm:Id\n";
+                    $buf .= "\t * @orm Id\n";
                 }
-                $buf .= "\t * @orm:Column(type=\"{$this->variable_types[$column['Type']]}\")\n";
-                if ($column['Null'] == 'NO') {
-                    $buf .= "\t * @assert:NotBlank(groups=\"{$this->td->getTable()}\")\n";
-                }
-                if ($column['ReferencedSchema'] != '') {
+                if ($column['ReferencedSchema'] != '')
                     $buf .= "\t * @var entities\\" . $column['ReferencedEntity'] . "\n";
+                else
+                    $buf .= "\t * @var ". tiposVariables::$tipos[$column['Type']] ."\n";
+                if ($column['Null'] == 'NO') {
+                    $buf .= "\t * @assert NotBlank(groups=\"{$this->td->getTable()}\")\n";
                 }
                 $buf .= "\t */\n";
                 if (!is_null($column['Default']) and ($column['Default'] != ''))
                     $valorpordefecto = " = '" . $column['Default'] . "'";
                 else
-                    $valorpordefecto='';
+                    $valorpordefecto = '';
                 $buf .= "\tprotected \$" . $column_name . $valorpordefecto . ";\n";
             }
         }
@@ -122,7 +102,7 @@ class EntityBuilder {
 //      STRING: quito espacios en blanco (trim)
 //      DATE:   instancio un objeto del tipo fecha
 //      Resto de tipos: lo almaceno tal cual
-                switch ($this->variable_types[$column['Type']]) {
+                switch (tiposVariables::$tipos[$column['Type']]) {
                     case 'string':
                         $valor = "\t\t\$this->$column_name = trim(\$$column_name);";
                         break;
@@ -146,12 +126,12 @@ class EntityBuilder {
                     $valor = "\t\tif (!(\$this->$column_name instanceof $relEntity))\n";
                     $valor .= "\t\t\t\$this->$column_name = new $relEntity(\$this->$column_name);\n";
                     $valor .= "\t\treturn \$this->$column_name;";
-                } elseif ($this->variable_types[$column['Type']] == 'date') {
+                } elseif (tiposVariables::$tipos[$column['Type']] == 'date') {
                     $valor = "\t\t\$date = new Fecha(\$this->$column_name);\n";
                     $valor .= "\t\t\$ddmmaaaa = \$date->getddmmaaaa();\n";
                     $valor .= "\t\tunset(\$date);\n";
                     $valor .= "\t\treturn \$ddmmaaaa;";
-                } elseif ($this->variable_types[$column['Type']] == 'tinyint') {
+                } elseif (tiposVariables::$tipos[$column['Type']] == 'tinyint') {
                     $relEntity = "ValoresSN";
                     $valor = "\t\tif (!(\$this->$column_name instanceof $relEntity))\n";
                     $valor .= "\t\t\t\$this->$column_name = new $relEntity(\$this->$column_name);\n";

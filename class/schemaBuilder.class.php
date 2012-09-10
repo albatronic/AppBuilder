@@ -203,10 +203,10 @@ class schemaBuilder {
         $ok = $this->doQuery($query);
 
         // Despues de insertar actualizo algunas columnas
-        // Se si ha indicado 'Orden' lo respeto
+        // Se si ha indicado 'Order' lo respeto
         if ($ok) {
-            (isset($row['Orden'])) ? $orden = $row['Orden'] :  $orden = $this->lastInsertId;
-            $updates = "`PrimaryKeyMD5` = '" . md5($this->lastInsertId) . "', `Orden` = '" . $orden . "'";
+            (isset($row['Order'])) ? $orden = $row['Order'] :  $orden = $this->lastInsertId;
+            $updates = "`PrimaryKeyMD5` = '" . md5($this->lastInsertId) . "', `Order` = '" . $orden . "'";
             $query = "UPDATE `{$this->dataBase}`.`{$table}` SET {$updates} WHERE Id = '{$this->lastInsertId}';";
             $ok = $this->doQuery($query);
         }
