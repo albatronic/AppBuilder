@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>img{ height: 100px; float: left; }</style>
+        <script src="http://code.jquery.com/jquery-latest.js"></script>
+    </head>
+    <body>
+        <div id="images">
+
+        </div>
+
+        <script>
+            $.getJSON("https://foxplaces.appspot.com/fox/fans?userID=46001&callback=?",
+            function(data) {
+                alert('adafsd');
+                $.each(data.items, function(i,item){
+                    $("<img/>").attr("src", item.imageURL).appendTo("#images");
+                    if ( i == 3 ) return false;
+                });
+            });
+        </script>
+
+    </body>
+</html>

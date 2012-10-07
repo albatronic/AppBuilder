@@ -103,16 +103,16 @@ if ($_POST['accion'] == "Generar") {
                     new CreaFichero($pathmodules . DS . "config.yml", $config->getConfigYml());
                 }
 
-                //Crear el archivo con el formulario de variables de entorno
+                //Crear el archivo yml de las variables de entorno
                 if ($_POST['varEntorno'] == 'on') {
                     $config = new ConfigYmlBuilder($tablename);
-                    new CreaFichero($pathmodules . DS . "fieldsVarEnv.html.twig", $config->getFieldsVarEntorno());
+                    new CreaFichero($pathmodules . DS . "varEnv.yml", $config->getFieldsVarEntorno());
                 }
 
-                //Crear el archivo con el formulario de variables de web
+                //Crear el archivo yml de las variables web
                 if ($_POST['varWeb'] == 'on') {
                     $config = new ConfigYmlBuilder($tablename);
-                    new CreaFichero($pathmodules . DS . "fieldsVarWeb.html.twig", $config->getFieldsVarWeb());
+                    new CreaFichero($pathmodules . DS . "varWeb.yml", $config->getFieldsVarWeb());
                 }
 
                 //Crear el archivo listados.yml

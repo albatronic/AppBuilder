@@ -13,6 +13,7 @@
  *     Clase para leer archivos YAML: class/yaml/lib/sfYaml.php
  *     Clase class/schemaBuilder.class.php
  *     Clase class/Archivo.class.php
+ *     Clase class/entitybuilder.class.php
  *
  *
  *  * EJEMPLO DEL ESQUEMA DE UNA TABLA EN FORMATO YAML:
@@ -121,7 +122,20 @@ else
 if (file_exists("class/Archivo.class.php"))
     include "class/Archivo.class.php";
 else
-    die("NO EXISTE LA CLASE schemaBuilder.class.php");
+    die("NO EXISTE LA CLASE Archivo.class.php");
+
+if (file_exists("class/entitybuilder.class.php"))
+    include "class/entitybuilder.class.php";
+else
+    die("NO EXISTE LA CLASE entitybuilder.class.php");
+
+if (file_exists("class/tabledescriptor.class.php"))
+    include "class/tabledescriptor.class.php";
+else
+    die("NO EXISTE LA CLASE tabledescriptor.class.php");
+
+include 'class/columnasComunes.class.php';
+include 'class/tiposVariables.class.php';
 
 class schema {
 
@@ -139,21 +153,29 @@ class schema {
         }
     }
 
-    public function build($arraySchema) {
+    public function buildTables($arraySchema) {
 
         if (is_array($arraySchema))
-            $ok = $this->sb->buildSchema($arraySchema);
+            $this->sb->buildTables($arraySchema);
         else
             $this->errores[] = "No ha seleccionado el archivo con el esquema";
+    }
+
+    /**
+     * Construye el esquema yml en base las las tablas existentes
+     */
+    public function buildSchema() {
+
+        if (!$this->sb->buildSchema())
+            $this->errores = $this->sb->getErrores();
     }
 
     public function loadFixtures($arrayFixtures) {
 
         if (is_array($arrayFixtures))
-            $ok = $this->sb->loadFixtures($arrayFixtures);
+            $this->sb->loadFixtures($arrayFixtures);
         else
             $this->errores[] = "No ha seleccionado el archivo con los datos";
-
     }
 
     public function createDataBase() {
@@ -255,6 +277,13 @@ switch ($_SERVER['REQUEST_METHOD']) {
             'FILES' => $_FILES,
         );
 
+        $database_connection_information = "
+            define(DB_HOST,'" . $_POST['host'] . "');
+            define(DB_USER,'" . $_POST['user'] . "');
+            define(DB_PASS,'" . $_POST['password'] . "');
+            define(DB_BASE,'" . $_POST['dataBase'] . "');";
+        eval($database_connection_information);
+
         $schema = new schema($connection);
         $schema->saveCurrentParametersConnection();
 
@@ -274,14 +303,17 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
             if ($ok) {
                 switch ($_POST['action']) {
-                    case 'BUILD':
-                        $schema->build(sfYaml::load($_FILES['fileNameSchema']['tmp_name']));
+                    case 'BUILD SCHEMA':
+                        $schema->buildSchema();
+                        break;
+                    case 'BUILD TABLES':
+                        $schema->buildTables(sfYaml::load($_FILES['fileNameSchema']['tmp_name']));
                         break;
                     case 'LOAD FIXTURES':
                         $schema->loadFixtures(sfYaml::load($_FILES['fileNameFixtures']['tmp_name']));
                         break;
                     case 'BUILD AND LOAD':
-                        $schema->build(sfYaml::load($_FILES['fileNameSchema']['tmp_name']));
+                        $schema->buildTables(sfYaml::load($_FILES['fileNameSchema']['tmp_name']));
                         $schema->loadFixtures(sfYaml::load($_FILES['fileNameFixtures']['tmp_name']));
                         break;
                 }
@@ -331,7 +363,8 @@ switch ($_SERVER['REQUEST_METHOD']) {
                     <tr><td>Drop Tables</td><td><input name="dropTablesIfExists" type="checkbox" title="AÑADE 'DROP TABLE IF EXISTS'"></td></tr>
                     <tr>
                         <td colspan="2" align="center">
-                            <input name="action" value="BUILD" type="submit" title="CREA las tablas en base al esquema">&nbsp;
+                            <input name="action" value="BUILD SCHEMA" type="submit" title="CREA el esquema en base a las tablas">&nbsp;
+                            <input name="action" value="BUILD TABLES" type="submit" title="CREA las tablas en base al esquema">&nbsp;
                             <input name="action" value="LOAD FIXTURES" type="submit" title="VACIA las tablas y CARGA los datos">&nbsp;
                             <input name="action" value="BUILD AND LOAD" type="submit" title="CREA las tablas y CARGA los datos">&nbsp;
                             <input name="action" value="CANCEL" type="submit">

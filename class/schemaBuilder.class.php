@@ -135,7 +135,7 @@ class schemaBuilder {
      * @param array $schema Array con el esquema de la base de datos
      * @return boolean TRUE si se ha construido el esquema
      */
-    public function buildSchema(array $schema) {
+    public function buildTables(array $schema) {
 
         if (is_array($schema)) {
             foreach ($schema as $tableName => $tableSchema)
@@ -145,6 +145,43 @@ class schemaBuilder {
             $this->errores[] = "NO HAY ESQUEMA";
 
         return ( count($this->errores) == 0 );
+    }
+
+    /**
+     * Lee la tablas existencias y genera un archivo yml
+     * con el esquema de la base de datos.
+     *
+     * Este método solo funciona con BDs mysql
+     *
+     * El archivo generado tiene el nombre de la base de datos
+     *
+     * @return boolean TRUE si se construyo con éxito
+     */
+    public function buildSchema() {
+
+        $ok = FALSE;
+        $arrayTablas = array();
+
+        $dblink = mysql_connect($this->host, $this->user, $this->password);
+        mysql_select_db($this->dataBase, $dblink);
+
+        $query = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='" . $this->dataBase . "'";
+        $result = mysql_query($query, $dblink);
+        while ($row = mysql_fetch_array($result)) {
+            $entity = new EntityBuilder($row['TABLE_NAME']);
+            $arrayTabla = $entity->getSchema();
+            $arrayTablas[$row['TABLE_NAME']] = $arrayTabla[$row['TABLE_NAME']];
+        }
+        unset($entity);
+
+        $yml = "# ESQUEMA DE LA BD " . $this->dataBase . "\n\n";
+        $yml .= sfYaml::dump($arrayTablas,2);
+
+        $archivo = new Archivo($this->dataBase . ".yml");
+        $ok = $archivo->write($yml);
+        unset($archivo);
+
+        return $ok;
     }
 
     /**
@@ -203,10 +240,10 @@ class schemaBuilder {
         $ok = $this->doQuery($query);
 
         // Despues de insertar actualizo algunas columnas
-        // Se si ha indicado 'Order' lo respeto
+        // Se si ha indicado 'SortOrder' lo respeto
         if ($ok) {
-            (isset($row['Order'])) ? $orden = $row['Order'] :  $orden = $this->lastInsertId;
-            $updates = "`PrimaryKeyMD5` = '" . md5($this->lastInsertId) . "', `Order` = '" . $orden . "'";
+            (isset($row['SortOrder'])) ? $orden = $row['SortOrder'] : $orden = $this->lastInsertId;
+            $updates = "`PrimaryKeyMD5` = '" . md5($this->lastInsertId) . "', `SortOrder` = '" . $orden . "'";
             $query = "UPDATE `{$this->dataBase}`.`{$table}` SET {$updates} WHERE Id = '{$this->lastInsertId}';";
             $ok = $this->doQuery($query);
         }

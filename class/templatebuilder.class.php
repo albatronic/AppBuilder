@@ -34,8 +34,6 @@ class TemplateBuilder {
         $this->fieldsTemplate();
         $this->listTemplate();
         $this->helpTemplate();
-        $this->fieldsVarEnv();
-        $this->fieldsVarWeb();
     }
 
     /**
@@ -62,42 +60,6 @@ class TemplateBuilder {
         $this->templates['list'] = $tmp;
     }
 
-    /**
-     * Genera el template para las variables de ENTORNO del modulo
-     */
-    private function fieldsVarEnv() {
-        $tmp .= "{#\n";
-        $tmp .= "  Module: " . $this->filename . "\n";
-        $tmp .= "  Document : modules\\" . $this->filename . "\\fieldsVarEnv.html.twig\n\n";
-        $tmp .= "  author: Sergio Pérez <sergio.perez@albatronic.com>\n";
-        $tmp .= "  copyright: INFORMATICA ALBATRONIC SL\n";
-        $tmp .= "  date " . date('d.m.Y H:i:s') . "\n";
-        $tmp .= "#}\n\n";
-
-        $tmp .= "{% extends values.controller  ~ '/form.html.twig' %}\n\n";
-        $tmp .= "{% block variables %}\n";
-        $tmp .= "{% endblock %}";
-
-        $this->templates['fieldsVarEnv'] = $tmp;
-    }
-    /**
-     * Genera el template para las variables WEB del módulo
-     */
-    private function fieldsVarWeb() {
-        $tmp .= "{#\n";
-        $tmp .= "  Module: " . $this->filename . "\n";
-        $tmp .= "  Document : modules\\" . $this->filename . "\\fieldsVarWeb.html.twig\n\n";
-        $tmp .= "  author: Sergio Pérez <sergio.perez@albatronic.com>\n";
-        $tmp .= "  copyright: INFORMATICA ALBATRONIC SL\n";
-        $tmp .= "  date " . date('d.m.Y H:i:s') . "\n";
-        $tmp .= "#}\n\n";
-
-        $tmp .= "{% extends values.controller  ~ '/form.html.twig' %}\n\n";
-        $tmp .= "{% block variables %}\n";
-        $tmp .= "{% endblock %}";
-
-        $this->templates['fieldsVarWeb'] = $tmp;
-    }
     /**
      * Generar el template "help"
      */
@@ -142,7 +104,7 @@ class TemplateBuilder {
         //$tmp .= "\t{% include '_global/tituloGenerico.html.twig' with {'controller': values.controller, 'linkValue': values.linkBy.value} %}\n";
 
         $tmp .= "\t{% block filtro %}\n";
-        $tmp .= "\t{% if values.permisos['CO'] and values.tieneListado %}\n";
+        $tmp .= "\t{% if values.permisos.permisosModulo['CO'] and values.tieneListado %}\n";
         $tmp .= "\t\t{% include '_global/filtroGenericoWrapper.html.twig' with {'filter': values.listado.filter} %}\n";
         $tmp .= "\t{% endif %}\n";
         $tmp .= "\t{% endblock %}\n\n";
@@ -265,6 +227,7 @@ class TemplateBuilder {
         $tmp .= "\t\t\t<input name=\"controller\" value=\"{{ values.controller }}\" type=\"hidden\" />\n";
         $tmp .= "\t\t\t<input name=\"action\" id=\"action_{{ values.controller }}\" value=\"{{action}}\" type=\"hidden\" />\n";
         $tmp .= "\t\t\t<input name=\"accion\" id=\"accion_{{ values.controller }}\" value=\"\" type=\"hidden\" />\n";
+        $tmp .= "\t\t\t<input name=\"solapaActiva\" id=\"solapaActiva\" value=\"{{ values.solapaActiva }}\" type=\"hidden\" />\n";
         $tmp .= "\t\t\t<input name=\"{{ values.controller }}[{{values.datos.getPrimaryKeyName}}]\" value=\"{{values.datos.getPrimaryKeyValue}}\" type=\"hidden\" />\n\n";
         //$tmp .= "\t\t\t{% if action == 'new' %} {% include '_global/comandosCreate.html.twig' %} {% endif %}\n";
         //$tmp .= "\t\t\t{% if action == 'edit' %} {% include '_global/comandosSaveDelete.html.twig' %} {% endif %}\n\n";
@@ -278,7 +241,6 @@ class TemplateBuilder {
         $tmp .= "\t\t</div>\n";
         $tmp .= "\t</div>\n";
         $tmp .= "</div>\n";
-        $tmp .= "<div id='div_formVariablesEnv' class='formVariablesEnv'></div>\n";
         $tmp .= "{% endblock %}";
 
         $this->templates['form'] = $tmp;

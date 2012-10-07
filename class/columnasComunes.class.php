@@ -38,6 +38,7 @@ class columnasComunes {
         'UrlFriendly',
         'UrlHeritable',
         'NumberVisits',
+        'LockMetatagTitle',
         'MetatagTitle',
         'MetatagKeywords',
         'MetatagDescription',

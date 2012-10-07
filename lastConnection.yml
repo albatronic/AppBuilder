@@ -2,8 +2,8 @@ POST:
   host: localhost
   user: root
   password: albatronic
-  dataBase: cpanel
+  dataBase: kaia
   dropTablesIfExists: false
 FILES:
   fileNameSchema: { name: '', type: '', tmp_name: '', error: 4, size: 0 }
-  fileNameFixtures: { name: fixturesModules.yml, type: application/x-yaml, tmp_name: /tmp/phpo3nwZN, error: 0, size: 4548 }
+  fileNameFixtures: { name: fixturesModules.yml, type: application/x-yaml, tmp_name: /tmp/phpNIGbKM, error: 0, size: 4170 }

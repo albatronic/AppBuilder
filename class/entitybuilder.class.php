@@ -45,7 +45,7 @@ class EntityBuilder {
                 if ($column['ReferencedSchema'] != '')
                     $buf .= "\t * @var entities\\" . $column['ReferencedEntity'] . "\n";
                 else
-                    $buf .= "\t * @var ". tiposVariables::$tipos[$column['Type']] ."\n";
+                    $buf .= "\t * @var " . tiposVariables::$tipos[$column['Type']] . "\n";
                 if ($column['Null'] == 'NO') {
                     $buf .= "\t * @assert NotBlank(groups=\"{$this->td->getTable()}\")\n";
                 }
@@ -185,6 +185,29 @@ class EntityBuilder {
     public function GetMethod() {
         $buf = $this->cabecera . "class {$this->className} extends {$this->className}Entity {\n" . $this->methods;
         return "<?php\n" . $buf . "}\n?>";
+    }
+
+    /**
+     * Devuelve un array con el esquema de la tabla
+     * El primer indice del array es el nombre de la tabla
+     * Los índices de segundo nivel son los nombre de las columnas
+     * Los índices de tercer nivel son las propiedades de cada columna
+     *
+     * @return array Array con el esquema de la tabla
+     */
+    public function getSchema() {
+
+
+        foreach ($this->td->getColumns() as $column) {
+            foreach ($column as $propiedad => $value) {
+                if ($propiedad != 'Field')
+                    $arrayColumnas[$column['Field']][$propiedad] = $value;
+            }
+        }
+
+        $array[$this->td->getTable()] = $arrayColumnas;
+
+        return $array;
     }
 
 }

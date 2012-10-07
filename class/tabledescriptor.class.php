@@ -206,6 +206,10 @@ class TableDescriptor {
         return $this->db;
     }
 
+    /**
+     * Devuelve el nombre de la tabla
+     * @return string El nombre de la tabla
+     */
     public function getTable() {
         return $this->table;
     }

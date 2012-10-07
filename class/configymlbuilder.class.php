@@ -68,7 +68,8 @@ class ConfigYmlBuilder {
                 $arrayColumns[$column['Field']]['title'] = $column['Field'];
 
                 if ($column['Field'] == $this->td->getPrimaryKey()) {
-                    $arrayColumns[$column['Field']]['form'] = FALSE;
+                    $arrayColumns[$column['Field']]['visible'] = FALSE;
+                    $arrayColumns[$column['Field']]['updatable'] = FALSE;
                     $arrayColumns[$column['Field']]['filter'] = 'NO';
                     $arrayColumns[$column['Field']]['list'] = 'NO';
                 } else {
@@ -84,7 +85,8 @@ class ConfigYmlBuilder {
                     else
                         $arrayColumns[$column['Field']]['filter'] = 'NO';
                     $arrayColumns[$column['Field']]['list'] = 'NO';
-                    $arrayColumns[$column['Field']]['form'] = TRUE;
+                    $arrayColumns[$column['Field']]['visible'] = TRUE;
+                    $arrayColumns[$column['Field']]['updatable'] = TRUE;
                 }
                 $arrayColumns[$column['Field']]['default'] = $column['Default'];
                 $arrayColumns[$column['Field']]['help'] = null;
@@ -110,6 +112,7 @@ class ConfigYmlBuilder {
                         'entity' => $column['ReferencedEntity'],
                         'method' => 'fetchAll',
                         'params' => 'Descripcion',
+                        'type' => 'select',
                         'operator' => '=',
                         'event' => null,
                     );
@@ -172,6 +175,38 @@ class ConfigYmlBuilder {
         $arrayDeColumnas = $this->getArrayColumns();
 
         $array[$this->filename] = array(
+            'app' => '',
+            'isModuleRoot' => '0',
+            'linkModule' => array(
+                'fromColumn' => '',
+                'toEntity' => '',
+                'toColumn' => '',
+            ),
+            'numMaxRecords' => '',
+            'withImages' => '0',
+            'withGalery' => '0',
+            'withDocuments' => '0',
+            'withVideos' => 0,
+            'withAudios' => '0',
+            'maxSizes' => array(
+                'image' => '400000',
+                'document' => '',
+                'video' => '',
+                'audio' => '',
+            ),
+            'galery' => array(
+                'maxWidthImage' => '500',
+                'maxHeightImage' => '400',
+                'generateThumbnail' => '0',
+                'widthThumbnail' => '50',
+                'heightThumbnail' => '50',
+            ),
+            'fieldGeneratorUrlFriendly' => $this->primeraColumna,
+            'fieldGeneratorMetatagTitle' => $this->primeraColumna,
+            'controller' => 'CONTROLADOR',
+            'action' => 'ACTION',
+            'template' => 'TEMPLATE',
+            'parametros' => 'PARAMETROS',
             'includesHead' => array(
                 'twigCss' => '_global/css.html.twig',
                 'twigJs' => '_global/js.html.twig',
@@ -190,6 +225,7 @@ class ConfigYmlBuilder {
             'primarykey' => $this->td->getPrimaryKey(),
             'linkBy' => '',
             'records_per_page' => 15,
+            'isModuleRoot' => 0,
             'order_by' => array(
                 array(
                     'title' => $this->td->getPrimaryKey() . " a-z",
@@ -202,8 +238,6 @@ class ConfigYmlBuilder {
             ),
             'search_default' => $this->td->getPrimaryKey(),
             'referenced_entities' => $this->td->getParentEntities(),
-            'fieldGeneratorUrlFriendly' => $this->primeraColumna,
-            'fieldGeneratorMetatagTitle' => $this->primeraColumna,
             'columns' => $arrayDeColumnas,
         );
 
@@ -214,33 +248,35 @@ class ConfigYmlBuilder {
 
     private function creaFieldsVarWeb() {
 
-        $buf = "{#\n";
-        $buf .= "   FORMULARIO DE VARIALBES WEB DEL MODULO\n\n";
-        $buf .= "   Module: " . $this->filename . "\n";
-        $buf .= "   Document : modules/" . $this->filename . "/fieldsvarEnv.html.twig\n\n";
-        $buf .= "   author: Sergio Pérez <sergio.perez@albatronic.com>\n";
-        $buf .= "   copyright: INFORMATICA ALBATRONIC SL\n";
-        $buf .= "   date " . date('d.m.Y H:i:s') . "\n";
-        $buf .= "#}\n\n";
-        $buf .= "{% extends values.controller ~ '/form.html.twig' %}\n\n";
-        $buf .= "{% block variables %}\n";
-        $buf .= "{% endblock %}";
+        $buf  = "# VARIABLES WEB ESPECIFICAS DEL MODULO ". $this->filename ."\n";
+        $buf .= "#\n";
+        $buf .= "# Module: " . $this->filename . "\n";
+        $buf .= "# author Sergio Pérez <sergio.perez@albatronic.com>\n";
+        $buf .= "# copyright Informática ALBATRONIC, SL\n";
+        $buf .= "# date " . date('d-m-Y H:i:s') . "\n";
+        $buf .= "#\n";
+        $buf .= "# ejemplo:\n";
+        $buf .= "#\n";
+        $buf .= "# nombreVariable: el texto del caption\n";
+        $buf .= "---\n";
+
         $this->buffer = $buf;
     }
 
     private function creaFieldsVarEntorno() {
 
-        $buf = "{#\n";
-        $buf .= "   FORMULARIO DE VARIALBES DE ENTORNO DEL MODULO\n\n";
-        $buf .= "   Module: " . $this->filename . "\n";
-        $buf .= "   Document : modules/" . $this->filename . "/fieldsVarEnv.html.twig\n\n";
-        $buf .= "   author: Sergio Pérez <sergio.perez@albatronic.com>\n";
-        $buf .= "   copyright: INFORMATICA ALBATRONIC SL\n";
-        $buf .= "   date " . date('d.m.Y H:i:s') . "\n";
-        $buf .= "#}\n\n";
-        $buf .= "{% extends values.controller ~ '/form.html.twig' %}\n\n";
-        $buf .= "{% block variables %}\n";
-        $buf .= "{% endblock %}";
+        $buf  = "# VARIABLES DE ENTORNO ESPECIFICAS DEL MODULO ". $this->filename ."\n";
+        $buf .= "#\n";
+        $buf .= "# Module: " . $this->filename . "\n";
+        $buf .= "# author Sergio Pérez <sergio.perez@albatronic.com>\n";
+        $buf .= "# copyright Informática ALBATRONIC, SL\n";
+        $buf .= "# date " . date('d-m-Y H:i:s') . "\n";
+        $buf .= "#\n";
+        $buf .= "# ejemplo:\n";
+        $buf .= "#\n";
+        $buf .= "# nombreVariable: el texto del caption\n";
+        $buf .= "---\n";
+
         $this->buffer = $buf;
     }
 
