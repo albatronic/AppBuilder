@@ -170,10 +170,10 @@ class schema {
             $this->errores = $this->sb->getErrores();
     }
 
-    public function loadFixtures($arrayFixtures) {
+    public function loadFixtures($arrayFixtures, $truncateTables = FALSE) {
 
         if (is_array($arrayFixtures))
-            $this->sb->loadFixtures($arrayFixtures);
+            $this->sb->loadFixtures($arrayFixtures, $truncateTables);
         else
             $this->errores[] = "No ha seleccionado el archivo con los datos";
     }
@@ -310,7 +310,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
                         $schema->buildTables(sfYaml::load($_FILES['fileNameSchema']['tmp_name']));
                         break;
                     case 'LOAD FIXTURES':
-                        $schema->loadFixtures(sfYaml::load($_FILES['fileNameFixtures']['tmp_name']));
+                        $schema->loadFixtures(sfYaml::load($_FILES['fileNameFixtures']['tmp_name']), $_POST['truncateTables'] == 'on');
                         break;
                     case 'BUILD AND LOAD':
                         $schema->buildTables(sfYaml::load($_FILES['fileNameSchema']['tmp_name']));
@@ -361,6 +361,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
                     </tr>
                     <tr><td>Drop Data Base </td><td><input name="dropDataBase" type="checkbox" title="¡¡¡ BORRA la base de datos !!!!"></td></tr>
                     <tr><td>Drop Tables</td><td><input name="dropTablesIfExists" type="checkbox" title="AÑADE 'DROP TABLE IF EXISTS'"></td></tr>
+                    <tr><td>Truncate Tables</td><td><input name="truncateTables" type="checkbox" title="VACÍA LAS TABLAS ANTES DE CARGALAS"></td></tr>
                     <tr>
                         <td colspan="2" align="center">
                             <input name="action" value="BUILD SCHEMA" type="submit" title="CREA el esquema en base a las tablas">&nbsp;

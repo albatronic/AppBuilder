@@ -1,9 +1,0 @@
-{# Template para el Comando Crear #}
-<input name="accion" id="accion" value="" type="hidden" />
-<div class='Comandos'>
-    <p class="Titulo">
-    {% if values.permisos['I'] %}
-        <input type="image" src="{{app.path}}/images/save_cmd.png" width="24px" onclick="getElementById('accion').value='Crear';" alt="Guardar" title="Guardar" />
-    {% endif %}
-    </p>
-</div>

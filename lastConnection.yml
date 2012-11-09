@@ -1,9 +1,9 @@
 POST:
-  host: localhost
+  host: 192.168.1.101
   user: root
-  password: albatronic
-  dataBase: kaia
+  password: Peces2010
+  dataBase: regantes
   dropTablesIfExists: false
 FILES:
-  fileNameSchema: { name: '', type: '', tmp_name: '', error: 4, size: 0 }
-  fileNameFixtures: { name: fixturesModules.yml, type: application/x-yaml, tmp_name: /tmp/phpNIGbKM, error: 0, size: 4170 }
+  fileNameSchema: { name: schemaAppGcon.yml, type: application/x-yaml, tmp_name: /tmp/phpg3g2cj, error: 0, size: 6129 }
+  fileNameFixtures: { name: fixturesAppGcon.yml, type: application/x-yaml, tmp_name: /tmp/phpkacvcT, error: 0, size: 1949 }

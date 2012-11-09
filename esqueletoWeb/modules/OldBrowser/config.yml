@@ -1,0 +1,23 @@
+## YAML Template.
+---
+OldBrowser:
+  includesHead:
+    lapTopPublic:
+      twigCss: OldBrowser/css.html.twig
+      twigJs: OldBrowser/js.html.twig
+      
+    lapTopPrivate:
+      twigCss: 
+      twigJs: 
+
+    mobilePublic:
+      twigCss: 
+      twigJs: 
+      
+    mobilePrivate:
+      twigCss: 
+      twigJs: 
+  
+  #Variables Web
+  includesVarWeb: 
+

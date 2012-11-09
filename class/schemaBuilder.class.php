@@ -82,17 +82,28 @@ class schemaBuilder {
      */
     public function createTable($name, array $schema) {
 
+        $hayColumnaId = FALSE;
+
+        $this->indices = "";
+
         ($schema['engine'] != '') ? $engine = $schema['engine'] : $engine = $this->defaultEngine;
         ($schema['charSet'] != '') ? $charSet = $schema['charSet'] : $charSet = $this->defaultCharSet;
 
-        $columnas = "  `Id` bigint(11) NOT NULL AUTO_INCREMENT,\n";
-        $this->indices = "  PRIMARY KEY (`Id`)";
-
         // Crear sintaxis de las columnas
-        if (is_array($schema['columns']))
+        if (is_array($schema['columns'])) {
             foreach ($schema['columns'] as $columnName => $attributes) {
                 $columnas .= "  " . $this->buildColumn($columnName, $attributes) . ",\n";
+                $hayColumnaId = ($hayColumnaId OR $columnName == 'Id');
             }
+
+            if (!$hayColumnaId) {
+                $columnas = "  `Id` bigint(11) NOT NULL AUTO_INCREMENT,\n" . $columnas;
+                $this->indices = "\n  PRIMARY KEY (`Id`)," . $this->indices;
+            }
+            // Quito las coma final de la relación de índices
+            $this->indices = substr($this->indices, 0, -1);
+        }
+
 
         // Crear sintaxis de las relaciones extranjeras
         if (is_array($schema['relations']))
@@ -175,7 +186,7 @@ class schemaBuilder {
         unset($entity);
 
         $yml = "# ESQUEMA DE LA BD " . $this->dataBase . "\n\n";
-        $yml .= sfYaml::dump($arrayTablas,2);
+        $yml .= sfYaml::dump($arrayTablas, 2);
 
         $archivo = new Archivo($this->dataBase . ".yml");
         $ok = $archivo->write($yml);
@@ -187,25 +198,29 @@ class schemaBuilder {
     /**
      * Carga datos en las tablas en base al array $fixtures
      *
-     * Vacia la tabla antes de cargarlas
+     * La tabla puede ser vaciada o no antes de la carga, dependiendo
+     * del valor del parámetro $truncateTables.
      *
      * Pone en $this->errores[] los posibles errores y además
      * la estadística de la tablas creadas y filas insertadas
      *
      * @param array $fixtures Array con los datos a cargar
+     * @param boolean $truncateTables Si TRUE, vacía la tabla antes de cargarle datos
      * @return boolean TRUE si la carga se hizo correctamente
      */
-    public function loadFixtures(array $fixtures) {
+    public function loadFixtures(array $fixtures, $truncateTables = FALSE) {
 
         if (is_array($fixtures)) {
             foreach ($fixtures as $table => $rows) {
                 // Cada Tabla
                 $nRows = 0;
-                if ($this->truncateTable($table)) {
-                    foreach ($rows as $row)
-                    // Cada Fila
-                        $nRows += $this->insertRow($table, $row);
-                }
+                if ($truncateTables)
+                    $this->truncateTable($table);
+
+                foreach ($rows as $row)
+                // Cada Fila
+                    $nRows += $this->insertRow($table, $row);
+
                 $this->log[] = "Tabla '{$table}', {$nRows} filas insertadas";
             }
         } else
@@ -262,7 +277,6 @@ class schemaBuilder {
      */
     private function buildColumn($name, array $attributes) {
 
-
         // VALIDAR LOS TIPOS DE DATOS. AQUI HAY QUE ACTUAR
         // DE UNA FORMA U OTRA DEPENDIENDO DEL TIPO DE BASE DE DATOS
         $arrayTipo = explode("(", $attributes['type']);
@@ -278,6 +292,11 @@ class schemaBuilder {
                     $precision = '4';
                 $tipo = "INTEGER({$precision})";
                 break;
+            case 'BIGINT':
+                if (!$precision)
+                    $precision = '4';
+                $tipo = "BIGINT({$precision})";
+                break;
             case 'DECIMAL':
                 if (!$precision)
                     $precision = '10,2';
@@ -292,6 +311,10 @@ class schemaBuilder {
                 if (!$precision)
                     $precision = '1';
                 $tipo = "TINYINT({$precision})";
+                break;
+            case 'FLOAT':
+                $tipo = "FLOAT";
+                break;
             case 'BOOLEAN':
                 $tipo = "TINYINT(1)";
                 break;
@@ -312,14 +335,25 @@ class schemaBuilder {
         }
 
         $column = "`{$name}` {$tipo}";
+
         if ($attributes['notnull'])
             $column .= " NOT NULL";
+
         if (isset($attributes['default']))
             $column .= " DEFAULT '{$attributes['default']}'";
-        if ($attributes['index'])
-            $this->indices .= ",\n  {$attributes['index']} `{$name}` (`{$name}`)";
+
+        if ($attributes['autoIncrement'])
+            $column .= " AUTO_INCREMENT";
+
         if ($attributes['comment'])
             $column .= " COMMENT '{$attributes['comment']}'";
+
+        if ($attributes['index']) {
+            if (strtoupper($attributes['index']) == 'PRIMARY')
+                $this->indices .= "\n  PRIMARY KEY (`{$name}`),";
+            else
+                $this->indices .= "\n  {$attributes['index']} `{$name}` (`{$name}`),";
+        }
 
         return $column;
     }

@@ -151,9 +151,9 @@ class TableDescriptor {
                 case 'MyISAM':
                     if ($column['COLUMN_COMMENT'] != '') {
                         $referencias = explode(",", $column['COLUMN_COMMENT']);
-                        $columna['ReferencedSchema'] = $referencias[0];
-                        $columna['ReferencedEntity'] = $referencias[1];
-                        $columna['ReferencedColumn'] = $referencias[2];
+                        $columna['ReferencedSchema'] = trim($referencias[0]);
+                        $columna['ReferencedEntity'] = trim($referencias[1]);
+                        $columna['ReferencedColumn'] = trim($referencias[2]);
                         //Pongo el nombre de la tabla refenciada en notacion entidad
                         $aux = str_replace("_", " ", $columna['ReferencedEntity']);
                         $columna['ReferencedEntity'] = str_replace(" ", "", ucwords($aux));

@@ -1,15 +1,13 @@
 <?php
-
 $inicio = date('H:i:s');
 
 // URL A LA QUE SE HACE LA PETICION
-//$url = "https://foxplaces.appspot.com/fox/foxfans";
-$url = "https://foxplaces.appspot.com/fox/fans?userID=46001";
-//$url = "http://www.albatronic.com/fox/foxws.php?id=" . $_GET['id'];
+$url = "http://www.albatronic.com/ws/ws.php";
 
 // Hago la petición y el resultado lo guardo en $resultado,
 // que es un array con los elementos 'resultado' e 'info'
-$resultado = getRequest($url);
+$parametros= $_GET;//"t=clientes&c=RazonSocial,Direccion,Poblacion";
+$resultado = getRequest($url,$parametros);
 
 $fin = date('H:i:s');
 
@@ -28,10 +26,17 @@ $arrayResultado = json_decode($resultado['result'], true);
  * @param string $url La url con la peticion
  * @return array Array con dos elementos: result, info
  */
-function getRequest($url) {
+function getRequest($url, $parametros) {
+
+    $options = array(
+        CURLOPT_RETURNTRANSFER => TRUE,
+        CURLOPT_HEADER => FALSE,
+        CURLOPT_POST => 1,
+        CURLOPT_POSTFIELDS => $parametros,
+    );
+
     $ch = curl_init($url);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_HEADER, false);
+    curl_setopt_array($ch, $options);
     $result = curl_exec($ch);
     $info = curl_getinfo($ch);
     curl_close($ch);
@@ -53,12 +58,6 @@ function pintaNodo($array, $nodo) {
 
         LA RESPUESTA JSON AL REQUEST <?php echo $inicio, " ", $fin; ?>
         <pre><?php print_r($arrayResultado); ?></pre>
-
-        <br />LAS IMAGENES DEL NODO 'global'
-        <?php pintaNodo($arrayResultado, 'global'); ?>
-
-        <br />LAS IMAGENES DEL NODO 'week'
-        <?php pintaNodo($arrayResultado, 'week'); ?>
 
     </body>
 </html>

@@ -169,7 +169,7 @@ class ConfigYmlBuilder {
 
         $cabecera  = "# Module: " . $this->filename . "\n";
         $cabecera .= "# Document : modules/" . $this->filename . "/config.yml\n#\n";
-        $cabecera .= "# @author: Sergio Pérez <sergio.perez@albatronic.com>\n# @copyright: INFORMATICA ALBATRONIC SL\n# @date " . date('d.m.Y H:i:s') . "\n";
+        $cabecera .= "# @author: Sergio Pérez <sergio.perez@albatronic.com>\n# @copyright: ARTICO ESTUDIO SL\n# @date " . date('d.m.Y H:i:s') . "\n";
         $cabecera .= "#\n---\n";
 
         $arrayDeColumnas = $this->getArrayColumns();
@@ -182,8 +182,9 @@ class ConfigYmlBuilder {
                 'toEntity' => '',
                 'toColumn' => '',
             ),
+            'showCommonFields' => true,
             'numMaxRecords' => '',
-            'withImages' => '0',
+            'numberOfImages' => '3',
             'withGalery' => '0',
             'withDocuments' => '0',
             'withVideos' => 0,
@@ -201,16 +202,14 @@ class ConfigYmlBuilder {
                 'widthThumbnail' => '50',
                 'heightThumbnail' => '50',
             ),
+            'urlFriendlyManagement' => true,
             'fieldGeneratorUrlFriendly' => $this->primeraColumna,
+            'metatagTitleManagement' => true,
             'fieldGeneratorMetatagTitle' => $this->primeraColumna,
-            'controller' => 'CONTROLADOR',
-            'action' => 'ACTION',
-            'template' => 'TEMPLATE',
-            'parametros' => 'PARAMETROS',
-            'includesHead' => array(
-                'twigCss' => '_global/css.html.twig',
-                'twigJs' => '_global/js.html.twig',
-            ),
+            'controller' => $this->filename,
+            'action' => 'Index',
+            'template' => 'Index.html.twig',
+            'parametros' => '',
             'login_required' => 'YES',
             'permission_control' => PERMISSIONCONTROL,
             'favourite_control' => 'NO',
@@ -252,7 +251,7 @@ class ConfigYmlBuilder {
         $buf .= "#\n";
         $buf .= "# Module: " . $this->filename . "\n";
         $buf .= "# author Sergio Pérez <sergio.perez@albatronic.com>\n";
-        $buf .= "# copyright Informática ALBATRONIC, SL\n";
+        $buf .= "# copyright ARTICO ESTUDIO, SL\n";
         $buf .= "# date " . date('d-m-Y H:i:s') . "\n";
         $buf .= "#\n";
         $buf .= "# ejemplo:\n";
@@ -269,7 +268,7 @@ class ConfigYmlBuilder {
         $buf .= "#\n";
         $buf .= "# Module: " . $this->filename . "\n";
         $buf .= "# author Sergio Pérez <sergio.perez@albatronic.com>\n";
-        $buf .= "# copyright Informática ALBATRONIC, SL\n";
+        $buf .= "# copyright ARTICO ESTUDIO, SL\n";
         $buf .= "# date " . date('d-m-Y H:i:s') . "\n";
         $buf .= "#\n";
         $buf .= "# ejemplo:\n";
