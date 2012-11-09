@@ -2,8 +2,8 @@ POST:
   host: 192.168.1.101
   user: root
   password: Peces2010
-  dataBase: regantes
+  dataBase: pcae
   dropTablesIfExists: false
 FILES:
-  fileNameSchema: { name: schemaAppGcon.yml, type: application/x-yaml, tmp_name: /tmp/phpg3g2cj, error: 0, size: 6129 }
-  fileNameFixtures: { name: fixturesAppGcon.yml, type: application/x-yaml, tmp_name: /tmp/phpkacvcT, error: 0, size: 1949 }
+  fileNameSchema: { name: schemaCommon.yml, type: application/x-yaml, tmp_name: /tmp/phpzTPnT6, error: 0, size: 5034 }
+  fileNameFixtures: { name: fixturesCommon.yml, type: application/x-yaml, tmp_name: /tmp/phpva05x8, error: 0, size: 666 }
