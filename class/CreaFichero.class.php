@@ -52,6 +52,7 @@ class Esqueleto {
     private function copy_r($path, $dest) {
         if (is_dir($path)) {
             @mkdir($dest);
+            chmod($dest,'0777');
             $objects = scandir($path);
             if (sizeof($objects) > 0) {
                 foreach ($objects as $file) {
