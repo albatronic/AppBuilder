@@ -53,7 +53,7 @@ if ($_POST['accion'] == "Generar") {
         $esqueleto = new Esqueleto();
         $esqueleto->copia("esqueletoWeb", CARPETA);
         // cambiar los permisos de la carpeta destino
-        chmod(CARPETA, '0777');
+        chmod(CARPETA, 0755);
         unset($esqueleto);
     }
 
