@@ -52,8 +52,10 @@ if ($_POST['accion'] == "Generar") {
     if (($_POST['esqueleto'] == 'on') and (CARPETA != '')) {
         $esqueleto = new Esqueleto();
         $esqueleto->copia("esqueletoWeb", CARPETA);
+        // cambiar los permisos de la carpeta destino
+        chmod(CARPETA, '0777');
         unset($esqueleto);
-    }
+    }∫
 
     if ((DB_BASE != '') and (CARPETA != '')) {
         $dblink = mysql_connect(DB_HOST, DB_USER, DB_PASS);
