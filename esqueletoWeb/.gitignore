@@ -3,3 +3,6 @@ tmp/
 log/
 docs/
 phpdoc/
+!/docs/
+!/tmp/
+!/log/
