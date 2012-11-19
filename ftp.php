@@ -22,13 +22,13 @@ include "class/yaml/lib/sfYaml.php";
 //unset($ftp);
 
 
-$connectId = ftp_connect('www.sistelsur.com');
+$connectId = ftp_connect('127.0.0.1');
 if ($connectId) {
-    $ok = ftp_login($connectId, 'ss', 'fortuna');
+    $ok = ftp_login($connectId, 'sergio', 'Piticlis1');
     if ($ok) {
         echo "directorio actual ", ftp_pwd($connectId),"<br />";
-        $ok = ftp_mkdir($connectId, 'public_html/docs/sergio');
-        echo $ok;
+        //$ok = ftp_mkdir($connectId, 'public_html/docs/sergio');
+        //echo $ok;
     }
 }
 ?>

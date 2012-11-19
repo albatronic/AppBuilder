@@ -111,6 +111,8 @@ if (!$_SESSION['isMobile']) {
 
 $rq = new Request();
 
+$_SESSION['EntornoDesarrollo'] = $rq->isDevelopment();
+
 // ----------------------------------------------------------------
 // ACTIVAR EL FORMATO DE LA MONEDA
 // ----------------------------------------------------------------

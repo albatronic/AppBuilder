@@ -35,9 +35,9 @@ config:
 
   # MOTOR DE ENVIO DE CORREOS
   mailer:
-    plugin_dir: ../../app/bin/PHPMailer_v2.0.0/
-    plugin_file: PhpMailer.class.php
-    motor: PhpMailer
+    plugin_dir: bin/PHPMailer_5.2.1/
+    plugin_file: class.phpmailer.php
+    motor: PHPMailer
     socket: smtp
     host: mail.dominio.com
     smtp_auth: true
@@ -47,20 +47,20 @@ config:
     from_name: NOMBRE
     timeout: 30
   # MOTOR PARA DOCUMENTOS EXCEL
-  excel: ../binWeb/PHPExcel/PHPExcel.php
+  excel: bin/PHPExcel/PHPExcel.php
   # MOTOR PARA GENERAR DOCUMENTOS PDF
-  pdf: ../binWeb/pdf/fpdf.class.php
+  pdf: bin/pdf/fpdf.class.php
   # MOTOR PARA GRAFICOS DE BARRAS
   graph:
     -
-      ../binWeb/jpgraph/src/jpgraph.php
+      bin/jpgraph/src/jpgraph.php
     -
-      ..//binWeb/jpgraph/src/jpgraph_line.php
+      bin/jpgraph/src/jpgraph_line.php
     -
-      ../binWeb/jpgraph/src/jpgraph_bar.php
+      bin/jpgraph/src/jpgraph_bar.php
   # MOTOR DE TEMPLATES
   twig:
-    motor: ../binWeb/Twig-1.7.0/lib/Twig/Autoloader.php
+    motor: bin/Twig-1.7.0/lib/Twig/Autoloader.php
     templates_folder: modules
     debug_mode: true
     cache_folder: tmp

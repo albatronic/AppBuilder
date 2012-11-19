@@ -102,7 +102,8 @@ class TemplateBuilder {
 
         $tmp .= "{% block content %}\n";
         //$tmp .= "\t{% include '_global/tituloGenerico.html.twig' with {'controller': values.controller, 'linkValue': values.linkBy.value} %}\n";
-
+        $tmp .= "\t{% include '_global/formErrores.html.twig' with {'errores': values.errores} %}\n";
+	$tmp .= "\t{% include '_global/alertas.html.twig' with {'alertas': values.alertas} %}\n";
         $tmp .= "\t{% block filtro %}\n";
         $tmp .= "\t{% if values.permisos.permisosModulo['CO'] and values.tieneListado %}\n";
         $tmp .= "\t\t{% include '_global/filtroGenericoWrapper.html.twig' with {'filter': values.listado.filter} %}\n";
@@ -231,8 +232,8 @@ class TemplateBuilder {
         $tmp .= "\t\t\t<input name=\"{{ values.controller }}[{{values.datos.getPrimaryKeyName}}]\" value=\"{{values.datos.getPrimaryKeyValue}}\" type=\"hidden\" />\n\n";
         //$tmp .= "\t\t\t{% if action == 'new' %} {% include '_global/comandosCreate.html.twig' %} {% endif %}\n";
         //$tmp .= "\t\t\t{% if action == 'edit' %} {% include '_global/comandosSaveDelete.html.twig' %} {% endif %}\n\n";
-        $tmp .= "\t\t\t{% include '_global/formErrores.html.twig' with {'errores': values.errores} %}\n";
-        $tmp .= "\t\t\t{% include '_global/alertas.html.twig' with {'alertas': values.alertas} %}\n\n";
+        //$tmp .= "\t\t\t{% include '_global/formErrores.html.twig' with {'errores': values.errores} %}\n";
+        //$tmp .= "\t\t\t{% include '_global/alertas.html.twig' with {'alertas': values.alertas} %}\n\n";
         $tmp .= "\t\t\t<ul>\n";
         $tmp .= "\t\t\t\t{% include values.controller ~ \"/fields.html.twig\" with {'datos' : values.datos, 'atributos' : values.atributos } %}\n";
         $tmp .= "\t\t\t</ul>\n";
