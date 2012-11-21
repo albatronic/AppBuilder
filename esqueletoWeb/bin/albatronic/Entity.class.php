@@ -11,7 +11,7 @@
  * @since 10-jun-2011
  *
  */
-class Entity  {
+class Entity {
 
     /**
      * Objeto de conexion a la base de datos
@@ -347,7 +347,7 @@ class Entity  {
      * Este método lo debe implementar la entidad que lo necesite
      */
     protected function validaLogico() {
-
+        
     }
 
     /**
@@ -522,7 +522,7 @@ class Entity  {
      *
      * @return array Array de objetos documentos
      */
-    public function getDocuments($tipo='images') {
+    public function getDocuments($tipo = 'images') {
         $docs = new Documents($this->getClassName(), $this->getPrimaryKeyValue(), $tipo);
         return $docs->getDocuments();
     }
@@ -532,9 +532,21 @@ class Entity  {
      *
      * @return integer El número de documentos
      */
-    public function getNumberOfDocuments($tipo='images') {
+    public function getNumberOfDocuments($tipo = 'images') {
         $docs = new Documents($this->getClassName(), $this->getPrimaryKeyValue(), $tipo);
         return $docs->getNumberOfDocuments();
+    }
+
+    /**
+     * Devuelve el objeto CpanUrlAmigables asociado
+     */
+    public function getObjetoUrlAmigable() {
+
+        $url = new CpanUrlAmigables();
+        $rows = $url->cargaCondicion("Id", "Entity='{$this->getClassName()}' and IdEntity='{$this->getPrimaryKeyValue()}'");
+        unset($url);
+
+        return new CpanUrlAmigables($rows[0]['Id']);
     }
 
     /**

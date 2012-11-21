@@ -7,150 +7,302 @@
  *
  * @date 03-08-2012
  * @author Sergio Perez <sergio.perez@albatronic.com>
+ * @copyright (c) Informática ALBATRONIC, SL
  */
 class EntityComunes extends Entity {
 
     /**
-     * @orm:Column(type="string")
+     * @orm Column(type="string")
+     * @var text
      */
-    protected $Observaciones;
+    protected $Observations;
 
     /**
-     * @orm:Column(type="string")
+     * @orm Column(type="string")
+     * @var string(100)
      */
     protected $PrimaryKeyMD5;
 
     /**
-     * @orm:Column(type="tinyint")
+     * @orm Column(type="tinyint")
+     * @var entities\ValoresSN
      */
-    protected $EsPredeterminado = '0';
+    protected $IsDefault = '0';
 
     /**
-     * @orm:Column(type="tinyint")
+     * @orm Column(type="tinyint")
+     * @var entities\ValoresSN
      */
-    protected $Revisado = '0';
+    protected $Checked = '0';
 
     /**
-     * @orm:Column(type="tinyint")
+     * @orm Column(type="tinyint")
+     * @var entities\ValoresSN
      */
-    protected $Publicar = '0';
+    protected $Publish = '0';
 
     /**
-     * @orm:Column(type="datetime")
+     * @orm Column(type="int")
+     * @var integer(11)
      */
-    protected $VigenteDesde;
+    protected $BelongsTo = '0';
 
     /**
-     * @orm:Column(type="datetime")
-     */
-    protected $VigenteHasta;
-
-    /**
-     * @orm:Column(type="integer")
-     * @var entities\CoreUsuarios
+     * @orm Column(type="integer")
+     * @var entities\CpanUsuarios
      */
     protected $CreatedBy = '0';
 
     /**
-     * @orm:Column(type="datetime")
-     * @assert:NotBlank(groups="cursos")
+     * @orm Column(type="datetime")
+     * @assert:NotBlank
+     * @var datetime
      */
     protected $CreatedAt = '0000-00-00 00:00:00';
 
     /**
-     * @orm:Column(type="integer")
-     * @var entities\CoreUsuarios
+     * @orm Column(type="integer")
+     * @var entities\CpanUsuarios
      */
     protected $ModifiedBy = '0';
 
     /**
-     * @orm:Column(type="datetime")
-     * @assert:NotBlank(groups="cursos")
+     * @orm Column(type="datetime")
+     * @assert:NotBlank
+     * @var datetime
      */
     protected $ModifiedAt = '0000-00-00 00:00:00';
 
     /**
-     * @orm:Column(type="tinyint")
+     * @orm Column(type="tinyint")
+     * @var entities\ValoresSN
      */
     protected $Deleted = '0';
 
     /**
-     * @orm:Column(type="integer")
-     * @var entities\CoreUsuarios
+     * @orm Column(type="integer")
+     * @var entities\CpanUsuarios
      */
     protected $DeletedBy = '0';
 
     /**
-     * @orm:Column(type="datetime")
+     * @orm Column(type="datetime")
+     * @var datetime
      */
     protected $DeletedAt = '0000-00-00 00:00:00';
 
     /**
-     * @orm:Column(type="tinyint")
+     * @orm Column(type="tinyint")
+     * @var entities\ValoresPrivacy
      */
-    protected $Privacidad = '0';
+    protected $Privacy = '0';
 
     /**
-     * @orm:Column(type="integer")
+     * @orm Column(type="integer")
+     * @var integer(11)
      */
-    protected $Orden;
+    protected $SortOrder = '0';
 
     /**
-     * @orm:Column(type="datetime")
+     * @orm Column(type="datetime")
+     * @var datetime
      */
-    protected $FechaPublicacion;
+    protected $PublishedAt = '0000-00-00 00:00:00';
 
     /**
-     * @orm:Column(type="string")
+     * @orm Column(type="datetime")
+     * @var datetime
      */
-    protected $UrlAmigable;
+    protected $ActiveFrom = '0000-00-00 00:00:00';
 
     /**
-     * @orm:Column(type="string")
+     * @orm Column(type="datetime")
+     * @var datetime
+     */
+    protected $ActiveTo = '0000-00-00 00:00:00';
+
+    /**
+     * @orm Column(type="string")
+     * @var string(255)
+     */
+    protected $UrlPrefix;
+
+    /**
+     * @orm Column(type="tinyint")
+     * @var entities\ValoresSN
+     */
+    protected $LockUrlPrefix = '1';
+
+    /**
+     * @orm Column(type="string")
+     * @var string(255)
+     */
+    protected $Slug;
+
+    /**
+     * @orm Column(type="tinyint")
+     * @var entities\ValoresSN
+     */
+    protected $LockSlug = '1';
+
+    /**
+     * @orm Column(type="string")
+     * @var string(255)
+     */
+    protected $UrlFriendly;
+
+    /**
+     * @orm Column(type="string")
+     * @var entities\ValoresSN
+     */
+    protected $UrlHeritable = '1';
+
+    /**
+     * @orm Column(type="integer")
+     * @var integer(11)
+     */
+    protected $NumberVisits = '0';
+
+    /**
+     * @orm Column(type="string")
+     * @var string(255)
      */
     protected $MetatagTitle;
 
     /**
-     * @orm:Column(type="string")
+     * @orm Column(type="tinyint")
+     * @var entities\ValoresSN
+     */
+    protected $LockMetatagTitle = '';
+
+    /**
+     * @orm Column(type="string")
+     * @var string(255)
      */
     protected $MetatagKeywords;
 
     /**
-     * @orm:Column(type="string")
+     * @orm Column(type="string")
+     * @var string(255)
      */
     protected $MetatagDescription;
 
     /**
-     * @orm:Column(type="tinyint")
+     * @orm Column(type="tinyint")
+     * @var entities\ValoresSN
      */
     protected $MetatagTitleSimple = '0';
 
     /**
-     * @orm:Column(type="tinyint")
+     * @orm Column(type="tinyint")
+     * @var entities\ValoresDchaIzq
      */
-    protected $MetatagTitlePosicion = '0';
+    protected $MetatagTitlePosition = '0';
 
     /**
-     * @orm:Column(type="tinyint")
+     * @orm Column(type="tinyint")
+     * @var entities\ValoresSN
      */
-    protected $MostrarEnMapaWeb = '0';
+    protected $ShowOnSitemap = '0';
 
     /**
-     * @orm:Column(type="string")
+     * @orm Column(type="string")
+     * @var string(5)
      */
-    protected $ImportanciaMapaWeb;
+    protected $ImportanceSitemap = '0.5';
 
     /**
-     * @orm:Column(type="string")
+     * @orm Column(type="string")
+     * @var entities\ValoresChangeFreq
      */
-    protected $ChangeFreqMapaWeb = '';
+    protected $ChangeFreqSitemap = 'monthly';
 
-    public function setObservaciones($Observaciones) {
-        $this->Observaciones = trim($Observaciones);
+    /**
+     * @orm Column(type="tinyint")
+     * @var entities\ValoresSN
+     */
+    protected $ShowGalery = '0';
+
+    /**
+     * @orm Column(type="tinyint")
+     * @var entities\ValoresSN
+     */
+    protected $ShowDocuments = '0';
+
+    /**
+     * @orm Column(type="tinyint")
+     * @var entities\ValoresSN
+     */
+    protected $ShowRelatedLinks = '0';
+
+    /**
+     * @orm Column(type="tinyint")
+     * @var entities\ValoresSN
+     */
+    protected $ShowRelatedContents = '0';
+
+    /**
+     * @orm Column(type="tinyint")
+     * @var entities\ValoresSN
+     */
+    protected $ShowPublishedAt = '0';
+
+    /**
+     * @orm Column(type="string")
+     * @var string(100)
+     */
+    protected $AccessProfileList = '1,2';
+
+    /**
+     * @orm Column(type="string")
+     * @var string(255)
+     */
+    protected $UrlTarget = NULL;
+
+    /**
+     * @orm Column(type="string")
+     * @var string(255)
+     */
+    protected $UrlParameters = NULL;
+
+    /**
+     * @orm Column(type="tinyint")
+     * @var entities\RequestMethods
+     */
+    protected $UrlRequestMethod = '0';
+
+    /**
+     * @orm Column(type="tinyint")
+     * @var entities\RequestOrigins
+     */
+    protected $UrlOrigin = '0';
+
+    /**
+     * @orm Column(type="tinyint")
+     * @var entities\ValoresSN
+     */
+    protected $UrlTargetBlank = '0';
+
+    /**
+     * @orm Column(type="tinyint")
+     * @var entities\ValoresSN
+     */
+    protected $UrlIsHttps = '0';
+
+    /**
+     * @orm Column(type="tinyint")
+     * @var entities\CpanAplicaciones
+     */
+    protected $CodigoAppAsociada = NULL;
+    protected $IdAlbumExterno = NULL;
+    protected $IdSliderAsociado = NULL;
+
+    public function setObservations($Observations) {
+        $this->Observations = trim($Observations);
     }
 
-    public function getObservaciones() {
-        return $this->Observaciones;
+    public function getObservations() {
+        return $this->Observations;
     }
 
     public function setPrimaryKeyMD5($PrimaryKeyMD5) {
@@ -161,50 +313,48 @@ class EntityComunes extends Entity {
         return $this->PrimaryKeyMD5;
     }
 
-    public function setEsPredeterminado($EsPredeterminado) {
-        $this->EsPredeterminado = $EsPredeterminado;
+    public function setIsDefault($IsDefault) {
+        $this->IsDefault = $IsDefault;
     }
 
-    public function getEsPredeterminado() {
-        if (!($this->EsPredeterminado instanceof ValoresSN))
-            $this->EsPredeterminado = new ValoresSN($this->EsPredeterminado);
-        return $this->EsPredeterminado;
+    public function getIsDefault() {
+        if (!($this->IsDefault instanceof ValoresSN))
+            $this->IsDefault = new ValoresSN($this->IsDefault);
+        return $this->IsDefault;
     }
 
-    public function setRevisado($Revisado) {
-        $this->Revisado = $Revisado;
+    public function setChecked($Checked) {
+        $this->Checked = $Checked;
     }
 
-    public function getRevisado() {
-        if (!($this->Revisado instanceof ValoresSN))
-            $this->Revisado = new ValoresSN($this->Revisado);
-        return $this->Revisado;
+    public function getChecked() {
+        if (!($this->Checked instanceof ValoresSN))
+            $this->Checked = new ValoresSN($this->Checked);
+        return $this->Checked;
     }
 
-    public function setPublicar($Publicar) {
-        $this->Publicar = $Publicar;
+    public function setPublish($Publish) {
+        $this->Publish = $Publish;
     }
 
-    public function getPublicar() {
-        if (!($this->Publicar instanceof ValoresSN))
-            $this->Publicar = new ValoresSN($this->Publicar);
-        return $this->Publicar;
+    public function getPublish() {
+        if (!($this->Publish instanceof ValoresSN))
+            $this->Publish = new ValoresSN($this->Publish);
+        return $this->Publish;
     }
 
-    public function setVigenteDesde($VigenteDesde) {
-        $this->VigenteDesde = $VigenteDesde;
+    public function setBelongsTo($BelongsTo) {
+        $this->BelongsTo = $BelongsTo;
     }
 
-    public function getVigenteDesde() {
-        return $this->VigenteDesde;
-    }
+    public function getBelongsTo() {
 
-    public function setVigenteHasta($VigenteHasta) {
-        $this->VigenteHasta = $VigenteHasta;
-    }
+        if (!is_object($this->BelongsTo)) {
+            $clase = $this->getClassName();
+            $this->BelongsTo = new $clase($this->BelongsTo);
+        }
 
-    public function getVigenteHasta() {
-        return $this->VigenteHasta;
+        return $this->BelongsTo;
     }
 
     public function setCreatedBy($CreateBy) {
@@ -212,8 +362,8 @@ class EntityComunes extends Entity {
     }
 
     public function getCreatedBy() {
-        if (!($this->CreatedBy instanceof CoreUsuarios))
-            $this->CreatedBy = new CoreUsuarios($this->CreatedBy);
+        if (!($this->CreatedBy instanceof CpanUsuarios))
+            $this->CreatedBy = new CpanUsuarios($this->CreatedBy);
         return $this->CreatedBy;
     }
 
@@ -230,8 +380,8 @@ class EntityComunes extends Entity {
     }
 
     public function getModifiedBy() {
-        if (!($this->ModifiedBy instanceof CoreUsuarios))
-            $this->ModifiedBy = new CoreUsuarios($this->ModifiedBy);
+        if (!($this->ModifiedBy instanceof CpanUsuarios))
+            $this->ModifiedBy = new CpanUsuarios($this->ModifiedBy);
         return $this->ModifiedBy;
     }
 
@@ -258,8 +408,8 @@ class EntityComunes extends Entity {
     }
 
     public function getDeletedBy() {
-        if (!($this->DeletedBy instanceof CoreUsuarios))
-            $this->DeletedBy = new CoreUsuarios($this->DeletedBy);
+        if (!($this->DeletedBy instanceof CpanUsuarios))
+            $this->DeletedBy = new CpanUsuarios($this->DeletedBy);
         return $this->DeletedBy;
     }
 
@@ -271,38 +421,132 @@ class EntityComunes extends Entity {
         return $this->DeletedAt;
     }
 
-    public function setPrivacidad($Privacidad) {
-        $this->Privacidad = $Privacidad;
+    public function setPrivacy($Privacy) {
+        $this->Privacy = $Privacy;
     }
 
-    public function getPrivacidad() {
-        if (!($this->Privacidad instanceof ValoresPrivacidad))
-            $this->Privacidad = new ValoresPrivacidad($this->Privacidad);
-        return $this->Privacidad;
+    public function getPrivacy() {
+        if (!($this->Privacy instanceof ValoresPrivacy))
+            $this->Privacy = new ValoresPrivacy($this->Privacy);
+        return $this->Privacy;
     }
 
-    public function setOrden($Orden) {
-        $this->Orden = $Orden;
+    public function setSortOrder($SortOrder) {
+        $this->SortOrder = $SortOrder;
     }
 
-    public function getOrden() {
-        return $this->Orden;
+    public function getSortOrder() {
+        return $this->SortOrder;
     }
 
-    public function setFechaPublicacion($FechaPublicacion) {
-        $this->FechaPublicacion = $FechaPublicacion;
+    public function setPublishedAt($PublishedAt) {
+        $date = new Fecha($PublishedAt);
+        $this->PublishedAt = $date->getFechaTime();
+        unset($date);
     }
 
-    public function getFechaPublicacion() {
-        return $this->FechaPublicacion;
+    public function getPublishedAt() {
+        $date = new Fecha($this->PublishedAt);
+        $ddmmaaaahhmmss = $date->getddmmaaaahhmmss();
+        unset($date);
+        return $ddmmaaaahhmmss;
     }
 
-    public function setUrlAmigable($UrlAmigable) {
-        $this->UrlAmigable = trim($UrlAmigable);
+    public function setActiveFrom($ActiveFrom) {
+        $date = new Fecha($ActiveFrom);
+        $this->ActiveFrom = $date->getFechaTime();
+        unset($date);
     }
 
-    public function getUrlAmigable() {
-        return $this->UrlAmigable;
+    public function getActiveFrom() {
+        $date = new Fecha($this->ActiveFrom);
+        $ddmmaaaahhmmss = $date->getddmmaaaahhmmss();
+        unset($date);
+        return $ddmmaaaahhmmss;
+    }
+
+    public function setActiveTo($ActiveTo) {
+        $date = new Fecha($ActiveTo);
+        $this->ActiveTo = $date->getFechaTime();
+        unset($date);
+    }
+
+    public function getActiveTo() {
+        $date = new Fecha($this->ActiveTo);
+        $ddmmaaaahhmmss = $date->getddmmaaaahhmmss();
+        unset($date);
+        return $ddmmaaaahhmmss;
+    }
+
+    public function setUrlPrefix($UrlPrefix) {
+        $this->UrlPrefix = trim($UrlPrefix);
+    }
+
+    public function getUrlPrefix() {
+        return $this->UrlPrefix;
+    }
+
+    public function setLockUrlPrefix($LockUrlPrefix) {
+        $this->LockUrlPrefix = $LockUrlPrefix;
+    }
+
+    public function getLockUrlPrefix() {
+        if (!($this->LockUrlPrefix instanceof ValoresSN))
+            $this->LockUrlPrefix = new ValoresSN($this->LockUrlPrefix);
+        return $this->LockUrlPrefix;
+    }
+
+    public function setSlug($Slug) {
+        $this->Slug = trim($Slug);
+    }
+
+    public function getSlug() {
+        return $this->Slug;
+    }
+
+    public function setLockSlug($LockSlug) {
+        $this->LockSlug = $LockSlug;
+    }
+
+    public function getLockSlug() {
+        if (!($this->LockSlug instanceof ValoresSN))
+            $this->LockSlug = new ValoresSN($this->LockSlug);
+        return $this->LockSlug;
+    }
+
+    public function setUrlFriendly($UrlFriendly) {
+        $this->UrlFriendly = trim($UrlFriendly);
+    }
+
+    public function getUrlFriendly() {
+        return $this->UrlFriendly;
+    }
+
+    public function setUrlHeritable($UrlHeritable) {
+        $this->UrlHeritable = $UrlHeritable;
+    }
+
+    public function getUrlHeritable() {
+        if (!($this->UrlHeritable instanceof ValoresSN))
+            $this->UrlHeritable = new ValoresSN($this->UrlHeritable);
+        return $this->UrlHeritable;
+    }
+
+    public function setNumberVisits($NumberVisits) {
+        $this->NumberVisits = $NumberVisits;
+    }
+
+    /**
+     * Devuelve el número de visitas que ha tenido este objeto
+     * El valor está en la entidad CpanUrlFriendlys
+     *
+     * @return integer El número de visitas
+     */
+    public function getNumberVisits() {
+        $url = new CpanUrlAmigables();
+        $rows = $url->cargaCondicion("NumberVisits", "Entity='{$this->getClassName()}' AND IdEntity='{$this->getPrimaryKeyValue()}'");
+        unset($url);
+        return $rows[0]['NumberVisits'];
     }
 
     public function setMetatagTitle($MetatagTitle) {
@@ -311,6 +555,16 @@ class EntityComunes extends Entity {
 
     public function getMetatagTitle() {
         return $this->MetatagTitle;
+    }
+
+    public function setLockMetatagTitle($LockMetatagTitle) {
+        $this->LockMetatagTitle = $LockMetatagTitle;
+    }
+
+    public function getLockMetatagTitle() {
+        if (!($this->LockMetatagTitle instanceof ValoresSN))
+            $this->LockMetatagTitle = new ValoresSN($this->LockMetatagTitle);
+        return $this->LockMetatagTitle;
     }
 
     public function setMetatagKeywords($MetatagKeywords) {
@@ -339,46 +593,184 @@ class EntityComunes extends Entity {
         return $this->MetatagTitleSimple;
     }
 
-    public function setMetatagTitlePosicion($MetatagTitlePosicion) {
-        $this->MetatagTitlePosicion = $MetatagTitlePosicion;
+    public function setMetatagTitlePosition($MetatagTitlePosition) {
+        $this->MetatagTitlePosition = $MetatagTitlePosition;
     }
 
-    public function getMetatagTitlePosicion() {
-        if (!($this->MetatagTitlePosicion instanceof ValoresDchaIzq))
-            $this->MetatagTitlePosicion = new ValoresDchaIzq($this->MetatagTitlePosicion);
-        return $this->MetatagTitlePosicion;
+    public function getMetatagTitlePosition() {
+        if (!($this->MetatagTitlePosition instanceof ValoresDchaIzq))
+            $this->MetatagTitlePosition = new ValoresDchaIzq($this->MetatagTitlePosition);
+        return $this->MetatagTitlePosition;
     }
 
-    public function setMostrarEnMapaWeb($MostrarEnMapaWeb) {
-        $this->MostrarEnMapaWeb = $MostrarEnMapaWeb;
+    public function setShowOnSitemap($ShowOnSitemap) {
+        $this->ShowOnSitemap = $ShowOnSitemap;
     }
 
-    public function getMostrarEnMapaWeb() {
-        if (!($this->MostrarEnMapaWeb instanceof ValoresSN))
-            $this->MostrarEnMapaWeb = new ValoresSN($this->MostrarEnMapaWeb);
-        return $this->MostrarEnMapaWeb;
+    public function getShowOnSitemap() {
+        if (!($this->ShowOnSitemap instanceof ValoresSN))
+            $this->ShowOnSitemap = new ValoresSN($this->ShowOnSitemap);
+        return $this->ShowOnSitemap;
     }
 
-    public function setImportanciaMapaWeb($ImportanciaMapaWeb) {
-        $this->ImportanciaMapaWeb = trim($ImportanciaMapaWeb);
+    public function setImportanceSitemap($ImportanceSitemap) {
+        $this->ImportanceSitemap = trim($ImportanceSitemap);
     }
 
-    public function getImportanciaMapaWeb() {
-        return $this->ImportanciaMapaWeb;
+    public function getImportanceSitemap() {
+        return $this->ImportanceSitemap;
     }
 
-    public function setChangeFreqMapaWeb($ChangeFreqMapaWeb) {
-        $this->ChangeFreqMapaWeb = trim($ChangeFreqMapaWeb);
+    public function setChangeFreqSitemap($ChangeFreqSitemap) {
+        $this->ChangeFreqSitemap = $ChangeFreqSitemap;
     }
 
-    public function getChangeFreqMapaWeb() {
-        if (!($this->ChangeFreqMapaWeb instanceof ValoresChangeFreq))
-            $this->ChangeFreqMapaWeb = new ValoresChangeFreq($this->ChangeFreqMapaWeb);
-        return $this->ChangeFreqMapaWeb;
+    public function getChangeFreqSitemap() {
+        if (!($this->ChangeFreqSitemap instanceof ValoresChangeFreq))
+            $this->ChangeFreqSitemap = new ValoresChangeFreq($this->ChangeFreqSitemap);
+        return $this->ChangeFreqSitemap;
     }
 
-    public function getNumeroVisitas() {
+    public function setShowGalery($ShowGalery) {
+        $this->ShowGalery = $ShowGalery;
+    }
 
+    public function getShowGalery() {
+        if (!($this->ShowGalery instanceof ValoresSN))
+            $this->ShowGalery = new ValoresSN($this->ShowGalery);
+        return $this->ShowGalery;
+    }
+
+    public function setShowDocuments($ShowDocuments) {
+        $this->ShowDocuments = $ShowDocuments;
+    }
+
+    public function getShowDocuments() {
+        if (!($this->ShowDocuments instanceof ValoresSN))
+            $this->ShowDocuments = new ValoresSN($this->ShowDocuments);
+        return $this->ShowDocuments;
+    }
+
+    public function setShowRelatedLinks($ShowRelatedLinks) {
+        $this->ShowRelatedLinks = $ShowRelatedLinks;
+    }
+
+    public function getShowRelatedLinks() {
+        if (!($this->ShowRelatedLinks instanceof ValoresSN))
+            $this->ShowRelatedLinks = new ValoresSN($this->ShowRelatedLinks);
+        return $this->ShowRelatedLinks;
+    }
+
+    public function setShowRelatedContents($ShowRelatedContents) {
+        $this->ShowRelatedContents = $ShowRelatedContents;
+    }
+
+    public function getShowRelatedContents() {
+        if (!($this->ShowRelatedContents instanceof ValoresSN))
+            $this->ShowRelatedContents = new ValoresSN($this->ShowRelatedContents);
+        return $this->ShowRelatedContents;
+    }
+
+    public function setShowPublishedAt($ShowPublishedAt) {
+        $this->ShowPublishedAt = $ShowPublishedAt;
+    }
+
+    public function getShowPublishedAt() {
+        if (!($this->ShowPublishedAt instanceof ValoresSN))
+            $this->ShowPublishedAt = new ValoresSN($this->ShowPublishedAt);
+        return $this->ShowPublishedAt;
+    }
+
+    public function setAccessProfileList($AccessProfileList) {
+        $this->AccessProfileList = trim($AccessProfileList);
+    }
+
+    public function getAccessProfileList() {
+        return $this->AccessProfileList;
+    }
+
+    public function setUrlTarget($UrlTarget) {
+        $this->UrlTarget = trim($UrlTarget);
+    }
+
+    public function getUrlTarget() {
+        return $this->UrlTarget;
+    }
+
+    public function setUrlParameters($UrlParameters) {
+        $this->UrlParameters = trim($UrlParameters);
+    }
+
+    public function getUrlParameters() {
+        return $this->UrlParameters;
+    }
+
+    public function setUrlRequestMethod($UrlRequestMethod) {
+        $this->UrlRequestMethod = $UrlRequestMethod;
+    }
+
+    public function getUrlRequestMethod() {
+        if (!($this->UrlRequestMethod instanceof RequestMethods))
+            $this->UrlRequestMethod = new RequestMethods($this->UrlRequestMethod);
+        return $this->UrlRequestMethod;
+    }
+
+    public function setUrlOrigin($UrlOrigin) {
+        $this->UrlOrigin = $UrlOrigin;
+    }
+
+    public function getUrlOrigin() {
+        if (!($this->UrlOrigin instanceof RequestOrigins))
+            $this->UrlOrigin = new RequestOrigins($this->UrlOrigin);
+        return $this->UrlOrigin;
+    }
+
+    public function setUrlTargetBlank($UrlTargetBlank) {
+        $this->UrlTargetBlank = $UrlTargetBlank;
+    }
+
+    public function getUrlTargetBlank() {
+        if (!($this->UrlTargetBlank instanceof ValoresSN))
+            $this->UrlTargetBlank = new ValoresSN($this->UrlTargetBlank);
+        return $this->UrlTargetBlank;
+    }
+
+    public function setUrlIsHttps($UrlIsHttps) {
+        $this->UrlIsHttps = $UrlIsHttps;
+    }
+
+    public function getUrlIsHttps() {
+        if (!($this->UrlIsHttps instanceof ValoresSN))
+            $this->UrlIsHttps = new ValoresSN($this->UrlIsHttps);
+        return $this->UrlIsHttps;
+    }
+
+    public function setCodigoAppAsociada($CodigoAppAsociada) {
+        $this->CodigoAppAsociada = $CodigoAppAsociada;
+    }
+
+    public function getCodigoAppAsociada() {
+        if (!($this->CodigoAppAsociada instanceof CpanAplicaciones)) {
+            $app = new CpanAplicaciones();
+            $this->CodigoAppAsociada = $app->find('CodigoApp', $this->CodigoAppAsociada);
+        }
+        return $this->CodigoAppAsociada;
+    }
+
+    public function setIdAlbumExterno($IdAlbumExterno) {
+        $this->IdAlbumExterno = $IdAlbumExterno;
+    }
+
+    public function getIdAlbumExterno() {
+        return $this->IdAlbumExterno;
+    }
+
+    public function setIdSliderAsociado($IdSliderAsociado) {
+        $this->IdSliderAsociado = $IdSliderAsociado;
+    }
+
+    public function getIdSliderAsociado() {
+        return $this->IdSliderAsociado;
     }
 
 }
