@@ -296,7 +296,62 @@ class EntityComunes extends Entity {
     protected $CodigoAppAsociada = NULL;
     protected $IdAlbumExterno = NULL;
     protected $IdSliderAsociado = NULL;
+    
+    
+    /**
+     * METODOS ELABORADOS
+     */
 
+    
+    /**
+     * Devuelve el objeto CpanUrlAmigables asociado
+     */
+    public function getObjetoUrlAmigable() {
+
+        $url = new CpanUrlAmigables();
+        $rows = $url->cargaCondicion("Id", "Entity='{$this->getClassName()}' and IdEntity='{$this->getPrimaryKeyValue()}'");
+        unset($url);
+
+        return new CpanUrlAmigables($rows[0]['Id']);
+    }
+    
+    /**
+     * Devuelve un array con los elemementos necesarios para
+     * construir un <a href=''> 
+     * 
+     * Tiene dos elmentos:
+     * 
+     *  'url'   Es la url en si con el prefijo, que puede ser: nada, http, o https)
+     *  'targetBlank'   Es un flag booleano para saber si el enlace se habrirá en popup o no
+     * 
+     * @return array Array
+     */
+    public function getHref() {
+
+        $url = $this->getUrlTarget();
+        $esInterna = ($url == '');
+
+        if ($esInterna) {
+            $url = $this->getUrlFriendly();
+            $prefijo = $_SESSION['appPath'];
+        } else {
+            if ($this->UrlIsHttps)
+                $prefijo = "https://";
+            else
+                $prefijo = "http://";
+        }
+
+        $url = $prefijo . $url . $this->getUrlParameters();
+
+        $array = array('url' => $url, 'targetBlank' => $this->UrlTargetBlank);
+
+
+        return $array;
+    }
+
+    /**
+     * GETERS Y SETERS
+     */
     public function setObservations($Observations) {
         $this->Observations = trim($Observations);
     }
