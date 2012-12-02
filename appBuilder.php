@@ -145,7 +145,7 @@ if ($_POST['accion'] == "Generar") {
 
                     foreach ($templates as $key => $value) {
                         //Crear el fichero .html.twig de cada template
-                        new CreaFichero($pathtemplates . DS . $key . ".html.twig", $value);
+                        new CreaFichero($pathmodules . DS . $key . ".html.twig", $value);
                     }
                 }
 
@@ -153,7 +153,7 @@ if ($_POST['accion'] == "Generar") {
                 if ($ok and ($_POST['help'] == 'on')) {
                     $template = new TemplateBuilder($tablename, false);
                     $templates = $template->Get();
-                    new CreaFichero($pathtemplates . DS . "help.html.twig", $templates['help']);
+                    new CreaFichero($pathmodules . DS . "help.html.twig", $templates['help']);
                 }
 
 

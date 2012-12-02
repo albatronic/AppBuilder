@@ -3,14 +3,15 @@
     <head>
         {% include '_global/meta.twig'%}
         {% include  values.archivoCss %}
+          
+        <!-- Para que esté disponible el path de la app en todos los java scripts -->
+        <script type="text/javascript">var appPath = "{{appPath}}";</script>             
         {% include values.archivoJs %}
     </head>
 
     <body>
 
         {% block contenido %}
-{{values.archivoCss}}
-{{values.archivoJs}}
         {% endblock %}
 
     </body>

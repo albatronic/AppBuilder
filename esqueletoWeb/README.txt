@@ -12,10 +12,23 @@ PROCESOS A SEGUIR PARA LA PUESTA EN MARCHA DEL PROYECTO
 	- /oldBrowser
 	- /contacto
 
-* Poner en la carpeta 'js' la última librería de jquery
-* Poner en la carpeta 'css' el archivo 'reset.css'
-* Cada controlador debe tener un archivo para los includes de 'css' y otro para los de 'js', pero si no existen
-  se utilizarán los que haya en la carpeta '_global': css.twig y js.twig respectivamente
+* Cada vista de cada controlador puede (opcionalmente) tener un archivo para los includes de 'css' y otro para los de 'js', 
+  con la siguiente nomenclatura: si la vista se llama vista.html.twig, vista.css.twig y vista.js.twig;
 
-* En el config/config.yml definir la conexión a la base de datos.
+  Pero si no existen se utilizarán los que haya en la carpeta '_global': css.twig y js.twig respectivamente
+
+* Personalizar config/config.yml según se indica en su interior.
+
+* Comprobar que exista la carpeta 'tmp' para la caché de templates y class_path
+
+* Comprobar que existan los archivos .htaccess en la carpeta raiz del proyecto,
+  y las carpetas 'config', 'bin', 'entities' y 'log'
+
+* Poner el archivo 'favicon.ico' correcto en la carpeta raiz del proyecto
+
+* Las carpetas 'css' y 'js' deben contener dos subcarpetas llamadas 'laptop' y 'mobile'
+
+* Poner en las carpetas 'js/laptop' y 'js/mobile' la última librería de jquery
+
+* Poner en las carpetas 'css/laptop' y 'css/mobile' el archivo 'reset.css'
 

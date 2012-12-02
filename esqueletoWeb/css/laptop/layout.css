@@ -1,0 +1,954 @@
+/* -------------------------------- */
+/*	contenedor global	 		*/
+/* -------------------------------- */
+body {
+	font-family: 'Source Sans Pro', sans-serif;
+        font-weight: 200;
+        width: 100%;
+        margin:0px;
+        padding:0px;
+}
+
+
+/* -------------------------------- */
+/*	CONTENEDORES COMUNES 		*/
+/* -------------------------------- */
+#contenedor_global {
+	width:100%;
+	float:left;	
+}
+
+.contenedor_central {
+	width:1176px;
+        min-width:1176px;
+	/*width:924px;*/
+	padding:0 40px;
+	overflow:hidden;
+	margin:0 auto;
+}
+
+.contenedor_100 {
+	width:100%;
+	float:left;
+	margin:0;
+	/*position:relative;
+	z-index:10;*/
+}
+
+
+
+/*******************************
+   Texto
+********************************/
+#contenidoslegales h1 {
+	font-size:32px;
+	color: #c3446d;
+	line-height:38px;
+	font-style:italic;
+	float:left;
+	width:100%;
+	margin-bottom:10px;
+}
+
+
+#contenidoslegales p{
+	width:100%;
+	color:#666;
+	float:left;
+	margin:5px 0 25px 0;
+}
+
+#contenidoslegales p a {
+	text-decoration:underline;
+	color:#c3446d;
+}
+
+/* -------------------------------- */
+/*		 INPUT OCULTO		 		*/
+/* -------------------------------- */
+#input_oculto {
+	display:none;
+	visibility:hidden;
+}
+
+/* -------------------------------- */
+/*		 CLASES GEN�RICAS	 		*/
+/* -------------------------------- */
+.clear {
+	width:100%;
+	float:left;
+	height:50px;
+}
+
+.left {
+	float:left;
+}
+
+.right {
+	float:right !important;
+}
+
+
+.ultimo {
+	margin-right:0 !important;
+	margin-bottom:0 !important;
+}
+
+
+
+/* -------------------------------- */
+/*		 CABECERA			 		*/
+/* -------------------------------- */
+header {
+        float: left;
+        width: 100%;
+	background:url(../../images/cabecera-degradado.png) 0 bottom repeat-x;
+        
+}
+
+header .contenedor_central{
+        padding-top:3px;
+}
+
+header .left {
+    margin-bottom:10px;
+}
+
+header .right {
+    margin-top:15px;
+}
+
+
+/* -------------------------------- */
+/*            CUERPO                */
+/* -------------------------------- */
+div#cuerpo {
+    float: left;
+    background-position: right bottom;
+    position: relative;
+    z-index: 50;
+    height: 570px;
+}
+
+#degradado {
+    float: left;
+    height: 570px;
+    width: 100%;
+    background:#171717 url(../../images/degradado.png) 50% bottom no-repeat;
+    position: absolute;
+    top: 68px;
+}
+
+#cuerpo section#cajas{
+    width:475px;
+    float: left;
+    margin-top: 60px;
+    margin-left: 40px;
+}
+
+.cajetin {
+    width:475px;
+    height: 127px;
+    float: left;
+    margin-bottom: 35px;
+}
+
+.cajetin h2 {
+    color:#fff;
+    font-weight: 600;
+    font-size: 26px;
+    margin-top: 10px;
+    margin-left: 25px;
+    padding-left: 40px;
+    width: 385px;
+    float: left;
+    margin-bottom: 25px;
+}
+.cajetin h2 a {
+    color:#fff;
+    width: 385px;
+    float:left;
+}
+
+.cajetin p {
+    color:#fff;
+    font-weight: 200;
+    font-size: 16px;
+    float:left;
+    margin-left: 25px;
+    width: 425px;
+}
+
+#tienda {
+    background: url(../../images/fondo-a.png);
+}
+
+#tienda h2 {
+    background: url(../../images/icono-play-verde.png) 0 0 no-repeat;    
+}
+
+#tienda h2 a {
+    color:#cdea6b;
+}
+
+#tienda h2 a:hover {
+    color:#7ca71c;
+}
+
+#tienda h2 #verde {
+    color:#7ca71c;
+}
+
+#web {
+    background: url(../../images/fondo-b.png);
+}
+
+#web h2{
+    background: url(../../images/icono-play-azul.png) 0 0 no-repeat;
+}
+
+#web h2 a {
+    color:#85cdf2;
+}
+
+#web h2 a:hover{
+    color:#4d82a7;
+}
+
+#web h2 #azul {
+    color:#4d82a7;
+}
+
+#medida {
+    background: url(../../images/fondo-c.png);
+}
+
+#medida h2{
+    background: url(../../images/icono-play-gris.png) 0 0 no-repeat;
+}
+
+#medida h2 #gris {
+    color:#959ca2;
+}
+
+#medida h2 a:hover {
+    color:#989ca2;
+}
+
+
+/* -------------------------------- */
+/*    	 COLUMNA DERECHA            */
+/* -------------------------------- */
+#columnaDerecha {
+    width: 549px;
+    float: right;
+    margin-right: 40px;
+    margin-top: 60px;
+}
+
+#login {
+    width: 549px;
+    float: left; 
+    height: 159px;
+    background: url(../../images/fondo-login.png);
+    margin-bottom: 30px;
+}
+
+#login a {
+    font-size: 13px;
+    color:#808080;
+    float: right;
+    margin-right: 55px;
+    margin-top: 5px;
+    text-shadow: 0 1px #000;
+}
+
+#login a:hover {
+    color:#fff;
+}
+
+#login h3 {
+    width: 549px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 26px;
+    color: #333;
+    margin-top: 10px;
+    text-shadow: 0 1px #fff;
+    float: left;
+    margin-bottom: 25px;
+}
+
+form {
+    width: 510px;
+    float: left;
+    margin-left: 20px;
+}
+
+#login form label {
+    width: 100%;
+    float: left;
+}
+
+.enviar {
+    background:url(../../images/enviar.png) 0 0 no-repeat;
+    width: 25px;
+    height: 26px;
+    float: left;
+    text-indent:-99999px;
+    position: relative;
+    left:10px;
+    top:28px;
+}
+
+.contenedor {
+    width: 223px;
+    float: left;
+}
+
+.contenedorOlvido {
+    width: 453px;
+    float: left;
+}
+
+#usuario {
+    margin-right: 24px;
+}
+.contenedor input {
+    width:213px;
+    float: left;
+    padding:5px;
+    border-radius: 2px; 
+    moz-border-radius: 2px;
+    webkit-border-radius: 2px;  
+    color: #333;
+}
+
+label span {
+    font-size: 13px;
+    color: #CDEA6B;
+}
+
+.contenedor label, .contenedorOlvido label {
+    color:#b9b9b9;
+    width: 100%;
+    float: left;
+    margin-bottom: 5px;
+}
+
+.contenedorOlvido input {
+    width:453px;
+    float: left;
+    padding:5px;
+    border-radius: 2px; 
+    moz-border-radius: 2px;
+    webkit-border-radius: 2px;  
+    color: #333;
+}
+
+.error input {
+    background: #a8d526;
+}
+/* -------------------------------- */
+/*    	 NOTICIAS                   */
+/* -------------------------------- */
+section#noticias {
+    width: 545px;
+    float: left;
+}
+
+#novedades h4, #sabiasque h4{
+    float: left;
+    color:#969ca2;
+    font-size: 48px;
+    width: 100%;
+    margin-bottom: 10px;
+    font-weight: 200;
+}
+
+
+article#novedades {
+    float: left;
+    width: 260px;
+    
+}
+
+article#novedades ul {
+    float: left;
+    width: 100%;
+}
+
+article#novedades ul li {
+    padding-left: 25px;
+    width: 235px;
+    background: url(../../images/icono-mas.png) 0 2px no-repeat;
+    float: left;
+    margin-bottom: 10px;
+}
+
+article#novedades ul li a{
+    color:#fff;
+}
+
+article#novedades ul li a:hover{
+    color:#808080;
+}
+
+
+
+
+/* -------------------------------- */
+/*    	 SABIAS QUE                 */
+/* -------------------------------- */
+article#sabiasque {
+    float: right;
+    width: 260px;    
+}
+
+article#sabiasque h5 {
+    float: left;
+    width: 240px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    background: url(../../images/icono-tic.png) 0 3px no-repeat;
+    padding-left: 20px;
+    line-height: 1.2em;
+    margin-bottom: 10px;
+}
+
+article#sabiasque h5 a {
+    color:#fff;
+}
+
+article#sabiasque h5 a:hover {
+    color:#808080;
+}
+
+article#sabiasque p {
+    color:#bebebe;
+    float: left;
+    width: 240px;
+    font-size: 16px;   
+    padding-left: 20px;
+
+}
+/* -------------------------------- */
+/*		 FOOTER             */
+/* -------------------------------- */
+footer {
+    float:left;
+    width: 100%;
+    margin-top:28px;
+}
+
+
+footer h5 {
+    color: #555;
+    font-size: 42px;
+    width: 100%;
+    float: left;
+    margin-bottom: 15px;
+    font-weight: 200;
+}
+
+footer ul {
+    float: left;
+}
+/* -------------------------------- */
+/*      PARTE IZQUIERDA             */
+/* -------------------------------- */
+section#pie_izq {
+    width: 700px;
+    float: left;
+}
+
+footer nav {
+    width:120px;
+    float: left;
+}
+
+footer nav ul li {
+    color: #555;
+    font-weight: 600;
+    width: 100%;
+    float: left;
+    margin-bottom: 10px;
+}
+
+footer nav ul li a{
+    color: #555;
+}
+
+footer nav ul li a:hover{
+    color: #000;
+}
+
+aside {
+    width:450px;
+    float:left;
+}
+aside h6 {
+    font-size: 16px;
+    color: #555;
+    font-weight: 600;
+    width: 100%;
+    float: left;
+    margin-bottom: 10px;
+}
+
+aside ul {
+    width:190px;
+}
+
+aside ul li {
+    color: #999;
+    font-size: 16px;
+    float:left;
+    width: 190px;
+    margin-bottom: 10px;
+}
+
+aside ul li a {
+    color:#999;
+}
+
+aside ul li a:hover{
+    color: #333;
+}
+/* -------------------------------- */
+/*      PARTE DERECHA               */
+/* -------------------------------- */
+aside#pie_drc {
+    width: 410px;
+    float: right;
+}
+
+aside#pie_drc ul {
+    width: 100%;
+}
+
+aside#pie_drc ul li {
+    width: 385px;
+    padding-left: 25px;
+    float:left;
+    margin-bottom: 15px;
+    color: #555;
+}
+
+aside#pie_drc ul li a {
+    color:#555;
+}
+
+aside#pie_drc ul li a:hover {
+    color:#111;
+}
+
+#direccion {
+    background: url(../../images/icono-direccion.png) 0 0 no-repeat;
+}
+
+#telefono {
+    background: url(../../images/icono-tlf.png) 0 0 no-repeat;
+}
+
+#email {
+    background: url(../../images/icono-email.png) 0 4px no-repeat;
+}
+
+
+aside#pie_drc ul#rrss {
+    width:100%;
+    float: left;
+    margin-top: 10px;
+}
+
+aside#pie_drc ul#rrss li {
+    width: 30px;
+    height: 30px;
+    overflow: hidden;    
+    float: left;
+    padding-left: 0px;
+    margin-right: 10px;
+    
+}
+li#facebook {
+    background: url(../../images/icono-facebook.png) 0 0 no-repeat;
+}
+
+li#twitter {
+    background: url(../../images/icono-twitter.png) 0 0 no-repeat;
+    margin-right: 15px !important;
+}
+
+li#linkedin {
+    background: url(../../images/icono-linkedin.png) 0 0 no-repeat;
+}
+
+aside#pie_drc ul#rrss li a{
+    text-indent:-99999px;
+    width: 30px;
+    height: 30px;
+    float: left;
+}
+
+
+#datosLegales {
+    width:100%;
+    float: right;
+    margin-bottom: 20px;
+   
+}
+
+
+#datosLegales #avisoLegal {
+    color:#777;
+    /*padding-top:4px;*/
+    float:left;
+    position:relative;
+    top:4px;
+    text-decoration:underline;
+    background: none !important;
+    font-size: 13px;
+}
+
+#datosLegales #avisoLegal:hover {
+    color:#111;
+}
+
+#disenoWeb {
+	float:right;
+	font-size:12px;
+	color:#777;
+}
+
+#disenoWeb:hover {
+	color:#111;
+}
+
+.articoestudio {
+	margin-left:8px;
+        position:relative;
+        top:3px;
+}
+
+/*******************************
+   CONTENIDO LEGAL
+********************************/
+.contenidoslegales {
+	width:720px;
+	margin:0 auto;
+	overflow:hidden;
+	padding-top:30px;
+}
+
+.contenidoslegales h1, .contenidoslegales h2 {
+	font-size:32px;
+	color: #7ca71c;
+	line-height:38px;
+	float:left;
+	width:100%;
+	margin-bottom:20px;
+        font-weight: 200;
+}
+
+
+.contenidoslegales p{
+	width:100%;
+	color:#666;
+	float:left;
+	margin:5px 0 25px 0;
+}
+
+.contenidoslegales p a {
+	text-decoration:underline;
+	color:#c3446d;
+}
+
+/* -------------------------------- */
+/*        COLUMNA IZQUIERDA         */
+/* -------------------------------- */
+#colIzqda {
+    width:545px;
+    float: left;
+    margin-top: 60px;
+    margin-left: 40px;
+}
+
+#colIzqda1 {
+    width: 250px;
+    float: left;
+}
+
+
+#colIzqda2 {
+    width: 260px;
+    float: right;
+}
+
+#bienvenido {
+    width:182px;
+    height: 143px;
+    background:url(../../images/bievenido.png) 0 0 no-repeat;
+    float: left;
+    margin-bottom: 35px;
+    padding: 7px 15px;
+}
+
+#bienvenido span {
+    color:#333;
+    font-size: 18px;
+    margin-bottom: 25px;
+    float: left;
+}
+
+#bienvenido ul {
+    float: left;
+    width: 182px;
+    margin-bottom: 15px;
+}
+
+#bienvenido ul li {
+    color:#fff;
+    background: url(../../images/sprite-bienvenido.png)no-repeat;
+    float: left;
+    margin-bottom: 5px;
+    padding-left: 25px;
+    width: 157px;
+}
+
+#bienvenido ul li a {
+    color: #fff;
+}
+
+#bienvenido #notificaciones {
+    background-position: left 0;
+}
+
+#notificaciones a {
+    font-weight: 600;
+    color: #c0eb33 !important;
+}
+
+#bienvenido #datos {
+    background-position: left -20px;
+}
+
+#datos a:hover {
+    color:#c0eb33;
+}
+
+#cerrarSesion {
+    float:right;
+    text-indent: -99999px;
+    background: url(../../images/sprite-cerrar-sesion.png) 0 0 no-repeat;
+    width: 97px;
+    height: 27px;
+}
+#cerrarSesion:hover {
+    background-position: -100px 0;
+}
+#empresas {
+    width:260px;
+    height: 169px;
+    margin-bottom: 25px;
+    float: right;
+}
+
+#content_1 {
+    color: #fff;
+    font-size: 18px;
+}
+
+#content_1 ul {
+    float:left;
+}
+
+#content_1 ul li {
+    width:260px;
+    border-bottom: 1px solid #535353;
+    float: left;
+    
+}
+
+
+#content_1 ul li a {
+    color:#fff;
+    width: 195px;
+    float:left;
+    min-height: 26px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    padding-right: 35px;    
+   /* background: url(../../images/enviar.png) right 10px no-repeat;*/   
+}
+
+#content_1 ul li a.activo {
+    background: url(../../images/enviar.png) right 50% no-repeat;
+}
+
+
+
+
+#content_1 ul li a:hover {
+    color:#999;
+    background: url(../../images/enviar.png) right 50% no-repeat;
+    
+}
+
+/* -------------------------------- */
+/*        COLUMNA DERECHA           */
+/* -------------------------------- */
+.colDrcha {
+    width:500px;
+    height: 455px;
+    overflow: hidden;
+    float: right;
+    margin-top: 50px;
+    margin-right: 40px;
+}
+
+.colDrcha2 {
+    /*display:none;*/
+}
+
+.colDrcha h5{
+    width: 100%;
+    float: left;
+    margin-bottom: 20px;
+    color: #fff;
+    font-size: 36px;
+    font-weight: 200;
+}
+
+.colDrcha article {
+    width:500px;
+    float: left;
+}
+
+.proyecto {
+    width: 475px;
+    background: url(../../images/fondo-proyecto-reflejo.png) 0 0 no-repeat;
+    float: left;
+    margin-bottom: 20px;
+    padding:0px;
+}
+
+.proyectoTop {
+    width: 475px;
+    height: 2px;
+    float: left;
+    background: url(../../images/fondo-proyecto-top.png) 0 0 no-repeat;
+}
+
+.proyectoBottom {
+    width: 475px;
+    height: 2px;
+    float: left;
+    background: url(../../images/fondo-proyecto-bottom.png) 0 0 no-repeat;    
+}
+
+.proyectoInter {
+    width: 475px;
+    float: left;
+    overflow: hidden;
+    background: url(../../images/fondo-proyecto-repeat.png) 0 0 repeat-y; 
+    padding:0px;
+
+
+}
+
+.proyectoInter h6 {
+    background: url(../../images/icono-play-verde.png) 0 0 no-repeat;
+    color: #CDEA6B;
+    font-weight: 600;
+    font-size: 26px;
+    padding-left: 40px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 20px;
+    width: 425px;
+    float: left;
+}
+
+.proyectoInter ul {
+    width: 425px;
+    margin: 25px 0px 10px 30px;
+    float: left;
+    color: #fff;
+}
+
+.proyectoInter ul li {
+    width:185px;
+    float: left;
+    background: url(../../images/icono-proyectos.png) left 5px no-repeat;
+    padding-left: 15px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.proyectoInter ul li a {
+    float:left;
+    color: #fff;
+}
+
+.proyectoInter ul li a:hover {
+    color: #7ca71c;
+}
+
+.verde {
+    color:#7ca71c;
+}
+
+
+
+/* -------------------------------- */
+/*       MENSAJES RESPUESTA         */
+/* -------------------------------- */
+#mensajesRespuesta {
+    width:100%;
+    margin: 0 auto;
+    position: relative;
+    color: #a8d526;
+    font-size: 16px;
+    font-weight: 600;
+    top: 140px;
+    text-align: center;
+    
+}
+
+/* -------------------------------- */
+/*       OLVIDO CONTRASEÑA          */
+/* -------------------------------- */
+#olvidoCont {
+    width:549px;
+    height: 159px;
+    background: url(../../images/fondo-login.png) 0 0 no-repeat;
+    margin: 170px auto 0 auto;
+    position:relative;
+}
+
+#olvidoCont h3 {
+    width: 549px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 26px;
+    color: #333;
+    margin-top: 10px;
+    text-shadow: 0 1px #fff;
+    float: left;
+    margin-bottom: 25px;
+}
+
+
+h5.nombreProyecto {
+    width: 100%;
+    margin-bottom: 20px;
+    color: #fff;
+    font-size: 36px;
+    font-weight: 200;
+}
+
+iframe {
+    background:none;
+}

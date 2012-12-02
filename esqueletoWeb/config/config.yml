@@ -1,41 +1,82 @@
-# PARAMETROS DE CONFIGURACION GLOBAL DE LA APLICACION
----
+# PARAMETROS DE CONFIGURACION GLOBAL DEL PROYECTO
+#
+# PERSONALIZACION PARA CADA PROYECTO:
+#
+#     1.- EN EL NODO 'app', SUSTITUIR 'DOMINIO' POR EL NOMBRE DEL DOMINIO O IP DONDE ESTARÁ
+#         EL PROYECTO. EN DESARROLO PUEDE SER 'localhost'
+#     2.- EN EL NODO 'app', SUSTITUIR 'FOLDER' POR EL NOMBRE DE LA CARPETA DONDE ESTARÁ EL PROYECTO
+#         EN ENTORNO DE PRODUCCION Y SI EL PROYECTO ESTÁ EN EL DIRECTORIO RAIZ DEL DOMINIO, 'FOLDER'
+#         HAY QUE DEJARLO TOTALMENTE VACIO, NI SIQUIERA CON UN '/'
+#     3.- OPTIMIZAR EL NODO 'signatures'
+#     4.- EN EL NODO 'conections' CAMBIAR:
+  
+#         4.1. 'CONEXION' por el nombre del proyecto, p.ej: Pcae, regantes, etc
+#         4.2. 'FOLDER' por el nombre de la carpeta del proyecto
+#         4.3. 'USUARIO' por el usuario de base de datos
+#         4.4. 'PASSWORD' por la contraseña de base de datos
+#         4.5. 'BASEDEDATOS' por el nombre de la base de datos
+#
+#     5.- EN EL NODO 'mailer', personalizar los parámetros del servidor de correo saliente
+#
+# NOTA: 
+#    En entorno de desarrollo el USUARIO, PASSWORD Y BASEDEDATOS se igualará al valor indicado en CONEXION
+#
+# NOTA IMPORTANTE: 
+#    En producción, poner a 'false' el subnodo 'debug_mode' del nodo 'twig' para que los
+#    templates no sean recompilados
+#
+
 config:
   debug_mode: false
+  
   # PARA MOSTRAR O NO EL BOTON DE LA AUDITORIA DE LOS FORMULARIOS
   audit_mode: true
+  
   # CONTROL DE ACCESO POR IP
   ip_control: true
-  # FORMATOS DE EXPORTACION DE INFORMACION
-  export_types:
-    - xls
-    - xml
-    - cvs
-    - Yaml
+  
+  # WEB SERVICE PARA CONTROL DE VISITAS
+  wsControlVisitas: http://api.ip-adress.com/?u=1062c309c5c054edc08fe578ef8f0dd94720c0&h=
+  
+  # FRECUENCIA DE HORAS PARA BORRAR LA TABLA TEMPORAL DE VISITAS
+  frecuenciaHorasBorrado: 5
+    
   # ENTORNO DE LA APLICACION
+  # SI LA APP ESTÁ EN EL RAIZ, 'path' debe estar vacío
+  # NORMALMENTE, EN PRODUCCION 'path' estará vacio
   app:
-    name: ERP Albatronic
-    url: http://localhost/apps
-    path: /apps/Erp
-    framework: ../binWeb/albatronic/
-  # CONEXIONES A LAS BASES DE DATOS
-  conections:
-    empresas:
-      dbEngine: mysql
-      host: localhost
-      user: root
-      password:
-      database:
-    datos001:
-      dbEngine: mysql
-      host: localhost
-      user: root
-      password:
-      database:
+    name: 'Pcae: Portal Cloud Artico Estudio'
+    url: http://DOMINIO/FOLDER
+    path: /FOLDER
+    framework: bin/albatronic/
+    
+  # FIRMAS DE LA WEB
+  signatures:
+    links: 'www.articoestudio.com'
+    services:
+      'es': 'Diseño web,Venta Online,Posicionamiento web'
+      'en': 'Web design,eCommerce,SEO'
+      'fr': ''
+    locations: 'Granada,Madrid,Malaga'
+
+  # LONGITUD MÁXIMA PARA LAS URLS Y NOMBRES AMIGABLES
+  maxLengthUrlsFriendly: 50
+  # NUMERO MAXIMO DE PAGINAS
+  numMaxPages: 100
+  # NUMERO MAXIMO DE DOCUMENTOS
+  numMaxDocuments: 0
+  # NUMERO MAXIMO DE IMAGENES EN LA GALERIA
+  numMaxGalery: 0
+  # NUMERO MAXIMO DE VIDEOS
+  numMaxVideos: 0
+  # NUMERO MAXIMO DE AUDIOS
+  numMaxAudios: 0
+  # TIPOS DE ARCHIVOS PERMITIDOS PARA UPLOAD
+  allowTypes: 'jpg,png,gif,pdf,docx,mp3,avi,pps'
 
   # MOTOR DE ENVIO DE CORREOS
   mailer:
-    plugin_dir: bin/PHPMailer_5.2.1/
+    plugin_dir: bin/PHPMailer_v5.2.1/
     plugin_file: class.phpmailer.php
     motor: PHPMailer
     socket: smtp
@@ -46,18 +87,10 @@ config:
     from: info@dominio.com
     from_name: NOMBRE
     timeout: 30
-  # MOTOR PARA DOCUMENTOS EXCEL
-  excel: bin/PHPExcel/PHPExcel.php
+  
   # MOTOR PARA GENERAR DOCUMENTOS PDF
   pdf: bin/pdf/fpdf.class.php
-  # MOTOR PARA GRAFICOS DE BARRAS
-  graph:
-    -
-      bin/jpgraph/src/jpgraph.php
-    -
-      bin/jpgraph/src/jpgraph_line.php
-    -
-      bin/jpgraph/src/jpgraph_bar.php
+
   # MOTOR DE TEMPLATES
   twig:
     motor: bin/Twig-1.7.0/lib/Twig/Autoloader.php
@@ -65,3 +98,26 @@ config:
     debug_mode: true
     cache_folder: tmp
     charset: null
+    
+  # CONEXIONES A LAS BASES DE DATOS
+  # IMPORTANTE:
+  #    1.-
+  #    EN ENTORNO DE DESARROLLO, LOS VALORES DE 'user', 'password' y 'database'
+  #    NO SE TIENEN EN CUENTA Y SON REEMPLAZADOS POR EL NOMBRE DE LA CONEXION. POR LO TANTO
+  #    EN ESTE CASO Y SUPONIENDO QUE ESTEMOS EN DESARROLLO, 'user', 'password' y 'database' VALDRÍAN 'CONEXION'
+  #
+  #    2.-
+  #    SI EN ENTORNO DE DESARROLLO LA BASE DE DATOS NO ESTUVIERA EN EL EQUIPO DEL DESARROLLADOR, SINO EN UN
+  #    SERVIDOR DE DESARROLLO, HABRA QUE INDICAR SU IP EN 'host'
+  #
+  #    3.-
+  #    PARA FACILITAR LA PORTABILIDAD DEL MODELO DE DATOS ENTRE DISTINTAS BASES DE DATOS, SE SEGUIRÁ LA
+  #    SIGUIENTE REGLA: SI EN LA PROPIEDAD $_conectionName DEL MODELO DE DATOS DE CADA TABLA NO SE INDICA 
+  #    NINGUN VALOR, SE ENTENDERÁ QUE LA CONEXIÓN SERÁ LA PRIMERA QUE HAYA DEFINIDA DENTRO DE ESTE NODO (conections).
+  conections:
+    CONEXION:
+      dbEngine: mysql
+      host: localhost
+      user: USUARIO
+      password: PASSWORD
+      database: BASEDEDATOS

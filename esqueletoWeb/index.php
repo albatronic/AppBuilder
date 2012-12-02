@@ -28,6 +28,10 @@
  */
 session_start();
 
+$_SESSION['IdSesion'] = session_id();
+
+if (!$_SESSION['USER']['user']['Id'])
+    $_SESSION['USER']['user']['Id'] = 0;
 
 if (!file_exists('config/config.yml'))
     die("NO EXISTE EL FICHERO DE CONFIGURACION");
@@ -46,6 +50,7 @@ $config = $yaml['config'];
 $app = $config['app'];
 
 $_SESSION['appPath'] = $app['path'];
+$_SESSION['frecuenciaHorasBorrado'] = $config['frecuenciaHorasBorrado'];
 
 // ---------------------------------------------------------------
 // ACTIVAR EL AUTOLOADER DE CLASES Y FICHEROS A INCLUIR
@@ -77,6 +82,15 @@ spl_autoload_register(array('Autoloader', 'loadClass'));
   include "lang/" . $_SESSION['IDIOMA'] . ".php";
   }
  */
+
+//----------------------------------------------------------------
+// ACTIVAR EL MOTOR DE PDF'S
+// ---------------------------------------------------------------
+if (file_exists($config['pdf']))
+    include_once $config['pdf'];
+else
+    die("NO SE PUEDE ENCONTRAR EL MOTOR PDF");
+
 //----------------------------------------------------------------
 // ACTIVAR EL MOTOR TWIG PARA LOS TEMPLATES.
 //----------------------------------------------------------------
@@ -109,9 +123,22 @@ if (!$_SESSION['isMobile']) {
     unset($browser);
 }
 
+// ----------------------------------------------------------------
+// CARGAR LO QUE VIENE EN EL REQUEST
+// ----------------------------------------------------------------
 $rq = new Request();
 
+// ----------------------------------------------------------------
+// DETERMINAR ENTORNO DE DESARROLLO O DE PRODUCCION
+// ----------------------------------------------------------------
 $_SESSION['EntornoDesarrollo'] = $rq->isDevelopment();
+
+// ----------------------------------------------------------------
+// EN ENTORNO DE PRODUCCION, COMPROBAR ORIGEN DE LA PETICION
+// ----------------------------------------------------------------
+if ( (!$_SESSION['EntornoDesarrollo']) and (!$_SESSION['origen']) ){
+    $_SESSION['origen'] = WebService::getOrigenVisitante($config['wsControlVisitas'] . $rq->getRemoteAddr());
+}
 
 // ----------------------------------------------------------------
 // ACTIVAR EL FORMATO DE LA MONEDA
@@ -121,7 +148,7 @@ setlocale(LC_MONETARY, $rq->getLanguage());
 // Si el navagador es antiguo muestro template especial
 $url = new CpanUrlAmigables();
 if ($rq->isOldBrowser()) {
-    $rows = $url->cargaCondicion("*", "UrlFriendly='/oldBrowser'");
+    $rows = $url->cargaCondicion("*", "UrlFriendly='/oldbrowser'");
 } else {
     // Localizar la url amigable
     $rows = $url->cargaCondicion("*", "UrlFriendly='{$rq->getUrlFriendly($app['path'])}'");
@@ -195,12 +222,20 @@ $result['values']['controller'] = $controller;
 $result['values']['archivoCss'] = getArchivoCss($result['template']);
 $result['values']['archivoJs'] = getArchivoJs($result['template']);
 
+// Cargar las variables Web del Proyecto
+if (!isset($_SESSION['varPro_Web'])) {
+    $var = new CpanVariables();
+    $rows = $var->cargaCondicion('Yml', "Variable='varPro_Web'");
+    unset($var);
+    $_SESSION['varPro_Web'] = sfYaml::load($rows[0]['Yml']);
+}
+$result['values']['varPro_Web'] = $_SESSION['varPro_Web'];
+
 // Cargo los valores para el modo debuger
 if ($config['debug_mode']) {
     $result['values']['_debugMode'] = true;
-    $result['values']['_auditMode'] = (string) $config['audit_mode'];
-    //$result['values']['_session'] = print_r(array('emp' => $_SESSION['emp'], 'suc' => $_SESSION['suc'], 'tpv' => $_SESSION['tpv']), true);
-    $result['values']['_user'] = print_r($_SESSION['USER'], true);
+    $result['values']['_conections'] = print_r($config['conections'], true);
+    $result['values']['_SESSION'] = print_r($_SESSION, true);
     $result['values']['_debugValues'] = print_r($result['values'], true);
 }
 
@@ -218,11 +253,16 @@ if ($_SESSION['isMobile']) {
 }
 
 // Renderizo el template y los valores devueltos por el método
+$twig->addGlobal('appPath', $app['path']);
 $twig->loadTemplate($result['template'])
         ->display(array(
             'layout' => $layout,
             'values' => $result['values'],
             'app' => $app,
+            'user'    => $_SESSION['USER']['user'],
+            'menu'    => $_SESSION['USER']['menu'],
+            'projects'=> $_SESSION['projects'],
+            'project' => $_SESSION['project'], ∫
         ));
 
 //------------------------------------------------------------
@@ -232,7 +272,6 @@ unset($con);
 unset($loader);
 unset($twig);
 unset($config);
-
 
 /**
  * Devuelve el nombre del archivo css asociado al template

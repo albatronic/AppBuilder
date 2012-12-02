@@ -152,14 +152,6 @@ class Request {
     }
 
     /**
-     * Devuelve un array con los ficheros enviados por POST
-     * @return array
-     */
-    public function getFiles() {
-        return $this->request['FILES'];
-    }
-    
-    /**
      * Devuelve un string con el idioma aceptado por el cliente (ej: es-ES)
      * @return string
      */
@@ -223,7 +215,6 @@ class Request {
         return $isOld;
     }
 
-
     /**
      * Devuelve TRUE / FALSE dependiendo si estás en entorno
      * de desarrollo o de producción respectivamente.
@@ -231,8 +222,9 @@ class Request {
      * @return boolean TRUE si estás en entorno desarrollo
      */
     public function isDevelopment() {
-        return ( ($_SERVER['SERVER_NAME'] == 'localhost') or (substr($_SERVER['SERVER_NAME'],0,3) != 'www') );
+        return ( ($_SERVER['SERVER_NAME'] == 'localhost') or (substr($_SERVER['SERVER_NAME'], 0, 3) != 'www') );
     }
+
 }
 
 ?>
