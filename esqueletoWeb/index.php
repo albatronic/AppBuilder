@@ -82,7 +82,6 @@ spl_autoload_register(array('Autoloader', 'loadClass'));
   include "lang/" . $_SESSION['IDIOMA'] . ".php";
   }
  */
-
 //----------------------------------------------------------------
 // ACTIVAR EL MOTOR DE PDF'S
 // ---------------------------------------------------------------
@@ -134,9 +133,10 @@ $rq = new Request();
 $_SESSION['EntornoDesarrollo'] = $rq->isDevelopment();
 
 // ----------------------------------------------------------------
-// EN ENTORNO DE PRODUCCION, COMPROBAR ORIGEN DE LA PETICION
+// EN ENTORNO DE PRODUCCION, OBTENER EL ORIGEN DE LA PETICION PARA
+// LA GESTION DE VISITAS
 // ----------------------------------------------------------------
-if ( (!$_SESSION['EntornoDesarrollo']) and (!$_SESSION['origen']) ){
+if ((!$_SESSION['EntornoDesarrollo']) and (!$_SESSION['origen'])) {
     $_SESSION['origen'] = WebService::getOrigenVisitante($config['wsControlVisitas'] . $rq->getRemoteAddr());
 }
 
@@ -173,9 +173,10 @@ switch ($rq->getMethod()) {
         //$action = $request[1];
         $controller = ucfirst($row['Controller']);
         $action = $row['Action'];
+        $request['IdUrlAmigable'] = $row['Id'];
         $request['Parameters'] = $row['Parameters'];
         $request['Entity'] = $row['Entity'];
-        $request['IdEntity'] = $row['IDEntity'];
+        $request['IdEntity'] = $row['IdEntity'];
         break;
 
     case 'POST':
@@ -195,22 +196,22 @@ if ($controller == '')
 if ($action == '')
     $action = "Index";
 
-// Si no existe el controller lo pongo a 'Index'
+// Si no existe el controller lo pongo a 'Error404'
 $fileController = "modules/" . $controller . "/" . $controller . "Controller.class.php";
 if (!file_exists($fileController)) {
-    $controller = "Index";
-    $fileController = "modules/Index/IndexController.class.php";
+    $controller = "Error404";
+    $fileController = "modules/Error404/Error404Controller.class.php";
 }
 
 $clase = $controller . "Controller";
 $metodo = $action . "Action";
 
-//---------------------------------------------------------------
+//------------------------------------------------------------------------------
 // INSTANCIAR EL CONTROLLER REQUERIDO
 // SI EL METODO SOLICITADO EXISTE, LO EJECUTO, SI NO EJECUTO EL METODO INDEX
 // RENDERIZAR EL RESULTADO CON EL TEMPLATE Y DATOS DEVUELTOS
 // SI NO EXISTE EL TEMPLATE DEVUELTO, MUESTRO UNA PAGINA DE ERROR
-//---------------------------------------------------------------
+//------------------------------------------------------------------------------
 include_once $fileController;
 $con = new $clase($request);
 if (!method_exists($con, $metodo))
@@ -222,20 +223,11 @@ $result['values']['controller'] = $controller;
 $result['values']['archivoCss'] = getArchivoCss($result['template']);
 $result['values']['archivoJs'] = getArchivoJs($result['template']);
 
-// Cargar las variables Web del Proyecto
-if (!isset($_SESSION['varPro_Web'])) {
-    $var = new CpanVariables();
-    $rows = $var->cargaCondicion('Yml', "Variable='varPro_Web'");
-    unset($var);
-    $_SESSION['varPro_Web'] = sfYaml::load($rows[0]['Yml']);
-}
-$result['values']['varPro_Web'] = $_SESSION['varPro_Web'];
-
 // Cargo los valores para el modo debuger
 if ($config['debug_mode']) {
     $result['values']['_debugMode'] = true;
-    $result['values']['_conections'] = print_r($config['conections'], true);
-    $result['values']['_SESSION'] = print_r($_SESSION, true);
+    $result['values']['_auditMode'] = (string) $config['audit_mode'];
+    $result['values']['_user'] = print_r($_SESSION['USER'], true);
     $result['values']['_debugValues'] = print_r($result['values'], true);
 }
 
@@ -259,9 +251,9 @@ $twig->loadTemplate($result['template'])
             'layout' => $layout,
             'values' => $result['values'],
             'app' => $app,
-            'user'    => $_SESSION['USER']['user'],
-            'menu'    => $_SESSION['USER']['menu'],
-            'projects'=> $_SESSION['projects'],
+            'user' => $_SESSION['USER']['user'],
+            'menu' => $_SESSION['USER']['menu'],
+            'projects' => $_SESSION['projects'],
             'project' => $_SESSION['project'], ∫
         ));
 
@@ -282,7 +274,7 @@ function getArchivoCss($template) {
 
     $archivoTemplate = str_replace('html', 'css', $template);
 
-    if (!file_exists($archivoTemplate)) {
+    if (!file_exists('modules/' . $archivoTemplate)) {
         $archivoTemplate = "_global/css.twig";
     }
 
@@ -298,7 +290,7 @@ function getArchivoJs($template) {
 
     $archivoTemplate = str_replace('html', 'js', $template);
 
-    if (!file_exists($archivoTemplate)) {
+    if (!file_exists('modules/' . $archivoTemplate)) {
         $archivoTemplate = "_global/js.twig";
     }
 

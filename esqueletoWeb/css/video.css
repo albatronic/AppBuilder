@@ -1,0 +1,109 @@
+/* ---------------------------------------- */
+/*			TEXTOS							*/
+/* ---------------------------------------- */
+h1 {
+	width: 100%;
+	float: left;
+	font-size: 40px;
+	color: #00A2DF;
+	margin-bottom: 20px;
+}
+
+h2 {
+	color:#94bc28;
+	font-size:20px;
+	margin-bottom:10px;
+}
+
+h2 a{
+	color:#94bc28;
+}
+
+h2 a:hover{
+	color:#637d1b;
+}
+
+h4 {
+	color:#1b3e58;
+	font-size:18px;
+	margin-bottom:5px;
+}
+
+p {
+	margin-bottom:10px;
+}
+
+/*******************************
+   Contenedor interno
+********************************/
+
+#mosaicoProyectos {
+	float:left;
+	margin-bottom:50px;
+	width:100%;
+}
+
+.proyectosFila {
+	float:left;
+	margin-bottom:45px;
+}
+
+/*.proyecto1, .proyecto2, .proyecto3 {
+	width:225px;
+	height:137px;
+}*/
+
+.proyecto1, .proyecto2 {
+	float:left;
+	margin-right:50px;
+}
+
+.proyecto3 {
+	float:right;
+}
+
+
+/****************
+SHOWREEL 
+*****************/
+#showreel{
+	float:left;
+	width:100%;
+	padding-bottom:20px;
+	margin-bottom:50px;
+}
+	
+#showreel h1{
+		font-size:25px;
+		line-height:28px;
+		color:#333;
+		margin-bottom:12px;
+}
+
+#showreel p{
+		line-height:23px;
+		margin-bottom:20px;
+}
+
+#showreel p a{
+		color:#94BC28;
+		text-decoration:underline;
+}
+
+#showreel p a:hover{
+	color:#637d1b;
+}
+		
+/* -------------------------------- */
+/*		 	VIDEO			 		*/ 
+/* -------------------------------- */
+#video {
+	float:left;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+
+#video iframe {
+	margin:0 30px 10px 0;
+}	

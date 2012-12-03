@@ -1,0 +1,284 @@
+/* -------------------------------- */
+/*		 MEDIA				 		*/
+/* -------------------------------- */
+.media {
+	width:783px;
+	float:left;
+	margin-bottom:40px;
+}
+
+/* -------------------------------- */
+/*		 MEDIA IZQDA		 		*/
+/* -------------------------------- */
+.media_izqda {
+	width:290px;
+	float:left;
+	margin-bottom:15px;
+}
+
+.media_izqda h1 {
+	color:#00a2df;
+	font-size:34px;
+	margin-bottom:15px;
+	width:100%;
+	float:left;
+}
+
+.media_izqda h2 {
+	color:#94bc28;
+	font-size:20px;
+	margin-bottom:15px;
+}
+
+.media_izqda h2 a{
+	color:#94bc28;
+}
+
+.media_izqda h2 a:hover{
+	color:#637d1b;
+}
+
+.media_izqda h3 {
+	color:#4f4f4f;
+	font-size:16px;
+	margin-bottom:15px;
+}
+
+.media_izqda h3 a{
+	color:#4f4f4f;
+}
+
+.media_izqda h3 a:hover {
+	color:#94BC28;
+}
+
+.media_izqda p {
+	margin-bottom:15px;
+	width:100%;
+	float:left;
+	font-size:13px;
+}
+
+.media_izqda img {
+	border-top:1px solid #c9c9c9;
+	float:left;
+	margin-bottom:20px;
+}
+
+.media_izqda .img_noticias {
+	width:226px;
+}
+
+#noticias_top {
+	background:url(../images/noticias-top.png) 0 0 no-repeat;
+	width:290px;
+	height:5px;
+	float:left;
+}
+
+#noticias_inter {
+	background:#f2f2f2;
+	border-left:1px solid #d2d2d2;
+	border-right:1px solid #d2d2d2;
+	width:224px;
+	float:left;
+	overflow:hidden;
+	padding:16px 32px;
+}
+
+#noticias_bottom {
+	background:url(../images/noticias-bottom.png) 0 0 no-repeat;
+	width:290px;
+	height:6px;
+	float:left;
+	margin-bottom:15px;
+}
+
+/* -------------------------------- */
+/*		 MEDIA DRCHA		 		*/
+/* -------------------------------- */
+.media_drcha h1 {
+	color:#94bc28;
+	font-size:34px;
+	width:100%;
+	float:left;
+	margin-bottom:25px;
+}
+
+.media_drcha h2, .media_drcha h5 {
+	color:#94bc28;
+	font-size:20px;
+	margin-bottom:10px;
+}
+
+.media_drcha h2 a, .media_drcha h5 a{
+	color:#94bc28;
+}
+
+.media_drcha h2 a:hover, .media_drcha h5 a:hover{
+	color:#637d1b;
+}
+
+.media_drcha .evento_indiv.sin_imagen h2 {
+	width:100% !important;
+	float:left;
+}
+
+.media_drcha h3 {
+	color:#00a2df;
+	font-size:16px;
+	margin-bottom:10px;
+}
+
+.media_drcha h3 a{
+	color:#00a2df;
+}
+
+.media_drcha h3 a:hover{
+	color:#003881;
+}
+
+.media_drcha .evento_indiv.sin_imagen h3 {
+	width:100% !important;
+	float:left;
+}
+
+.media_drcha h4 {
+	color:#00a2df;
+	font-size:20px;
+	margin-bottom:10px;
+	width:100%;
+	float:left;
+}
+
+.media_drcha h4 a{
+	color:#00a2df;
+}
+
+.media_drcha h4 a:hover{
+	color:#003881;
+}
+
+
+
+.media_drcha p {
+	margin-bottom:10px;
+}
+
+.media_drcha .evento_indiv.sin_imagen p {
+	width:100% !important;
+	float:left;
+}
+
+.evento_indiv {
+	width:434px;
+}
+
+
+/* -------------------------------- */
+/*	   CONTENIDOS M�S VISITADOS		*/
+/* -------------------------------- */
+#contenidos {
+	width:374px;
+	float:left;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	background:#044383;
+	color:#fff;
+	font-size:15px;
+	padding:30px 30px 15px 30px;
+}
+
+#contenidos h1{
+	color:#fff;
+	font-size:28px;
+	background:url(../images/filete-contenidos.png) 0 bottom repeat-x;
+	padding-bottom:10px;
+}
+
+#contenidos a{
+	color:#fff;
+}
+
+#contenidos ul{
+	width:175px;
+}
+
+#contenidos ul li{
+	width:140px;
+	float:left;
+	background:url(../images/contenidos-tic.png) 0 4px no-repeat;
+	padding-left:23px;
+	margin-bottom:15px;
+}
+
+#contenidos ul li a {
+	float:left;
+	padding-left:2px;
+}
+
+#contenidos ul li a:hover {
+	color:#0CA6E1;
+}
+
+/* -------------------------------- */
+/*		 	GALERIA			 		*/
+/* -------------------------------- */
+ul.galeria {
+	float:left;
+	width:434px;
+	margin-bottom:20px;
+}
+
+ul.galeria li{
+	float:left;
+	width:69px;
+	height:71px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	background:#ddd;
+	padding:3px;
+	margin-right:14px;
+}
+
+ul.galeria li img {
+	border-top:1px solid #909090;
+	border-bottom:1px solid #fff;
+	width:69px;
+	height:69px;
+}
+
+.albumes {
+	background:url(../images/icono-siguiente.png) right 5px no-repeat;
+	float:right;
+	padding-right:15px;
+	color:#94bc28;
+	font-size:15px;
+	margin-bottom:40px;
+}
+
+.albumes:hover {
+	color:#00A2DF;
+}
+
+
+/* -------------------------------- */
+/*		 	VIDEO			 		*/ 
+/* -------------------------------- */
+#video {
+	background:#434343;
+	width:404px;
+	float:left;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	padding:15px;
+}
+
+#video iframe {
+	border-top:1px solid #2c2c2c;
+	border-bottom:1px solid #7e7e7e;
+	margin-bottom:10px;
+}

@@ -18,21 +18,30 @@ class GconSecciones extends GconSeccionesEntity {
     /**
      * Devuelve un array con las subsecciones de la sección en curso
      * 
-     * El índice del array es el título de la subsección y el valor es la url amigable
+     * Cada elemento del array es:
+     * 
+     *      * titulo => El titulo de la seccion
+     *      * url => array(url => La url, targetBlank => boolean)
      * 
      * @return array Array de subsecciones
      */
     public function getArraySubsecciones() {
-    
+
         $array = array();
-        
+
         $subseccion = new GconSecciones();
         $filtro = "BelongsTo='{$this->Id}'";
-        $rows = $subseccion->cargaCondicion("Titulo,UrlFriendly",$filtro,"SortOrder ASC");
-        unset($subseccion);
+        $rows = $subseccion->cargaCondicion("Id", $filtro, "SortOrder ASC");
+
         foreach ($rows as $row) {
-            $array[$row['Titulo']] = $row['UrlFriendly'];
+            $subseccion = new GconSecciones($row['Id']);
+            $array[] = array(
+                'titulo' => $subseccion->getTitulo(),
+                'url' => $subseccion->getHref(),
+            );
         }
+        unset($subseccion);
+        
         return $array;
     }
 

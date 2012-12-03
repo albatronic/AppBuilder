@@ -1,0 +1,139 @@
+/* ------------------------------- */
+/* 			ENLACES 			   */
+/* ------------------------------- */
+ul#contenedorEnlaces {
+	width:100%;
+	float:left;
+	margin-bottom:20px;	
+}
+ /* ---------------------------- */
+
+
+ul#contenedorEnlaces li  {
+	background:url(../images/icono-pie-lista.png) 0 2px no-repeat;
+	padding-left: 15px;
+	margin-bottom: 30px;
+	width:768px;
+	float:left;
+}
+
+h2 {
+	width:100%;
+	float:left;
+	margin-bottom:25px;
+	line-height:1.5em;
+	color:#94BC28;
+	font-size:25px;
+}
+
+h3 {
+	width:768px;
+	float:left;
+	margin-bottom:5px;
+	line-height:1.5em;
+	padding-left:15px;
+	color:#4F4F4F;
+	font-size:15px;
+}
+
+h3 a {
+	color:#4F4F4F;
+	line-height:1.4em;
+	float:left;
+	background:url(../images/icono-tic.png) 0 8px no-repeat;
+}
+
+h3 a:hover {
+	color:#666;
+	text-decoration:underline;
+}
+
+
+h4 {
+	color:#94BC28;
+	font-size:13px;
+	width:637px;
+	margin-left:15px;
+}
+
+h4 a{
+	color:#94BC28;
+}
+
+h4 a:hover{
+	color:#637d1b;
+	text-decoration:underline;
+	font-size:13px;
+	/*padding-left:15px;*/
+}
+
+h5 {
+	color:#94BC28;
+	width:768px;
+	float:left;
+	margin-bottom:5px;
+	line-height:1.5em;
+	padding-left:5px;
+	font-size:16px;
+}
+
+/* ------------------------------- */
+/* 			SUBMENU 			   */
+/* ------------------------------- */
+.submenu {
+	color:#555;
+	font-size:13px;
+	padding-left:15px;
+	float:left;
+	margin-top:5px;
+}
+
+ul#contenedorEnlaces li ul.submenu li{
+	height:1.4em;
+	float:left;
+	margin-bottom:10px;
+}
+
+.submenu a {
+	color:#555;
+}
+
+.submenu a:hover {
+	color:#94BC28;
+	text-decoration:underline;
+}
+
+ul#contenedorEnlaces li ul.submenu li.direccion_directorio {
+	background:url(../images/icono-casa.png) 0 0 no-repeat;
+	padding-left:30px;
+}
+
+ul#contenedorEnlaces li ul.submenu li.pagina_directorio {
+	background:url(../images/icono-web.png) 0 0 no-repeat;
+	padding-left:30px;
+}
+
+ul#contenedorEnlaces li ul.submenu li.mail_directorio {
+	background:url(../images/icono-sobre.png) 0 0 no-repeat;
+	padding-left:30px;
+}
+
+ul#contenedorEnlaces li ul.submenu li.info_directorio {
+	background:url(../images/icono-info.png) 0 0 no-repeat;
+	padding-left:30px;
+}
+
+ul#contenedorEnlaces li ul.submenu li.telefono_directorio {
+	background:url(../images/icono-tlf.png) 0 0 no-repeat;
+	padding-left:30px;
+}
+
+ul#contenedorEnlaces li ul.submenu li.movil_directorio {
+	background:url(../images/icono-movil.png) 0 0 no-repeat;
+	padding-left:30px;
+}
+
+ul#contenedorEnlaces li ul.submenu li.fax_directorio {
+	background:url(../images/icono-fax.png) 0 0 no-repeat;
+	padding-left:30px;
+}

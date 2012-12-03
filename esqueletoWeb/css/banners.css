@@ -1,0 +1,55 @@
+/*#newsticker-demo { 
+	width:224px; 
+	padding:0; 
+	font-size:12px;
+	margin:0px;
+	overflow:hidden;
+	float:left;
+}
+
+#newsticker-demo a { text-decoration:none; }
+
+.newsticker-jcarousellite { width:224px; float:left; }
+.newsticker-jcarousellite ul{ width:224px; float:left; }
+.newsticker-jcarousellite ul li{ display:block; padding-bottom:1px; margin-bottom:5px; float:left;}*/
+
+#newsticker-demo { 
+	width:224px; 
+	padding:0; 
+	font-size:12px;
+	margin:20px auto;
+	/*background:url(../images/fondo-pie.png) 0 0 repeat;*/
+	overflow:hidden;
+	float:left;
+}
+
+#newsticker-demo a { text-decoration:none; }
+#newsticker-demo img {/* border: 2px solid #FFFFFF;*/ width:169px; }
+
+#newsticker-demo .title {
+text-align:center;
+font-size:14px;
+font-weight:bold;
+padding:5px;
+}
+
+.newsticker-jcarousellite { width:205px; }
+.newsticker-jcarousellite ul li{ list-style:none; display:block; padding-bottom:1px; margin-bottom:5px; }
+.newsticker-jcarousellite .thumbnail { float:left; width:205px;  margin-right:35px;}
+.newsticker-jcarousellite .info { float:right; width:190px; }
+.newsticker-jcarousellite .info span.cat { display: block; font-size:10px; color:#808080; }
+
+.clear { clear: both; }
+
+
+.col_git, .col_baron  {
+	position:relative;
+	top:-10px;
+}
+
+.col_lan {
+	position:relative;
+	top:-30px;
+	padding:30px 0;
+}
+

@@ -1,0 +1,43 @@
+.mosaicoProyectos {
+	float:left;
+	width:100%;
+	margin-bottom:40px;
+}
+
+.proyectosFila {
+	float:left;
+	margin-bottom:15px;
+	width:100%;
+}
+
+.proyectosFila img {
+	width:205px;
+	height:126px;
+}
+
+.proyecto1, .proyecto2, .proyecto3 {
+	background:url(../images/fondo-album.png) 0 0 no-repeat;
+	width:205px;
+	overflow:hidden;
+	float:left;
+	padding:14px 8px 12px 12px;
+}
+
+.proyecto1, .proyecto2 {
+	float:left;
+	margin-right:42px;
+}
+
+.textoAlbum {
+	width:205px;
+	float:left;
+	margin-top:20px;
+	margin-left:-2px;
+}
+
+.textoAlbum h4 {
+	margin-bottom:5px;
+	font-size: 14px;
+	color: #4F4F4F;
+	float:left;
+}

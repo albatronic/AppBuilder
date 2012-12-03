@@ -1,0 +1,77 @@
+/* ---------------------------------------- */
+/*			TEXTOS							*/
+/* ---------------------------------------- */
+h1 {
+	width: 100%;
+	float: left;
+	font-size: 40px;
+	color: #00A2DF;
+	margin-bottom: 20px;
+}
+
+h2 {
+	color:#94bc28;
+	font-size:20px;
+	margin-bottom:10px;
+}
+
+h2 a{
+	color:#94bc28;
+}
+
+h2 a:hover{
+	color:#637d1b;
+}
+
+.evento_indiv.sin_imagen h2 {
+	width:100% !important;
+	float:left;
+}
+
+h3 {
+	color:#00a2df;
+	font-size:16px;
+	margin-bottom:10px;
+}
+
+h3 a{
+	color:#00a2df;
+}
+
+h3 a:hover{
+	color:#003881;
+}
+
+.evento_indiv.sin_imagen h3 {
+	width:100% !important;
+	float:left;
+}
+
+p {
+	margin-bottom:10px;
+}
+
+.evento_indiv.sin_imagen p {
+	width:100% !important;
+	float:left;
+}
+
+
+
+/* ---------------------------------------- */
+/*			ESTRUCTURA						*/
+/* ---------------------------------------- */
+#col_izqda {
+	width:350px;
+	float:left;
+}
+
+#col_drcha {
+	width:350px;
+	float:right;
+}
+
+.evento_indiv {
+	width:100%;
+}
+

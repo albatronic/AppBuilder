@@ -1,0 +1,217 @@
+
+/**********************************
+CALENDARIO DE EVENTOS
+
+DEPENDENCIAS:
+
+    _global/calendario.html.twig
+
+**********************************/
+
+#contenedor_calendario {
+	width:251px;
+	/*height:190px; */
+	float:left;
+	/*margin: 25px 0 25px 8px; */
+	margin: 0px 0px 0px 0px; 
+	/*margin-top:0px;*/
+	/*margin-bottom:20px;*/
+	 /*background-color: #990000; */
+	/*padding:1px 1px 1px 1px;
+	background-color: #990000;
+	text-align: center;*/
+}
+
+#calendarioTablaDias {
+    min-height: 216px;
+}
+
+/*#contenedor_calendario #cabecera_calendario {
+	background:url('../images/calendario-cabecera.png') 0 0 no-repeat;
+	width:260px;
+	height:33px;
+	float:left;
+	margin-bottom:5px;
+}*/
+
+/*#contenedor_calendario #cabecera_calendario #mes_anterior_calendario {
+	width:15px;
+	height:33px;
+	float:left;
+} */
+
+/* #contenedor_calendario #cabecera_calendario #nombre_mes_year_calendario {
+	width:260px;
+	height:25px;
+	padding-top:0px;
+	float:left;
+	color:#444;
+	text-align:center;
+	font-weight:normal;
+	font-size:22px;
+	font-family:gill;
+
+} */
+
+
+/* #contenedor_calendario #cabecera_calendario #mes_siguiente_calendario {
+	width:15px;
+	height:33px;
+	float:left;
+} */
+
+
+#contenedor_calendario #borde_sup_calendario {
+	background:url('../images/fondo-calendario-top.png') 0 0 repeat-x;
+	width:250px;
+	text-align:center;
+	color:#f5f5f5;
+	font-size:14px;
+	padding-top:10px;
+	height:26px;
+	float:left;
+	text-transform:uppercase;
+	margin-bottom:0px;
+	
+}
+
+#contenedor_calendario #borde_sup_calendario img {
+	margin:4px 10px 0px 10px;
+}
+
+.mes_year {
+	width:190px;
+	float:left;
+}
+
+#contenedor_calendario #contenedor_tabla_dias {
+	background:url('../images/fondo-calendario.png') 0 0 repeat-y;
+	width:251px;
+	float:left;
+	overflow:hidden;
+	padding-left:0px;}
+
+/*#contenedor_calendario #borde_inf_calendario {
+	background:url('../images/fondo-calendario-bottom.png') 0 0 no-repeat;
+	width:251px;
+	height:43px;
+	float:left;}*/
+
+
+#contenedor_calendario #cabecera_calendario {
+	background:url('../images/fondo-mes.png') 0 0 no-repeat;
+	width:251px;
+	height:29px;
+	float:left;
+	margin-bottom:0px;
+	float:left;
+	text-align:center;
+/*font-family:museo500;*/
+	font-size:17px;
+	color:#88b6dc;
+	padding-top:6px;
+}
+
+#contenedor_calendario #cabecera_calendario img {
+	margin-bottom:0px;
+	margin-left:15px;
+	margin-right:15px;
+}
+
+
+
+#contenedor_calendario table#calendario {
+	width:250px;
+	border-spacing:1px;
+	/*border-collapse:separate;*/
+	padding-left:0px;
+}
+
+/*#calendario_espacio_superior {
+	height:12px;
+}*/
+
+
+/* #calendario_mes {
+	background:url('../images/mes-calendario_v2.png') 0 0 no-repeat;
+	text-align:center;
+	height:48px;
+	color:#004C8E;
+	font-size:18px;
+	padding-bottom:5px;
+} */
+
+table#calendario tr td.nombredias_calendario {
+	/*font-family: Verdana, sans-serif, Arial;*/
+	font-size:9px;
+	text-align:center;
+	color:#646464;
+	font-weight:bold;
+	height:15px;
+	background:#e3e3e3;
+	padding:4px 0;
+	border:1px solid #e3e3e3;
+}
+
+table#calendario tr td.diasactuales_calendario {
+	/*font-family:Arial,Helvetica,sans-serif;*/
+	font-size:11px;
+	width:26px;
+	height:20px;
+	color:#444;
+	text-align:center;
+	font-weight:700;
+	padding:5px 0;
+	border:1px solid #eee;
+}
+
+
+table#calendario tr td.dia_con_evento_calendario {
+	background:url('../images/calendario-esquina.png') right 0 no-repeat;
+	/*font-family:Arial,Helvetica,sans-serif;*/
+	font-size:11px;
+        font-weight: 700;
+	width:26px;
+	height:20px;
+	color:#444;
+	padding:5px 0;
+	text-align:center;
+	border:1px solid #eee;
+}
+
+table#calendario tr td.dia_con_evento_calendario:hover {
+	background:#E3E3E3 url('../images/calendario-esquina.png') right 0 no-repeat;
+}
+
+table#calendario tr td.dia_con_evento_calendario a {
+	color:#444;
+	text-decoration:none;
+	font-weight:700;
+}
+
+table#calendario tr td.dia_con_evento_calendario a:hover {
+	text-decoration:underline;
+}
+
+/*#contenedor_calendario table a {
+	color: #ffffff;
+}*/
+
+
+table#calendario tr td.diasadyacentes_calendario {
+	/*font-family: Verdana, sans-serif, Arial;*/
+	font-size:10px;
+	text-align:center;
+	color: #cfcfcf;
+	border:1px solid #eee;
+	font-weight:700;
+}
+
+/*#siguiente_anterior_calendario {
+	font-size:10px;
+	font-weight:bold;
+	text-align:center;
+}*/
+
+
+/* ______________________________________ FIN: ALMANAQUE DE EVENTOS  ____________________________________ */

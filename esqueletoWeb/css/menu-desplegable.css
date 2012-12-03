@@ -1,0 +1,87 @@
+/* Men� vertical desplegable
+----------------------------------------------- */
+.menu_list {	
+	width: 251px; /* Ancho del men� */
+	/*font-family:Arial, Helvetica, sans-serif;*/
+	font-size:14px;
+	overflow:hidden;
+	border-top:1px solid #ccc;
+}
+
+.menu_head {
+	width:240px;
+	padding: 10px 10px 10px 0px;
+	color:#0ca6e1; /* Color de las pesta�as principales */
+	cursor: pointer;
+	position: relative;
+	/*height:22px;*/
+	margin-left:0;
+	margin-right:0;
+	float:left;
+	/*border-top:1px solid #ccc;*/
+	border-bottom:1px solid #ccc;
+}
+
+.menu_head:hover {
+	color:#044383; /* Color de las pesta�as principales */
+}
+
+.menu_head a {
+	color:#0ca6e1; /* Color de las pesta�as principales */
+}
+
+.menu_head a:hover {
+	color:#044383; /* Color de las pesta�as principales */
+}
+
+/*.menu_head:hover {
+width:225px;
+padding: 3px 10px 10px 20px;
+color:#444; /* Color de las pesta�as principales */
+/*cursor: pointer;
+position: relative;
+height:22px;
+margin:1px;
+margin-left:0;
+margin-right:0;
+margin-bottom:2px;
+/*font-weight:bold;*/
+/*background-color: #424242;*/ /* Color de fondo */
+/*background:url(../images/menu_titularfondo.png) 0 0 no-repeat;
+/*background-position:center right;*/
+/*background-repeat:no-repeat;*/
+/*float:left;
+}*/
+
+.menu_body {
+	display:none;
+	float:left;
+	color:#94bc28;
+	width:250px;
+	position:relative;
+	top:-1px;
+}
+
+.menu_body li{
+	border-bottom:1px solid #ccc;
+	padding: 10px 10px 10px 0px;
+	position:relative;
+	width:100%;
+}
+
+.menu_body li a{
+	display:block;
+	color:#94bc28; /* Color de los enlaces */
+	background-color:#fff; /* Color de fondo de los enlaces */
+	padding-left:20px;
+	/*font-weight:bold;*/
+	text-decoration:none;
+	/*height:2.2em;*/
+	/*margin-top:5px;*/
+	width:230px;
+}
+
+.menu_body a:hover{
+color: #003881; /* Color de los enlaces al pasar el cursor */
+text-decoration:none;
+}

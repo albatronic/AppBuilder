@@ -1,0 +1,108 @@
+.celda {
+	background:#fff;
+	border:0px;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	position: relative;
+	outline: none;
+	padding:4px 8px;
+	color: #666;
+	width:636px;
+	float:left;
+	margin-bottom:20px;
+	margin-top:0px;
+	overflow:auto;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	border:1px solid #cbcbcb;
+}
+
+.celdaError {
+	background:#a60837;
+	border:0px;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	position: relative;
+	outline: none;
+	padding:4px 8px;
+	color: #fff;
+	width:636px;
+	float:left;
+	margin-bottom:20px;
+	margin-top:0px;
+	overflow:auto;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	border:1px solid #cbcbcb;
+}
+
+
+/***************** CHECKBOXES Y ENVIAR *****************************/
+#contenedorEnviar {
+	width:100%;
+	float:left;
+	margin-top:15px;
+	padding-bottom:40px;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size:10px;
+	color:#777;
+}
+
+.enviar {
+	float:right;
+}
+
+.enviar {
+	width:115px;
+	height:38px;
+	text-indent:-99999px;
+	float:right;
+	background:url(../imagenes/btn-enviar.png) 0 0 no-repeat;
+}
+
+.enviar a:hover{
+	/*background-position:-150px 0;*/
+}
+
+/*#contenedorCheckboxes {
+	width:290px;
+	float:left;
+	margin-bottom:12px;
+}
+*/
+.checboxesCaja {
+	width:290px;
+	font-size:11px;
+	color:#666;
+	float:left;
+	margin-bottom:10px;
+}
+
+#contenedorEnviar  a{
+	color:#a60837;
+	text-decoration:underline;
+}
+
+#contenedorEnviar  a:hover{
+	color:#777;
+}
+
+.checboxesCajaError { /* Error en checkbox */
+	width:290px;
+	font-size:11px;
+	color:#929E55;
+	float:left;
+	margin-bottom:10px;
+}
+
+/*********************************** FIN: CHECKBOXES Y ENVIAR **************************/
+
+/* --------- GOOGLE MAPS ------------- */
+#map_canvas {
+	margin:25px 0 80px 0;
+	float:left;
+	height:268px;
+	width:930px;
+}

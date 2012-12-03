@@ -1,0 +1,119 @@
+.slider_noticias {
+	width: 224px;
+	float: left;
+	padding-bottom: 20px;
+}
+
+.flechas {
+	position:relative;
+}
+
+.cmsms_content_slider_parent {
+	width:100%;
+	height:0;
+	padding-bottom:56.25%;
+	position:relative;
+	overflow:hidden;
+	float:left;
+	margin-top:40px;
+}
+
+.responsiveContentSlider {
+	background:url(../images/loader.gif) 50% 50% no-repeat;
+	text-align:left;
+	display:block;
+	list-style:none;
+	width:100%;
+	height:0;
+	padding:0 0 56.25%;
+	margin:0;
+	position:relative;
+	overflow:hidden;
+}
+
+.cmsms_content_slider_parent>.responsiveContentSlider, 
+.responsiveContentSlider>li {
+	display:block;
+	width:100%;
+	height:100%;
+	padding:0;
+	margin:0;
+	overflow:hidden;
+	position:absolute;
+}
+
+.responsiveContentSlider {
+	top:0;
+	left:0;
+}
+
+.responsiveContentSlider>li {
+	top:0;
+	left:100%;
+	z-index:1;
+}
+
+a.cmsms_content_prev_slide, 
+a.cmsms_content_next_slide {
+    background-image:url(../images/widget_nav.png);
+    background-repeat:no-repeat;
+	display:block;
+	width:21px;
+	height:20px;
+	position:absolute;
+	top:10px;
+	z-index:11;
+}
+
+a.cmsms_content_prev_slide {
+    background-position:0 -30px;
+    right:23px;
+}
+
+a.cmsms_content_next_slide {
+	background-position:0 0;
+    right:0;
+}
+
+a.cmsms_content_prev_slide:hover {background-position:0 -60px;}
+
+a.cmsms_content_next_slide:hover {background-position:0 -90px;}
+
+.cmsms_content_slider_parent ul.cmsms_slides_nav {
+	list-style:none;
+	padding:10px;
+	margin:0;
+	position:absolute;
+	top:0;
+	right:0;
+	z-index:10;
+	-webkit-transition:opacity .3s ease-in-out;
+	-moz-transition:opacity .3s ease-in-out;
+	-ms-transition:opacity .3s ease-in-out;
+	-o-transition:opacity .3s ease-in-out;
+	transition:opacity .3s ease-in-out;
+}
+
+.cmsms_content_slider_parent ul.cmsms_slides_nav li {
+	display:block;
+	float:left;
+	padding:0 0 0 4px;
+}
+
+.cmsms_content_slider_parent ul.cmsms_slides_nav li:first-child {padding:0;}
+
+.cmsms_content_slider_parent ul.cmsms_slides_nav li a {
+	background-color:#ececec;
+	display:block;
+	text-indent:-9999px;
+	width:7px;
+	height:7px;
+	border-radius:3.5px;
+	-moz-border-radius:3.5px;
+	-webkit-border-radius:3.5px;
+	-webkit-transition:background-color .3s ease-in-out;
+	-moz-transition:background-color .3s ease-in-out;
+	-ms-transition:background-color .3s ease-in-out;
+	-o-transition:background-color .3s ease-in-out;
+	transition:background-color .3s ease-in-out;
+}

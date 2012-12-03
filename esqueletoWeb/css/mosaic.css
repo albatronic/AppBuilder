@@ -1,0 +1,81 @@
+/*General Mosaic Styles*/
+.mosaic-block {
+	float:left;
+	position:relative;
+	overflow:hidden;
+	width:225px;
+	height:146px;
+	/*border:6px solid #ccc;*/
+	/*-webkit-box-shadow:0 1px 3px rgba(0,0,0,0.5); */
+}
+
+.mosaic-backdrop {
+	display:none;
+	position:absolute;
+	top:0;
+	width:203px;
+	height:124px;
+	padding:10px;
+	/*background:url(../images/video-fondo.png) no-repeat;*/
+	float: left;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	border:1px solid #DDD;
+	margin-right: 14px;
+}
+
+.mosaic-backdrop img { /* -------- Tama�o de la imagen dentro del mosaico */
+	width:205px;
+	height:126px;
+}
+	
+	.mosaic-overlay {
+		display:none;
+		z-index:5;
+		position:absolute;
+		width:100%;
+		height:100%;
+		background:#111;
+	}
+	
+		
+		.bar .mosaic-overlay { /* pantalla negra al hacer hover */
+			bottom:-146px;
+			height:146px;
+			/*background:url(../images/bg-black.png);*/
+			background:url(../images/fondo-mosaico-portafolio.png) 0px 0 no-repeat;
+			/*background:#000;*/
+			/*opacity:0.7;
+			filter:alpha(opacity:70);*/
+		}
+		
+
+
+.details{ /* texto que va sobre la pantalla negra de hover */
+	margin:20px 20px 10px 20px;
+	height:70px;
+	float:left;
+	font-size:14px; 
+	/*color:#94BC28; *//* verde */
+	color:#fff; /* blanco */
+	/*color:#0ca6ea; */ /* azul */
+	padding-bottom:10px;
+ }
+	
+.details h4{ 
+	font-style:italic;
+	font-family:Georgia, serif;
+	font-size:16px;
+	color:#94BC28;
+	/*text-shadow:1px 1px 0 rgb(0,0,0);*/ 
+	margin-bottom:5px; 
+} 
+
+/*p { 
+	font-size:12px; 
+	color:#ccc; 
+	padding: 10px;
+	/*text-shadow:1px 1px 0 rgb(0,0,0);*/
+
+a{ text-decoration:none; }
