@@ -84,6 +84,7 @@ class Entity {
         $this->_em = new EntityManager($this->getConectionName());
         $this->_dbLink = $this->_em->getDbLink();
         $this->_dataBaseName = $this->_em->getDataBase();
+        $this->_errores = $this->_em->getError();
     }
 
     /**
