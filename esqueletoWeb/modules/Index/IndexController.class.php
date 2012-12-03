@@ -19,7 +19,7 @@ class IndexController extends ControllerWeb {
          * EL ARRAY DE VALORES '$this->values'
          */
         return array(
-            'template' => $this->entity . '/Index.html.twig',
+            'template' => $this->entity . '/index.html.twig',
             'values' => $this->values
         );
     }

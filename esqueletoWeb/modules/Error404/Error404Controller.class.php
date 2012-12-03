@@ -17,7 +17,7 @@ class Error404Controller extends ControllerWeb {
     public function IndexAction() {
         
         return array(
-            "template" => $this->entity . "/Index.html.twig",
+            "template" => $this->entity . "/index.html.twig",
             "values" => $this->values,
         );
     }
