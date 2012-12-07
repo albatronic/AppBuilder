@@ -16,6 +16,7 @@ class columnasComunes {
         'Observations',
         'PrimaryKeyMD5',
         'IsDefault',
+        'IsSuper',
         'Checked',
         'Publish',
         'BelongsTo',
@@ -62,6 +63,7 @@ class columnasComunes {
         'CodigoAppAsociada',
         'IdAlbumExterno',
         'IdSliderAsociado',
+        'DateTimeLastVisit',
     );
 
     /**

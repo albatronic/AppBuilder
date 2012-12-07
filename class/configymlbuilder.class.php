@@ -208,7 +208,7 @@ class ConfigYmlBuilder {
             'fieldGeneratorMetatagTitle' => $this->primeraColumna,
             'controller' => $this->filename,
             'action' => 'Index',
-            'template' => 'Index.html.twig',
+            'template' => 'index.html.twig',
             'parametros' => '',
             'login_required' => 'YES',
             'permission_control' => PERMISSIONCONTROL,

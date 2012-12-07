@@ -427,6 +427,12 @@ class Entity {
             $this->_alertas[] = "El objeto no puede pertenecer a el mismo";
         }
 
+        if ($this->getPrimaryKeyValue() != '') {
+            // Estoy validando antes de actualizar
+            if ( ($this->IsSuper) and ($_SESSION['USER']['user']['IdPerfil'] != '1') )
+                $this->_errores[] = "No se puede modificar, es un datos reservado (super)";
+        }
+        
         if (trim($this->UrlTarget) != '') {
             // Desactivar la gestion de url amigable
             $this->LockUrlPrefix = 1;
@@ -446,6 +452,9 @@ class Entity {
      * Las validaciones se hacen en base al array $this->_parentEntities
      * donde se definen las entidades que referencian a esta
      *
+     * Si es un valor por defecto o super y el usuario no es superadministrador,
+     * no se podrá eliminar.
+     * 
      * Si hay errores carga el array $this->_errores
      *
      * @return boolean
@@ -453,8 +462,11 @@ class Entity {
     protected function validaBorrado() {
         unset($this->_errores);
 
-        if ($this->IsDefault)
+        if (($this->IsDefault) AND ($_SESSION['USER']['user']['IdPerfil'] != 1))
             $this->errores[] = "No se puede eliminar. Es un valor predeterminado";
+
+        if (($this->IsSuper) AND ($_SESSION['USER']['user']['IdPerfil'] != 1))
+            $this->errores[] = "No se puede eliminar. Es un valor reservado (super)";
 
         if (count($this->errores) == 0) {
             // Validacion de integridad referencial respecto a entidades padre
