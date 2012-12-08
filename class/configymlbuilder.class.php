@@ -17,7 +17,6 @@ class ConfigYmlBuilder {
     private $td;
     private $primeraColumna = '';
 
-
     public function __construct($table = '') {
         $this->td = new TableDescriptor(DB_BASE, $table);
         $this->filename = str_replace("_", " ", $this->td->getTable());
@@ -167,7 +166,7 @@ class ConfigYmlBuilder {
 
         $conexion = str_replace("#", "<?php echo \$_SESSION['emp'];?>", CONECTION);
 
-        $cabecera  = "# Module: " . $this->filename . "\n";
+        $cabecera = "# Module: " . $this->filename . "\n";
         $cabecera .= "# Document : modules/" . $this->filename . "/config.yml\n#\n";
         $cabecera .= "# @author: Sergio Pérez <sergio.perez@albatronic.com>\n# @copyright: ARTICO ESTUDIO SL\n# @date " . date('d.m.Y H:i:s') . "\n";
         $cabecera .= "#\n---\n";
@@ -210,6 +209,10 @@ class ConfigYmlBuilder {
             'action' => 'Index',
             'template' => 'index.html.twig',
             'parametros' => '',
+            'includesHead' => array(
+                'twigCss' => '_global/css.html.twig',
+                'twigJs' => '_global/js.html.twig',
+            ),
             'login_required' => 'YES',
             'permission_control' => PERMISSIONCONTROL,
             'favourite_control' => 'NO',
@@ -240,14 +243,14 @@ class ConfigYmlBuilder {
             'columns' => $arrayDeColumnas,
         );
 
-        $yml = sfYaml::dump($array,4);
+        $yml = sfYaml::dump($array, 4);
 
         $this->buffer = $cabecera . $yml;
     }
 
     private function creaFieldsVarWeb() {
 
-        $buf  = "# VARIABLES WEB ESPECIFICAS DEL MODULO ". $this->filename ."\n";
+        $buf = "# VARIABLES WEB ESPECIFICAS DEL MODULO " . $this->filename . "\n";
         $buf .= "#\n";
         $buf .= "# Module: " . $this->filename . "\n";
         $buf .= "# author Sergio Pérez <sergio.perez@albatronic.com>\n";
@@ -264,7 +267,7 @@ class ConfigYmlBuilder {
 
     private function creaFieldsVarEntorno() {
 
-        $buf  = "# VARIABLES DE ENTORNO ESPECIFICAS DEL MODULO ". $this->filename ."\n";
+        $buf = "# VARIABLES DE ENTORNO ESPECIFICAS DEL MODULO " . $this->filename . "\n";
         $buf .= "#\n";
         $buf .= "# Module: " . $this->filename . "\n";
         $buf .= "# author Sergio Pérez <sergio.perez@albatronic.com>\n";
@@ -278,7 +281,6 @@ class ConfigYmlBuilder {
 
         $this->buffer = $buf;
     }
-
 
 }
 
