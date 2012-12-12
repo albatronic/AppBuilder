@@ -45,18 +45,24 @@ class ControllerWeb {
      */
     protected $varWeb;
 
+    /**
+     * Carga las variables web del rpoyecto
+     * Borra la tabla temporal de visitas según la frecuencia de borrado indicada en el config.yml
+     * Controla el número de visitas únicas a cada url
+     * Almacena el registro de visitas
+     * 
+     * @param array $request Array con el request
+     */
     public function __construct($request) {
 
         // Cargar lo que viene en el request
         $this->request = $request;
 
-        // Cargar las variables web en la variable de sesion y en $this->varWeb
+        // Cargar las variables web del proyecto en la variable de sesion y en $this->varWeb['Pro']
         // de esta forma solo se cargaran la primera vez
         if (!is_array($_SESSION['varWeb']['Pro']))
             $_SESSION['varWeb']['Pro'] = $this->getVariables('Pro');
         $this->varWeb['Pro'] = $_SESSION['varWeb']['Pro'];
-
-
 
         // Borrar la tabla temporal de visitas
         if (!$_SESSION['borradoTemporalVisitas']) {
@@ -133,6 +139,12 @@ class ControllerWeb {
      * Genera el array 'firma' de forma aletoria en base
      * la variable web del proyecto 'signatures'
      * 
+     * El array tiene tres elementos:
+     * 
+     *      url => 'texto'
+     *      location => 'texto'
+     *      service => 'texto'
+     * 
      * @return array Array con la firma de la web
      */
     protected function getFirma() {
@@ -161,6 +173,14 @@ class ControllerWeb {
      * Genera el array 'ruta' con todas las entidades
      * padre del objeto en curso
      * 
+     * El array tiene dos elementos:
+     * 
+     *      nombre => 'texto'
+     *      url => array(
+     *                  url => 'texto con la url completa incluido http::// ó https://'
+     *                  tartgetBlank => boolean
+     *              )
+     *              
      * @return array Array con la ruta en la que está el visitante web
      */
     protected function getRuta() {
@@ -198,6 +218,14 @@ class ControllerWeb {
 
     /**
      * Genera el array 'ustedEstaEn'
+     * 
+     * El array tiene dos elementos:
+     * 
+     *      titulo => texto
+     *      subsecciones => array con n elmentos numerados del 0 al N (
+     *                          titulo => texto
+     *                          url => array(url => texto, targetBlank => boolean)
+     *                      )
      * 
      * @return array Array con los elmentos de 'ustedEntaEn'
      */
@@ -247,7 +275,16 @@ class ControllerWeb {
      * Genera el array del menu desplegable en base
      * a las secciones que tienen a TRUE MostrarEnMenu1
      * 
-     * @param integer $nItems El numero de elementos a devolver. (0=todos)
+     * El array tiene trex elementos:
+     * 
+     *      seccion => texto de la etiquetaWeb1
+     *      url => array(url => texto, targetBlank => boolean)
+     *      subsecciones => array de 0 a N (
+     *                          titulo => texto
+     *                          url => array(url => texto, targetBlank => boolean)
+     *                      )
+     * 
+     * @param integer $nItems El numero de elementos a devolver. Opcional. (0=todos)
      * @return array Array con las secciones
      */
     protected function getMenuDesplegable($nItems = 0) {
@@ -278,7 +315,13 @@ class ControllerWeb {
      * Genera el array del menu del pie en base
      * a las secciones que tienen a TRUE MostrarEnMenu3
      * 
-     * @param integer $nItems El numero de elementos a devolver. (0=todos)
+     * El array tiene 3 elementos:
+     * 
+     *      nombre => texto de la etiquetaWeb3
+     *      url => array(url => texto, targetBlank => boolean)
+     *      controller => nombre del controller
+     * 
+     * @param integer $nItems El numero de elementos a devolver. Opcional. (0=todos)
      * @return array Array con las secciones
      */
     protected function getMenuPie($nItems = 0) {
@@ -306,6 +349,14 @@ class ControllerWeb {
 
     /**
      * Genera el array con las noticias
+     * 
+     * El array tiene 5 elementos
+     * 
+     *      titulo => titulo de la noticia
+     *      subtitulo => subtitulo de la noticia
+     *      url => array(url => texto, targetBlank => boolean)
+     *      descripcion => texto del resumen
+     *      imagen => array con OBJETOS documentos de tipo 'image1'
      * 
      * @param boolean $enPortada Si TRUE se devuleven solo las que están marcadas como portada, 
      * en caso contrario se devuelven todas las noticias

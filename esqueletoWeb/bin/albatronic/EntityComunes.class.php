@@ -331,8 +331,8 @@ class EntityComunes extends Entity {
      * 
      * Tiene dos elmentos:
      * 
-     *  'url'   Es la url en si con el prefijo, que puede ser: nada, http, o https)
-     *  'targetBlank'   Es un flag booleano para saber si el enlace se abrirá en popup o no
+     *      url =>   Es la url en si con el prefijo, que puede ser: nada, http, o https)
+     *      targetBlank =>   Es un flag booleano para saber si el enlace se abrirá en popup o no
      * 
      * @return array Array
      */
