@@ -46,7 +46,7 @@ class ControllerWeb {
     protected $varWeb;
 
     /**
-     * Carga las variables web del rpoyecto
+     * Carga las variables web del proyecto
      * Borra la tabla temporal de visitas según la frecuencia de borrado indicada en el config.yml
      * Controla el número de visitas únicas a cada url
      * Almacena el registro de visitas
@@ -394,15 +394,27 @@ class ControllerWeb {
     /**
      * Genera el array con las noticias más leidas
      * 
-     * Las noticias se ordenan descendentemente por número de visitas
+     * Las noticias son Contenidos que tiene a TRUE los campos
+     * NoticiaPublicar y Publish
      * 
-     * @param integer $nItems El numero de elementos a devolver. (0=todos)
+     * Las noticias se ordenan descendentemente por número de visitas (NumberVisits)
+     * 
+     * El array tiene 6 elementos:
+     * 
+     *      * fecha => la fecha de publicación (PublishedAt)
+     *      * titulo => el titulo de la noticia (seccion)
+     *      * subtitulo => el subtitulo de la noticia (seccion)
+     *      * url => array(url => texto, targetBlank => boolean)
+     *      * descripcion => el resumen de la noticia (seccion)
+     *      * imagen => array con OBJETOS documentos de tipo 'image1'
+     * 
+     * @param integer $nItems El numero de elementos a devolver. Opcional. (0=todos)
      * @return array Array con las noticias
      */
     protected function getNoticiasMasLeidas($nItems = 0) {
 
         $array = array();
-        
+
         $limite = ($nItems <= 0) ? "" : "LIMIT 0,{$nItems}";
 
         $noticia = new GconContenidos();
@@ -422,7 +434,7 @@ class ControllerWeb {
             );
         }
         unset($noticia);
-        
+
         return $array;
     }
 
@@ -462,6 +474,27 @@ class ControllerWeb {
         unset($evento);
 
         return $array;
+    }
+
+    /**
+     * Devuelve el texto utilizado para calcular la password
+     * 
+     * El texto está en el nodo <config><semillaMD5> del archivo config/config.yml
+     * 
+     * @return string La semilla
+     */
+    protected function getSemilla() {
+
+        $semilla = "";
+
+        $fileConfig = $_SERVER['DOCUMENT_ROOT'] . $_SESSION['appPath'] . "/config/config.yml";
+
+        if (file_exists($fileConfig)) {
+            $yaml = sfYaml::load($fileConfig);
+            $semilla = $yaml['config']['semillaMD5'];
+        }
+
+        return $semilla;
     }
 
 }

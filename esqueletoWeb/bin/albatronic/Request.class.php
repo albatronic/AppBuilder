@@ -44,6 +44,12 @@ class Request {
     private $remoteAddr;
 
     /**
+     * Url desde donde viene el visitante
+     * @var string
+     */
+    private $httpReferer;
+
+    /**
      * Navegador
      * @var string
      */
@@ -71,6 +77,7 @@ class Request {
         $this->remoteAddr = $_SERVER['REMOTE_ADDR'];
         $this->userAgent = $_SERVER['HTTP_USER_AGENT'];
         $this->contentType = $_SERVER['CONTENT_TYPE'];
+        $this->httpReferer = $_SERVER['HTTP_REFERER'];
     }
 
     /**
@@ -173,6 +180,14 @@ class Request {
      */
     public function getRemoteAddr() {
         return $this->remoteAddr;
+    }
+
+    /**
+     * Devuelve un string con la url desde la que procede el visitante
+     * @return string
+     */
+    public function getHttpReferer() {
+        return $this->httpReferer;
     }
 
     /**

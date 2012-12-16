@@ -55,6 +55,7 @@ class VisitVisitasItinerarios extends VisitVisitasItinerariosEntity {
             // Incrementar el registro de visita cabacera
             $visita = $this->getIdVisita();
             $visita->setSegundosVisita($visita->getSegundosVisita() + $diferencia);
+            $visita->setResolution($_SESSION['resolucionVisitante']);
             $visita->save();
             unset($visita);
         }

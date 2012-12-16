@@ -31,29 +31,25 @@ class Fecha {
     private $time = '00:00:00';
     private $esDateTime = FALSE;
     private $plantilla = array(
-        
-        "/^\d{1,2}\d{1,2}\d{4} \d{2}:\d{2}:\d{2}$/",        // ddmmaaaa hh:mm:ss
-        "/^\d{1,2}.\d{1,2}.\d{4} \d{2}:\d{2}:\d{2}$/",      // dd.mm.aaaa hh:mm:ss
-        "/^\d{1,2}-\d{1,2}-\d{4} \d{2}:\d{2}:\d{2}$/",      // dd-mm-aaaa hh:mm:ss    
-        "/^\d{1,2}\/\d{1,2}\/\d{4} \d{2}:\d{2}:\d{2}$/",    // dd/mm/aaaa hh:mm:ss      
-        
-        
-        "/^\d{4}\d{1,2}\d{1,2} \d{2}:\d{2}:\d{2}$/",        // aaaammdd hh:mm:ss
-        "/^\d{4}.\d{1,2}.\d{1,2} \d{2}:\d{2}:\d{2}$/",      // aaaa.mm.dd hh:mm:ss
-        "/^\d{4}-\d{1,2}-\d{1,2} \d{2}:\d{2}:\d{2}$/",      // aaaa-mm-dd hh:mm:ss    
-        "/^\d{4}\/\d{1,2}\/\d{1,2} \d{2}:\d{2}:\d{2}$/",    // aaaa/mm/dd hh:mm:ss  
-        
-        "/^\d{1,2}\d{1,2}\d{4}$/",      // ddmmaaaa        
-        "/^\d{1,2}.\d{1,2}.\d{4}$/",    // dd.mm.aaaa        
-        "/^\d{1,2}-\d{1,2}-\d{4}$/",    // dd-mm-aaaa
-        "/^\d{1,2}\/\d{1,2}\/\d{4}$/",  // dd/mm/aaaa
-        
-          
-        "/^\d{4}\d{1,2}\d{1,2}$/",      // aaaammdd        
-        "/^\d{4}.\d{1,2}.\d{1,2}$/",    // aaaa.mm.dd        
-        "/^\d{4}-\d{1,2}-\d{1,2}$/",    // aaaa-mm-dd
-        "/^\d{4}\/\d{1,2}\/\d{1,2}$/",  // aaaa/mm/dd        
+        "/^\d{1,2}\d{1,2}\d{4} \d{2}:\d{2}:\d{2}$/", // ddmmaaaa hh:mm:ss
+        "/^\d{1,2}.\d{1,2}.\d{4} \d{2}:\d{2}:\d{2}$/", // dd.mm.aaaa hh:mm:ss
+        "/^\d{1,2}-\d{1,2}-\d{4} \d{2}:\d{2}:\d{2}$/", // dd-mm-aaaa hh:mm:ss    
+        "/^\d{1,2}\/\d{1,2}\/\d{4} \d{2}:\d{2}:\d{2}$/", // dd/mm/aaaa hh:mm:ss      
 
+        "/^\d{4}\d{1,2}\d{1,2} \d{2}:\d{2}:\d{2}$/", // aaaammdd hh:mm:ss
+        "/^\d{4}.\d{1,2}.\d{1,2} \d{2}:\d{2}:\d{2}$/", // aaaa.mm.dd hh:mm:ss
+        "/^\d{4}-\d{1,2}-\d{1,2} \d{2}:\d{2}:\d{2}$/", // aaaa-mm-dd hh:mm:ss    
+        "/^\d{4}\/\d{1,2}\/\d{1,2} \d{2}:\d{2}:\d{2}$/", // aaaa/mm/dd hh:mm:ss  
+
+        "/^\d{1,2}\d{1,2}\d{4}$/", // ddmmaaaa        
+        "/^\d{1,2}.\d{1,2}.\d{4}$/", // dd.mm.aaaa        
+        "/^\d{1,2}-\d{1,2}-\d{4}$/", // dd-mm-aaaa
+        "/^\d{1,2}\/\d{1,2}\/\d{4}$/", // dd/mm/aaaa
+
+        "/^\d{4}\d{1,2}\d{1,2}$/", // aaaammdd        
+        "/^\d{4}.\d{1,2}.\d{1,2}$/", // aaaa.mm.dd        
+        "/^\d{4}-\d{1,2}-\d{1,2}$/", // aaaa-mm-dd
+        "/^\d{4}\/\d{1,2}\/\d{1,2}$/", // aaaa/mm/dd        
     );
 
     public function __construct($fecha = '') {
@@ -72,47 +68,126 @@ class Fecha {
 
         if ($formatoCorrecto) {
             switch ($i) {
-                case '0': // Formato datetime ddmmaaaa
-                case '1':
-                case '2':
-                case '3':
-                    $this->dia = $registro[1];
-                    $this->mes = $registro[2];
-                    $this->anio = $registro[3];
-                    $this->hora = $registro[4];
-                    $this->minutos = $registro[5];
-                    $this->segundos = $registro[6];
+                case '0': // Formato datetime ddmmaaaa hh:mm:ss
+                    $this->dia = substr($registro[0], 0, 2);
+                    $this->mes = substr($registro[0], 2, 2);
+                    $this->anio = susbtr($registro[0], 4, 4);
+                    $hora = explode(":", substr($registsro[0], -8));
+                    $this->hora = $hora[0];
+                    $this->minutos = $hora[1];
+                    $this->segundos = $hora[2];
                     $this->time = $this->hora . ":" . $this->minutos . ":" . $this->segundos;
                     $this->esDateTime = TRUE;
                     break;
-                case '4': // Formato datetime aaaammdd
-                case '5':
-                case '6':
-                case '7':
-                    $this->dia = $registro[3];
-                    $this->mes = $registro[2];
-                    $this->anio = $registro[1];
-                    $this->hora = $registro[4];
-                    $this->minutos = $registro[5];
-                    $this->segundos = $registro[6];
+                case '1': // Formato datetime dd.mm.aaaa hh:mm:ss
+                    $fecha = explode(".", substr($registro[0], 0, 10));
+                    $this->dia = $fecha[0];
+                    $this->mes = $fecha[1];
+                    $this->anio = $fecha[2];
+                    $hora = explode(":", substr($registsro[0], -8));
+                    $this->hora = $hora[0];
+                    $this->minutos = $hora[1];
+                    $this->segundos = $hora[2];
+                    $this->time = $this->hora . ":" . $this->minutos . ":" . $this->segundos;
+                    $this->esDateTime = TRUE;
+                case '2': // Formato datetime dd-mm/aaaa hh:mm:ss
+                    $fecha = explode("-", substr($registro[0], 0, 10));
+                    $this->dia = $fecha[0];
+                    $this->mes = $fecha[1];
+                    $this->anio = $fecha[2];
+                    $hora = explode(":", substr($registsro[0], -8));
+                    $this->hora = $hora[0];
+                    $this->minutos = $hora[1];
+                    $this->segundos = $hora[2];
+                    $this->time = $this->hora . ":" . $this->minutos . ":" . $this->segundos;
+                    $this->esDateTime = TRUE;
+                case '3': // Formato datetime dd/mm/aaaa hh:mm:ss
+                    $fecha = explode("/", substr($registro[0], 0, 10));
+                    $this->dia = $fecha[0];
+                    $this->mes = $fecha[1];
+                    $this->anio = $fecha[2];
+                    $hora = explode(":", substr($registsro[0], -8));
+                    $this->hora = $hora[0];
+                    $this->minutos = $hora[1];
+                    $this->segundos = $hora[2];
+                    $this->time = $this->hora . ":" . $this->minutos . ":" . $this->segundos;
+                    $this->esDateTime = TRUE;
+                    break;
+                case '4': // Formato datetime aaaammdd hh:mm:ss
+                    $this->dia = substr($registro[0], 6, 2);
+                    $this->mes = substr($registro[0], 4, 2);
+                    $this->anio = susbtr($registro[0], 0, 4);
+                    $hora = explode(":", substr($registsro[0], -8));
+                    $this->hora = $hora[0];
+                    $this->minutos = $hora[1];
+                    $this->segundos = $hora[2];
+                    $this->time = $this->hora . ":" . $this->minutos . ":" . $this->segundos;
+                    $this->esDateTime = TRUE;
+                    break;
+                case '5': // Formato datetime aaaa.mm.dd hh:mm:ss
+                    $fecha = explode(".", substr($registro[0], 0, 10));
+                    $this->dia = $fecha[2];
+                    $this->mes = $fecha[1];
+                    $this->anio = $fecha[0];
+                    $hora = explode(":", substr($registsro[0], -8));
+                    $this->hora = $hora[0];
+                    $this->minutos = $hora[1];
+                    $this->segundos = $hora[2];
+                    $this->time = $this->hora . ":" . $this->minutos . ":" . $this->segundos;
+                    $this->esDateTime = TRUE;
+                    break;
+                case '6': // Formato datetime aaaa-mm-dd hh:mm:ss
+                    $fecha = explode("-", substr($registro[0], 0, 10));
+                    $this->dia = $fecha[2];
+                    $this->mes = $fecha[1];
+                    $this->anio = $fecha[0];
+                    $hora = explode(":", substr($registsro[0], -8));
+                    $this->hora = $hora[0];
+                    $this->minutos = $hora[1];
+                    $this->segundos = $hora[2];
+                    $this->time = $this->hora . ":" . $this->minutos . ":" . $this->segundos;
+                    $this->esDateTime = TRUE;
+                    break;
+                case '7': // Formato datetime aaaa/mm/dd hh:mm:ss
+                    $fecha = explode("/", substr($registro[0], 0, 10));
+                    $this->dia = $fecha[2];
+                    $this->mes = $fecha[1];
+                    $this->anio = $fecha[0];
+                    $hora = explode(":", substr($registsro[0], -8));
+                    $this->hora = $hora[0];
+                    $this->minutos = $hora[1];
+                    $this->segundos = $hora[2];
                     $this->time = $this->hora . ":" . $this->minutos . ":" . $this->segundos;
                     $this->esDateTime = TRUE;
                     break;
                 case '8': // Formato date ddmmaaaa
-                case '9':
-                case '10':
-                case '11':
-                    $this->dia = $registro[1];
-                    $this->mes = $registro[2];
-                    $this->anio = $registro[3];
+                    $this->dia = substr($registro[0], 0, 2);
+                    $this->mes = substr($registro[0], 2, 2);
+                    $this->anio = susbtr($registro[0], 4, 4);
+                    $this->esDateTime = FALSE;
                     break;
-                case '12': // Formato date aaammdd
-                case '13':
-                case '14':
-                case '15':
-                    $this->dia = $registro[3];
-                    $this->mes = $registro[2];
-                    $this->anio = $registro[1];
+                case '9': // Formato date dd.mm.aaaa
+                case '10': // Formato date dd-mm-aaaa
+                case '11': // Formato date dd/mm/aaaa
+                    $fecha = explode("/", substr($registro[0], 0, 10));
+                    $this->dia = substr($registro[0], 0, 2);
+                    $this->mes = substr($registro[0], 3, 2);
+                    $this->anio = substr($registro[0], 6, 4);
+                    $this->esDateTime = FALSE;
+                    break;
+                case '12': // Formato date aaaammdd
+                    $this->dia = substr($registro[0], -2);
+                    $this->mes = substr($registro[0], 4, 2);
+                    $this->anio = susbtr($registro[0], 0, 4);
+                    $this->esDateTime = FALSE;
+                    break;
+                case '13': // Formato date aaaa.mm.dd
+                case '14': // Formato date aaaa-mm-dd
+                case '15': // Formato date aaaa/mm/dd
+                    $this->dia = substr($registro[0], -2);
+                    $this->mes = substr($registro[0], 5, 2);
+                    $this->anio = substr($registro[0], 0, 4);
+                    $this->esDateTime = FALSE;
                     break;
             }
             $this->fecha = $this->anio . "-" . $this->mes . "-" . $this->dia;

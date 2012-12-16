@@ -70,3 +70,27 @@ function calendario(idDiv,mes,ano) {
     jQuery('#'+idDiv).load(url, parametros);
     
 }
+
+/**
+ * Captura la resolucion del dispositivo de navegación del cliente web y 
+ * se la envía por ajax a lib/setResolucion.php para que la ponga en $_SESSION['resolucionVisitante']
+ */
+function chequeaResolucionVisitante() {
+    
+    var ventana_ancho = screen.width;
+    var ventana_alto = screen.height;
+    var var_resolucion = ventana_ancho+'x'+ventana_alto;
+    var navInfo = window.navigator.appVersion.toLowerCase();
+        
+    //alert (var_resolucion);
+    
+    $.ajax({
+        url: 'lib/setResolucion.php',
+        type: 'POST',
+        async: true,
+        data: {
+            navegador:navInfo,
+            resolucion:var_resolucion
+        }
+    })
+}

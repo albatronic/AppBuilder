@@ -251,10 +251,11 @@ $twig->loadTemplate($result['template'])
             'layout' => $layout,
             'values' => $result['values'],
             'app' => $app,
+            'chequeadaResolucionVisitante' => isset($_SESSION['resolucionVisitante']),
             'user' => $_SESSION['USER']['user'],
             'menu' => $_SESSION['USER']['menu'],
             'projects' => $_SESSION['projects'],
-            'project' => $_SESSION['project'], ∫
+            'project' => $_SESSION['project'],
         ));
 
 //------------------------------------------------------------

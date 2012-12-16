@@ -54,7 +54,8 @@ class VisitVisitas extends VisitVisitasEntity {
             $visita->setLongitud($_SESSION['origen']['Longitud']);
             $visita->setISP($_SESSION['origen']['ISP']);
             $visita->setOrganizacion($_SESSION['origen']['Organizacion']);
-
+            $visita->setUrlOrigen($_SERVER['HTTP_REFERER']);
+            
             $browser = new Browser();
 
             $visita->setBrowser($browser->getBrowser());

@@ -3,10 +3,28 @@
     <head>
         {% include '_global/meta.twig'%}
         {% include  values.archivoCss %}
+          
+        <!-- Para que esté disponible el path de la app en todos los java scripts -->
+        <script type="text/javascript">var appPath = "{{appPath}}";</script>             
+        
         {% include values.archivoJs %}
+        
+        <!-- Obtener la resolución del dispositivo de navegación del cliente web -->
+        {% if not chequeadaResolucionVisitante %}
+        <script type="text/javascript">chequeaResolucionVisitante();</script>
+        {% endif %}
     </head>
 
     <body>
 
+        {% block contenido %}
+        {% endblock %}
+
+        {# PARA HACER DEBUGER EN ENTORNO DE DESARROLLO #}
+        {% if values._debugMode %}
+        <div style="clear: both;">
+            <pre>{{values._debugValues}}</pre>
+        </div>
+        {% endif %}        
     </body>
 </html>
