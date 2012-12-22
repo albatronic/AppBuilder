@@ -73,6 +73,7 @@ class Request {
     public function __construct() {
         $this->method = $_SERVER['REQUEST_METHOD'];
         $this->request = $_REQUEST;
+        $this->request['FILES'] = $_FILES;
         $this->acceptLanguage = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
         $this->remoteAddr = $_SERVER['REMOTE_ADDR'];
         $this->userAgent = $_SERVER['HTTP_USER_AGENT'];

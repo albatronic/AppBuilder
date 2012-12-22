@@ -7,11 +7,15 @@
  * 
  */
 $db = $_GET['db'];
+if ($db == '')
+    die("USO: alterTables.php?db=NOMBRE_DE_LA_BASE_DE_DATOS");
 
-$querys[] = "ALTER TABLE  `TABLA` ADD  `IsSuper` TINYINT( 1 ) NOT NULL DEFAULT  '0' COMMENT  'Abstract,ValoresSN,IDTipo' AFTER  `IsDefault` ,
-ADD INDEX (  `IsSuper` );";
-$querys[] = "ALTER TABLE  `TABLA` ADD  `DateTimeLastVisit` BIGINT( 11 ) NOT NULL DEFAULT  '0',
-ADD INDEX (  `DateTimeLastVisit` );";
+$querys[] = "ALTER TABLE  `TABLA` ADD  `AllowsChildren` TINYINT( 1 ) NOT NULL DEFAULT  '1' COMMENT  'Abstract,ValoresSN,IDTipo' AFTER  `BelongsTo` ,
+ADD INDEX (  `AllowsChildren` );";
+//$querys[] = "ALTER TABLE  `TABLA` ADD  `IsSuper` TINYINT( 1 ) NOT NULL DEFAULT  '0' COMMENT  'Abstract,ValoresSN,IDTipo' AFTER  `IsDefault` ,
+//ADD INDEX (  `IsSuper` );";
+//$querys[] = "ALTER TABLE  `TABLA` ADD  `DateTimeLastVisit` BIGINT( 11 ) NOT NULL DEFAULT  '0',
+//ADD INDEX (  `DateTimeLastVisit` );";
 
 $dbLink = mysql_connect('localhost', 'root', 'albatronic');
 if ($dbLink) {

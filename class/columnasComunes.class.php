@@ -20,6 +20,7 @@ class columnasComunes {
         'Checked',
         'Publish',
         'BelongsTo',
+        'AllowsChildren',
         'CreatedBy',
         'CreatedAt',
         'ModifiedBy',

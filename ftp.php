@@ -22,14 +22,17 @@ include "class/yaml/lib/sfYaml.php";
 //unset($ftp);
 
 
-$connectId = ftp_connect('127.0.0.1');
+$connectId = ftp_connect('192.168.1.38');
 if ($connectId) {
-    $ok = ftp_login($connectId, 'sergio', 'Piticlis1');
+    $ok = ftp_login($connectId, 'sergio', 'E123456L');
     if ($ok) {
         echo "directorio actual ", ftp_pwd($connectId),"<br />";
         //$ok = ftp_mkdir($connectId, 'public_html/docs/sergio');
         //echo $ok;
     }
 }
+
+$dbLink = mysql_connect('192.168.1.38','regantes','regantes');
+echo "conexion db ",$dbLink;
 ?>
 

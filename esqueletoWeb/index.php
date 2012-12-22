@@ -47,9 +47,15 @@ else
 $yaml = sfYaml::load('config/config.yml');
 $config = $yaml['config'];
 
+if ($config['projectId'] == '')
+    die("NO SE HA DEFINIDO EL ID DE PROYECTO");
+else
+    $_SESSION['projectId'] = $config['projectId'];
+
 $app = $config['app'];
 
 $_SESSION['appPath'] = $app['path'];
+$_SESSION['appUrl'] = $app['url'];
 $_SESSION['frecuenciaHorasBorrado'] = $config['frecuenciaHorasBorrado'];
 
 // ---------------------------------------------------------------
@@ -152,8 +158,14 @@ if ($rq->isOldBrowser()) {
 } else {
     // Localizar la url amigable
     $rows = $url->cargaCondicion("*", "UrlFriendly='{$rq->getUrlFriendly($app['path'])}'");
-    if (!$rows)
-        $rows = $url->cargaCondicion("*", "UrlFriendly='/error404'");
+
+    if (count($url->getErrores()) == 0) {
+        if (!$rows)
+            $rows = $url->cargaCondicion("*", "UrlFriendly='/error404'");
+    } else {
+        print_r($url->getErrores());
+        die("Error de conexión a la BD");
+    }
 }
 
 unset($url);

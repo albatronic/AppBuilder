@@ -331,8 +331,8 @@ class EntityComunes extends Entity {
      * 
      * Tiene dos elmentos:
      * 
-     *      url =>   Es la url en si con el prefijo, que puede ser: nada, http, o https)
-     *      targetBlank =>   Es un flag booleano para saber si el enlace se abrirá en popup o no
+     *  'url'   Es la url en si con el prefijo, que puede ser: nada, http, o https)
+     *  'targetBlank'   Es un flag booleano para saber si el enlace se habrirá en popup o no
      * 
      * @return array Array
      */
@@ -345,10 +345,7 @@ class EntityComunes extends Entity {
             $url = $this->getUrlFriendly();
             $prefijo = $_SESSION['appPath'];
         } else {
-            if ($this->UrlIsHttps)
-                $prefijo = "https://";
-            else
-                $prefijo = "http://";
+            $prefijo = ($this->UrlIsHttps) ? "https://" : "http://";
         }
 
         $url = $prefijo . $url . $this->getUrlParameters();
