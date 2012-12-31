@@ -97,7 +97,7 @@ config:
 
   # MOTOR DE TEMPLATES
   twig:
-    motor: bin/Twig-1.7.0/lib/Twig/Autoloader.php
+    motor: bin/Twig-1.11.1/lib/Twig/Autoloader.php
     templates_folder: modules
     debug_mode: true
     cache_folder: tmp

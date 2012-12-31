@@ -1,4 +1,5 @@
 <?php
+
 $url = 'http://www.google.es/imgres?q=orquesta+de+c%C3%A1mara&hl=es&tbo=d&biw=800&bih=476&tbm=isch&tbnid=WICDWLb0M9Rf-M:&imgrefurl=http://www.articoestudio.com/web-de-la-orquesta-de-camara-andaluza.php&docid=lZFDNMfAPs0uqM&imgurl=http://www.articoestudio.com';
 
 $array = parse_url($url);
