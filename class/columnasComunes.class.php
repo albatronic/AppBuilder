@@ -64,6 +64,7 @@ class columnasComunes {
         'CodigoAppAsociada',
         'IdAlbumExterno',
         'IdSliderAsociado',
+        'IdSeccionEnlaces',
         'DateTimeLastVisit',
     );
 

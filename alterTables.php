@@ -10,8 +10,8 @@ $db = $_GET['db'];
 if ($db == '')
     die("USO: alterTables.php?db=NOMBRE_DE_LA_BASE_DE_DATOS");
 
-$querys[] = "ALTER TABLE  `TABLA` ADD  `AllowsChildren` TINYINT( 1 ) NOT NULL DEFAULT  '1' COMMENT  'Abstract,ValoresSN,IDTipo' AFTER  `BelongsTo` ,
-ADD INDEX (  `AllowsChildren` );";
+$querys[] = "ALTER TABLE  `TABLA` ADD  `IdSeccionEnlaces` BIGINT( 11 )  NULL DEFAULT  NULL COMMENT  'db,EnlSecciones,Id' AFTER  `IdSliderAsociado` ,
+ADD INDEX (  `IdSeccionEnlaces` );";
 //$querys[] = "ALTER TABLE  `TABLA` ADD  `IsSuper` TINYINT( 1 ) NOT NULL DEFAULT  '0' COMMENT  'Abstract,ValoresSN,IDTipo' AFTER  `IsDefault` ,
 //ADD INDEX (  `IsSuper` );";
 //$querys[] = "ALTER TABLE  `TABLA` ADD  `DateTimeLastVisit` BIGINT( 11 ) NOT NULL DEFAULT  '0',

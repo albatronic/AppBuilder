@@ -83,14 +83,6 @@ config:
     plugin_dir: bin/PHPMailer_v5.2.1/
     plugin_file: class.phpmailer.php
     motor: PHPMailer
-    socket: smtp
-    host: mail.dominio.com
-    smtp_auth: true
-    user_name: info@dominio.com
-    password:
-    from: info@dominio.com
-    from_name: NOMBRE
-    timeout: 30
   
   # MOTOR PARA GENERAR DOCUMENTOS PDF
   pdf: bin/pdf/fpdf.class.php
