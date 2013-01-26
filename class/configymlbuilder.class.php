@@ -259,7 +259,10 @@ class ConfigYmlBuilder {
         $buf .= "#\n";
         $buf .= "# ejemplo:\n";
         $buf .= "#\n";
-        $buf .= "# nombreVariable: el texto del caption\n";
+        $buf .= "# nombreVariable:\n";
+        $buf .= "#   caption: el texto del caption\n";
+        $buf .= "#   values: array Id, Value con los valores posibles de la variable (opcional)\n";
+        $buf .= "#   default: valor por defecto\n";
         $buf .= "---\n";
 
         $this->buffer = $buf;

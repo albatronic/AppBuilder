@@ -65,6 +65,7 @@ class columnasComunes {
         'IdAlbumExterno',
         'IdSliderAsociado',
         'IdSeccionEnlaces',
+        'IdSeccionVideos',
         'DateTimeLastVisit',
     );
 

@@ -4,16 +4,13 @@
  */
 
 if(!isset($_GET['t']))
-{
-    echo "DEBE INDICAR UN NOMBRE DE TABLA: ?t=tablename";
-    exit;
-}
+    die("generateEntity.php?t=tablename");
 
 $database_connection_information = "
 define(DB_HOST,'localhost');
 define(DB_USER,'root');
 define(DB_PASS,'');
-define(DB_BASE,'interpral_ppuerp001');
+define(DB_BASE,'interpra_ppuerp001');
 define(PATH_MODEL,'../erp/entities');
 ";
 eval($database_connection_information);

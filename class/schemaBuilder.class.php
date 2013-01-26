@@ -66,9 +66,9 @@ class schemaBuilder {
      */
     public function createUser(array $newUser) {
 
-        $ok = $this->doQuery("CREATE USER '{$newUser['user']}'@'$this->host' IDENTIFIED BY '{$newUser['password']}';");
+        $ok = $this->doQuery("CREATE USER '{$newUser['user']}'@'%' IDENTIFIED BY '{$newUser['password']}';");
         if ($ok)
-            $ok = $this->doQuery("GRANT SELECT, INSERT, UPDATE, DELETE ON `{$this->dataBase}`.* TO '{$newUser['user']}'@'$this->host';");
+            $ok = $this->doQuery("GRANT SELECT, INSERT, UPDATE, DELETE ON `{$this->dataBase}`.* TO '{$newUser['user']}'@'%';");
 
         return $ok;
     }
