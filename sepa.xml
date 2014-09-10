@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Document xmlns="urn:iso:std:iso:20022:tech:xsd:pain.008.001.02" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance";>
+<CstmrDrctDbtInitn>
+<GrpHdr>
+<MsgId>PRE2013102809583113000ES80B11111111</MsgId>
+<CreDtTm>2013-10-28T09:58:31</CreDtTm>
+<NbOfTxs>2</NbOfTxs>
+<CtrlSum>2517.33</CtrlSum>
+<InitgPty>
+<Nm>EMPRESA PRUEBAS,S.L.U.</Nm>
+     <Id>
+         <OrgId>
+             <Othr>
+                 <Id>ES46J03118115</Id>
+             </Othr>
+         </OrgId>
+     </Id>
+</InitgPty>
+</GrpHdr>
+<PmtInf>
+     <PmtInfId>2013-10-28_095831Remesa 218</PmtInfId>
+     <PmtMtd>DD</PmtMtd>
+     <PmtTpInf>
+         <SvcLvl>
+             <Cd>SEPA</Cd>
+         </SvcLvl>
+         <LclInstrm>
+             <Cd>CORE</Cd>
+         </LclInstrm>
+         <SeqTp>RCUR</SeqTp>
+         <CtgyPurp>
+             <Cd>TRAD</Cd>
+         </CtgyPurp>
+     </PmtTpInf>
+     <ReqdColltnDt>2013-09-30</ReqdColltnDt>
+     <Cdtr>
+             <Nm>EMPRESA PRUEBAS,S.L.U.</Nm>
+             <Id>
+                 <PrvtId>
+                     <Othr>
+                         <Id>ES46J03118115</Id>
+                     </Othr>
+                 </PrvtId>
+             </Id>
+     </Cdtr>
+     <CdtrAcct>
+             <Id>
+                 <IBAN>ES8011111111111111111</IBAN>
+             </Id>
+             <Ccy>EUR</Ccy>
+     </CdtrAcct>
+     <CdtrAgt>
+             <FinInstnId>
+                 <BIC>BKBKESMM</BIC>
+             </FinInstnId>
+     </CdtrAgt>
+     <ChrgBr>SLEV</ChrgBr>
+<DrctDbtTxInf>
+     <PmtId>
+          <InstrId> 20130930Fra.509301</InstrId>
+          <EndToEndId> 20130930Fra.509301</EndToEndId>
+     </PmtId>
+     <InstdAmt Ccy="EUR">2499.99</InstdAmt>
+     <DrctDbtTx>
+         <MndtRltdInf>
+             <MndtId>4330027115</MndtId>
+             <DtOfSgntr>2009-10-31</DtOfSgntr>
+             <AmdmntInd>false</AmdmntInd>
+         </MndtRltdInf>
+         <CdtrSchmeId>
+         <Id>
+             <PrvtId>
+                 <Othr>
+                     <Id>ES46J03118115</Id>
+                     <SchmeNm>
+                         <Prtry>SEPA</Prtry>
+                     </SchmeNm>
+                 </Othr>
+             </PrvtId>
+         </Id>
+         </CdtrSchmeId>
+     </DrctDbtTx>
+     <DbtrAgt>
+         <FinInstnId>
+             <BIC>BSABESBB</BIC>
+         </FinInstnId>
+     </DbtrAgt>
+     <Dbtr>
+         <Nm>CLIENTE 1, S.A.</Nm>
+         <Id>
+             <OrgId>
+                 <BICOrBEI>BSABESBB</BICOrBEI>
+             </OrgId>
+         </Id>
+     </Dbtr>
+     <DbtrAcct>
+         <Id>
+             <IBAN>ES66111111118103221103</IBAN>
+         </Id>
+         <Ccy>EUR</Ccy>
+     </DbtrAcct>
+     <RmtInf>
+         <Ustrd>Fra. 13 01            5.093</Ustrd>
+     </RmtInf>
+</DrctDbtTxInf>
+<DrctDbtTxInf>
+     <PmtId>
+          <InstrId> 20130930Fra.508901</InstrId>
+          <EndToEndId> 20130930Fra.508901</EndToEndId>
+     </PmtId>
+     <InstdAmt Ccy="EUR">17.34</InstdAmt>
+     <DrctDbtTx>
+         <MndtRltdInf>
+             <MndtId>4350025048</MndtId>
+             <DtOfSgntr>2009-10-31</DtOfSgntr>
+             <AmdmntInd>false</AmdmntInd>
+         </MndtRltdInf>
+         <CdtrSchmeId>
+         <Id>
+             <PrvtId>
+                 <Othr>
+                     <Id>ES46J03118115</Id>
+                     <SchmeNm>
+                         <Prtry>SEPA</Prtry>
+                     </SchmeNm>
+                 </Othr>
+             </PrvtId>
+         </Id>
+         </CdtrSchmeId>
+     </DrctDbtTx>
+     <DbtrAgt>
+         <FinInstnId>
+             <BIC>BSABESBB</BIC>
+         </FinInstnId>
+     </DbtrAgt>
+     <Dbtr>
+         <Nm>CLIENTE 2, S.L.</Nm>
+         <Id>
+             <OrgId>
+                 <BICOrBEI>BSABESBB</BICOrBEI>
+             </OrgId>
+         </Id>
+     </Dbtr>
+     <DbtrAcct>
+         <Id>
+             <IBAN>ES55008103221100010XXXX</IBAN>
+         </Id>
+         <Ccy>EUR</Ccy>
+     </DbtrAcct>
+     <RmtInf>
+         <Ustrd>Fra. 13 01            5.089</Ustrd>
+     </RmtInf>
+</DrctDbtTxInf>
+</PmtInf>
+</CstmrDrctDbtInitn>
+</Document>

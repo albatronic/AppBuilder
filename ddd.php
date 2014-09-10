@@ -1,11 +1,12 @@
 <?php
-include_once "class/tabledescriptor.class.php";
-include_once "../apps/bin/pdf/fpdf.class.php";
+include_once 'class/tabledescriptor.class.php';
+include_once '../apps/bin/pdf/fpdf.class.php';
 
-class listadoPDF extends FPDF {
-
+class listadoPDF extends FPDF
+{
     //Cabecera de página
-    function Header() {
+    public function Header()
+    {
         global $tableName;
         global $pintarEstado;
 
@@ -77,7 +78,8 @@ class listadoPDF extends FPDF {
     }
 
     //Pie de pagina
-    function Footer() {
+    public function Footer()
+    {
         global $sinPie;
 
         $this->SetFont('Arial', '', 8);
@@ -137,7 +139,6 @@ if ($_POST['accion'] == 'BUILD') {
     $pdf->Ln(20);
     $pdf->Cell(0, 10, DB_BASE, 0, 1, "C");
     $pdf->SetFont('Arial', '', 8);
-
 
     $indice = array();
     $dependenciasTo = array();

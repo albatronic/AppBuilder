@@ -35,8 +35,8 @@
  * @copyright Informatica ALBATRONIC, SL 22.10.2010
  * @version 1.0
  */
-class TableDescriptor {
-
+class TableDescriptor
+{
     /**
      *
      * @var string El nombre de la base de datos
@@ -82,57 +82,69 @@ class TableDescriptor {
 
     /**
      * Constructor
-     * @param string $db      El nombre de la base de datos
-     * @param string $table   El nombre de la tabla
+     * @param string $db    El nombre de la base de datos
+     * @param string $table El nombre de la tabla
      */
-    public function __construct($db, $table) {
+    public function __construct($db, $table)
+    {
         $this->db = $db;
         $this->table = $table;
         $this->ChildEntities = array();
-        if ($this->Connect())
+        if ($this->Connect()) {
             $this->Load();
+        }
     }
 
     /**
      * Desctructor. Cierra el link a la base de datos
      */
-    public function __destruct() {
-        if (is_resource($this->dblink))
+    public function __destruct()
+    {
+        if (is_resource($this->dblink)) {
             mysql_close($this->dblink);
+        }
     }
 
-    private function Connect() {
+    private function Connect()
+    {
         if (($this->db != '') and ($this->table != '')) {
             return $this->getDbLink();
         }
     }
 
-    private function Query($query) {
+    private function Query($query)
+    {
         $result = mysql_query($query, $this->Connect());
+
         return $result;
     }
 
-    private function GetRow($result) {
+    private function GetRow($result)
+    {
         return mysql_fetch_array($result);
     }
 
-    public function getDbLink() {
+    public function getDbLink()
+    {
         if (!is_resource($this->dblink)) {
             $dblink = mysql_connect(DB_HOST, DB_USER, DB_PASS);
             //mysql_select_db(DB_BASE);
             $this->dblink = $dblink;
         }
+
         return $this->dblink;
     }
 
-    private function AddColumn($column) {
+    private function AddColumn($column)
+    {
         $pattern = "([a-z]{1,})[\(]{0,}([0-9]{0,})[\)]{0,}";
         $matches = array();
         ereg($pattern, $column['COLUMN_TYPE'], $matches);
-        if ($matches[1] == 'enum')
+        if ($matches[1] == 'enum') {
             $aux = substr($column['COLUMN_TYPE'], 5);
-        else
+        } else {
             $aux='';
+        }
 
         $columna['Field'] = $column['COLUMN_NAME'];
         $columna['Type'] = $matches[1];
@@ -143,13 +155,14 @@ class TableDescriptor {
         $columna['Default'] = $column['COLUMN_DEFAULT'];
         $columna['Extra'] = $column['EXTRA'];
 
-        if ($column['COLUMN_KEY'] == 'PRI')
-            $this->primary_key = $column['COLUMN_NAME'];
+        if ($column['COLUMN_KEY'] == 'PRI') {
+            $this->primary_key .= $column['COLUMN_NAME'].",";
+        }
 
         if ($column['COLUMN_KEY'] == 'MUL') { //Buscar la relacion con otra tabla
             switch ($this->getEngine()) {
                 case 'MyISAM':
-                    if ($column['COLUMN_COMMENT'] != '') {
+                    if ($column['COLUMN_COMMENT'] !== '') {
                         $referencias = explode(",", $column['COLUMN_COMMENT']);
                         $columna['ReferencedSchema'] = trim($referencias[0]);
                         $columna['ReferencedEntity'] = trim($referencias[1]);
@@ -157,8 +170,9 @@ class TableDescriptor {
                         //Pongo el nombre de la tabla refenciada en notacion entidad
                         $aux = str_replace("_", " ", $columna['ReferencedEntity']);
                         $columna['ReferencedEntity'] = str_replace(" ", "", ucwords($aux));
-                        if (!in_array($columna['ReferencedEntity'], $this->ParentEntities))
+                        if (!in_array($columna['ReferencedEntity'], $this->ParentEntities)) {
                             $this->ParentEntities[] = $columna['ReferencedEntity'];
+                        }
                     }
                     break;
 
@@ -168,15 +182,16 @@ class TableDescriptor {
                         WHERE (TABLE_NAME='{$this->getTable()}') AND (COLUMN_NAME='{$column['Field']}') AND (NOT ISNULL( REFERENCED_TABLE_SCHEMA ))";
                     $result = $this->Query($query);
                     $row = $this->GetRow($result);
-                    if ($row['TABLE_SCHEMA'] != '') {
+                    if ($row['TABLE_SCHEMA'] !== '') {
                         $columna['ReferencedSchema'] = $row['REFERENCED_TABLE_SCHEMA'];
                         $columna['ReferencedEntity'] = $row['REFERENCED_TABLE_NAME'];
                         $columna['ReferencedColumn'] = $row['REFERENCED_COLUMN_NAME'];
                         //Pongo el nombre la la tabla refenciada en notacion entidad
                         $aux = str_replace("_", " ", $columna['ReferencedEntity']);
                         $columna['ReferencedEntity'] = str_replace(" ", "", ucwords($aux));
-                        if (!in_array($columna['ReferencedEntity'], $this->ParentEntities))
+                        if (!in_array($columna['ReferencedEntity'], $this->ParentEntities)) {
                             $this->ParentEntities[] = $columna['ReferencedEntity'];
+                        }
                     }
                     break;
             }
@@ -185,7 +200,8 @@ class TableDescriptor {
         $this->columns[] = $columna;
     }
 
-    private function Load() {
+    private function Load()
+    {
         // Miro qué tipo de motor se utiliza para la tabla (MyISAM ó InnoDB)
         $query = "SELECT ENGINE FROM information_schema.TABLES WHERE TABLE_SCHEMA='{$this->getDataBase()}' AND TABLE_NAME='{$this->getTable()}';";
         $result = $this->Query($query);
@@ -194,15 +210,18 @@ class TableDescriptor {
 
         $query = "SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA='{$this->getDataBase()}' AND TABLE_NAME='{$this->getTable()}' ORDER BY ORDINAL_POSITION ASC;";
         $result = $this->Query($query);
-        while ($row = $this->GetRow($result))
+        while ($row = $this->GetRow($result)) {
             $this->AddColumn($row);
+        }
     }
 
-    public function getEngine() {
+    public function getEngine()
+    {
         return $this->engine;
     }
 
-    public function getDataBase() {
+    public function getDataBase()
+    {
         return $this->db;
     }
 
@@ -210,16 +229,19 @@ class TableDescriptor {
      * Devuelve el nombre de la tabla
      * @return string El nombre de la tabla
      */
-    public function getTable() {
+    public function getTable()
+    {
         return $this->table;
     }
 
-    public function getColumns() {
+    public function getColumns()
+    {
         return $this->columns;
     }
 
-    public function getPrimaryKey() {
-        return $this->primary_key;
+    public function getPrimaryKey()
+    {
+        return substr($this->primary_key,0,-1);
     }
 
     /**
@@ -227,7 +249,8 @@ class TableDescriptor {
      * referenciadas (padres) por esta
      * @return array
      */
-    public function getParentEntities() {
+    public function getParentEntities()
+    {
         return $this->ParentEntities;
     }
 
@@ -248,8 +271,8 @@ class TableDescriptor {
      *
      * @return array
      */
-    public function getChildEntities() {
-
+    public function getChildEntities()
+    {
         $query = "SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA='{$this->getDataBase()}' AND COLUMN_COMMENT LIKE '%{$this->getTable()}%' ORDER BY ORDINAL_POSITION ASC;";
         $result = $this->Query($query);
         while ($row = $this->GetRow($result)) {
@@ -265,9 +288,8 @@ class TableDescriptor {
                 'Column' => $row['COLUMN_NAME']
             );
         }
+
         return $this->ChildEntities;
     }
 
 }
-
-?>

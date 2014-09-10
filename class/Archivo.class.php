@@ -14,8 +14,8 @@
  * @since 14-abr-2012
  *
  */
-class Archivo {
-
+class Archivo
+{
     /**
      * Path completo del archivo incluido el nombre y la extension
      * @var string
@@ -105,8 +105,8 @@ class Archivo {
      */
     private $errores = array();
 
-    public function __construct($fullPath) {
-
+    public function __construct($fullPath)
+    {
         if ($fullPath) {
             $this->getPathInfo($fullPath);
             $this->fullPath = $fullPath;
@@ -124,11 +124,13 @@ class Archivo {
         }
     }
 
-    public function getFullPath() {
+    public function getFullPath()
+    {
         return $this->fullPath;
     }
 
-    public function getRelativePath() {
+    public function getRelativePath()
+    {
         return $this->relativePath;
     }
 
@@ -137,7 +139,8 @@ class Archivo {
      * '/www/htdocs/inc/lib.inc.php' => /www/htdocs/inc
      * @return string
      */
-    public function getDirName() {
+    public function getDirName()
+    {
         return $this->dirName;
     }
 
@@ -146,7 +149,8 @@ class Archivo {
      * '/www/htdocs/inc/lib.inc.php' => lib.inc.php
      * @return string
      */
-    public function getBaseName() {
+    public function getBaseName()
+    {
         return $this->baseName;
     }
 
@@ -155,7 +159,8 @@ class Archivo {
      * '/www/htdocs/inc/lib.inc.php' => php
      * @return string
      */
-    public function getExtension() {
+    public function getExtension()
+    {
         return $this->extension;
     }
 
@@ -164,27 +169,33 @@ class Archivo {
      * '/www/htdocs/inc/lib.inc.php' => lib.inc
      * @return string
      */
-    public function getFileName() {
+    public function getFileName()
+    {
         return $this->fileName;
     }
 
-    public function getNumericType() {
+    public function getNumericType()
+    {
         return $this->type;
     }
 
-    public function getMimeType() {
+    public function getMimeType()
+    {
         return image_type_to_mime_type($this->type);
     }
 
-    public function getImageWidth() {
+    public function getImageWidth()
+    {
         return $this->imageWidth;
     }
 
-    public function getImageHeight() {
+    public function getImageHeight()
+    {
         return $this->imageHeight;
     }
 
-    public function getIsImage() {
+    public function getIsImage()
+    {
         return $this->isImage;
     }
 
@@ -193,7 +204,8 @@ class Archivo {
      *
      * @return double EL tamaño del archivo en bytes
      */
-    public function getSize() {
+    public function getSize()
+    {
         return $this->size;
     }
 
@@ -220,7 +232,8 @@ class Archivo {
      *
      * @return string El nombre de archivo con el path completo
      */
-    static function getTemporalFileName() {
+    public static function getTemporalFileName()
+    {
         $fileName = md5($_SESSION['USER']['user']['iu'] . date('d-m-Y H:i:s'));
         $prefijoCarpeta = substr($fileName, 0, 2);
         $path = "docs/docs" . $_SESSION['project']['folder'] . "/pdfs/" . $prefijoCarpeta;
@@ -245,11 +258,11 @@ class Archivo {
      * Si hubiera errores de validación o de carga, se pueden recoger con
      * el método getErrores()
      *
-     * @param string $origen EL archivo origen
+     * @param  string  $origen EL archivo origen
      * @return boolean
      */
-    public function upLoad($origen) {
-
+    public function upLoad($origen)
+    {
         $this->errores = array();
 
         $subido = false;
@@ -310,7 +323,8 @@ class Archivo {
      * Devuelve el nombre del archivo subido
      * @return string
      */
-    public function getUpLoadedFileName() {
+    public function getUpLoadedFileName()
+    {
         return $this->upLoadedFileName;
     }
 
@@ -320,7 +334,8 @@ class Archivo {
      *
      * @return array Array con los errores
      */
-    public function getErrores() {
+    public function getErrores()
+    {
         return $this->errores;
     }
 
@@ -328,8 +343,8 @@ class Archivo {
      * Obtiene las partes que componen el nombre del archivo $path
      * @param string $path
      */
-    private function getPathInfo($path) {
-
+    private function getPathInfo($path)
+    {
         $path_parts = pathinfo($path);
         $this->dirName = $path_parts['dirname'];
         $this->baseName = $path_parts['basename'];
@@ -341,11 +356,13 @@ class Archivo {
      * Abre el archivo indicado en el constructor en modo $mode
      * y pone en $this->fp el manejador
      *
-     * @param string $mode
+     * @param  string  $mode
      * @return boolean TRUE si se abrió con éxito
      */
-    public function open($mode = "r") {
+    public function open($mode = "r")
+    {
         $this->fp = fopen($this->fullPath, $mode);
+
         return ($this->fp != false);
     }
 
@@ -355,14 +372,15 @@ class Archivo {
      *
      * @return string La cadena de texto leida o FALSE
      */
-    public function read() {
-
+    public function read()
+    {
         $cadena = '';
 
         if ($this->open('r')) {
             $cadena = fread($this->fp, $this->getSize());
             $this->close();
         }
+
         return $cadena;
     }
 
@@ -370,11 +388,11 @@ class Archivo {
      * Escribe en el archivo indicado en el constructor
      * la cadena de texto $datos
      *
-     * @param string $datos La cadena de texto a escribir
+     * @param  string  $datos La cadena de texto a escribir
      * @return boolean TRUE si la escritura se hizo con éxito
      */
-    public function write($datos) {
-
+    public function write($datos)
+    {
         $ok = FALSE;
 
         if ($this->open('w')) {
@@ -388,7 +406,8 @@ class Archivo {
     /**
      * Cierra el fichero
      */
-    public function close() {
+    public function close()
+    {
         fclose($this->fp);
     }
 
@@ -398,13 +417,15 @@ class Archivo {
      *
      * @return variant Array o false si es final de fichero
      */
-    public function readLine() {
+    public function readLine()
+    {
         if (!feof($this->fp)) {
             if ($this->columnsEnclosure)
                 return fgetcsv($this->fp, 1000, $this->columnsDelimiter, $this->columnsEnclosure, $this->escape);
             else
                 return fgetcsv($this->fp, 1000, $this->columnsDelimiter);
         } else
+
             return false;
     }
 
@@ -412,7 +433,8 @@ class Archivo {
      * Escribe una línea en el fichero
      * @param string $string
      */
-    public function writeLine($string) {
+    public function writeLine($string)
+    {
         fwrite($this->fp, $string . PHP_EOL);
     }
 
@@ -422,7 +444,8 @@ class Archivo {
      *
      * @param char(1) $char
      */
-    public function setColumnsDelimiter($char) {
+    public function setColumnsDelimiter($char)
+    {
         $this->columnsDelimiter = $char;
     }
 
@@ -432,7 +455,8 @@ class Archivo {
      *
      * @param char(1) $char
      */
-    public function setColumnsEnclosure($char) {
+    public function setColumnsEnclosure($char)
+    {
         $this->columnsEnclosure = $char;
     }
 
@@ -440,10 +464,9 @@ class Archivo {
      * Establece el carácter de escape (un sólo carácter). Por defecto es una barra invertida.
      * @param char(1) $char
      */
-    public function setEscape($char) {
+    public function setEscape($char)
+    {
         $this->escape = $char;
     }
 
 }
-
-?>

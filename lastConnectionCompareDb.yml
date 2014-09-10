@@ -1,0 +1,11 @@
+SOURCE:
+  host: localhost
+  user: root
+  password: albatronic
+  dataBase: albatro_abrasivosmotril
+TARGET:
+  host: localhost
+  user: root
+  password: albatronic
+  dataBase: albatro_carroceriasgranada
+action: Compare

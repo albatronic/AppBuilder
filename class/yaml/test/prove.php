@@ -16,10 +16,8 @@ $h = new lime_harness(array(
 ));
 $h->base_dir = realpath(dirname(__FILE__));
 
-foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator(dirname(__FILE__)), RecursiveIteratorIterator::LEAVES_ONLY) as $file)
-{
-  if (preg_match('/Test\.php$/', $file))
-  {
+foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator(dirname(__FILE__)), RecursiveIteratorIterator::LEAVES_ONLY) as $file) {
+  if (preg_match('/Test\.php$/', $file)) {
     $h->register($file->getRealPath());
   }
 }

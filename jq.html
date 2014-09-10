@@ -1,0 +1,25 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+  p { margin: 8px; font-size:16px; }
+  .selected { color:blue; }
+  .highlight { background:yellow; }
+  </style>
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+</head>
+<body>
+ <input type="text" onchange="$('#aa').addClass('selected');"/>
+<input type="text" onchange="$('#aa').removeClass('selected');"/>
+  <p>Hello</p>
+  <p>and</p>
+  <p id="aa">Goodbye</p>
+ 
+
+ 
+</body>
+</html>

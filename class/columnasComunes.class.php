@@ -7,7 +7,8 @@
  * @copyright Informática ALBATRONIC, SL
  * @date 25-ago-2012 22:41:15
  */
-class columnasComunes {
+class columnasComunes
+{
     /**
      * Array con las columnas comunes a todas la entidades de datos
      * @var array
@@ -28,6 +29,10 @@ class columnasComunes {
         'Deleted',
         'DeletedBy',
         'DeletedAt',
+        'PrintedBy',
+        'PrintedAt',
+        'EmailedBy',
+        'EmailedAt',
         'Privacy',
         'SortOrder',
         'PublishedAt',
@@ -55,6 +60,7 @@ class columnasComunes {
         'ShowRelatedContents',
         'ShowPublishedAt',
         'AccessProfileList',
+        'AccessProfileListWeb',
         'UrlTarget',
         'UrlParameters',
         'UrlRequestMethod',
@@ -67,6 +73,8 @@ class columnasComunes {
         'IdSeccionEnlaces',
         'IdSeccionVideos',
         'DateTimeLastVisit',
+        'RevisitAfter',
+        'NivelJerarquico',
     );
 
     /**
@@ -77,5 +85,3 @@ class columnasComunes {
 
     );
 }
-
-?>

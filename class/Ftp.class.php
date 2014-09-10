@@ -17,14 +17,15 @@
  * @copyright Informática ALBATRONIC, SL
  * @date 18-oct-2012 19:55:37
  */
-class Ftp {
+class Ftp
+{
+    public $server;
+    public $user;
+    public $password;
+    public $errores = array();
 
-    var $server;
-    var $user;
-    var $password;
-    var $errores = array();
-
-    public function __construct($server, $user, $password) {
+    public function __construct($server, $user, $password)
+    {
         $this->server = $server;
         $this->user = $user;
         $this->password = $password;
@@ -33,14 +34,14 @@ class Ftp {
     /**
      * Sube un archivo al servidor vía ftp
      *
-     * @param string $targetFolder Carpeta destino
-     * @param string $sourceFile Fichero origen
-     * @param string $targetFile Fichero destino
-     * @param integer $transferMode Tipo de transferencia (FTP_ASCII, FTP_BINARY), por defecto FTP_BINARY
+     * @param  string  $targetFolder Carpeta destino
+     * @param  string  $sourceFile   Fichero origen
+     * @param  string  $targetFile   Fichero destino
+     * @param  integer $transferMode Tipo de transferencia (FTP_ASCII, FTP_BINARY), por defecto FTP_BINARY
      * @return boolean TRUE si el archivo se subió con éxito
      */
-    public function upLoad($targetFolder, $sourceFile, $targetFile, $transferMode = FTP_BINARY) {
-
+    public function upLoad($targetFolder, $sourceFile, $targetFile, $transferMode = FTP_BINARY)
+    {
         $this->errores = array();
 
         $connId = $this->connect();
@@ -61,13 +62,13 @@ class Ftp {
      * Descarga un archivo desde el servidor FTP y lo copia en
      * un archivo local
      *
-     * @param string $serverFile El archivo a descargar desde el servidor
-     * @param string $localFile El nombre del archivo local que se generará
-     * @param integer $transferMode Tipo de transferencia (FTP_ASCII, FTP_BINARY), por defecto FTP_BINARY
+     * @param  string  $serverFile   El archivo a descargar desde el servidor
+     * @param  string  $localFile    El nombre del archivo local que se generará
+     * @param  integer $transferMode Tipo de transferencia (FTP_ASCII, FTP_BINARY), por defecto FTP_BINARY
      * @return boolean TRUE si la descarga se hizo con éxito
      */
-    public function downLoad($serverFile, $localFile, $transferMode = FTP_BINARY) {
-
+    public function downLoad($serverFile, $localFile, $transferMode = FTP_BINARY)
+    {
         $this->errores = array();
 
         $connId = $this->connect();
@@ -86,12 +87,12 @@ class Ftp {
     /**
      * Borrar un archivo del servidor vía FTP
      *
-     * @param string $folder Carpeta donde está el fichero a borrar
-     * @param string $file Fichero a borrar
+     * @param  string  $folder Carpeta donde está el fichero a borrar
+     * @param  string  $file   Fichero a borrar
      * @return boolean TRUE si el archivo se subió con éxito
      */
-    public function delete($folder, $file) {
-
+    public function delete($folder, $file)
+    {
         $this->errores = array();
 
         $connId = $this->connect();
@@ -110,13 +111,13 @@ class Ftp {
     /**
      * Cambia de nombre a un archivo vía FTP
      *
-     * @param string $folder Carpeta donde está el archivo a cambiar
-     * @param string $oldName El nombre actual del archivo
-     * @param string $newName El nombre nuevo
+     * @param  string  $folder  Carpeta donde está el archivo a cambiar
+     * @param  string  $oldName El nombre actual del archivo
+     * @param  string  $newName El nombre nuevo
      * @return boolean TRUE si el cambio de nombre se hizo con éxito
      */
-    public function rename($folder, $oldName, $newName) {
-
+    public function rename($folder, $oldName, $newName)
+    {
         $this->errores = array();
 
         $connId = $this->connect();
@@ -136,11 +137,11 @@ class Ftp {
     /**
      * Crear un directorio en el servidor vía FTP.
      *
-     * @param string $directory Directorio a crear
+     * @param  string  $directory Directorio a crear
      * @return boolean TRUE si se creó el directorio
      */
-    public function mkdir($directory) {
-
+    public function mkdir($directory)
+    {
         $this->errores = array();
 
         $connId = $this->connect();
@@ -161,11 +162,11 @@ class Ftp {
      *
      * El directorio debe estar vacio.
      *
-     * @param string $directory Directorio a borrar
+     * @param  string  $directory Directorio a borrar
      * @return boolean TRUE si se borró el directorio
      */
-    public function rmdir($directory) {
-
+    public function rmdir($directory)
+    {
         $this->errores = array();
 
         $connId = $this->connect();
@@ -184,11 +185,12 @@ class Ftp {
     /**
      * Ejecuta el comando FTP LIST, y devuelve el resultado como una matriz.
      *
-     * @param string $directory El directorio a listar
-     * @param boolean $recursive TRUE para
-     * @return array Array con el listado del directorio
+     * @param  string  $directory El directorio a listar
+     * @param  boolean $recursive TRUE para
+     * @return array   Array con el listado del directorio
      */
-    public function listDir($directory, $recursive = FALSE) {
+    public function listDir($directory, $recursive = FALSE)
+    {
         $this->errores = array();
 
         $connId = $this->connect();
@@ -212,10 +214,11 @@ class Ftp {
      * 'result' => El contenido del archivo
      * 'info' => array con la información de la operación realizada
      *
-     * @param string $urlFile Url del archivo a leer
-     * @return array Array con el resultado
+     * @param  string $urlFile Url del archivo a leer
+     * @return array  Array con el resultado
      */
-    public function getFileContent($urlFile) {
+    public function getFileContent($urlFile)
+    {
         $options = array(
             CURLOPT_RETURNTRANSFER => TRUE,
             CURLOPT_HEADER => FALSE,
@@ -238,8 +241,8 @@ class Ftp {
      *
      * @return boolean TRUE si la conexión fue exitosa
      */
-    private function connect() {
-
+    private function connect()
+    {
         $connId = ftp_connect($this->server);
         $ok = @ftp_login($connId, $this->user, $this->password);
 
@@ -247,6 +250,7 @@ class Ftp {
             return $connId;
         else {
             $this->errores[] = "FTP: La conexión ha fallado!";
+
             return FALSE;
         }
     }
@@ -256,10 +260,9 @@ class Ftp {
      *
      * @return array Array de errores
      */
-    public function getErrores() {
+    public function getErrores()
+    {
         return $this->errores;
     }
 
 }
-
-?>

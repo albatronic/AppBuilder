@@ -76,8 +76,7 @@ $testsForLoad = array(
   '[foo, bar: { foo: bar }]' => array('foo', '1' => array('bar' => array('foo' => 'bar'))),
 );
 
-foreach ($testsForLoad as $yaml => $value)
-{
+foreach ($testsForLoad as $yaml => $value) {
   $t->is_deeply(sfYamlInline::load($yaml), $value, sprintf('::load() converts an inline YAML to a PHP structure (%s)', $yaml));
 }
 
@@ -121,25 +120,20 @@ $testsForDump = array(
 
 // ::dump()
 $t->diag('::dump()');
-foreach ($testsForDump as $yaml => $value)
-{
+foreach ($testsForDump as $yaml => $value) {
   $t->is(sfYamlInline::dump($value), $yaml, sprintf('::dump() converts a PHP structure to an inline YAML (%s)', $yaml));
 }
 
-foreach ($testsForLoad as $yaml => $value)
-{
-  if ($value == 1230)
-  {
+foreach ($testsForLoad as $yaml => $value) {
+  if ($value == 1230) {
     continue;
   }
 
   $t->is_deeply(sfYamlInline::load(sfYamlInline::dump($value)), $value, 'check consistency');
 }
 
-foreach ($testsForDump as $yaml => $value)
-{
-  if ($value == 1230)
-  {
+foreach ($testsForDump as $yaml => $value) {
+  if ($value == 1230) {
     continue;
   }
 

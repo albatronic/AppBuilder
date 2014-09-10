@@ -3,7 +3,7 @@
 /*
  * This file is part of the symfony package.
  * (c) Fabien Potencier <fabien.potencier@symfony-project.com>
- * 
+ *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
@@ -22,31 +22,23 @@ $dumper = new sfYamlDumper();
 
 $path = dirname(__FILE__).'/fixtures';
 $files = $parser->parse(file_get_contents($path.'/index.yml'));
-foreach ($files as $file)
-{
+foreach ($files as $file) {
   $t->diag($file);
 
   $yamls = file_get_contents($path.'/'.$file.'.yml');
 
   // split YAMLs documents
-  foreach (preg_split('/^---( %YAML\:1\.0)?/m', $yamls) as $yaml)
-  {
-    if (!$yaml)
-    {
+  foreach (preg_split('/^---( %YAML\:1\.0)?/m', $yamls) as $yaml) {
+    if (!$yaml) {
       continue;
     }
 
     $test = $parser->parse($yaml);
-    if (isset($test['dump_skip']) && $test['dump_skip'])
-    {
+    if (isset($test['dump_skip']) && $test['dump_skip']) {
       continue;
-    }
-    else if (isset($test['todo']) && $test['todo'])
-    {
+    } elseif (isset($test['todo']) && $test['todo']) {
       $t->todo($test['test']);
-    }
-    else
-    {
+    } else {
       $expected = eval('return '.trim($test['php']).';');
 
       $t->is_deeply($parser->parse($dumper->dump($expected, 10)), $expected, $test['test']);

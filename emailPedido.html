@@ -1,0 +1,235 @@
+<html>
+<body text="#333333">
+<TABLE width="780" border=0 cellpadding="1" cellspacing="2">	
+  <TR>		
+	<td width="762"><p><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif">
+            <strong>Gracias por confiar en nosotros. Tu pedido ha sido realizado correctamente.</strong><br>
+          Desde {{webName}} le agradecemos que haya confiado en nosotros, pronto podrá disfrutar de sus productos.
+          </font></p></td>	
+  </TR>
+  <TR>
+    <td> </td>
+  </TR>
+  <TR>
+    <td> </td>
+  </TR>
+  <TR>
+    <td><table width="390" border="0" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
+      <tr>
+        <td><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif"><strong>DATOS DEL PEDIDO : </strong></font></td>
+      </tr>
+    </table></td>
+  </TR>
+  <TR>
+    <td><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif"><strong>Número de pedido :</strong> {{idPedido}}</font></td>
+  </TR>
+  <TR>
+    <td><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif">El Cliente {{razonSocial}} ha adquirido a fecha de {{fecha}} los siguientes Artículos:</font></td>
+  </TR>
+  <TR>
+    <td> </td>
+  </TR>
+  <TR bgcolor="#999999">
+    <td align="left" valign="top"><table width="100%" border="0" bgcolor="#FFFFFF">
+      <TR bgcolor="#666666">
+        <td align=center><strong><font color="#FFFFFF" size="-1" face="Arial, Helvetica, sans-serif">ARTICULO</font></strong></td>
+        <td align=center><strong><font color="#FFFFFF" size="-1" face="Arial, Helvetica, sans-serif">DESCRIPCION</font></strong></td>
+        <td align=center><strong><font color="#FFFFFF" size="-1" face="Arial, Helvetica, sans-serif">CANTIDAD</font></strong></td>
+        <td align=center><strong><font color="#FFFFFF" size="-1" face="Arial, Helvetica, sans-serif">PRECIO</font></strong></td>
+      </TR>
+       {{LINEAS}}
+      <TR>
+        <td align=center><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif">{{codigo}}</font></td>
+        <td align=center><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif">{{descripcion}}</font></td>
+        <td align=center><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif">{{unidades}}</font></td>
+        <td align=center><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif">{{precio}}</font></td>
+      </TR>
+      {{LINEAS}}
+    </table></td>
+  </TR>
+  <TR bgcolor="#999999">
+    <td align="left" valign="top" bgcolor="#FFFFFF"> </td>
+  </TR>
+  <TR bgcolor="#999999">
+    <td align="left" valign="top"><table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#FFFFFF">
+      <tr>
+        <td width="22%" bgcolor="#666666"><strong><font color="#FFFFFF" size="-1" face="Arial, Helvetica, sans-serif">Subtotal de la compra:</font></strong></td>
+        <td width="78%"><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif">{{total}} Euros</font></td>
+      </tr>
+      <tr>
+        <td bgcolor="#666666"><strong><font color="#FFFFFF" size="-1" face="Arial, Helvetica, sans-serif">Gastos de envío:</font></strong></td>
+        <td><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif">{{gastosEnvio}} Euros</font></td>
+      </tr>
+      <tr>
+        <td bgcolor="#666666"><strong><font color="#FFFFFF" size="-1" face="Arial, Helvetica, sans-serif">Total de la compra:</font></strong></td>
+        <td><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif">{{totalPagar}} Euros</font></td>
+      </tr>
+    </table></td>
+  </TR>
+  <TR>
+    <td> </td>
+  </TR>
+  <TR bgcolor="#FFFFFF">
+    <td align="left" valign="top"><font color="#FFFFFF" size="-1" face="Arial, Helvetica, sans-serif"> </font>
+      <table width="390" border="0" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
+        <tr>
+          <td><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif"><strong>ZONA DE ENVÍO, FORMA DE PAGO, FORMA DE ENVÍO: </strong></font></td>
+        </tr>
+      </table></td>
+  </TR>
+  <TR align="left" valign="top" bgcolor="#999999">
+    <td bgcolor="#CCCCCC"><table width="100%" border="0" cellpadding="2" bgcolor="#FFFFFF">
+      <tr>
+        <td width="20%"><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif"><strong>Zona de envío:</strong></font></td>
+        <td width="80%"><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif">{{zonaEnvio}}</font></td>
+      </tr>
+      <tr>
+        <td><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif"><strong>Forma de pago:</strong></font></td>
+        <td><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif">{{formaPago}}</font></td>
+      </tr>
+      <tr>
+        <td><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif"><strong>Modo de entrega:</strong></font></td>
+        <td><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif">{{formaEnvio}}</font></td>
+      </tr>
+	  
+  <!--datos tarjeta-->
+      <tr>
+        <td><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif"><strong>Datos Tarjeta:</strong></font></td>
+        <td><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif">{tipo_tarjeta} {número_tarjeta} ({CCV2}). <strong>Titular</strong> {titular}. <strong>Caduca</strong> en {mes_tarjeta} de {año_tarjeta}</font></td>
+      </tr>
+ <!--fin datos tarjeta-->
+ <!--envolver-->
+      <tr>
+        <td><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif"><b>Envolver:</b></font></td>
+        <td><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif">{{envolver}}</font></td>
+      </tr>
+ <!--fin envolver-->
+<!--enviar factura-->
+      <tr>
+        <td><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif"><b>Enviar factura:</b></font></td>
+        <td><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif">{{enviarFactura}}</font></td>
+      </tr>
+ <!--fin enviar factura-->
+    </table></td>
+  </TR>
+
+  <TR>
+    <TD> </TD>
+  </TR>
+  <TR align="left" bgcolor="#FFFFFF">
+	<TD valign="top"><table width="390" border="0" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
+        <tr>
+          <td><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif"><strong>DIRECCIÓN COMPLETA DE LA ENTREGA: </strong></font></td>
+        </tr>
+      </table></TD>
+  </TR>
+  <TR align="left" valign="top" bgcolor="#999999">
+    <TD bgcolor="#CCCCCC"><table width="100%" border="0" cellpadding="2" bgcolor="#FFFFFF">
+      <tr>
+        <td colspan="2"><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif"><strong>Nombre:</strong></font></td>
+        <td colspan="2"><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif">{{nombreEnvio}}</font></td>
+      </tr>
+      <tr>
+        <td colspan="2"><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif"><strong>Direccion:</strong></font></td>
+        <td colspan="2"><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif">{{direccionEnvio}}</font></td>
+      </tr>
+      <tr>
+        <td width="67"><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif"><strong>Localidad:</strong></font></td>
+        <td width="129"><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif">{{localidadEnvio}}</font></td>
+        <td width="93"><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif"><strong>CP:</strong></font></td>
+        <td width="473"><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif">{{codigoPostalEnvio}}</font></td>
+      </tr>
+      <tr>
+        <td><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif"><strong>Provincia:</strong></font></td>
+        <td><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif">{{pronviaEnvio}}</font></td>
+        <td><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif"><strong>País:</strong></font></td>
+        <td><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif">{{paisEnvio}}</font></td>
+      </tr>
+      <tr>
+        <td><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif"><strong>Email:</strong></font></td>
+        <td><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif"><a href=mailto:{email}>{{email}}</a></font></td>
+        <td><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif"><strong>Teléfono:</strong></font></td>
+        <td><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif">{{telefono}}</font></td>
+      </tr>
+      <tr>
+        <td><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif"><strong>Fax:</strong></font></td>
+        <td><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif">{{fax}}</font></td>
+        <td><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif"><strong>CIF/NIF:</strong></font></td>
+        <td><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif">{{cif}}</font></td>
+      </tr>
+    </table></TD>
+  </TR>
+  <TR>
+    <TD> </TD>
+  </TR>
+  <!--datos facturación-->
+  <TR align="left" bgcolor="#FFFFFF">
+	<TD><table width="390" border="0" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
+        <tr>
+          <td><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif"><strong>DATOS DE FACTURACIÓN: </strong></font></td>
+        </tr>
+      </table>      </TD>
+  </TR>
+  <TR align="left" valign="top" bgcolor="#999999">
+    <TD bgcolor="#CCCCCC"><table width="100%"  border="0" cellpadding="2" bgcolor="#FFFFFF">
+      <tr>
+        <td colspan="2"><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif"><strong>Nombre:</strong></font></td>
+        <td colspan="2"><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif">{{nombreFactura}}</font></td>
+      </tr>
+      <tr>
+        <td colspan="2"><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif"><strong>Direccion:</strong></font></td>
+        <td colspan="2"><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif">{{direcciónFactura}}</font></td>
+      </tr>
+      <tr>
+        <td width="67"><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif"><strong>Localidad:</strong></font></td>
+        <td width="129"><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif">{{localidadFactura}}</font></td>
+        <td width="93" ><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif"><strong>CP:</strong></font></td>
+        <td width="473"><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif">{{codigoPostalFactura}}</font></td>
+      </tr>
+      <tr>
+        <td><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif"><strong>Provincia:</strong></font></td>
+        <td><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif">{{provinciaFactura}}</font></td>
+        <td><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif"><strong>País:</strong></font></td>
+        <td><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif">{{paisFactura}}</font></td>
+      </tr>
+      <tr>
+        <td><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif"><strong>Email:</strong></font></td>
+        <td><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif"><a href=mailto:{email_facturación}>{email_facturación}</a></font></td>
+        <td><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif"><strong>Teléfono:</strong></font></td>
+        <td><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif">{{telefonoFactura}}</font></td>
+      </tr>
+      <tr>
+        <td><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif"><strong>Fax:</strong></font></td>
+        <td><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif">{{faxFactura}}</font></td>
+        <td><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif"><strong>CIF/NIF:</strong></font></td>
+        <td><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif">{{cifFactura}}</font></td>
+      </tr>
+    </table></TD>
+  </TR>
+  <TR>
+    <TD> </TD>
+  </TR>
+  <!--fin datos facturación-->
+  <!--observaciones-->
+  <TR align="left" bgcolor="#FFFFFF">
+    <TD valign="top"><strong></strong>
+      <table width="390" border="0" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
+        <tr>
+          <td><font color="#FFFFFF" size="-1" face="Arial, Helvetica, sans-serif"><strong><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif">OBSERVACIONES: </font></strong></font></td>
+        </tr>
+      </table></TD>
+  </TR>
+  <TR align="left" bgcolor="#FFFFFF">
+    <TD valign="top" bgcolor="#CCCCCC"><table width="100%"  border="0" bgcolor="#FFFFFF">
+      <tr>
+        <td><font color="#666666" size="-1" face="Arial, Helvetica, sans-serif">{{observaciones}}</font></td>
+      </tr>
+    </table></TD>
+  </TR>
+  <TR>
+	<TD> </TD>
+  </TR> 
+  <!--fin observaciones-->
+</table>
+</body>
+</html>

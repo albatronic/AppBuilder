@@ -30,4 +30,3 @@ if ($dbLink) {
         die("La base de datos indicada ({$_GET['db']}) no existe o no está disponible");
 } else
     die("Error de conexión al servidor de datos");
-?>

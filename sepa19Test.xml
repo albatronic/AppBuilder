@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:iso:std:iso:20022:tech:xsd:pain.008.001.02">
+  <CstmrDrctDbtInitn>
+    <GrpHdr>
+      <MsgId>S1914/11/20140215</MsgId>
+      <CreDtTm>2014-02-20T23:16:21</CreDtTm>
+      <NbOfTxs>2</NbOfTxs>
+      <CtrlSum>2001.22</CtrlSum>
+      <InitgPty>
+        <Nm>Informatica Albatronic, SL</Nm>
+        <Id>
+          <OrgId>
+            <Othr>
+              <Id>ES00B18426684</Id>
+            </Othr>
+          </OrgId>
+        </Id>
+      </InitgPty>
+    </GrpHdr>
+    <PmtInf>
+      <PmtInfId>S1914/11/20140215/1</PmtInfId>
+      <PmtMtd>DD</PmtMtd>
+      <PmtTpInf><SvcLvl><Cd>SEPA</Cd></SvcLvl><LclInstrm><Cd>CORE</Cd></LclInstrm><SeqTp>RCUR</SeqTp></PmtTpInf>
+      <ReqdColltnDt>2014-02-28</ReqdColltnDt>
+      <Cdtr>
+        <Nm>Informatica Albatronic, SL</Nm>
+        <PstlAdr>
+          <Ctry>ES</Ctry>
+          <AdrLine>Avd. Blas Otero, 10 Local 1</AdrLine>
+          <AdrLine>18200 Maracena Granada</AdrLine>
+        </PstlAdr>
+      </Cdtr>
+      <CdtrAcct>
+        <Id><IBAN>ESxx21002497190210004796</IBAN></Id>
+        <Ccy>EUR</Ccy>
+      </CdtrAcct>
+      <CdtrAgt>
+        <FinInstnId><BIC>CAIXESBB</BIC></FinInstnId>
+      </CdtrAgt>
+      <ChrgBr>SLEV</ChrgBr>
+      <CdtrSchmeId>
+        <Id>
+          <PrvtId>
+            <Othr>
+              <Id>ES00B18426684</Id>
+              <SchmeNm>
+                <Prtry>SEPA</Prtry>
+              </SchmeNm>
+            </Othr>
+          </PrvtId>
+        </Id>
+      </CdtrSchmeId>
+      <DrctDbtTxInf>
+        <PmtId>
+          <EndToEndId>FA001</EndToEndId>
+        </PmtId>
+        <InstdAmt Ccy="EUR">1500.23</InstdAmt>
+        <DrctDbtTx>
+          <MndtRltdInf>
+            <MndtId>mandato1</MndtId>
+            <DtOfSgntr>2013-02-01</DtOfSgntr>
+            <AmdmntInd>false</AmdmntInd>
+          </MndtRltdInf>
+        </DrctDbtTx>
+        <DbtrAgt>
+          <FinInstnId>
+            <BIC>BIC001</BIC>
+          </FinInstnId>
+        </DbtrAgt>
+        <Dbtr>
+        <Nm>PRIMER CLIENTE, SL</Nm>
+        <PstlAdr>
+          <Ctry>ES</Ctry>
+          <AdrLine>calle</AdrLine>
+          <AdrLine>poblacion</AdrLine>
+        </PstlAdr>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>ESXXBBBBOOOODDCCCCCCCCCC</IBAN>
+          </Id>
+        </DbtrAcct>
+        <Purp>
+          <Cd>TRAD</Cd>
+        </Purp>
+        <RmtInf>
+        <Ustrd>Factura N. FA001 10-01-2014 1500.23€</Ustrd>
+        </RmtInf>
+      </DrctDbtTxInf>
+      <DrctDbtTxInf>
+        <PmtId>
+          <EndToEndId>FA002</EndToEndId>
+        </PmtId>
+        <InstdAmt Ccy="EUR">500.99</InstdAmt>
+        <DrctDbtTx>
+          <MndtRltdInf>
+            <MndtId>mandato2</MndtId>
+            <DtOfSgntr>2013-02-02</DtOfSgntr>
+            <AmdmntInd>false</AmdmntInd>
+          </MndtRltdInf>
+        </DrctDbtTx>
+        <DbtrAgt>
+          <FinInstnId>
+            <BIC>BIC002</BIC>
+          </FinInstnId>
+        </DbtrAgt>
+        <Dbtr>
+        <Nm>SEGUNDO CLIENTE, SL</Nm>
+        <PstlAdr>
+          <Ctry>EN</Ctry>
+          <AdrLine>calle</AdrLine>
+          <AdrLine>poblacion</AdrLine>
+        </PstlAdr>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>ESXXBBBBOOOODDCCCCCCCCCC</IBAN>
+          </Id>
+        </DbtrAcct>
+        <Purp>
+          <Cd>TRAD</Cd>
+        </Purp>
+        <RmtInf>
+        <Ustrd>Factura N. FA002 11-01-2014 500.99€</Ustrd>
+        </RmtInf>
+      </DrctDbtTxInf>
+    </PmtInf>
+  </CstmrDrctDbtInitn>
+</Document>

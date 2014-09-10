@@ -57,71 +57,71 @@
 
  <changelog>
    <release>
-      <version> 
-        <release>1.0.6</release> 
-        <api>1.0.0</api> 
-      </version> 
-      <stability> 
-        <release>stable</release> 
-        <api>stable</api> 
-      </stability> 
-      <date>2010-02-22</date> 
-      <license>MIT</license> 
-      <notes> 
+      <version>
+        <release>1.0.6</release>
+        <api>1.0.0</api>
+      </version>
+      <stability>
+        <release>stable</release>
+        <api>stable</api>
+      </stability>
+      <date>2010-02-22</date>
+      <license>MIT</license>
+      <notes>
         * fabien: renamed doc files to avoid collision with pecl/yaml
-      </notes> 
+      </notes>
     </release>
    <release>
-      <version> 
-        <release>1.0.5</release> 
-        <api>1.0.0</api> 
-      </version> 
-      <stability> 
-        <release>stable</release> 
-        <api>stable</api> 
-      </stability> 
-      <date>2010-02-22</date> 
-      <license>MIT</license> 
-      <notes> 
+      <version>
+        <release>1.0.5</release>
+        <api>1.0.0</api>
+      </version>
+      <stability>
+        <release>stable</release>
+        <api>stable</api>
+      </stability>
+      <date>2010-02-22</date>
+      <license>MIT</license>
+      <notes>
         * indiyets: fixed package.xml
-      </notes> 
+      </notes>
     </release>
    <release>
-      <version> 
-        <release>1.0.4</release> 
-        <api>1.0.0</api> 
-      </version> 
-      <stability> 
-        <release>stable</release> 
-        <api>stable</api> 
-      </stability> 
-      <date>2010-11-29</date> 
-      <license>MIT</license> 
-      <notes> 
+      <version>
+        <release>1.0.4</release>
+        <api>1.0.0</api>
+      </version>
+      <stability>
+        <release>stable</release>
+        <api>stable</api>
+      </stability>
+      <date>2010-11-29</date>
+      <license>MIT</license>
+      <notes>
         * fabien: fixed parsing of simple inline documents
-      </notes> 
+      </notes>
     </release>
    <release>
-      <version> 
-        <release>1.0.3</release> 
-        <api>1.0.0</api> 
-      </version> 
-      <stability> 
-        <release>stable</release> 
-        <api>stable</api> 
-      </stability> 
-      <date>2010-04-06</date> 
-      <license>MIT</license> 
-      <notes> 
-        * fabien: fixed YAML parser when mbstring.func_overload is used with an mbstring.internal_encoding different from ASCII 
-        * fabien: fixed offset when the document use --- or the %YAML element 
-        * fabien: added ? in the list of characters that trigger quoting (for compatibility with libyaml) 
-        * fabien: added backtick to the list of characters that trigger quotes as it is reserved for future use 
-        * FabianLange: fixed missing newline in sfYamlParser when parsing certain symfony core files 
-        * FabianLange: removed the unused value property from Parser 
-        * fabien: changed Exception to InvalidArgumentException 
-        * fabien: fixed YAML dump when a string contains a \r without a \n 
-      </notes> 
+      <version>
+        <release>1.0.3</release>
+        <api>1.0.0</api>
+      </version>
+      <stability>
+        <release>stable</release>
+        <api>stable</api>
+      </stability>
+      <date>2010-04-06</date>
+      <license>MIT</license>
+      <notes>
+        * fabien: fixed YAML parser when mbstring.func_overload is used with an mbstring.internal_encoding different from ASCII
+        * fabien: fixed offset when the document use --- or the %YAML element
+        * fabien: added ? in the list of characters that trigger quoting (for compatibility with libyaml)
+        * fabien: added backtick to the list of characters that trigger quotes as it is reserved for future use
+        * FabianLange: fixed missing newline in sfYamlParser when parsing certain symfony core files
+        * FabianLange: removed the unused value property from Parser
+        * fabien: changed Exception to InvalidArgumentException
+        * fabien: fixed YAML dump when a string contains a \r without a \n
+      </notes>
     </release>
     <release>
      <version>

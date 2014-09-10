@@ -12,20 +12,21 @@
  * @copyright INFORMATICA ALBATRONIC SL 28.09.2010 20:14:08
  * @version 1.0
  */
-include "class/tabledescriptor.class.php";
-include "class/templatebuilder.class.php";
-include "class/controllerbuilder.class.php";
-include "class/configymlbuilder.class.php";
-include "class/listadosymlbuilder.class.php";
-include "class/entitybuilder.class.php";
+include 'class/tabledescriptor.class.php';
+include 'class/templatebuilder.class.php';
+include 'class/controllerbuilder.class.php';
+include 'class/configymlbuilder.class.php';
+include 'class/listadosymlbuilder.class.php';
+include 'class/entitybuilder.class.php';
 include 'class/columnasComunes.class.php';
 include 'class/tiposVariables.class.php';
-include "class/CreaFichero.class.php";
-include "class/yaml/lib/sfYaml.php";
+include 'class/CreaFichero.class.php';
+include 'class/yaml/lib/sfYaml.php';
 
 define('DS', DIRECTORY_SEPARATOR);
 
 $database_connection_information = "
+define(PREFIJO,'" . $_POST[prefijo]. "');
 define(DB_HOST,'" . $_POST[dbhost] . "');
 define(DB_USER,'" . $_POST[dbuser] . "');
 define(DB_PASS,'" . $_POST[dbpassword] . "');
@@ -39,7 +40,6 @@ else
     $database_connection_information .= "define(PERMISSIONCONTROL,'NO');";
 
 eval($database_connection_information);
-
 
 /**
  * Clase para crear en fichero con el contenido pasado
@@ -72,7 +72,6 @@ if ($_POST['accion'] == "Generar") {
 
         $new_classes = array();
 
-
         //Recorre todo el schema y para cada tabla genera: form.php, template.php, actions.php y config.xml
         //Los cuatro archivos los ubica en una carpeta con el nombre de la tabla.
         $pathmodel = CARPETA . DS . "entities";
@@ -85,7 +84,7 @@ if ($_POST['accion'] == "Generar") {
 
                 //$filename = str_replace("_", " ", strtolower($tablename));
                 //$filename = str_replace(" ", "", ucwords($filename));
-                $filename = $tablename;
+                $filename = str_replace(PREFIJO,"",$tablename);
 
                 // CREAR MODULO
                 // ------------
@@ -106,7 +105,6 @@ if ($_POST['accion'] == "Generar") {
                         echo "NO EXISTE LA CARPETA ", $pathmodules, "</br>";
                 } else
                     $ok = false;
-
 
                 //Crear el Controlador
                 if ($ok and ($_POST['controller'] == 'on')) {
@@ -156,13 +154,11 @@ if ($_POST['accion'] == "Generar") {
                     new CreaFichero($pathmodules . DS . "help.html.twig", $templates['help']);
                 }
 
-
                 // CREAR ENTIDAD DE DATOS
                 // ----------------------
                 if ((file_exists($pathmodel)) and (($_POST['model'] == 'on') or ($_POST['method'] == 'on'))) {
                     //$filename = str_replace("_", " ", strtolower($tablename));
                     //$filename = str_replace(" ", "", ucwords($filename));
-                    $filename = $tablename;
                     $entity = new EntityBuilder($tablename);
 
                     // Crear la clase para el modelo de datos
@@ -195,6 +191,7 @@ if ($_POST['accion'] == "Generar") {
                 <tr><td>Contrase&ntilde;a</td><td><input name="dbpassword" type="text" value="albatronic"></td></tr>
                 <tr><td>Base de datos</td><td><input name="dbbase" type="text" value="cpanel"></td></tr>
                 <tr><td>Conexi&oacute;n</td><td><input name="conection" type="text" value="datos#"></td></tr>
+                <tr><td>Prefijo Tablas</td><td><input name="prefijo" type="text" value="Erp"></td></tr>
                 <tr><td>Tabla</td><td><input name="table" type="text" value=""></td></tr>
                 <tr><td>Generar esqueleto</td><td><input name="esqueleto" type="checkbox"></td></tr>
                 <tr><td>Carpeta destino (sin '/' al final)</td><td><input name="carpeta" type="text" size="50" value="/home/sergio/NetBeansProjects/"></td></tr>

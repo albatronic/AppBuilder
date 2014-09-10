@@ -7,30 +7,31 @@
  * @copyright (c) Ártico Estudio, sl
  * @version 1.0 27-nov-2012
  */
-class Calendario {
-
+class Calendario
+{
     /**
      * Devuelve el código html del calendario del $mes y $ano
-     * 
-     * @param integer $mes
-     * @param integer $ano
-     * @param boolean $pintarSemana
-     * @param integer $nCaracteresDiaSemana El número de caracteres a mostrar para los títulos de los días de la semana
-     * @return string Codigo html 
+     *
+     * @param  integer $mes
+     * @param  integer $ano
+     * @param  boolean $pintarSemana
+     * @param  integer $nCaracteresDiaSemana El número de caracteres a mostrar para los títulos de los días de la semana
+     * @return string  Codigo html
      */
-    static function showCalendario($mes = '', $ano = '', $pintarSemana = false, $nCaracteresDiaSemana = 3) {
+    public static function showCalendario($mes = '', $ano = '', $pintarSemana = false, $nCaracteresDiaSemana = 3)
+    {
         return self::getHtmlCalendario(self::getArrayCalendario($mes, $ano), $pintarSemana, $nCaracteresDiaSemana);
     }
 
     /**
      * Devuelve el array bidimensional del calendario del $mes y $ano
-     * @param integer $mes El mes
-     * @param integer $ano El año
-     * @param string $formato El formato cómo se devuelve: php,json,yml
-     * @return array Array con el calendario
+     * @param  integer $mes     El mes
+     * @param  integer $ano     El año
+     * @param  string  $formato El formato cómo se devuelve: php,json,yml
+     * @return array   Array con el calendario
      */
-    static function getArrayCalendario($mes = '', $ano = '', $formato = 'PHP') {
-
+    public static function getArrayCalendario($mes = '', $ano = '', $formato = 'PHP')
+    {
         if ($mes == '')
             $mes = date('m');
         if ($ano == '')
@@ -41,7 +42,6 @@ class Calendario {
         if (!in_array($formato, array('PHP', 'YML', 'JSON')))
             $formato = 'PHP';
 
-
         $ultimoDiaMes = date('d', mktime(0, 0, 0, $mes + 1, 0, $ano));
 
         $calendario = array();
@@ -51,7 +51,6 @@ class Calendario {
             $diaSemana = date('N', mktime(0, 0, 0, $mes, $dia, $ano));
             $calendario[$semana][$diaSemana] = $dia;
         }
-
 
         switch ($formato) {
             case 'PHP': $resultado = $calendario;
@@ -67,18 +66,18 @@ class Calendario {
 
     /**
      * Genera el código html de un calendario mensual
-     * 
-     * @param array $calendario Array bidemensional con el calendario
-     * @param boolean $pintarSemana Si true en añade una columna a la izquierda con el número de la semana
-     * @param integer $nCaracteresDiaSemana El número de caracteres a mostrar para los títulos de los días de la semana
-     * @return string Código html con el calendario
+     *
+     * @param  array   $calendario           Array bidemensional con el calendario
+     * @param  boolean $pintarSemana         Si true en añade una columna a la izquierda con el número de la semana
+     * @param  integer $nCaracteresDiaSemana El número de caracteres a mostrar para los títulos de los días de la semana
+     * @return string  Código html con el calendario
      */
-    static function getHtmlCalendario($calendario, $pintarSemana = false, $nCaracteresDiaSemana = 3) {
-
+    public static function getHtmlCalendario($calendario, $pintarSemana = false, $nCaracteresDiaSemana = 3)
+    {
         $cabecera .= "<tr>";
         if ($pintarSemana)
             $cabecera .= "<td class='nombredias_almanaque'>Sem</td>";
-        
+
         $diasSemana = new DiasSemana();
         foreach ($diasSemana->fetchAll('',false) as $dia) {
             $dia = substr($dia['Value'],0,$nCaracteresDiaSemana);
@@ -86,7 +85,7 @@ class Calendario {
         }
         $cabecera .= "</tr>";
         unset($diasSemana);
-        
+
         foreach ($calendario as $keySemana => $semana) {
 
             $cuerpo .= "<tr>";
@@ -97,7 +96,7 @@ class Calendario {
             }
             $cuerpo .= "</tr>";
         }
-        
+
         $html = "<div id='contenedor_tabla_dias'><table id='almanaque'>{$cabecera}{$cuerpo}</table></div>";
         $html .= "<div id='borde_inf_almanaque'>&nbsp;</div>";
 
@@ -105,5 +104,3 @@ class Calendario {
     }
 
 }
-
-?>

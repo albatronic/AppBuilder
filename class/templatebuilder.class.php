@@ -13,13 +13,14 @@
  * @copyright Informatica ALBATRONIC, SL 22.10.2010
  * @version 1.0
  */
-class TemplateBuilder {
-
+class TemplateBuilder
+{
     private $templates = array();
     private $td;
     private $filename;
 
-    public function __construct($table = '') {
+    public function __construct($table = '')
+    {
         $this->td = new TableDescriptor(DB_BASE, $table);
 
         //$this->filename = str_replace("_", " ", $this->td->getTable());
@@ -27,10 +28,10 @@ class TemplateBuilder {
         $this->filename = $this->td->getTable();
 
         $this->indexTemplate();
-        //$this->filtroTemplate();
-        //$this->editTemplate();
-        //$this->newTemplate();
-        $this->formTemplate();
+        $this->filtroTemplate();
+        $this->editTemplate();
+        $this->newTemplate();
+        //$this->formTemplate();
         $this->fieldsTemplate();
         $this->listTemplate();
         $this->helpTemplate();
@@ -39,7 +40,8 @@ class TemplateBuilder {
     /**
      * Genera el template "list"
      */
-    private function listTemplate() {
+    private function listTemplate()
+    {
         $tmp .= "{#\n";
         $tmp .= "  Module: " . $this->filename . "\n";
         $tmp .= "  Document : modules\\" . $this->filename . "\\list.html.twig\n\n";
@@ -63,7 +65,8 @@ class TemplateBuilder {
     /**
      * Generar el template "help"
      */
-    private function helpTemplate() {
+    private function helpTemplate()
+    {
         $tmp .= "{#\n";
         $tmp .= "  Module: " . $this->filename . "\n";
         $tmp .= "  Document : modules\\" . $this->filename . "\\help.html.twig\n\n";
@@ -87,7 +90,8 @@ class TemplateBuilder {
     /**
      * Generar el template "index"
      */
-    private function indexTemplate() {
+    private function indexTemplate()
+    {
         $tmp .= "{#\n";
         $tmp .= "  Module: " . $this->filename . "\n";
         $tmp .= "  Document : modules\\" . $this->filename . "\\index.html.twig\n\n";
@@ -101,12 +105,12 @@ class TemplateBuilder {
         $tmp .= "{% block title parent() ~ ' - '  ~ values.titulo %}\n\n";
 
         $tmp .= "{% block content %}\n";
-        //$tmp .= "\t{% include '_global/tituloGenerico.html.twig' with {'controller': values.controller, 'linkValue': values.linkBy.value} %}\n";
-        $tmp .= "\t{% include '_global/formErrores.html.twig' with {'errores': values.errores} %}\n";
-	$tmp .= "\t{% include '_global/alertas.html.twig' with {'alertas': values.alertas} %}\n";
+        $tmp .= "\t{% include '_global/TituloGenerico.html.twig' with {'controller': values.controller, 'linkValue': values.linkBy.value} %}\n";
+        //$tmp .= "\t{% include '_global/formErrores.html.twig' with {'errores': values.errores} %}\n";
+    //$tmp .= "\t{% include '_global/alertas.html.twig' with {'alertas': values.alertas} %}\n";
         $tmp .= "\t{% block filtro %}\n";
         $tmp .= "\t{% if values.permisos.permisosModulo['CO'] and values.tieneListado %}\n";
-        $tmp .= "\t\t{% include '_global/filtroGenericoWrapper.html.twig' with {'filter': values.listado.filter} %}\n";
+        $tmp .= "\t\t{% include values.controller ~ '/filtro.html.twig' with {'filter': values.listado.filter} %}\n";
         $tmp .= "\t{% endif %}\n";
         $tmp .= "\t{% endblock %}\n\n";
 
@@ -126,15 +130,17 @@ class TemplateBuilder {
     /**
      * Generar el template filtro
      */
-    private function filtroTemplate() {
+    private function filtroTemplate()
+    {
         $tmp = "{# Template filtro.html.twig for " . $this->filename . " #}\n";
         $tmp .= "{# -------------------------------------------------------#}\n";
         $tmp .= "<div class='Filtro'>\n";
         $tmp .= "\t<form name='filtro' id='filtro' action='' method='POST'>\n";
         $tmp .= "\t\t<input name='controller' value='{{ values.controller }}' type='hidden' />\n";
         $tmp .= "\t\t<input name='action' id='actionFiltro' value='list' type='hidden' />\n";
-        $tmp .= "\t\t{% include '_global/FiltroGenerico.html.twig' with {'filter': filter} %}\n";
+        $tmp .= "\t\t{% include '_global/filtroGenerico.html.twig' with {'filter': filter} %}\n";
         $tmp .= "\t</form>\n";
+        $tmp .= "\t{% include '_global/filtroAvanzado.html.twig' with {'filter': filter} %}\n";
         $tmp .= "</div>";
 
         $this->templates['filtro'] = $tmp;
@@ -143,24 +149,26 @@ class TemplateBuilder {
     /**
      * Generar el template edit
      */
-    private function editTemplate() {
+    private function editTemplate()
+    {
         $tmp = "{# Template edit.html.twig for " . $this->filename . " #}\n";
         $tmp .= "{# -------------------------------------------------------#}\n";
         $tmp .= "{# EDITAR UN REGISTRO. ACCIONES: GUARDAR Y BORRAR         #}\n";
         $tmp .= "{# -------------------------------------------------------#}\n";
-        $tmp .= "{% extends values.controller  ~ '/index.html.twig' %}\n\n";
+        $tmp .= "{% extends values.controller ~ '/index.html.twig' %}\n\n";
+
+        $tmp .= "{% block navegador %}{% endblock %}\n\n";
 
         $tmp .= "{% block mantenimiento %}\n";
         $tmp .= "<div class=\"FormManto\">\n";
-        $tmp .= "\t<form name=\"manto\" id=\"manto_{{ values.controller }}\" action=\"\" enctype=\"multipart/form-data\" method=\"POST\">\n";
+        $tmp .= "\t<form name=\"manto_{{values.controller}}\" id=\"manto_{{values.controller}}\" action=\"\" method=\"POST\" enctype=\"multipart/form-data\">\n";
         $tmp .= "\t\t<input name=\"controller\" value=\"{{ values.controller }}\" type=\"hidden\" />\n";
         $tmp .= "\t\t<input name=\"action\" id=\"action\" value=\"edit\" type=\"hidden\" />\n";
-        $tmp .= "\t\t<input name=\"{{ values.controller }}[" . $this->td->getPrimaryKey() . "]\" value=\"{{ values.datos." . $this->td->getPrimaryKey() . " }}\" type=\"hidden\" />\n";
-        $tmp .= "\t\t{% include \"_global/comandosSaveDelete.html.twig\" %}\n\n";
+        $tmp .= "\t\t<input name=\"{{ values.controller }}[{{values.datos.getPrimaryKeyName}}]\" value=\"{{ values.datos.getPrimaryKeyValue}}\" type=\"hidden\" />\n";
+        $tmp .= "\t\t{% include '_global/comandosSaveDelete.html.twig' %}\n";
 
-        $tmp .= "\t\t<div class='Cuerpo'>\n";
-        $tmp .= "\t\t\t{% include \"_global/FormErrores.html.twig\" with {'errores': values.errores} %}\n";
-        $tmp .= "\t\t\t{% include \"_global/alertas.html.twig\" with {'alertas': values.alertas} %}\n";
+        $tmp .= "\t\t<div class=\"Cuerpo\">\n";
+        $tmp .= "\t\t\t{% include '_global/alertas.html.twig' with {'alertas': values.alertas,'errores': values.errores} %}\n";
         $tmp .= "\t\t\t{% include values.controller ~ \"/form.html.twig\" with {'datos': values.datos} %}\n";
         $tmp .= "\t\t</div>\n";
         $tmp .= "\t</form>\n";
@@ -173,7 +181,8 @@ class TemplateBuilder {
     /**
      * Generar el template new
      */
-    private function newTemplate() {
+    private function newTemplate()
+    {
         $tmp = "{# Template new.html.twig for " . $this->filename . " #}\n";
         $tmp .= "{# -------------------------------------------------------#}\n";
         $tmp .= "{# CREAR UN REGISTRO NUEVO                                #}\n";
@@ -184,15 +193,14 @@ class TemplateBuilder {
 
         $tmp .= "{% block mantenimiento %}\n";
         $tmp .= "<div class=\"FormManto\">\n";
-        $tmp .= "\t<form name=\"manto\" action=\"\" method=\"POST\">\n";
+        $tmp .= "\t<form name=\"manto_{{values.controller}}\" id=\"manto_{{values.controller}}\" action=\"\" method=\"POST\" enctype=\"multipart/form-data\">\n";
         $tmp .= "\t\t<input name=\"controller\" value=\"{{ values.controller }}\" type=\"hidden\" />\n";
         $tmp .= "\t\t<input name=\"action\" id=\"action\" value=\"new\" type=\"hidden\" />\n";
-        $tmp .= "\t\t<input name=\"{{ values.controller }}[" . $this->td->getPrimaryKey() . "]\" value=\"{{ values.datos." . $this->td->getPrimaryKey() . " }}\" type=\"hidden\" />\n";
+        $tmp .= "\t\t<input name=\"{{ values.controller }}[{{values.datos.getPrimaryKeyName}}]\" value=\"{{ values.datos.getPrimaryKeyValue}}\" type=\"hidden\" />\n";
         $tmp .= "\t\t{% include '_global/comandosCreate.html.twig' %}\n";
 
         $tmp .= "\t\t<div class=\"Cuerpo\">\n";
-        $tmp .= "\t\t\t{% include '_global/FormErrores.html.twig' with {'errores': values.errores} %}\n";
-        $tmp .= "\t\t\t{% include '_global/alertas.html.twig' with {'alertas': values.alertas} %}\n";
+        $tmp .= "\t\t\t{% include '_global/alertas.html.twig' with {'alertas': values.alertas,'errores': values.errores} %}\n";
         $tmp .= "\t\t\t{% include values.controller ~ \"/form.html.twig\" with {'datos': values.datos} %}\n";
         $tmp .= "\t\t</div>\n";
         $tmp .= "\t</form>\n";
@@ -205,7 +213,8 @@ class TemplateBuilder {
     /**
      * Generar el template form
      */
-    private function formTemplate() {
+    private function formTemplate()
+    {
         $tmp .= "{#\n";
         $tmp .= "  Module: " . $this->filename . "\n";
         $tmp .= "  Document : modules\\" . $this->filename . "\\form.html.twig\n\n";
@@ -250,9 +259,9 @@ class TemplateBuilder {
     /**
      * Generar el template de los campos
      */
-    private function fieldsTemplate() {
-
-        $labelClass = "field_title";
+    private function fieldsTemplate()
+    {
+        $labelClass = "Etiqueta";
 
         $tmp .= "{#\n";
         $tmp .= "  Module: " . $this->filename . "\n";
@@ -276,7 +285,7 @@ class TemplateBuilder {
 
                 $column_name = str_replace('-', '_', $column['Field']);
 
-                $label = "atributos." . $column_name;
+                $label = "values.atributos." . $column_name;
                 $labelClass = $labelClass;
                 $name = "values.controller ~ '[" . $column_name . "]'";
                 $id = "values.controller ~ '_" . $column_name . "'";
@@ -341,7 +350,7 @@ class TemplateBuilder {
                         case 'text':
                         case 'longtext':
                             $macro = "textarea";
-                            $tagClass = "input_grow";
+                            $tagClass = "textarea";
                             break;
 
                         case 'enum': // NO SE RECOMIENDA EL USO DE ENUM
@@ -392,14 +401,15 @@ class TemplateBuilder {
         // Añado la macro para situar el foco
         $tmp .= "{{ macro.foco(values.controller ~ '_{$campoFoco}') }}\n";
 
-        $this->templates['fields'] = $tmp;
+        $this->templates['form'] = $tmp;
     }
 
     /**
      * Devuelve el código html con el formulario de mantenimiento
      * @return text
      */
-    public function Get() {
+    public function Get()
+    {
         return $this->templates;
     }
 

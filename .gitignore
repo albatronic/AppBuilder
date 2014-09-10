@@ -1,1 +1,8 @@
-nbproject/
+/nbproject
+/colorpicker
+/colorpicker-master
+/gapi-1.3
+/onix
+/tiny_mce
+/chosen
+.DS_Store

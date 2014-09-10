@@ -10,14 +10,15 @@
  * @copyright Informatica ALBATRONIC, SL 15.03.2011
  * @version 1.0
  */
-class ConfigYmlBuilder {
-
+class ConfigYmlBuilder
+{
     private $buffer;
     private $filename;
     private $td;
     private $primeraColumna = '';
 
-    public function __construct($table = '') {
+    public function __construct($table = '')
+    {
         $this->td = new TableDescriptor(DB_BASE, $table);
         $this->filename = str_replace("_", " ", $this->td->getTable());
         $this->filename = str_replace(" ", "", ucwords($this->filename));
@@ -27,21 +28,24 @@ class ConfigYmlBuilder {
      * Devuelve el código yml de configuracion del formulario de mantenimiento
      * @return text
      */
-    public function getConfigYml() {
-
+    public function getConfigYml()
+    {
         $this->creaConfigYml();
+
         return $this->buffer;
     }
 
-    public function getFieldsVarWeb() {
-
+    public function getFieldsVarWeb()
+    {
         $this->creaFieldsVarWeb();
+
         return $this->buffer;
     }
 
-    public function getFieldsVarEntorno() {
-
+    public function getFieldsVarEntorno()
+    {
         $this->creaFieldsVarEntorno();
+
         return $this->buffer;
     }
 
@@ -53,8 +57,8 @@ class ConfigYmlBuilder {
      *
      * @return array Array con los atributos de las columnas
      */
-    private function getArrayColumns() {
-
+    private function getArrayColumns()
+    {
         $this->primeraColumna = '';
         $arrayColumns = array();
         $nfiltros = 0;
@@ -90,6 +94,8 @@ class ConfigYmlBuilder {
                 $arrayColumns[$column['Field']]['default'] = $column['Default'];
                 $arrayColumns[$column['Field']]['help'] = null;
                 $arrayColumns[$column['Field']]['permission'] = null;
+                $arrayColumns[$column['Field']]['translatable'] = FALSE;
+                $arrayColumns[$column['Field']]['searchable'] = FALSE;
 
                 $arrayColumns[$column['Field']]['link'] = array(
                     'route' => null,
@@ -105,7 +111,7 @@ class ConfigYmlBuilder {
                 // ES DE TIPO TINYINT (ValoresSN)
                 if ($column['ReferencedColumn'] != '') {
                     $nfiltros++;
-                    $arrayColumns[$column['Field']]['aditional_filter'] = array(
+                    $arrayColumns[$column['Field']]['#aditional_filter'] = array(
                         'order' => $nfiltros,
                         'caption' => $column['Field'],
                         'entity' => $column['ReferencedEntity'],
@@ -118,7 +124,7 @@ class ConfigYmlBuilder {
                 } else {
                     if ($column['Type'] == 'date') {
                         $nfiltros++;
-                        $arrayColumns[$column['Field']]['aditional_filter'] = array(
+                        $arrayColumns[$column['Field']]['#aditional_filter'] = array(
                             'order' => $nfiltros,
                             'caption' => $column['Field'],
                             'type' => 'range',
@@ -127,7 +133,7 @@ class ConfigYmlBuilder {
                         $nfiltros++;
                     } elseif ($column['Type'] == 'tinyint') {
                         $nfiltros++;
-                        $arrayColumns[$column['Field']]['aditional_filter'] = array(
+                        $arrayColumns[$column['Field']]['#aditional_filter'] = array(
                             'order' => $nfiltros,
                             'caption' => $column['Field'],
                             'entity' => 'ValoresSN',
@@ -162,18 +168,20 @@ class ConfigYmlBuilder {
         return $arrayColumns;
     }
 
-    private function creaConfigYml() {
+    private function creaConfigYml()
+    {
+        $sinPrefijo = str_replace(PREFIJO, "", $this->filename);
 
         $conexion = str_replace("#", "<?php echo \$_SESSION['emp'];?>", CONECTION);
 
-        $cabecera = "# Module: " . $this->filename . "\n";
-        $cabecera .= "# Document : modules/" . $this->filename . "/config.yml\n#\n";
-        $cabecera .= "# @author: Sergio Pérez <sergio.perez@albatronic.com>\n# @copyright: ARTICO ESTUDIO SL\n# @date " . date('d.m.Y H:i:s') . "\n";
+        $cabecera = "# Module: " . $sinPrefijo . "\n";
+        $cabecera .= "# Document : modules/" . $sinPrefijo . "/config.yml\n#\n";
+        $cabecera .= "# @author: Sergio Pérez <sergio.perez@albatronic.com>\n# @copyright: Informática ALBATRONIC SL\n# @date " . date('d.m.Y H:i:s') . "\n";
         $cabecera .= "#\n---\n";
 
         $arrayDeColumnas = $this->getArrayColumns();
 
-        $array[$this->filename] = array(
+        $array[$sinPrefijo] = array(
             'app' => '',
             'isModuleRoot' => '0',
             'linkModule' => array(
@@ -181,9 +189,15 @@ class ConfigYmlBuilder {
                 'toEntity' => '',
                 'toColumn' => '',
             ),
-            'showCommonFields' => true,
+            'modulosRelacionables' => '',
+            'translatable' => false,
+            'searchable' => false,
+            'showCommonFields' => false,
             'numMaxRecords' => '',
-            'numberOfImages' => '3',
+            'numberOfImages' => '0',
+            'withMetadata' => '0',
+            'addMetadata' => '0',
+            'deleteMetadata' => '0',
             'withGalery' => '0',
             'withDocuments' => '0',
             'withVideos' => 0,
@@ -201,11 +215,13 @@ class ConfigYmlBuilder {
                 'widthThumbnail' => '50',
                 'heightThumbnail' => '50',
             ),
-            'urlFriendlyManagement' => true,
+            'urlFriendlyManagement' => false,
             'fieldGeneratorUrlFriendly' => $this->primeraColumna,
-            'metatagTitleManagement' => true,
+            'metatagTitleManagement' => false,
             'fieldGeneratorMetatagTitle' => $this->primeraColumna,
-            'controller' => $this->filename,
+            'fieldGeneratorMetatagDescription' => $this->primeraColumna,
+            'fieldGeneratorMetatagKeywords' => $this->primeraColumna,
+            'controller' => $sinPrefijo,
             'action' => 'Index',
             'template' => 'index.html.twig',
             'parametros' => '',
@@ -217,12 +233,12 @@ class ConfigYmlBuilder {
             'permission_control' => PERMISSIONCONTROL,
             'favourite_control' => 'NO',
             'help_file' => 'help.html.twig',
-            'title' => ucwords($this->filename),
-            'id_video' => strtolower($this->filename),
+            'title' => ucwords($sinPrefijo),
+            'id_video' => strtolower($sinPrefijo),
             'url_video' => null,
             'feature_list' => 'YES',
             'conection' => $conexion,
-            'entity' => $this->filename,
+            'entity' => $sinPrefijo,
             'table' => $this->td->getTable(),
             'primarykey' => $this->td->getPrimaryKey(),
             'linkBy' => '',
@@ -248,13 +264,15 @@ class ConfigYmlBuilder {
         $this->buffer = $cabecera . $yml;
     }
 
-    private function creaFieldsVarWeb() {
+    private function creaFieldsVarWeb()
+    {
+        $sinPrefijo = str_replace(PREFIJO, "", $this->filename);
 
-        $buf = "# VARIABLES WEB ESPECIFICAS DEL MODULO " . $this->filename . "\n";
+        $buf = "# VARIABLES WEB ESPECIFICAS DEL MODULO " . $sinPrefijo . "\n";
         $buf .= "#\n";
-        $buf .= "# Module: " . $this->filename . "\n";
+        $buf .= "# Module: " . $sinPrefijo . "\n";
         $buf .= "# author Sergio Pérez <sergio.perez@albatronic.com>\n";
-        $buf .= "# copyright ARTICO ESTUDIO, SL\n";
+        $buf .= "# copyright Informática ALBATRONIC, SL\n";
         $buf .= "# date " . date('d-m-Y H:i:s') . "\n";
         $buf .= "#\n";
         $buf .= "# ejemplo:\n";
@@ -268,13 +286,15 @@ class ConfigYmlBuilder {
         $this->buffer = $buf;
     }
 
-    private function creaFieldsVarEntorno() {
+    private function creaFieldsVarEntorno()
+    {
+        $sinPrefijo = str_replace(PREFIJO, "", $this->filename);
 
-        $buf = "# VARIABLES DE ENTORNO ESPECIFICAS DEL MODULO " . $this->filename . "\n";
+        $buf = "# VARIABLES DE ENTORNO ESPECIFICAS DEL MODULO " . $sinPrefijo . "\n";
         $buf .= "#\n";
-        $buf .= "# Module: " . $this->filename . "\n";
+        $buf .= "# Module: " . $sinPrefijo . "\n";
         $buf .= "# author Sergio Pérez <sergio.perez@albatronic.com>\n";
-        $buf .= "# copyright ARTICO ESTUDIO, SL\n";
+        $buf .= "# copyright Informática ALBATRONIC, SL\n";
         $buf .= "# date " . date('d-m-Y H:i:s') . "\n";
         $buf .= "#\n";
         $buf .= "# ejemplo:\n";

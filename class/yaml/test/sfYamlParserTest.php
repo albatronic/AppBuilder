@@ -20,27 +20,21 @@ $parser = new sfYamlParser();
 
 $path = dirname(__FILE__).'/fixtures';
 $files = $parser->parse(file_get_contents($path.'/index.yml'));
-foreach ($files as $file)
-{
+foreach ($files as $file) {
   $t->diag($file);
 
   $yamls = file_get_contents($path.'/'.$file.'.yml');
 
   // split YAMLs documents
-  foreach (preg_split('/^---( %YAML\:1\.0)?/m', $yamls) as $yaml)
-  {
-    if (!$yaml)
-    {
+  foreach (preg_split('/^---( %YAML\:1\.0)?/m', $yamls) as $yaml) {
+    if (!$yaml) {
       continue;
     }
 
     $test = $parser->parse($yaml);
-    if (isset($test['todo']) && $test['todo'])
-    {
+    if (isset($test['todo']) && $test['todo']) {
       $t->todo($test['test']);
-    }
-    else
-    {
+    } else {
       $expected = var_export(eval('return '.trim($test['php']).';'), true);
 
       $t->is(var_export($parser->parse($test['yaml']), true), $expected, $test['test']);
@@ -56,15 +50,11 @@ $yamls = array(
   "foo:\n 	 bar",
 );
 
-foreach ($yamls as $yaml)
-{
-  try
-  {
+foreach ($yamls as $yaml) {
+  try {
     $content = $parser->parse($yaml);
     $t->fail('YAML files must not contain tabs');
-  }
-  catch (InvalidArgumentException $e)
-  {
+  } catch (InvalidArgumentException $e) {
     $t->pass('YAML files must not contain tabs');
   }
 }

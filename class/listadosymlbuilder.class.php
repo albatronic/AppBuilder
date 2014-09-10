@@ -9,13 +9,14 @@
  * @copyright Informatica ALBATRONIC, SL 30.07.2011
  * @version 1.0
  */
-class ListadosYmlBuilder {
-
+class ListadosYmlBuilder
+{
     private $buffer;
     private $filename;
     private $td;
 
-    public function __construct($table='') {
+    public function __construct($table='')
+    {
         $this->td = new TableDescriptor(DB_BASE, $table);
         //$this->filename = str_replace("_", " ", $this->td->getTable());
         //$this->filename = str_replace(" ", "", ucwords($this->filename));
@@ -27,21 +28,24 @@ class ListadosYmlBuilder {
      * Devuelve el código xml de configuracion del formulario de mantenimiento
      * @return text
      */
-    public function Get() {
+    public function Get()
+    {
         return $this->buffer;
     }
 
-    private function creaYAML() {
-
+    private function creaYAML()
+    {
         $array = array();
 
-        $cabecera  = "# Module: " . $this->filename . "\n";
-        $cabecera .= "# Document : modules\\" . $this->filename . "\listados.yml\n#\n";
+        $sinPrefijo = str_replace(PREFIJO, "", $this->filename);
+
+        $cabecera  = "# Module: " . $sinPrefijo . "\n";
+        $cabecera .= "# Document : modules\\" . $sinPrefijo . "\listados.yml\n#\n";
         $cabecera .= "# @author: Sergio Pérez <sergio.perez@albatronic.com>\n# @copyright: INFORMATICA ALBATRONIC SL\n# @date " . date('d.m.Y H:i:s') . "\n";
         $cabecera .= "#\n---\n";
 
         $array['listados'][] = array(
-            'title' => ucwords($this->filename),
+            'title' => ucwords($sinPrefijo),
             'order_by' => $this->td->getPrimaryKey(),
             'break_field' => null,
             'idPerfil' => null,
@@ -61,8 +65,8 @@ class ListadosYmlBuilder {
         $this->buffer = $cabecera . $yml;
     }
 
-    private function getArrayColumns() {
-
+    private function getArrayColumns()
+    {
         $columnas = array();
 
         foreach ($this->td->getColumns() as $column) {
@@ -90,6 +94,7 @@ class ListadosYmlBuilder {
                 }
 
                 $columnas[$column['Field']] = array(
+                    'field' => $column['Field'],
                     'title' => $column['Field'],
                     'length' => $column['Length'],
                     'align' => $align,
@@ -105,5 +110,3 @@ class ListadosYmlBuilder {
     }
 
 }
-
-?>

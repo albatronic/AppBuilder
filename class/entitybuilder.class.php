@@ -1,7 +1,7 @@
 <?php
 
-class EntityBuilder {
-
+class EntityBuilder
+{
     private $className;
     private $cabecera;
     private $methods;
@@ -9,18 +9,19 @@ class EntityBuilder {
     private $validate;
     private $td;
 
-    public function __construct($table = '', $validate = false) {
+    public function __construct($table = '', $validate = false)
+    {
         $this->td = new TableDescriptor(DB_BASE, $table);
         $this->validate = $validate;
 
         //$this->className = str_replace("_", " ", strtolower($this->td->getTable()));
         //$this->className = str_replace(" ", "", ucwords($this->className));
-        $this->className = $this->td->getTable();
+        $this->className = str_replace(PREFIJO,"",$this->td->getTable());
         $this->Load();
     }
 
-    private function Load() {
-
+    private function Load()
+    {
         $aux = $this->td->getColumns();
         $columnToString = $aux[1]['Field'];
 
@@ -58,6 +59,15 @@ class EntityBuilder {
             }
         }
 
+        // Columnas que componen la primarykey separadas por coma y entrecomilladas
+        $array = explode(",", $this->td->getPrimaryKey());
+        $aux = "";
+        if (count($array)) {
+            foreach ($array as $columna) {
+                $aux .= "'{$columna}',";
+            }
+            $aux = substr($aux, 0, -1);
+        }
         $buf .= "\t/**\n";
         $buf .= "\t * Nombre de la conexion a la BD\n";
         $buf .= "\t * @var string\n";
@@ -74,6 +84,11 @@ class EntityBuilder {
         $buf .= "\t */\n";
         $buf .= "\tprotected \$_primaryKeyName = '" . $this->td->getPrimaryKey() . "';\n";
         $buf .= "\t/**\n";
+        $buf .= "\t * Array con las columnas de la primarykey\n";
+        $buf .= "\t * @var array\n";
+        $buf .= "\t */\n";
+        $buf .= "\tprotected \$_arrayPrimaryKeys = array({$aux});\n";
+        $buf .= "\t/**\n";
         $buf .= "\t * Relacion de entidades que dependen de esta\n";
         $buf .= "\t * @var string\n";
         $buf .= "\t */\n";
@@ -84,13 +99,11 @@ class EntityBuilder {
         $buf .= "\t */\n";
         $buf .= "\tprotected \$_childEntities = " . $this->getParentEntities() . ";\n";
 
-
 // GETTERS Y SETTERS
 // ---------------------------------------------------------------------
         $buf .= "\t/**\n";
         $buf .= "\t * GETTERS Y SETTERS\n";
         $buf .= "\t */\n";
-
 
         foreach ($this->td->getColumns() as $column) {
             if (!in_array($column['Field'], columnasComunes::$columnasExcepcion)) {
@@ -114,7 +127,7 @@ class EntityBuilder {
                     default:
                         $valor = "\t\t\$this->$column_name = \$$column_name;";
                 }
-                $buf .= "\tpublic function set$column_name(\$$column_name){\n$valor\n\t}\n";
+                $buf .= "\tpublic function set$column_name(\$$column_name) {\n$valor\n\t}\n";
 
 // METODO GET: hago tres tramientos distintos, segun el tipo de la columna:
 //      DATE: Devuelo la fecha en formato ddmmaaaa
@@ -138,11 +151,11 @@ class EntityBuilder {
                     $valor .= "\t\treturn \$this->$column_name;";
                 } else
                     $valor = "\t\treturn \$this->$column_name;";
-                $buf .= "\tpublic function get$column_name(){\n$valor\n\t}\n\n";
+                $buf .= "\tpublic function get$column_name() {\n$valor\n\t}\n\n";
             }
         }
 
-        $this->methods = "\tpublic function __toString() {\n\t\treturn \$this->get{$this->td->getPrimaryKey()}();\n\t}\n";
+        $this->methods = "\tpublic function __toString() {\n\t\treturn (\$this->{$this->td->getPrimaryKey()})?\$this->{$this->td->getPrimaryKey()}:'';\n\t}\n";
 
         $buf .= "} // END class {$this->td->getTable()}\n";
         $this->buffer = $buf;
@@ -152,7 +165,8 @@ class EntityBuilder {
      * Devuelve el codigo php del array que contiene las entidades padre
      * @return string
      */
-    private function getParentEntities() {
+    private function getParentEntities()
+    {
         $buf = "array(\n";
 
         foreach ($this->td->getParentEntities() as $entity) {
@@ -167,7 +181,8 @@ class EntityBuilder {
      * Devuelve el codigo php del array que contiene las entidades hijas
      * @return string
      */
-    private function getChildEntities() {
+    private function getChildEntities()
+    {
         $buf = "array(\n";
 
         foreach ($this->td->getChildEntities() as $entity) {
@@ -178,12 +193,15 @@ class EntityBuilder {
         return $buf;
     }
 
-    public function GetModel() {
+    public function GetModel()
+    {
         return "<?php\n" . $this->buffer . "\n?>";
     }
 
-    public function GetMethod() {
+    public function GetMethod()
+    {
         $buf = $this->cabecera . "class {$this->className} extends {$this->className}Entity {\n" . $this->methods;
+
         return "<?php\n" . $buf . "}\n?>";
     }
 
@@ -195,9 +213,8 @@ class EntityBuilder {
      *
      * @return array Array con el esquema de la tabla
      */
-    public function getSchema() {
-
-
+    public function getSchema()
+    {
         foreach ($this->td->getColumns() as $column) {
             foreach ($column as $propiedad => $value) {
                 if ($propiedad != 'Field')

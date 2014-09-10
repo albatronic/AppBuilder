@@ -9,9 +9,10 @@
  *
  */
 
-class CreaFichero {
-
-    public function __construct($filename, $content) {
+class CreaFichero
+{
+    public function __construct($filename, $content)
+    {
         if (file_exists($filename))
             rename($filename, $filename . "_");
         $fp = @fopen($filename, "w");
@@ -24,18 +25,18 @@ class CreaFichero {
 
 }
 
-class Esqueleto {
-
+class Esqueleto
+{
     /**
      * Crea la carpeta $pathDestino y copia en ella la estructura y contenido
      * de la carpeta $pathDestino
-     * 
-     * @param string $pathOrigen La carpeta origen
-     * @param string $pathDestino La carpeta destino
+     *
+     * @param  string  $pathOrigen  La carpeta origen
+     * @param  string  $pathDestino La carpeta destino
      * @return boolean
      */
-    public function copia($pathOrigen,$pathDestino) {
-        
+    public function copia($pathOrigen,$pathDestino)
+    {
         if ($pathDestino)
             return $this->copy_r($pathOrigen, $pathDestino);
         else
@@ -44,12 +45,13 @@ class Esqueleto {
 
     /**
      * Copia recursiva de origen a destino
-     * 
-     * @param string $path La carpeta origen
-     * @param string $dest La carpeta destino
+     *
+     * @param  string  $path La carpeta origen
+     * @param  string  $dest La carpeta destino
      * @return boolean
      */
-    private function copy_r($path, $dest) {
+    private function copy_r($path, $dest)
+    {
         if (is_dir($path)) {
             @mkdir($dest);
             chmod($dest,0755);
@@ -66,6 +68,7 @@ class Esqueleto {
                     }
                 }
             }
+
             return true;
         } elseif (is_file($path)) {
             return copy($path, $dest);
@@ -75,5 +78,3 @@ class Esqueleto {
     }
 
 }
-
-?>

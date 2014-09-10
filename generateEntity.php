@@ -1,5 +1,5 @@
 <?php
-/* 
+/*
  * Genera la clase de una entidad
  */
 
@@ -17,9 +17,9 @@ eval($database_connection_information);
 
 $tablename=$_GET['t'];
 
-include "class/tabledescriptor.class.php";
-include "class/entitybuilder.class.php";
-include "class/CreaFichero.class.php";
+include 'class/tabledescriptor.class.php';
+include 'class/entitybuilder.class.php';
+include 'class/CreaFichero.class.php';
 
 $dblink = mysql_connect(DB_HOST,DB_USER,DB_PASS);
 mysql_select_db(DB_BASE,$dblink);
@@ -33,5 +33,3 @@ new CreaFichero(PATH_MODEL."/methods/".$filename.".class.php", $entity->GetMetho
 mysql_close($dblink);
 
 echo $entity->Get();
-?>
-

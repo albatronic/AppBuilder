@@ -110,42 +110,43 @@
  * CARGA DE LAS CLASES NECESARIAS
  */
 if (file_exists("class/yaml/lib/sfYaml.php"))
-    include "class/yaml/lib/sfYaml.php";
+    include 'class/yaml/lib/sfYaml.php';
 else
     die("NO EXISTE LA CLASE PARA LEER ARCHIVOS YAML");
 
 if (file_exists("class/schemaBuilder.class.php"))
-    include "class/schemaBuilder.class.php";
+    include 'class/schemaBuilder.class.php';
 else
     die("NO EXISTE LA CLASE schemaBuilder.class.php");
 
 if (file_exists("class/Archivo.class.php"))
-    include "class/Archivo.class.php";
+    include 'class/Archivo.class.php';
 else
     die("NO EXISTE LA CLASE Archivo.class.php");
 
 if (file_exists("class/entitybuilder.class.php"))
-    include "class/entitybuilder.class.php";
+    include 'class/entitybuilder.class.php';
 else
     die("NO EXISTE LA CLASE entitybuilder.class.php");
 
 if (file_exists("class/tabledescriptor.class.php"))
-    include "class/tabledescriptor.class.php";
+    include 'class/tabledescriptor.class.php';
 else
     die("NO EXISTE LA CLASE tabledescriptor.class.php");
 
 include 'class/columnasComunes.class.php';
 include 'class/tiposVariables.class.php';
 
-class schema {
-
+class schema
+{
     protected $connection;
     protected $sb;
     protected $sql;
     protected $errores = array();
+    static $engineDataBase = array('mysql','postgres');
 
-    public function __construct($connection = '') {
-
+    public function __construct($connection = '')
+    {
         $this->connection = $connection;
 
         if (is_array($this->connection['POST'])) {
@@ -153,8 +154,8 @@ class schema {
         }
     }
 
-    public function buildTables($arraySchema) {
-
+    public function buildTables($arraySchema)
+    {
         if (is_array($arraySchema))
             $this->sb->buildTables($arraySchema);
         else
@@ -164,40 +165,46 @@ class schema {
     /**
      * Construye el esquema yml en base las las tablas existentes
      */
-    public function buildSchema() {
-
+    public function buildSchema()
+    {
         if (!$this->sb->buildSchema())
             $this->errores = $this->sb->getErrores();
     }
 
-    public function loadFixtures($arrayFixtures, $truncateTables = FALSE) {
-
+    public function loadFixtures($arrayFixtures, $truncateTables = FALSE)
+    {
         if (is_array($arrayFixtures))
             $this->sb->loadFixtures($arrayFixtures, $truncateTables);
         else
             $this->errores[] = "No ha seleccionado el archivo con los datos";
     }
 
-    public function createDataBase() {
-
+    public function createDataBase()
+    {
         return $this->sb->createDataBase();
     }
 
-    public function deleteDataBase() {
-
+    public function deleteDataBase()
+    {
         return $this->sb->deleteDataBase();
     }
 
-    public function createUser(array $user) {
-
+    public function createUser(array $user)
+    {
         return $this->sb->createUser($user);
+    }
+
+    public function clearTables()
+    {
+        return $this->sb->clearTables();
     }
 
     /**
      * ESCRIBE EN EL FICHERO lastConnection.yml LOS DATOS DE LA
      * ULTIMA CONEXIÓN QUE ESTAN EN $_POST
      */
-    public function saveCurrentParametersConnection() {
+    public function saveCurrentParametersConnection()
+    {
         $texto = sfYaml::dump($this->connection);
         $archivo = new Archivo("lastConnection.yml");
         $archivo->write($texto);
@@ -210,8 +217,8 @@ class schema {
      *
      * @return array Array con los parametros $_POST de la última conexión
      */
-    public function getLastParametersConnection() {
-
+    public function getLastParametersConnection()
+    {
         $parameters = array();
 
         if (file_exists("lastConnection.yml")) {
@@ -222,8 +229,8 @@ class schema {
         return $parameters;
     }
 
-    public function valida() {
-
+    public function valida()
+    {
         $errores = array();
 
         if ($_FILES['fileNameSchema']['name'] != '') {
@@ -242,16 +249,18 @@ class schema {
         return $errores;
     }
 
-    public function getSql() {
+    public function getSql()
+    {
         return $this->sb->getSql();
     }
 
-    public function getErrores() {
-
+    public function getErrores()
+    {
         return array_merge($this->errores, $this->sb->getErrores());
     }
 
-    public function getLog() {
+    public function getLog()
+    {
         return $this->sb->getLog();
     }
 
@@ -271,12 +280,13 @@ switch ($_SERVER['REQUEST_METHOD']) {
                 'host' => $_POST['host'],
                 'user' => $_POST['user'],
                 'password' => $_POST['password'],
+                'engineDataBase' => $_POST['engineDataBase'],
                 'dataBase' => $_POST['dataBase'],
                 'dropTablesIfExists' => ($_POST['dropTablesIfExists'] == 'on'),
             ),
             'FILES' => $_FILES,
         );
-
+        //print_r($connection);
         $database_connection_information = "
             define(DB_HOST,'" . $_POST['host'] . "');
             define(DB_USER,'" . $_POST['user'] . "');
@@ -316,6 +326,9 @@ switch ($_SERVER['REQUEST_METHOD']) {
                         $schema->buildTables(sfYaml::load($_FILES['fileNameSchema']['tmp_name']));
                         $schema->loadFixtures(sfYaml::load($_FILES['fileNameFixtures']['tmp_name']));
                         break;
+                    case 'CLEAR TABLES':
+                        $schema->clearTables();
+                        break;
                 }
             }
 
@@ -348,7 +361,16 @@ switch ($_SERVER['REQUEST_METHOD']) {
                     <tr><td>Server</td><td><input name="host" type="text" value="<?php echo $_POST['host']; ?>"></td></tr>
                     <tr><td>User</td><td><input name="user" type="text" value="<?php echo $_POST['user']; ?>"></td></tr>
                     <tr><td>Password</td><td><input name="password" type="text" value="<?php echo $_POST['password']; ?>"></td></tr>
-                    <tr><td>Data Base</td><td><input name="dataBase" type="text" value="<?php echo $_POST['dataBase']; ?>"></td></tr>
+                    <tr><td>Data Base engine</td>
+                        <td>
+                            <select name="engineDataBase" />
+                            <?php foreach (schema::$engineDataBase as $engine) {?>
+                            <option value="<?php echo $engine;?>" <?php if ($engine==$_POST['engineDataBase']) echo "SELECTED"; ?>><?php echo $engine;?></option>
+                            <?php }?>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr><td>Data Base name</td><td><input name="dataBase" type="text" value="<?php echo $_POST['dataBase']; ?>"></td></tr>
                     <tr><td>YAML file Schema</td><td><input name="fileNameSchema" type="file" size="50" /></td></tr>
                     <tr><td>YAML file Fixtures</td><td><input name="fileNameFixtures" type="file" size="50" /></td></tr>
                     <tr><td>Create Data Base </td><td><input name="createDataBase" type="checkbox"></td></tr>
@@ -368,6 +390,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
                             <input name="action" value="BUILD TABLES" type="submit" title="CREA las tablas en base al esquema">&nbsp;
                             <input name="action" value="LOAD FIXTURES" type="submit" title="VACIA las tablas y CARGA los datos">&nbsp;
                             <input name="action" value="BUILD AND LOAD" type="submit" title="CREA las tablas y CARGA los datos">&nbsp;
+                            <input name="action" value="CLEAR TABLES" type="submit" title="BORRA los registros marcados como borrados">&nbsp;
                             <input name="action" value="CANCEL" type="submit">
                         </td>
                     </tr>
@@ -378,29 +401,19 @@ switch ($_SERVER['REQUEST_METHOD']) {
         <?php if ($_SERVER['REQUEST_METHOD'] == 'POST') { ?>
             <div style="width: 49%; float: right; text-align: center;">
                 <div style="text-align: center;">SENTENCIAS SQL</div>
-                <textarea cols="70" rows="19"><?php echo $sql; ?></textarea>
+                <textarea cols="70" rows="19"><?php echo $sql;?></textarea>
             </div>
 
             <div style="clear: both;"></div>
 
             <div style="margin-top: 5px; width: 49%; text-align: center; float: left;">
                 <div style="text-align: center;">ERRORES</div>
-                <textarea cols="75" rows="9">
-                    <?php
-                    foreach ($errores as $error)
-                        echoln($error);
-                    ?>
-                </textarea>
+                <textarea cols="75" rows="9"><?php foreach ($errores as $error) echoln($error);?></textarea>
             </div>
 
             <div style="margin-top: 5px; width: 49%; text-align: center; float: right;">
                 <div style="text-align: center;">LOG</div>
-                <textarea cols="75" rows="9">
-                    <?php
-                    foreach ($log as $texto)
-                        echoln($texto);
-                    ?>
-                </textarea>
+                <textarea cols="75" rows="9"><?php foreach ($log as $texto) echoln($texto);?></textarea>
             </div>
         <?php } ?>
     </body>

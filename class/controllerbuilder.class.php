@@ -9,13 +9,14 @@
  * @copyright Informatica ALBATRONIC, SL 15.03.2011
  * @version 1.0
  */
-class ControllerBuilder {
-
+class ControllerBuilder
+{
     private $buffer;
     private $filename;
     private $td;
 
-    public function __construct($table='') {
+    public function __construct($table='')
+    {
         $this->td = new TableDescriptor(DB_BASE, $table);
 
         //$this->filename = str_replace("_", " ", $this->td->getTable());
@@ -24,10 +25,13 @@ class ControllerBuilder {
         $this->Load();
     }
 
-    private function Load() {
+    private function Load()
+    {
+        $sinPrefijo = str_replace(PREFIJO, "", $this->filename);
+
         $buf = "<?php\n";
         $buf .= "/**\n";
-        $buf .= "* CONTROLLER FOR " . $this->filename . "\n";
+        $buf .= "* CONTROLLER FOR " . $sinPrefijo . "\n";
         $buf .= "* @author: Sergio Perez <sergio.perez@albatronic.com>\n";
         $buf .= "* @copyright: INFORMATICA ALBATRONIC SL \n* @date " . date('d.m.Y H:i:s') . "\n\n";
         $buf .= "* Extiende a la clase controller\n";
@@ -46,10 +50,12 @@ class ControllerBuilder {
         $buf .= "\ninclude \"modules/controller.php\";\n\n";
          */
 
-        $buf .= "class " . $this->filename . "Controller extends Controller {\n\n";
-        $buf .= "\tprotected \$entity = \"" . $this->filename . "\";\n";
-        $buf .= "\tprotected \$parentEntity = \"\";\n";
-
+        $buf .= "class " . $sinPrefijo . "Controller extends Controller {\n\n";
+        $buf .= "\tprotected \$entity = \"" . $sinPrefijo . "\";\n";
+        $buf .= "\tprotected \$parentEntity = \"\";\n\n";
+        $buf .= "\tpublic function IndexAction() {\n";
+        $buf .= "\t\treturn \$this->listAction();\n";
+        $buf .= "\t}\n";
         $buf .= "}\n?>";
 
         $this->buffer = $buf;
@@ -59,7 +65,8 @@ class ControllerBuilder {
      * Devuelve el código php con el control de las acciones del formulario de mantenimiento
      * @return text
      */
-    public function Get() {
+    public function Get()
+    {
         return $this->buffer;
     }
 

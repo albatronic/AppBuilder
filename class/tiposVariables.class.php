@@ -7,8 +7,8 @@
  * @copyright Informática ALBATRONIC, SL
  * @date 08-sep-2012 13:12:42
  */
-class tiposVariables {
-
+class tiposVariables
+{
     /**
      * Tabla de correspondencia de tipos de variales
      * @var array
@@ -34,5 +34,3 @@ class tiposVariables {
     );
 
 }
-
-?>

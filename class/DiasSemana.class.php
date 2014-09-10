@@ -7,8 +7,8 @@
  * @since 19-nov-2011
  *
  */
-class DiasSemana extends Tipos {
-
+class DiasSemana extends Tipos
+{
     protected $tipos = array(
         array('Id' => '1', 'Value' => 'Lunes'),
         array('Id' => '2', 'Value' => 'Martes'),
@@ -19,4 +19,3 @@ class DiasSemana extends Tipos {
         array('Id' => '7', 'Value' => 'Domingo'),
     );
 }
-?>
